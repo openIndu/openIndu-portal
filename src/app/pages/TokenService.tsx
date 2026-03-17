@@ -1,30 +1,30 @@
-import { Server, Zap, Shield, TrendingUp, Code, CheckCircle, Cpu } from "lucide-react";
+import { Server, Zap, CheckCircle, Cpu, ExternalLink, MessageSquare, Image, Mic, Code } from "lucide-react";
 
 export function TokenService() {
   const features = [
     {
       icon: Zap,
       title: "统一接入",
-      description: "提供统一的API接口，支持多种大模型服务的无缝切换",
-      items: ["支持 OpenAI", "支持 Claude", "支持国内大模型", "统一接口标准"],
+      description: "The Unified LLM API Gateway - 更优价格、更稳定、无需订阅",
+      items: ["支持 30+ LLM 提供商", "统一接口标准", "无缝切换模型", "即开即用"],
     },
     {
-      icon: Shield,
-      title: "安全可靠",
-      description: "企业级安全保障，API密钥加密存储，访问权限细粒度控制",
-      items: ["API密钥加密存储", "访问控制", "审计日志", "流量监控"],
+      icon: MessageSquare,
+      title: "对话与补全",
+      description: "支持多种对话和文本补全 API 接口",
+      items: ["/v1/chat/completions", "/v1/responses", "/v1/messages", "/v1beta/models"],
     },
     {
-      icon: TrendingUp,
-      title: "成本优化",
-      description: "智能路由和负载均衡，优化API调用成本，提高资源利用率",
-      items: ["流量配额管理", "费用统计分析", "使用预警", "智能路由"],
+      icon: Image,
+      title: "图像与嵌入",
+      description: "提供图像生成、编辑和向量嵌入服务",
+      items: ["/v1/embeddings", "/v1/rerank", "/v1/images/generations", "/v1/images/edits"],
     },
     {
-      icon: Code,
-      title: "简单易用",
-      description: "兼容OpenAI API格式，零学习成本，快速集成到现有系统",
-      items: ["RESTful API", "详细文档", "示例代码", "SDK支持"],
+      icon: Mic,
+      title: "语音服务",
+      description: "支持语音合成、转录和翻译功能",
+      items: ["/v1/audio/speech", "/v1/audio/transcriptions", "/v1/audio/translations", "多语言支持"],
     },
   ];
 
@@ -46,15 +46,37 @@ export function TokenService() {
             <h1 className="text-4xl font-bold text-gray-900">AI+基础设施</h1>
           </div>
           <p className="text-xl text-gray-600 max-w-3xl mb-8">
-            大模型API中转服务，为智能制造场景提供统一的AI能力接入平台。
-            支持多种大模型服务，提供安全、稳定、高效的API转发和管理能力。
+            The Unified LLM API Gateway - 统一的大模型 API 网关。
+            更优价格、更稳定、无需订阅，只需替换 BASE URL 即可使用。
+            支持 30+ LLM 提供商，提供安全、稳定、高效的 API 转发和管理能力。
           </p>
           <div className="flex items-center gap-6 text-sm text-gray-600">
             <div>
-              <span className="font-semibold text-gray-900">版本:</span> 0.0.1-SNAPSHOT
-            </div>
-            <div>
               <span className="font-semibold text-gray-900">状态:</span> 已上线
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Quick Access */}
+      <section className="py-16 bg-white">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="bg-gradient-to-br from-purple-600 to-blue-600 rounded-2xl p-12 text-center">
+            <Server className="w-16 h-16 mx-auto mb-6 opacity-80" />
+            <h2 className="text-4xl font-bold mb-4 text-white">开始使用</h2>
+            <p className="text-xl mb-8 text-purple-100">
+              更优价格、更稳定、无需订阅 - 只需替换 BASE URL 即可开始使用
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href="https://model.openindu.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center px-8 py-4 bg-white text-purple-600 rounded-lg hover:bg-purple-50 transition-colors font-medium text-lg"
+              >
+                访问模型平台
+                <ExternalLink className="ml-2 h-5 w-5" />
+              </a>
             </div>
           </div>
         </div>
@@ -165,11 +187,11 @@ export function TokenService() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="bg-gray-900 rounded-2xl p-8 overflow-x-auto">
               <pre className="text-green-400 text-sm">
-{`# 使用示例 - Python
+                {`# 使用示例 - Python
 import openai
 
 # 配置API端点和密钥
-openai.api_base = "https://api.openindu.com/v1"
+openai.api_base = "https://model.openindu.com/v1"
 openai.api_key = "your-api-key"
 
 # 调用大模型API
@@ -177,50 +199,40 @@ response = openai.ChatCompletion.create(
   model="gpt-4",
   messages=[
     { "role": "user", "content": "分析这批产品的质量数据" }
-  ],
-  config
+  ]
 )
 print(response.choices[0].message.content)`}
               </pre>
             </div>
             <div className="bg-purple-50 p-8 rounded-2xl border border-purple-200">
-              <h4 className="font-semibold text-gray-900 mb-2">💡 兼容性说明</h4>
-              <p className="text-sm text-gray-700">
-                API完全兼容OpenAI格式，无需修改现有代码，只需更改api_base和api_key即可使用。
-                支持流式响应、函数调用等高级功能。
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Quick Access */}
-      <section className="py-16 bg-white">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-to-br from-purple-600 to-blue-600 rounded-2xl p-12 text-center">
-            <Server className="w-16 h-16 mx-auto mb-6 opacity-80" />
-            <h2 className="text-4xl font-bold mb-4 text-white">开始使用</h2>
-            <p className="text-xl mb-8 text-purple-100">
-              获取API密钥，立即开始使用大模型API中转服务
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="http://localhost:8000/swagger-ui/index.html"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-8 py-4 bg-white text-purple-600 rounded-lg hover:bg-purple-50 transition-colors font-medium text-lg"
-              >
-                查看API文档
-                <Code className="ml-2 h-5 w-5" />
-              </a>
-              <a
-                href="https://github.com/openindu/openindu-portal"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-8 py-4 bg-transparent border-2 border-white text-white rounded-lg hover:bg-white/10 transition-colors font-medium text-lg"
-              >
-                查看源码
-              </a>
+              <h4 className="font-semibold text-gray-900 mb-4">💡 支持的 API 端点</h4>
+              <div className="grid grid-cols-1 gap-2 text-sm text-gray-700">
+                <div className="font-medium text-gray-900 mb-2">对话与补全</div>
+                <ul className="space-y-1 ml-4 text-gray-600">
+                  <li>• /v1/chat/completions</li>
+                  <li>• /v1/responses</li>
+                  <li>• /v1/responses/compact</li>
+                  <li>• /v1/messages</li>
+                </ul>
+                <div className="font-medium text-gray-900 mb-2 mt-4">嵌入与重排</div>
+                <ul className="space-y-1 ml-4 text-gray-600">
+                  <li>• /v1beta/models</li>
+                  <li>• /v1/embeddings</li>
+                  <li>• /v1/rerank</li>
+                </ul>
+                <div className="font-medium text-gray-900 mb-2 mt-4">图像服务</div>
+                <ul className="space-y-1 ml-4 text-gray-600">
+                  <li>• /v1/images/generations</li>
+                  <li>• /v1/images/edits</li>
+                  <li>• /v1/images/variations</li>
+                </ul>
+                <div className="font-medium text-gray-900 mb-2 mt-4">语音服务</div>
+                <ul className="space-y-1 ml-4 text-gray-600">
+                  <li>• /v1/audio/speech</li>
+                  <li>• /v1/audio/transcriptions</li>
+                  <li>• /v1/audio/translations</li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>

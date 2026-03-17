@@ -134,6 +134,9 @@ export function Layout() {
                 <li>
                   <Link to="/iiot-platform" className="hover:text-white">AI+工业互联网平台</Link>
                 </li>
+                <li>
+                  <Link to="/infrastructure" className="hover:text-white">AI+基础设施</Link>
+                </li>
               </ul>
             </div>
 
