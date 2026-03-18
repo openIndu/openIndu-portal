@@ -4,9 +4,11 @@ FROM node:20-alpine AS builder
 WORKDIR /app
 
 # Copy package files
-COPY package.json package-lock.json ./
+COPY package.json ./
 
 # Install dependencie
+RUN npm config set registry https://registry.npmmirror.com
+
 RUN npm install && npm ci
 
 # Copy source code

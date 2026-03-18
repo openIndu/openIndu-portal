@@ -1,4 +1,4 @@
-import { Server, Zap, CheckCircle, Cpu, ExternalLink, MessageSquare, Image, Mic, Code } from "lucide-react";
+import { Server, Zap, CheckCircle, Cpu, ExternalLink, MessageSquare, Image, Mic } from "lucide-react";
 
 export function TokenService() {
   const features = [
