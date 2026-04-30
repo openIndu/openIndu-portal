@@ -221,7 +221,7 @@ export function Home() {
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-blue-600 to-cyan-600 text-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold mb-4">加入openIndu开源社区</h2>
+          <h2 className="text-3xl font-bold mb-4">加入openIndu社区</h2>
           <p className="text-xl mb-10 text-blue-100">
             立即体验开源工业互联网平台，与全球开发者共同构建智能制造生态
           </p>

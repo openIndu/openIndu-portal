@@ -149,6 +149,11 @@ export function Layout() {
                     工业互联网平台文档
                   </a>
                 </li>
+                <li>
+                  <a href="https://monitor.openindu.com/status/service" target="_blank" rel="noopener noreferrer" className="hover:text-white">
+                    服务监控
+                  </a>
+                </li>
               </ul>
             </div>
 
