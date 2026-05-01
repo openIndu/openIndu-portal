@@ -46,4 +46,5 @@ package-lock.json
 .claude/.claude/agents/docs/sessions/*.json
 .playwright-mcp/*.log
 .claude/settings.local.json
-
+.playwright-mcp
+.playwright-mcp/*

@@ -59,7 +59,10 @@ export function Layout() {
             <button
               type="button"
               className="md:hidden p-2 text-gray-700"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              onClick={() => {
+                setMobileMenuOpen(!mobileMenuOpen);
+                if (!mobileMenuOpen) window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
             >
               {mobileMenuOpen ? (
                 <X className="h-6 w-6" />
