@@ -1,5 +1,39 @@
 import { Link } from "react-router";
 import { ArrowRight, Github, Globe, Users, Zap, Code, ExternalLink, Clock, Cpu, Eye, Network, Server } from "lucide-react";
+import { ImageCarousel } from "../components/ImageCarousel";
+
+const carouselSlides = [
+  {
+    src: "/assets/iiot/login.png",
+    alt: "智能登录界面",
+    title: "智能登录 · 安全便捷",
+    description: "账号密码登录与注册，JWT Token 双令牌认证机制",
+  },
+  {
+    src: "/assets/iiot/workbench.png",
+    alt: "工作台总览",
+    title: "工作台 · 全局一目了然",
+    description: "多维度数据聚合，设备状态、产线运行、告警信息实时展示",
+  },
+  {
+    src: "/assets/iiot/dashboard.png",
+    alt: "数据大屏",
+    title: "数据大屏 · 生产态势一屏掌控",
+    description: "暗色科技风格数据大屏，适合车间看板与管理指挥中心",
+  },
+  {
+    src: "/assets/iiot/device-mgmt.png",
+    alt: "设备管理",
+    title: "设备管理 · 全生命周期管控",
+    description: "从设备注册到报废的全生命周期管理，实时监控与预警",
+  },
+  {
+    src: "/assets/iiot/traceability.png",
+    alt: "产品追溯",
+    title: "产品追溯 · 从原料到成品全链路",
+    description: "完整的产品追溯链条，从原材料到成品全程可追溯",
+  },
+];
 
 export function Home() {
   const solutions = [
@@ -96,6 +130,28 @@ export function Home() {
                 查看文档
               </Link>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Platform Screenshot Carousel */}
+      <section className="py-16 sm:py-20 bg-gray-50">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">平台核心功能展示</h2>
+            <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
+              六大核心功能模块，覆盖智能制造全场景
+            </p>
+          </div>
+          <ImageCarousel slides={carouselSlides} />
+          <div className="text-center mt-8">
+            <Link
+              to="/iiot-platform"
+              className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
+            >
+              了解更多详情
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
           </div>
         </div>
       </section>

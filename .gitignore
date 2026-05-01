@@ -34,7 +34,6 @@ dist-ssr
 *.ntvs*
 *.njsproj
 *.sln
-*.local
 
 stats.html
 pnpm-lock.yaml
