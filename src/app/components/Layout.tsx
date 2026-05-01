@@ -59,7 +59,10 @@ export function Layout() {
             <button
               type="button"
               className="md:hidden p-2 text-gray-700"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              onClick={() => {
+                setMobileMenuOpen(!mobileMenuOpen);
+                if (!mobileMenuOpen) window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
             >
               {mobileMenuOpen ? (
                 <X className="h-6 w-6" />
@@ -147,6 +150,11 @@ export function Layout() {
                 <li>
                   <a href="https://gitee.com/openIndu/openindu-platform/tree/feature/docs" target="_blank" rel="noopener noreferrer" className="hover:text-white">
                     工业互联网平台文档
+                  </a>
+                </li>
+                <li>
+                  <a href="https://monitor.openindu.com/status/service" target="_blank" rel="noopener noreferrer" className="hover:text-white">
+                    服务监控
                   </a>
                 </li>
               </ul>
