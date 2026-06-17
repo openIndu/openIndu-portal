@@ -12,6 +12,7 @@
     "@neodx/figma": "^0.6.0",
     "@radix-ui/react-slot": "^1.1.2",
     "@ronas-it/figma-export": "^0.3.0",
+    "axios": "^1.7.9",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.487.0",

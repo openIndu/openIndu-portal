@@ -1,14 +1,19 @@
-import { Outlet, Link, useLocation } from "react-router";
-import { Menu, X } from "lucide-react";
+import { Outlet, Link, useLocation, useNavigate } from "react-router";
+import { LogOut, Menu, UserRound, X } from "lucide-react";
 import { useState } from "react";
+import { useAuth } from "@/store/auth";
 import logo from "/assets/logo.png";
 
 export function Layout() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { isAuthenticated, user, logout } = useAuth();
 
   const navigation = [
     { name: "首页", href: "/" },
+    { name: "资源中心", href: "/resources" },
+    { name: "工作流", href: "/workflow" },
     { name: "AI+运动控制", href: "/motion-control" },
     { name: "AI+视觉", href: "/vision" },
     { name: "AI+工业互联网平台", href: "/iiot-platform" },
@@ -22,12 +27,18 @@ export function Layout() {
     return location.pathname.startsWith(path);
   };
 
+  async function handleLogout() {
+    await logout();
+    setMobileMenuOpen(false);
+    navigate("/");
+  }
+
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white border-b border-gray-200">
         <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex h-16 items-center justify-between">
+          <div className="flex h-16 items-center justify-between gap-4">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2">
               <img
@@ -39,7 +50,7 @@ export function Layout() {
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex md:gap-x-8">
+            <div className="hidden lg:flex lg:gap-x-6">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
@@ -55,14 +66,41 @@ export function Layout() {
               ))}
             </div>
 
+            {/* Desktop Auth */}
+            <div className="hidden lg:flex lg:items-center lg:gap-3">
+              {isAuthenticated ? (
+                <>
+                  <div className="flex items-center gap-2 rounded-full bg-blue-50 px-3 py-1.5 text-sm text-blue-700">
+                    <UserRound className="h-4 w-4" />
+                    <span>{user?.phone ?? "已登录用户"}</span>
+                    {user?.role && <span className="rounded-full bg-white px-2 py-0.5 text-xs uppercase">{user.role}</span>}
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => void handleLogout()}
+                    className="inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-600"
+                  >
+                    <LogOut className="h-4 w-4" />
+                    退出
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link to="/login" className="rounded-lg px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-600">登录</Link>
+                  <Link to="/register" className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700">注册</Link>
+                </>
+              )}
+            </div>
+
             {/* Mobile menu button */}
             <button
               type="button"
-              className="md:hidden p-2 text-gray-700"
+              className="lg:hidden p-2 text-gray-700"
               onClick={() => {
                 setMobileMenuOpen(!mobileMenuOpen);
                 if (!mobileMenuOpen) window.scrollTo({ top: 0, behavior: "smooth" });
               }}
+              aria-label="打开导航菜单"
             >
               {mobileMenuOpen ? (
                 <X className="h-6 w-6" />
@@ -76,7 +114,7 @@ export function Layout() {
 
       {/* Mobile Navigation */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-gray-200 bg-white">
+        <div className="lg:hidden border-t border-gray-200 bg-white">
           <div className="space-y-1 px-4 pb-3 pt-2">
             {navigation.map((item) => (
               <Link
@@ -92,6 +130,28 @@ export function Layout() {
                 {item.name}
               </Link>
             ))}
+            <div className="mt-3 border-t border-gray-100 pt-3">
+              {isAuthenticated ? (
+                <div className="space-y-2">
+                  <div className="rounded-lg bg-blue-50 px-3 py-2 text-sm text-blue-700">
+                    <div>{user?.phone ?? "已登录用户"}</div>
+                    {user?.role && <div className="text-xs uppercase">角色：{user.role}</div>}
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => void handleLogout()}
+                    className="block w-full rounded-lg px-3 py-2 text-left text-gray-700 hover:bg-gray-50"
+                  >
+                    退出登录
+                  </button>
+                </div>
+              ) : (
+                <div className="grid grid-cols-2 gap-2">
+                  <Link to="/login" onClick={() => setMobileMenuOpen(false)} className="rounded-lg border border-gray-200 px-3 py-2 text-center text-gray-700">登录</Link>
+                  <Link to="/register" onClick={() => setMobileMenuOpen(false)} className="rounded-lg bg-blue-600 px-3 py-2 text-center text-white">注册</Link>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )}
@@ -127,6 +187,12 @@ export function Layout() {
               <ul className="space-y-2 text-gray-400">
                 <li>
                   <Link to="/" className="hover:text-white">首页</Link>
+                </li>
+                <li>
+                  <Link to="/resources" className="hover:text-white">资源中心</Link>
+                </li>
+                <li>
+                  <Link to="/workflow" className="hover:text-white">工作流</Link>
                 </li>
                 <li>
                   <Link to="/motion-control" className="hover:text-white">AI+运动控制</Link>
