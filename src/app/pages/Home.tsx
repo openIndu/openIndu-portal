@@ -1,6 +1,8 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router";
-import { ArrowRight, Github, Globe, Users, Zap, Code, ExternalLink, Clock, Cpu, Eye, Network, Server } from "lucide-react";
+import { ArrowRight, Github, Globe, Users, Zap, Code, ExternalLink, Clock, Cpu, Eye, Network, Server, Loader2 } from "lucide-react";
 import { ImageCarousel } from "../components/ImageCarousel";
+import { portalApi, type PortalCarouselItem, type PortalHero, type PortalSolution } from "@/api";
 
 const carouselSlides = [
   {
@@ -35,37 +37,46 @@ const carouselSlides = [
   },
 ];
 
+const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+  cpu: Cpu,
+  eye: Eye,
+  network: Network,
+  server: Server,
+};
+
+function resolveIcon(iconName?: string) {
+  if (!iconName) return Cpu;
+  return iconMap[iconName.toLowerCase()] ?? Cpu;
+}
+
 export function Home() {
-  const solutions = [
-    {
-      icon: Cpu,
-      title: "AI+运动控制",
-      description: "智能运动控制解决方案，结合AI算法优化工业设备运动精度与效率",
-      status: "coming-soon",
-      link: "/motion-control",
-    },
-    {
-      icon: Eye,
-      title: "AI+视觉",
-      description: "基于深度学习的工业视觉检测系统，实现产品质量自动化检测",
-      status: "coming-soon",
-      link: "/vision",
-    },
-    {
-      icon: Network,
-      title: "AI+工业互联网平台",
-      description: "openIndu-platform：企业级工业物联网全栈解决方案，设备管理、流程控制、产品追溯一体化",
-      status: "available",
-      link: "/iiot-platform",
-    },
-    {
-      icon: Server,
-      title: "AI+基础设施",
-      description: "大模型API中转服务，为智能制造提供统一的AI能力接入平台",
-      status: "available",
-      link: "/infrastructure",
-    },
-  ];
+  const [hero, setHero] = useState<PortalHero | null>(null);
+  const [heroLoading, setHeroLoading] = useState(true);
+  const [carouselItems, setCarouselItems] = useState<PortalCarouselItem[]>([]);
+  const [carouselLoading, setCarouselLoading] = useState(true);
+  const [solutions, setSolutions] = useState<PortalSolution[]>([]);
+  const [solutionsLoading, setSolutionsLoading] = useState(true);
+
+  useEffect(() => {
+    portalApi.hero()
+      .then((data) => setHero(data))
+      .catch(() => setHero(null))
+      .finally(() => setHeroLoading(false));
+  }, []);
+
+  useEffect(() => {
+    portalApi.carousel()
+      .then((data) => setCarouselItems(data))
+      .catch(() => setCarouselItems([]))
+      .finally(() => setCarouselLoading(false));
+  }, []);
+
+  useEffect(() => {
+    portalApi.solutions()
+      .then((data) => setSolutions(data))
+      .catch(() => setSolutions([]))
+      .finally(() => setSolutionsLoading(false));
+  }, []);
 
   const benefits = [
     {
@@ -90,6 +101,15 @@ export function Home() {
     },
   ];
 
+  const mappedCarouselSlides = carouselItems.length > 0
+    ? carouselItems.map((item) => ({
+        src: item.image_url,
+        alt: item.alt ?? item.title,
+        title: item.title,
+        description: item.description ?? "",
+      }))
+    : carouselSlides;
+
   return (
     <div>
 
@@ -104,32 +124,70 @@ export function Home() {
                 开源社区驱动
               </span>
             </div>
-            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-              openIndu Community
-              <span className="block text-blue-600 mt-3">开源智能制造解决方案</span>
-            </h1>
-            <p className="text-xl text-gray-600 mb-10 max-w-3xl mx-auto leading-relaxed">
-              <span className="font-semibold text-blue-600 block mb-2">开源、开放、协作</span>
-              <span className="block">
-                致力于智能制造场景，提供AI赋能的工业互联网解决方案。
-                融合运动控制、机器视觉、工业物联网平台与AI基础设施，由社区共同构建完整的智能制造生态。
-              </span>
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                to="/iiot-platform"
-                className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
-              >
-                探索解决方案
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-              <Link
-                to="/iiot-platform#docs"
-                className="inline-flex items-center justify-center px-6 py-3 bg-white text-gray-900 border-2 border-gray-200 rounded-lg hover:border-blue-600 hover:text-blue-600 transition-colors font-medium"
-              >
-                查看文档
-              </Link>
-            </div>
+            {heroLoading ? (
+              <div className="flex items-center justify-center py-8">
+                <Loader2 className="animate-spin h-8 w-8 text-blue-600" />
+              </div>
+            ) : hero ? (
+              <>
+                <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+                  {hero.title}
+                </h1>
+                {hero.subtitle && (
+                  <p className="text-xl text-gray-600 mb-10 max-w-3xl mx-auto leading-relaxed">
+                    {hero.subtitle}
+                  </p>
+                )}
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  {hero.primary_cta_text && (
+                    <Link
+                      to={hero.primary_cta_link ?? "#"}
+                      className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+                    >
+                      {hero.primary_cta_text}
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </Link>
+                  )}
+                  {hero.secondary_cta_text && (
+                    <Link
+                      to={hero.secondary_cta_link ?? "#"}
+                      className="inline-flex items-center justify-center px-6 py-3 bg-white text-gray-900 border-2 border-gray-200 rounded-lg hover:border-blue-600 hover:text-blue-600 transition-colors font-medium"
+                    >
+                      {hero.secondary_cta_text}
+                    </Link>
+                  )}
+                </div>
+              </>
+            ) : (
+              <>
+                <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+                  openIndu Community
+                  <span className="block text-blue-600 mt-3">开源智能制造解决方案</span>
+                </h1>
+                <p className="text-xl text-gray-600 mb-10 max-w-3xl mx-auto leading-relaxed">
+                  <span className="font-semibold text-blue-600 block mb-2">开源、开放、协作</span>
+                  <span className="block">
+                    致力于智能制造场景，提供AI赋能的工业互联网解决方案。
+                    融合运动控制、机器视觉、工业物联网平台与AI基础设施，由社区共同构建完整的智能制造生态。
+                  </span>
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Link
+                    to="/iiot-platform"
+                    className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+                  >
+                    探索解决方案
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Link>
+                  <Link
+                    to="/iiot-platform#docs"
+                    className="inline-flex items-center justify-center px-6 py-3 bg-white text-gray-900 border-2 border-gray-200 rounded-lg hover:border-blue-600 hover:text-blue-600 transition-colors font-medium"
+                  >
+                    查看文档
+                  </Link>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </section>
@@ -143,7 +201,13 @@ export function Home() {
               六大核心功能模块，覆盖智能制造全场景
             </p>
           </div>
-          <ImageCarousel slides={carouselSlides} />
+          {carouselLoading ? (
+            <div className="flex items-center justify-center py-12">
+              <Loader2 className="animate-spin h-8 w-8 text-blue-600" />
+            </div>
+          ) : (
+            <ImageCarousel slides={mappedCarouselSlides} />
+          )}
           <div className="text-center mt-8">
             <Link
               to="/iiot-platform"
@@ -165,48 +229,60 @@ export function Home() {
               四大核心解决方案，覆盖智能制造全场景，为工业4.0转型提供完整支持
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {solutions.map((solution, index) => (
-              <div
-                key={index}
-                className="relative p-8 border border-gray-200 rounded-xl hover:border-blue-600 hover:shadow-lg transition-all group"
-              >
-                {solution.status === "coming-soon" && (
-                  <div className="absolute top-4 right-4 flex items-center gap-1 px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-sm">
-                    <Clock className="w-4 h-4" />
-                    <span>敬请期待</span>
-                  </div>
-                )}
-                {solution.status === "available" && (
-                  <div className="absolute top-4 right-4 px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">
-                    可用
-                  </div>
-                )}
-                <div className="flex items-center justify-center w-16 h-16 bg-blue-100 text-blue-600 rounded-lg mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                  <solution.icon className="w-8 h-8" />
-                </div>
-                <h3 className="text-2xl font-semibold text-gray-900 mb-3">{solution.title}</h3>
-                <p className="text-gray-600 mb-6 min-h-[3rem]">{solution.description}</p>
-                {solution.status === "available" ? (
-                  <Link
-                    to={solution.link}
-                    className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
+          {solutionsLoading ? (
+            <div className="flex items-center justify-center py-12">
+              <Loader2 className="animate-spin h-8 w-8 text-blue-600" />
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {solutions.map((solution) => {
+                const IconComponent = resolveIcon(solution.icon);
+                const isActive = solution.status !== "coming-soon";
+                return (
+                  <div
+                    key={solution.id}
+                    className="relative p-8 border border-gray-200 rounded-xl hover:border-blue-600 hover:shadow-lg transition-all group"
                   >
-                    了解更多
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                ) : (
-                  <span className="inline-flex items-center text-gray-400 font-medium">
-                    即将推出
-                  </span>
-                )}
-              </div>
-            ))}
-          </div>
+                    {!isActive && (
+                      <div className="absolute top-4 right-4 flex items-center gap-1 px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-sm">
+                        <Clock className="w-4 h-4" />
+                        <span>敬请期待</span>
+                      </div>
+                    )}
+                    {isActive && (
+                      <div className="absolute top-4 right-4 px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">
+                        可用
+                      </div>
+                    )}
+                    <div className="flex items-center justify-center w-16 h-16 bg-blue-100 text-blue-600 rounded-lg mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                      <IconComponent className="w-8 h-8" />
+                    </div>
+                    <h3 className="text-2xl font-semibold text-gray-900 mb-3">{solution.title}</h3>
+                    <p className="text-gray-600 mb-6 min-h-[3rem]">{solution.description}</p>
+                    {isActive ? (
+                      <Link
+                        to={solution.link ?? "#"}
+                        className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
+                      >
+                        了解更多
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Link>
+                    ) : (
+                      <span className="inline-flex items-center text-gray-400 font-medium">
+                        即将推出
+                      </span>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
       </section>
 
       {/* Open Source Benefits Section */}
+      {/* TODO: Benefits are currently hardcoded. Consider adding a portal API endpoint for benefits
+          when the backend supports it (e.g., GET /portal/benefits). */}
       <section className="py-20 bg-gradient-to-br from-blue-50 via-cyan-50 to-blue-50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">

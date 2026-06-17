@@ -1,4 +1,5 @@
-import { ArrowRight, Bot, Cpu, FileSpreadsheet, ListChecks, MonitorCog, Workflow as WorkflowIcon, Zap } from "lucide-react";
+import { useState } from "react";
+import { ArrowRight, Bot, Cpu, FileSpreadsheet, ListChecks, MonitorCog, Workflow as WorkflowIcon, Zap, ChevronDown, ChevronUp } from "lucide-react";
 import { Card, CardContent } from "../components/ui/card";
 
 const steps = [
@@ -35,6 +36,12 @@ const steps = [
 ];
 
 export function Workflow() {
+  const [expandedStep, setExpandedStep] = useState<number | null>(null);
+
+  function toggleStep(index: number) {
+    setExpandedStep((current) => (current === index ? null : index));
+  }
+
   return (
     <section className="bg-gradient-to-br from-slate-50 via-white to-blue-50 px-4 py-12 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
@@ -50,25 +57,45 @@ export function Workflow() {
         </div>
 
         <div className="grid gap-5 lg:grid-cols-2">
-          {steps.map((step, index) => (
-            <Card key={step.title} className="border-blue-100 bg-white/90 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg">
-              <CardContent className="p-6">
-                <div className="flex gap-4">
-                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-600 text-white shadow-md">
-                    <step.icon className="h-7 w-7" />
-                  </div>
-                  <div>
-                    <div className="mb-2 flex items-center gap-3">
-                      <span className="rounded-full bg-blue-50 px-3 py-1 text-sm font-semibold text-blue-700">步骤 {index + 1}</span>
-                      {index < steps.length - 1 && <ArrowRight className="hidden h-4 w-4 text-gray-400 sm:block" />}
+          {steps.map((step, index) => {
+            const isExpanded = expandedStep === index;
+            return (
+              <Card
+                key={step.title}
+                className="cursor-pointer border-blue-100 bg-white/90 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg"
+                onClick={() => toggleStep(index)}
+              >
+                <CardContent className="p-6">
+                  <div className="flex gap-4">
+                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-600 text-white shadow-md">
+                      <step.icon className="h-7 w-7" />
                     </div>
-                    <h2 className="mb-2 text-xl font-semibold text-gray-900">{step.title}</h2>
-                    <p className="leading-relaxed text-gray-600">{step.description}</p>
+                    <div className="min-w-0 flex-1">
+                      <div className="mb-2 flex items-center gap-3">
+                        <span className="rounded-full bg-blue-50 px-3 py-1 text-sm font-semibold text-blue-700">步骤 {index + 1}</span>
+                        {index < steps.length - 1 && <ArrowRight className="hidden h-4 w-4 text-gray-400 sm:block" />}
+                        <div className="ml-auto shrink-0">
+                          {isExpanded ? (
+                            <ChevronUp className="h-5 w-5 text-blue-600" />
+                          ) : (
+                            <ChevronDown className="h-5 w-5 text-gray-400" />
+                          )}
+                        </div>
+                      </div>
+                      <h2 className="mb-2 text-xl font-semibold text-gray-900">{step.title}</h2>
+                      {isExpanded ? (
+                        <p className="leading-relaxed text-gray-600">{step.description}</p>
+                      ) : (
+                        <p className="line-clamp-1 leading-relaxed text-gray-500 text-sm">
+                          {step.description.slice(0, 60)}...
+                        </p>
+                      )}
+                    </div>
                   </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+                </CardContent>
+              </Card>
+            );
+          })}
         </div>
 
         <div className="mt-10 rounded-2xl border border-blue-100 bg-white p-6 text-center shadow-sm">

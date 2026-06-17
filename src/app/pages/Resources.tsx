@@ -82,6 +82,7 @@ export function Resources() {
   const [loading, setLoading] = useState(false);
   const [downloadingId, setDownloadingId] = useState<string | number | null>(null);
   const [error, setError] = useState("");
+  const [rateLimitError, setRateLimitError] = useState("");
 
   const categories = activeTab === "documents" ? documentCategories : softwareCategories;
   const totalPages = useMemo(() => data.pages ?? Math.max(1, Math.ceil(data.total / data.page_size)), [data]);
@@ -130,6 +131,7 @@ export function Resources() {
   async function handleDownload(item: ResourceItem) {
     setDownloadingId(item.id);
     setError("");
+    setRateLimitError("");
     try {
       const result = activeTab === "documents" ? await documentsApi.downloadLink(item.id) : await softwareApi.downloadLink(item.id);
       const url = getDownloadUrl(result);
@@ -138,7 +140,7 @@ export function Resources() {
       void loadResources();
     } catch (err) {
       if (isTooManyRequests(err)) {
-        window.alert("今日下载次数已用完");
+        setRateLimitError("今日下载次数已用完，请明天再试");
       } else {
         setError(getApiErrorMessage(err, "下载链接获取失败"));
       }
@@ -192,6 +194,7 @@ export function Resources() {
         </Card>
 
         {error && <div className="mb-4 rounded-lg bg-red-50 px-4 py-3 text-sm text-red-700">{error}</div>}
+        {rateLimitError && <div className="mb-4 rounded-lg bg-amber-50 px-4 py-3 text-sm text-amber-800">{rateLimitError}</div>}
 
         <div className="space-y-4">
           {loading ? (

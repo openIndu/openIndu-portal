@@ -1,4 +1,4 @@
-import { createContext, createElement, useCallback, useContext, useMemo, useState, type ReactNode } from "react";
+import { createContext, createElement, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import { authApi, type AuthResponse, type User, type UserRole } from "@/api";
 
 const STORAGE_KEYS = {
@@ -14,6 +14,7 @@ interface AuthContextValue {
   isAuthenticated: boolean;
   isAdmin: boolean;
   isMember: boolean;
+  isLoading: boolean;
   login: (payload: AuthResponse) => Promise<void>;
   logout: () => Promise<void>;
   refreshToken: () => Promise<string | null>;
@@ -55,6 +56,31 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [token, setToken] = useState<string | null>(() => localStorage.getItem(STORAGE_KEYS.token));
   const [refreshTokenValue, setRefreshTokenValue] = useState<string | null>(() => localStorage.getItem(STORAGE_KEYS.refreshToken));
   const [user, setUserState] = useState<User | null>(() => readUser());
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const storedRefreshToken = localStorage.getItem(STORAGE_KEYS.refreshToken);
+    if (!storedRefreshToken) {
+      setIsLoading(false);
+      return;
+    }
+    authApi
+      .refresh(storedRefreshToken)
+      .then((refreshed) => {
+        const nextToken = refreshed.access_token;
+        const nextRefreshToken = refreshed.refresh_token ?? storedRefreshToken;
+        const nextUser = refreshed.user ?? readUser();
+        persistAuth(nextToken, nextRefreshToken, nextUser);
+        setToken(nextToken);
+        setRefreshTokenValue(nextRefreshToken);
+        setUserState(nextUser);
+      })
+      .catch(() => {
+        // Refresh failed — clear stale tokens but keep the user in state if they
+        // exist locally so the UI can show a logged-out state gracefully.
+      })
+      .finally(() => setIsLoading(false));
+  }, []);
 
   const setUser = useCallback((nextUser: User | null) => {
     setUserState(nextUser);
@@ -122,12 +148,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     isAuthenticated: Boolean(token),
     isAdmin: user?.role === "admin",
     isMember: user?.role === "member" || user?.role === "admin",
+    isLoading,
     login,
     logout,
     refreshToken,
     setUser,
     hasRole,
-  }), [token, refreshTokenValue, user, login, logout, refreshToken, setUser, hasRole]);
+  }), [token, refreshTokenValue, user, isLoading, login, logout, refreshToken, setUser, hasRole]);
 
   return createElement(AuthContext.Provider, { value }, children);
 }
