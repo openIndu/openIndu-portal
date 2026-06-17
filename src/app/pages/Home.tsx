@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { ArrowRight, Github, Globe, Users, Zap, Code, ExternalLink, Clock, Cpu, Eye, Network, Server, Loader2 } from "lucide-react";
 import { ImageCarousel } from "../components/ImageCarousel";
+import { SEO } from "../components/SEO";
 import { portalApi, type PortalCarouselItem, type PortalHero, type PortalSolution } from "@/api";
 
 const carouselSlides = [
@@ -54,8 +55,10 @@ export function Home() {
   const [heroLoading, setHeroLoading] = useState(true);
   const [carouselItems, setCarouselItems] = useState<PortalCarouselItem[]>([]);
   const [carouselLoading, setCarouselLoading] = useState(true);
+  const [carouselError, setCarouselError] = useState(false);
   const [solutions, setSolutions] = useState<PortalSolution[]>([]);
   const [solutionsLoading, setSolutionsLoading] = useState(true);
+  const [solutionsError, setSolutionsError] = useState(false);
 
   useEffect(() => {
     portalApi.hero()
@@ -66,15 +69,27 @@ export function Home() {
 
   useEffect(() => {
     portalApi.carousel()
-      .then((data) => setCarouselItems(data))
-      .catch(() => setCarouselItems([]))
+      .then((data) => {
+        setCarouselItems(data);
+        setCarouselError(false);
+      })
+      .catch(() => {
+        setCarouselItems([]);
+        setCarouselError(true);
+      })
       .finally(() => setCarouselLoading(false));
   }, []);
 
   useEffect(() => {
     portalApi.solutions()
-      .then((data) => setSolutions(data))
-      .catch(() => setSolutions([]))
+      .then((data) => {
+        setSolutions(data);
+        setSolutionsError(false);
+      })
+      .catch(() => {
+        setSolutions([]);
+        setSolutionsError(true);
+      })
       .finally(() => setSolutionsLoading(false));
   }, []);
 
@@ -112,6 +127,12 @@ export function Home() {
 
   return (
     <div>
+      <SEO
+        title="openIndu Community｜开源智能制造工业生态"
+        description="openIndu Community 面向智能制造场景，提供工业互联网平台、PLC 开发工作流、资源中心与 AI 赋能解决方案。"
+        keywords="openIndu,智能制造,工业互联网,PLC,HMI,AI Agent,RAG,MCP"
+        canonicalPath="/"
+      />
 
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-blue-50 via-white to-cyan-50 py-20 overflow-hidden">
@@ -202,11 +223,18 @@ export function Home() {
             </p>
           </div>
           {carouselLoading ? (
-            <div className="flex items-center justify-center py-12">
+            <div className="mx-auto flex aspect-video max-w-6xl animate-pulse items-center justify-center rounded-2xl border border-gray-200 bg-white shadow-sm">
               <Loader2 className="animate-spin h-8 w-8 text-blue-600" />
             </div>
           ) : (
-            <ImageCarousel slides={mappedCarouselSlides} />
+            <>
+              {carouselError && (
+                <div className="mx-auto mb-4 max-w-6xl rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
+                  展示内容暂时无法从服务端加载，已切换为本地默认内容。
+                </div>
+              )}
+              <ImageCarousel slides={mappedCarouselSlides} />
+            </>
           )}
           <div className="text-center mt-8">
             <Link
@@ -230,8 +258,14 @@ export function Home() {
             </p>
           </div>
           {solutionsLoading ? (
-            <div className="flex items-center justify-center py-12">
-              <Loader2 className="animate-spin h-8 w-8 text-blue-600" />
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+              {[1, 2, 3, 4].map((item) => (
+                <div key={item} className="h-64 animate-pulse rounded-xl border border-gray-200 bg-gray-50" />
+              ))}
+            </div>
+          ) : solutions.length === 0 ? (
+            <div className="rounded-xl border border-gray-200 bg-gray-50 px-6 py-12 text-center text-gray-600">
+              {solutionsError ? "解决方案暂时无法从服务端加载，请稍后刷新重试。" : "暂无解决方案内容。"}
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

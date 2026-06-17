@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router";
 import { Download, FileText, Loader2, Package, Search } from "lucide-react";
 import { documentsApi, getApiErrorMessage, isTooManyRequests, softwareApi, type PaginatedResponse, type ResourceItem } from "@/api";
 import { useAuth } from "@/store/auth";
+import { SEO } from "../components/SEO";
 import { Button } from "../components/ui/button";
 import { Card, CardContent } from "../components/ui/card";
 import { Input } from "../components/ui/input";
@@ -151,6 +152,12 @@ export function Resources() {
 
   return (
     <section className="bg-gray-50 px-4 py-10 sm:px-6 lg:px-8">
+      <SEO
+        title="资源中心｜openIndu"
+        description="openIndu 资源中心提供 PLC/HMI 开发资料、品牌手册、软件工具与最佳实践下载。"
+        keywords="PLC手册,HMI手册,工业软件,品牌资料,openIndu资源中心"
+        canonicalPath="/resources"
+      />
       <div className="mx-auto max-w-7xl">
         <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>

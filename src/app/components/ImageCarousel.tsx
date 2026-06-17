@@ -19,6 +19,7 @@ export function ImageCarousel({ slides, intervalMs = 4000 }: ImageCarouselProps)
 
   const goTo = useCallback(
     (index: number) => {
+      if (slides.length === 0) return;
       setCurrentIndex(((index % slides.length) + slides.length) % slides.length);
     },
     [slides.length],
@@ -29,10 +30,18 @@ export function ImageCarousel({ slides, intervalMs = 4000 }: ImageCarouselProps)
 
   // Auto-play
   useEffect(() => {
-    if (isPaused) return;
+    if (isPaused || slides.length <= 1) return;
     const timer = setInterval(goNext, intervalMs);
     return () => clearInterval(timer);
-  }, [isPaused, goNext, intervalMs]);
+  }, [isPaused, goNext, intervalMs, slides.length]);
+
+  if (slides.length === 0) {
+    return (
+      <div className="mx-auto flex aspect-video max-w-6xl items-center justify-center rounded-2xl border border-dashed border-gray-300 bg-white text-gray-500">
+        暂无轮播内容
+      </div>
+    );
+  }
 
   return (
     <div
@@ -64,43 +73,46 @@ export function ImageCarousel({ slides, intervalMs = 4000 }: ImageCarouselProps)
         ))}
 
         {/* Arrow buttons */}
-        <button
-          type="button"
-          onClick={goPrev}
-          className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors opacity-0 group-hover:opacity-100"
-          style={{ opacity: undefined }}
-          onMouseEnter={(e) => ((e.target as HTMLElement).style.opacity = "1")}
-          onMouseLeave={(e) => ((e.target as HTMLElement).style.opacity = "0")}
-        >
-          <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
-        </button>
-        <button
-          type="button"
-          onClick={goNext}
-          className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
-          onMouseEnter={(e) => ((e.target as HTMLElement).style.opacity = "1")}
-          onMouseLeave={(e) => ((e.target as HTMLElement).style.opacity = "0")}
-        >
-          <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
-        </button>
+        {slides.length > 1 && (
+          <>
+            <button
+              type="button"
+              onClick={goPrev}
+              className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-black/60 p-2 text-white transition-colors hover:bg-black/80 focus:outline-none focus:ring-2 focus:ring-white sm:left-4"
+              aria-label="上一张"
+            >
+              <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+            </button>
+            <button
+              type="button"
+              onClick={goNext}
+              className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-black/60 p-2 text-white transition-colors hover:bg-black/80 focus:outline-none focus:ring-2 focus:ring-white sm:right-4"
+              aria-label="下一张"
+            >
+              <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+            </button>
+          </>
+        )}
       </div>
 
       {/* Indicator dots */}
-      <div className="flex justify-center gap-2 mt-4">
-        {slides.map((_, index) => (
-          <button
-            key={index}
-            type="button"
-            onClick={() => goTo(index)}
-            className={`h-2 rounded-full transition-all duration-300 ${
-              index === currentIndex
-                ? "w-8 bg-blue-600"
-                : "w-2 bg-gray-300 hover:bg-gray-400"
-            }`}
-            aria-label={`Go to slide ${index + 1}`}
-          />
-        ))}
-      </div>
+      {slides.length > 1 && (
+        <div className="flex justify-center gap-2 mt-4">
+          {slides.map((_, index) => (
+            <button
+              key={index}
+              type="button"
+              onClick={() => goTo(index)}
+              className={`h-2 rounded-full transition-all duration-300 ${
+                index === currentIndex
+                  ? "w-8 bg-blue-600"
+                  : "w-2 bg-gray-300 hover:bg-gray-400"
+              }`}
+              aria-label={`切换到第 ${index + 1} 张`}
+            />
+          ))}
+        </div>
+      )}
 
     </div>
   );

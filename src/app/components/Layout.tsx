@@ -36,7 +36,7 @@ export function Layout() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-white border-b border-gray-200">
+      <header className="sticky top-0 z-50 border-b border-gray-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80">
         <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between gap-4">
             {/* Logo */}
@@ -50,7 +50,7 @@ export function Layout() {
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex lg:gap-x-6">
+            <div className="hidden min-w-0 flex-1 items-center justify-center gap-x-4 xl:gap-x-6 lg:flex">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
@@ -70,10 +70,10 @@ export function Layout() {
             <div className="hidden lg:flex lg:items-center lg:gap-3">
               {isAuthenticated ? (
                 <>
-                  <div className="flex items-center gap-2 rounded-full bg-blue-50 px-3 py-1.5 text-sm text-blue-700">
-                    <UserRound className="h-4 w-4" />
-                    <span>{user?.phone ?? "已登录用户"}</span>
-                    {user?.role && <span className="rounded-full bg-white px-2 py-0.5 text-xs uppercase">{user.role}</span>}
+                  <div className="flex max-w-[220px] items-center gap-2 rounded-full bg-blue-50 px-3 py-1.5 text-sm text-blue-700">
+                    <UserRound className="h-4 w-4 shrink-0" />
+                    <span className="truncate">{user?.phone ?? "已登录用户"}</span>
+                    {user?.role && <span className="shrink-0 rounded-full bg-white px-2 py-0.5 text-xs uppercase">{user.role}</span>}
                   </div>
                   <button
                     type="button"
