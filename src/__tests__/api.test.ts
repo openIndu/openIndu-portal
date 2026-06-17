@@ -75,6 +75,32 @@ describe("isTooManyRequests", () => {
   });
 });
 
+describe("authApi response normalization", () => {
+  it("normalizes backend login responses with nested tokens", async () => {
+    const { apiClient } = await import("@/api");
+    const postSpy = vi.spyOn(apiClient, "post").mockResolvedValueOnce({
+      data: {
+        code: 200,
+        data: {
+          user: { id: 1, phone: "13800000000", role: "admin" },
+          tokens: {
+            access_token: "access-token",
+            refresh_token: "refresh-token",
+            token_type: "bearer",
+          },
+        },
+      },
+    });
+
+    const result = await authApi.login("13800000000", "888888");
+
+    expect(result.access_token).toBe("access-token");
+    expect(result.refresh_token).toBe("refresh-token");
+    expect(result.user?.role).toBe("admin");
+    postSpy.mockRestore();
+  });
+});
+
 describe("portalApi response normalization", () => {
   it("normalizes portal list responses that use an items wrapper", async () => {
     const { apiClient } = await import("@/api");

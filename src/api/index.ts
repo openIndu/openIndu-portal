@@ -21,6 +21,17 @@ export interface AuthResponse extends AuthTokens {
   user?: User;
 }
 
+interface NestedAuthResponse {
+  user?: User;
+  tokens?: AuthTokens & {
+    expires_in?: number;
+    access_jti?: string;
+    refresh_jti?: string;
+    access_expires_at?: string;
+    refresh_expires_at?: string;
+  };
+}
+
 export interface ApiEnvelope<T> {
   code?: number;
   data?: T;
@@ -118,6 +129,16 @@ function unwrap<T>(response: AxiosResponse<ApiEnvelope<T> | T>): T {
   return body as T;
 }
 
+function normalizeAuthResponse(payload: AuthResponse | NestedAuthResponse): AuthResponse {
+  if ("tokens" in payload && payload.tokens) {
+    return {
+      ...payload.tokens,
+      user: payload.user,
+    };
+  }
+  return payload as AuthResponse;
+}
+
 export const apiClient = axios.create({
   baseURL: import.meta.env.VITE_API_BASE || "/api/v1",
   timeout: 15_000,
@@ -151,10 +172,10 @@ export const authApi = {
     return unwrap(await apiClient.post<ApiEnvelope<{ success: boolean }>>("/auth/send-code", { phone }));
   },
   async login(phone: string, code: string) {
-    return unwrap(await apiClient.post<ApiEnvelope<AuthResponse>>("/auth/login", { phone, code }));
+    return normalizeAuthResponse(unwrap(await apiClient.post<ApiEnvelope<AuthResponse | NestedAuthResponse>>("/auth/login", { phone, code })));
   },
   async register(phone: string, code: string) {
-    return unwrap(await apiClient.post<ApiEnvelope<AuthResponse>>("/auth/register", { phone, code }));
+    return normalizeAuthResponse(unwrap(await apiClient.post<ApiEnvelope<AuthResponse | NestedAuthResponse>>("/auth/register", { phone, code })));
   },
   async refresh(refreshToken: string) {
     return unwrap(await apiClient.post<ApiEnvelope<AuthResponse>>("/auth/refresh", { refresh_token: refreshToken }));
