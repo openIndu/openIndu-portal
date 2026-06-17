@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router";
 import { AuthGuard } from "./components/AuthGuard";
 import { Layout } from "./components/Layout";
+import { NotFound } from "./components/NotFound";
 import { Home } from "./pages/Home";
 import { MotionControl } from "./pages/MotionControl";
 import { Vision } from "./pages/Vision";
@@ -43,6 +44,7 @@ export const router = createBrowserRouter([
       { path: "quick-start", Component: IIoTPlatform },
       { path: "docs", Component: IIoTPlatform },
       { path: "token-service", Component: TokenService },
+      { path: "*", Component: NotFound },
     ],
   },
 ]);
