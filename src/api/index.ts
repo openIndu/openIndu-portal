@@ -21,7 +21,7 @@ export interface AuthResponse extends AuthTokens {
   user?: User;
 }
 
-interface NestedAuthResponse {
+export interface NestedAuthResponse {
   user?: User;
   tokens?: AuthTokens & {
     expires_in?: number;
@@ -121,7 +121,7 @@ const STORAGE_KEYS = {
   refreshToken: "openindu_portal_refresh_token",
 } as const;
 
-function unwrap<T>(response: AxiosResponse<ApiEnvelope<T> | T>): T {
+export function unwrap<T>(response: AxiosResponse<ApiEnvelope<T> | T>): T {
   const body = response.data;
   if (body && typeof body === "object" && "data" in body) {
     return (body as ApiEnvelope<T>).data as T;
@@ -129,7 +129,7 @@ function unwrap<T>(response: AxiosResponse<ApiEnvelope<T> | T>): T {
   return body as T;
 }
 
-function normalizeAuthResponse(payload: AuthResponse | NestedAuthResponse): AuthResponse {
+export function normalizeAuthResponse(payload: AuthResponse | NestedAuthResponse): AuthResponse {
   if ("tokens" in payload && payload.tokens) {
     return {
       ...payload.tokens,
@@ -212,14 +212,14 @@ export const softwareApi = {
   },
 };
 
-function unwrapPortalContent<T>(value: T | PortalContentRecord<T>): T {
+export function unwrapPortalContent<T>(value: T | PortalContentRecord<T>): T {
   if (value && typeof value === "object" && "content" in value) {
     return ((value as PortalContentRecord<T>).content ?? {}) as T;
   }
   return value as T;
 }
 
-function unwrapPortalList<T>(value: T[] | { items?: Array<T | PortalContentRecord<T>> } | undefined): T[] {
+export function unwrapPortalList<T>(value: T[] | { items?: Array<T | PortalContentRecord<T>> } | undefined): T[] {
   const list = Array.isArray(value) ? value : value?.items;
   if (!Array.isArray(list)) return [];
   return list.map((item) => unwrapPortalContent<T>(item));
