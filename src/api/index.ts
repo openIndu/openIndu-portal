@@ -68,13 +68,24 @@ export interface DownloadLinkResponse {
   filename?: string;
 }
 
+export interface PortalContentRecord<T> {
+  id?: number | string;
+  section?: string;
+  content?: T;
+  sort_order?: number;
+  is_active?: boolean;
+  updated_at?: string;
+}
+
 export interface PortalHero {
-  title: string;
+  title?: string;
   subtitle?: string;
   primary_cta_text?: string;
   primary_cta_link?: string;
   secondary_cta_text?: string;
   secondary_cta_link?: string;
+  cta_text?: string;
+  cta_link?: string;
 }
 
 export interface PortalSolution {
@@ -88,9 +99,9 @@ export interface PortalSolution {
 
 export interface PortalCarouselItem {
   id: number | string;
-  title: string;
+  title?: string;
   description?: string;
-  image_url: string;
+  image_url?: string;
   alt?: string;
 }
 
@@ -180,15 +191,28 @@ export const softwareApi = {
   },
 };
 
+function unwrapPortalContent<T>(value: T | PortalContentRecord<T>): T {
+  if (value && typeof value === "object" && "content" in value) {
+    return ((value as PortalContentRecord<T>).content ?? {}) as T;
+  }
+  return value as T;
+}
+
+function unwrapPortalList<T>(value: T[] | { items?: Array<T | PortalContentRecord<T>> } | undefined): T[] {
+  const list = Array.isArray(value) ? value : value?.items;
+  if (!Array.isArray(list)) return [];
+  return list.map((item) => unwrapPortalContent<T>(item));
+}
+
 export const portalApi = {
   async hero() {
-    return unwrap(await apiClient.get<ApiEnvelope<PortalHero>>("/portal/hero"));
+    return unwrapPortalContent<PortalHero>(unwrap(await apiClient.get<ApiEnvelope<PortalHero | PortalContentRecord<PortalHero>>>("/portal/hero")));
   },
   async solutions() {
-    return unwrap(await apiClient.get<ApiEnvelope<PortalSolution[]>>("/portal/solutions"));
+    return unwrapPortalList<PortalSolution>(unwrap(await apiClient.get<ApiEnvelope<PortalSolution[] | { items?: Array<PortalSolution | PortalContentRecord<PortalSolution>> }>>("/portal/solutions")));
   },
   async carousel() {
-    return unwrap(await apiClient.get<ApiEnvelope<PortalCarouselItem[]>>("/portal/carousel"));
+    return unwrapPortalList<PortalCarouselItem>(unwrap(await apiClient.get<ApiEnvelope<PortalCarouselItem[] | { items?: Array<PortalCarouselItem | PortalContentRecord<PortalCarouselItem>> }>>("/portal/carousel")));
   },
 };
 

@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { AxiosError } from "axios";
 import type { AxiosResponse } from "axios";
 
@@ -72,6 +72,43 @@ describe("isTooManyRequests", () => {
 
   it("should return false for non-Axios errors", () => {
     expect(isTooManyRequests(new Error("test"))).toBe(false);
+  });
+});
+
+describe("portalApi response normalization", () => {
+  it("normalizes portal list responses that use an items wrapper", async () => {
+    const { apiClient } = await import("@/api");
+    const getSpy = vi.spyOn(apiClient, "get").mockResolvedValueOnce({
+      data: {
+        code: 200,
+        data: {
+          items: [
+            {
+              id: 1,
+              section: "solutions",
+              content: { id: 1, title: "PLC", description: "PLC workflow" },
+            },
+          ],
+        },
+      },
+    });
+
+    const result = await portalApi.solutions();
+
+    expect(result).toEqual([{ id: 1, title: "PLC", description: "PLC workflow" }]);
+    getSpy.mockRestore();
+  });
+
+  it("returns an empty array for malformed portal list responses", async () => {
+    const { apiClient } = await import("@/api");
+    const getSpy = vi.spyOn(apiClient, "get").mockResolvedValueOnce({
+      data: { code: 200, data: { items: null } },
+    });
+
+    const result = await portalApi.carousel();
+
+    expect(result).toEqual([]);
+    getSpy.mockRestore();
   });
 });
 

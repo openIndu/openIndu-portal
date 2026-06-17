@@ -117,13 +117,18 @@ export function Home() {
   ];
 
   const mappedCarouselSlides = carouselItems.length > 0
-    ? carouselItems.map((item) => ({
-        src: item.image_url,
-        alt: item.alt ?? item.title,
-        title: item.title,
-        description: item.description ?? "",
-      }))
+    ? carouselItems
+        .filter((item) => item.image_url)
+        .map((item) => ({
+          src: item.image_url as string,
+          alt: item.alt ?? item.title ?? "平台功能展示",
+          title: item.title ?? "平台功能展示",
+          description: item.description ?? "",
+        }))
     : carouselSlides;
+  const hasRemoteHero = Boolean(hero?.title);
+  const primaryCtaText = hero?.primary_cta_text ?? hero?.cta_text;
+  const primaryCtaLink = hero?.primary_cta_link ?? hero?.cta_link;
 
   return (
     <div>
@@ -149,27 +154,27 @@ export function Home() {
               <div className="flex items-center justify-center py-8">
                 <Loader2 className="animate-spin h-8 w-8 text-blue-600" />
               </div>
-            ) : hero ? (
+            ) : hasRemoteHero ? (
               <>
                 <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-                  {hero.title}
+                  {hero?.title}
                 </h1>
-                {hero.subtitle && (
+                {hero?.subtitle && (
                   <p className="text-xl text-gray-600 mb-10 max-w-3xl mx-auto leading-relaxed">
                     {hero.subtitle}
                   </p>
                 )}
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  {hero.primary_cta_text && (
+                  {primaryCtaText && (
                     <Link
-                      to={hero.primary_cta_link ?? "#"}
+                      to={primaryCtaLink ?? "#"}
                       className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
                     >
-                      {hero.primary_cta_text}
+                      {primaryCtaText}
                       <ArrowRight className="ml-2 h-5 w-5" />
                     </Link>
                   )}
-                  {hero.secondary_cta_text && (
+                  {hero?.secondary_cta_text && (
                     <Link
                       to={hero.secondary_cta_link ?? "#"}
                       className="inline-flex items-center justify-center px-6 py-3 bg-white text-gray-900 border-2 border-gray-200 rounded-lg hover:border-blue-600 hover:text-blue-600 transition-colors font-medium"
