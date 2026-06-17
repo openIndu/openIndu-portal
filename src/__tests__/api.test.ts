@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import type { AxiosResponse } from "axios";
 
 // Import the functions to test — they use the real axios module (not mocked)
