@@ -70,7 +70,8 @@ export function Login() {
     try {
       const result = await authApi.login(phone, code);
       await login(result);
-      navigate(redirectTo, { replace: true });
+      // 登录会更新 AuthProvider 状态；等待 isAuthenticated 变为 true 后由上方 effect 跳转，
+      // 避免在同一个事件周期内直接进入受保护路由导致 AuthGuard 读到旧状态并回跳登录页。
     } catch (err) {
       setError(getApiErrorMessage(err, "登录失败，请检查验证码"));
     } finally {
