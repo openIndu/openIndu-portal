@@ -12,36 +12,39 @@ import { Tabs, TabsList, TabsTrigger } from "../components/ui/tabs";
 
 type ResourceType = "documents" | "software";
 
-const brands = [
-  { value: "", label: "全部品牌" },
-  { value: "siemens", label: "西门子" },
-  { value: "mitsubishi", label: "三菱" },
-  { value: "omron", label: "欧姆龙" },
-  { value: "keyence", label: "基恩士" },
-  { value: "inovance", label: "汇川" },
-  { value: "other", label: "其他" },
-];
+type FilterOption = { value: string; label: string };
 
-const documentCategories = [
-  { value: "", label: "全部分类" },
-  { value: "plc-manual", label: "PLC 编程手册" },
-  { value: "hardware-manual", label: "硬件手册" },
-  { value: "driver-manual", label: "驱动器手册" },
-  { value: "hmi-manual", label: "HMI 手册" },
-  { value: "software-manual", label: "软件手册" },
-  { value: "best-practice", label: "最佳实践" },
-  { value: "electrical-standard", label: "电气规范" },
-  { value: "other", label: "其他" },
-];
+const brandLabels: Record<string, string> = {
+  siemens: "西门子",
+  mitsubishi: "三菱",
+  omron: "欧姆龙",
+  keyence: "基恩士",
+  inovance: "汇川",
+  other: "其他",
+};
 
-const softwareCategories = [
-  { value: "", label: "全部分类" },
-  { value: "plc-software", label: "PLC 编程软件" },
-  { value: "hmi-software", label: "HMI 组态软件" },
-  { value: "driver-software", label: "驱动调试软件" },
-  { value: "utility", label: "工具软件" },
-  { value: "other", label: "其他" },
-];
+const categoryLabels: Record<string, string> = {
+  "plc-manual": "PLC 编程手册",
+  "hardware-manual": "硬件手册",
+  "driver-manual": "驱动器手册",
+  "hmi-manual": "HMI 手册",
+  "software-manual": "软件手册",
+  "best-practice": "最佳实践",
+  "electrical-standard": "电气规范",
+  "plc-ide": "PLC 编程软件",
+  "hmi-ide": "HMI 组态软件",
+  "plc-driver": "PLC 驱动/通信组件",
+  utility: "工具软件",
+  firmware: "固件",
+  other: "其他",
+};
+
+function toOptions(values: string[], allLabel: string, labels: Record<string, string>): FilterOption[] {
+  return [
+    { value: "", label: allLabel },
+    ...values.map((value) => ({ value, label: labels[value] ?? value })),
+  ];
+}
 
 function normalizeList(data: PaginatedResponse<ResourceItem> | ResourceItem[] | undefined, page: number): PaginatedResponse<ResourceItem> {
   if (!data) return { items: [], total: 0, page, page_size: 10 };
@@ -80,12 +83,14 @@ export function Resources() {
   const [keyword, setKeyword] = useState("");
   const [page, setPage] = useState(1);
   const [data, setData] = useState<PaginatedResponse<ResourceItem>>({ items: [], total: 0, page: 1, page_size: 10 });
+  const [brandOptions, setBrandOptions] = useState<FilterOption[]>([{ value: "", label: "全部品牌" }]);
+  const [categoryOptions, setCategoryOptions] = useState<FilterOption[]>([{ value: "", label: "全部分类" }]);
+  const [filtersLoading, setFiltersLoading] = useState(false);
   const [loading, setLoading] = useState(false);
   const [downloadingId, setDownloadingId] = useState<string | number | null>(null);
   const [error, setError] = useState("");
   const [rateLimitError, setRateLimitError] = useState("");
 
-  const categories = activeTab === "documents" ? documentCategories : softwareCategories;
   const totalPages = useMemo(() => data.pages ?? Math.max(1, Math.ceil(data.total / data.page_size)), [data]);
 
   const loadResources = useCallback(async () => {
@@ -111,6 +116,26 @@ export function Resources() {
       setPage(1);
     }
   }, [activeTab, location.pathname]);
+
+  useEffect(() => {
+    const loadFilters = async () => {
+      setFiltersLoading(true);
+      try {
+        const [nextBrands, nextCategories] = activeTab === "documents"
+          ? await Promise.all([documentsApi.brands(), documentsApi.categories()])
+          : await Promise.all([softwareApi.brands(), softwareApi.categories()]);
+        setBrandOptions(toOptions(nextBrands, "全部品牌", brandLabels));
+        setCategoryOptions(toOptions(nextCategories, "全部分类", categoryLabels));
+      } catch (err) {
+        setError(getApiErrorMessage(err, "筛选项加载失败"));
+        setBrandOptions([{ value: "", label: "全部品牌" }]);
+        setCategoryOptions([{ value: "", label: "全部分类" }]);
+      } finally {
+        setFiltersLoading(false);
+      }
+    };
+    void loadFilters();
+  }, [activeTab]);
 
   useEffect(() => {
     void loadResources();
@@ -195,11 +220,11 @@ export function Resources() {
             </div>
 
             <div className="grid grid-cols-1 gap-3 md:grid-cols-[180px_200px_1fr_auto]">
-              <Select value={brand} onChange={(event) => { setBrand(event.target.value); setPage(1); }} aria-label="品牌筛选">
-                {brands.map((item) => <option key={item.value} value={item.value}>{item.label}</option>)}
+              <Select value={brand} onChange={(event) => { setBrand(event.target.value); setPage(1); }} aria-label="品牌筛选" disabled={filtersLoading}>
+                {brandOptions.map((item) => <option key={item.value} value={item.value}>{item.label}</option>)}
               </Select>
-              <Select value={category} onChange={(event) => { setCategory(event.target.value); setPage(1); }} aria-label="分类筛选">
-                {categories.map((item) => <option key={item.value} value={item.value}>{item.label}</option>)}
+              <Select value={category} onChange={(event) => { setCategory(event.target.value); setPage(1); }} aria-label="分类筛选" disabled={filtersLoading}>
+                {categoryOptions.map((item) => <option key={item.value} value={item.value}>{item.label}</option>)}
               </Select>
               <div className="relative">
                 <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />

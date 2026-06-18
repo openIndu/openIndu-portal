@@ -409,6 +409,8 @@ describe("documentsApi", () => {
     expect(typeof documentsApi.list).toBe("function");
     expect(typeof documentsApi.get).toBe("function");
     expect(typeof documentsApi.downloadLink).toBe("function");
+    expect(typeof documentsApi.brands).toBe("function");
+    expect(typeof documentsApi.categories).toBe("function");
   });
 
   it("list should call get with params and unwrap result", async () => {
@@ -440,6 +442,17 @@ describe("documentsApi", () => {
     expect(result).toEqual({ download_url: "http://example.com/file.pdf" });
     expect(mockGet).toHaveBeenCalledWith("/documents/1/download-link");
   });
+
+  it("brands and categories should call backend option endpoints", async () => {
+    const mockGet = vi.spyOn(apiClient, "get")
+      .mockResolvedValueOnce({ data: { code: 200, data: ["siemens"] } })
+      .mockResolvedValueOnce({ data: { code: 200, data: ["plc-manual"] } });
+
+    await expect(documentsApi.brands()).resolves.toEqual(["siemens"]);
+    await expect(documentsApi.categories()).resolves.toEqual(["plc-manual"]);
+    expect(mockGet).toHaveBeenNthCalledWith(1, "/documents/brands/list");
+    expect(mockGet).toHaveBeenNthCalledWith(2, "/documents/categories/list");
+  });
 });
 
 describe("softwareApi", () => {
@@ -447,6 +460,8 @@ describe("softwareApi", () => {
     expect(typeof softwareApi.list).toBe("function");
     expect(typeof softwareApi.get).toBe("function");
     expect(typeof softwareApi.downloadLink).toBe("function");
+    expect(typeof softwareApi.brands).toBe("function");
+    expect(typeof softwareApi.categories).toBe("function");
   });
 
   it("list should call get with params and unwrap result", async () => {
@@ -477,6 +492,17 @@ describe("softwareApi", () => {
     const result = await softwareApi.downloadLink(1);
     expect(result).toEqual({ url: "http://example.com/software.zip" });
     expect(mockGet).toHaveBeenCalledWith("/software/1/download-link");
+  });
+
+  it("brands and categories should call backend option endpoints", async () => {
+    const mockGet = vi.spyOn(apiClient, "get")
+      .mockResolvedValueOnce({ data: { code: 200, data: ["siemens"] } })
+      .mockResolvedValueOnce({ data: { code: 200, data: ["utility"] } });
+
+    await expect(softwareApi.brands()).resolves.toEqual(["siemens"]);
+    await expect(softwareApi.categories()).resolves.toEqual(["utility"]);
+    expect(mockGet).toHaveBeenNthCalledWith(1, "/software/brands/list");
+    expect(mockGet).toHaveBeenNthCalledWith(2, "/software/categories/list");
   });
 });
 

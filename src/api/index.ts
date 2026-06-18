@@ -79,6 +79,8 @@ export interface DownloadLinkResponse {
   filename?: string;
 }
 
+export type OptionValue = string;
+
 export interface PortalContentRecord<T> {
   id?: number | string;
   section?: string;
@@ -139,6 +141,7 @@ export function isPublicApiRequest(method?: string, url?: string) {
     path === "/software" ||
     path === "/documents/brands/list" ||
     path === "/documents/categories/list" ||
+    path === "/software/brands/list" ||
     path === "/software/categories/list" ||
     path.startsWith("/portal/")
   );
@@ -230,6 +233,12 @@ export const documentsApi = {
   async downloadLink(id: number | string) {
     return unwrap(await apiClient.get<ApiEnvelope<DownloadLinkResponse>>(`/documents/${id}/download-link`));
   },
+  async brands() {
+    return unwrap(await apiClient.get<ApiEnvelope<OptionValue[]>>("/documents/brands/list"));
+  },
+  async categories() {
+    return unwrap(await apiClient.get<ApiEnvelope<OptionValue[]>>("/documents/categories/list"));
+  },
 };
 
 export const softwareApi = {
@@ -241,6 +250,12 @@ export const softwareApi = {
   },
   async downloadLink(id: number | string) {
     return unwrap(await apiClient.get<ApiEnvelope<DownloadLinkResponse>>(`/software/${id}/download-link`));
+  },
+  async brands() {
+    return unwrap(await apiClient.get<ApiEnvelope<OptionValue[]>>("/software/brands/list"));
+  },
+  async categories() {
+    return unwrap(await apiClient.get<ApiEnvelope<OptionValue[]>>("/software/categories/list"));
   },
 };
 

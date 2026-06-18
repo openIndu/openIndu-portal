@@ -11,6 +11,7 @@ import { Register } from "./pages/Register";
 import { Resources } from "./pages/Resources";
 import { Workflow } from "./pages/Workflow";
 import { AccountSettings } from "./pages/AccountSettings";
+import { CookiesPolicy, LegalIndex, LegalNotice, PrivacyPolicy } from "./pages/LegalPages";
 
 export const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ export const router = createBrowserRouter([
       { path: "login", Component: Login },
       { path: "register", Component: Register },
       { path: "account", Component: AccountSettings },
+      { path: "privacy", Component: PrivacyPolicy },
+      { path: "legal", Component: LegalNotice },
+      { path: "cookies", Component: CookiesPolicy },
+      { path: "legal-center", Component: LegalIndex },
       { path: "motion-control", Component: MotionControl },
       // openIndu-studio 介绍（原"工作流"）：作为 AI+运动控制 的子项，公开可见，点击即显示内容
       { path: "motion-control/studio", Component: Workflow },

@@ -87,7 +87,7 @@ export function MotionControl() {
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2 px-4 py-2 bg-orange-100 text-orange-700 rounded-lg">
               <CheckCircle className="w-5 h-5" />
-              <span className="font-medium">正式推出</span>
+              <span className="font-medium">已经推出</span>
             </div>
           </div>
         </div>
@@ -247,9 +247,9 @@ export function MotionControl() {
           <div className="flex items-center justify-center gap-3 mb-4">
             <CheckCircle className="w-12 h-12" />
           </div>
-          <h2 className="text-3xl font-bold mb-4">正式推出</h2>
+          <h2 className="text-3xl font-bold mb-4">已经推出</h2>
           <p className="text-xl mb-8 text-orange-100">
-            AI+运动控制解决方案已正式推出，欢迎联系 openIndu 获取方案支持
+            AI+运动控制解决方案已经推出，欢迎联系 openIndu 获取方案支持
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a

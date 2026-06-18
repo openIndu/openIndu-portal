@@ -20,6 +20,7 @@ export function Register() {
   const [submitting, setSubmitting] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const [privacyAccepted, setPrivacyAccepted] = useState(false);
 
   useEffect(() => {
     if (isAuthenticated) navigate("/resources", { replace: true });
@@ -33,7 +34,7 @@ export function Register() {
 
   // 仅在倒计时/发送中禁用按钮；手机号格式校验放到点击时提示，避免按钮静默置灰让用户误以为"无法点击"。
   const canSendCode = cooldown === 0 && !sending;
-  const canRegister = phonePattern.test(phone) && codePattern.test(code) && !submitting;
+  const canRegister = phonePattern.test(phone) && codePattern.test(code) && privacyAccepted && !submitting;
 
   async function handleSendCode() {
     setError("");
@@ -58,6 +59,10 @@ export function Register() {
     event.preventDefault();
     setError("");
     setMessage("");
+    if (!privacyAccepted) {
+      setError("请先阅读并同意隐私声明");
+      return;
+    }
     if (!canRegister) {
       setError("请输入正确手机号和 6 位验证码");
       return;
@@ -79,7 +84,7 @@ export function Register() {
       <Card className="mx-auto max-w-md border-blue-100 shadow-xl">
         <CardHeader className="text-center">
           <CardTitle>注册 openIndu 社区账号</CardTitle>
-          <CardDescription>手机号验证后即可浏览社区资源</CardDescription>
+          <CardDescription>手机号验证后即可注册成功</CardDescription>
         </CardHeader>
         <CardContent>
           <form className="space-y-5" onSubmit={handleSubmit}>
@@ -110,6 +115,17 @@ export function Register() {
                 </Button>
               </div>
             </div>
+            <label className="flex items-start gap-2 rounded-lg border border-gray-200 bg-gray-50 p-3 text-sm text-gray-700">
+              <input
+                type="checkbox"
+                checked={privacyAccepted}
+                onChange={(event) => setPrivacyAccepted(event.target.checked)}
+                className="mt-1"
+              />
+              <span>
+                我已阅读并同意 <Link to="/privacy" className="font-medium text-blue-600 hover:text-blue-700">openIndu社区隐私声明</Link>，了解平台对个人信息的处理方式。
+              </span>
+            </label>
             {message && <p className="rounded-lg bg-green-50 px-3 py-2 text-sm text-green-700">{message}</p>}
             {error && <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{error}</p>}
             <Button type="submit" disabled={!canRegister} className="w-full bg-blue-600 hover:bg-blue-700">

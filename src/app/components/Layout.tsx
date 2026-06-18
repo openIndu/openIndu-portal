@@ -227,7 +227,7 @@ export function Layout() {
       {/* Footer */}
       <footer className="bg-gray-900 text-white mt-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
             {/* Logo and Description */}
             <div className="flex flex-col items-start">
               <div className="flex items-center gap-2 mb-4">
@@ -255,7 +255,7 @@ export function Layout() {
                   <Link to="/resources" className="hover:text-white">资源中心</Link>
                 </li>
                 <li>
-                  <Link to="/motion-control" className="hover:text-white">概览（AI+运动控制）</Link>
+                  <Link to="/motion-control" className="hover:text-white">AI+运动控制-概览</Link>
                 </li>
                 <li>
                   <Link to="/motion-control/studio" className="hover:text-white">openIndu-studio 平台</Link>
@@ -285,6 +285,22 @@ export function Layout() {
                   <a href="https://monitor.openindu.com/status/service" target="_blank" rel="noopener noreferrer" className="hover:text-white">
                     服务监控
                   </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Legal */}
+            <div className="flex flex-col items-start">
+              <h3 className="font-semibold text-white mb-4">法律与隐私</h3>
+              <ul className="space-y-2 text-gray-400">
+                <li>
+                  <Link to="/privacy" className="hover:text-white">隐私声明</Link>
+                </li>
+                <li>
+                  <Link to="/legal" className="hover:text-white">法律声明</Link>
+                </li>
+                <li>
+                  <Link to="/cookies" className="hover:text-white">关于 Cookies</Link>
                 </li>
               </ul>
             </div>
