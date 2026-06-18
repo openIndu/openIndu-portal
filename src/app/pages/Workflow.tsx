@@ -52,10 +52,10 @@ export function Workflow() {
   return (
     <section className="bg-gradient-to-br from-slate-50 via-white to-blue-50 px-4 py-12 sm:px-6 lg:px-8">
       <SEO
-        title="PLC 开发六步工作流｜openIndu"
-        description="openIndu 将电气模组、电路图、BOM、IO 地址、PLC 编程与 HMI 编程串联为可追溯的 AI Agent 工作流。"
-        keywords="PLC工作流,电气设计,BOM,IO地址表,PLC编程,HMI编程,AI Agent"
-        canonicalPath="/workflow"
+        title="openIndu-studio 介绍｜openIndu"
+        description="openIndu-studio 将电气模组、电路图、BOM、IO 地址、PLC 编程与 HMI 编程串联为可追溯的 AI Agent 工作流。"
+        keywords="openIndu-studio,PLC工作流,电气设计,BOM,IO地址表,PLC编程,HMI编程,AI Agent"
+        canonicalPath="/motion-control/studio"
       />
       <div className="mx-auto max-w-7xl">
         <div className="mb-12 text-center">
@@ -63,9 +63,9 @@ export function Workflow() {
             <Bot className="h-4 w-4" />
             AI Agent 工作流 P1 展示版
           </div>
-          <h1 className="text-4xl font-bold text-gray-900">PLC 开发六步工作流</h1>
+          <h1 className="text-4xl font-bold text-gray-900">openIndu-studio 介绍</h1>
           <p className="mx-auto mt-4 max-w-3xl text-lg text-gray-600">
-            openIndu 将工业自动化项目从需求梳理到 PLC/HMI 编程拆解为可协作、可追溯的标准流程。当前阶段提供静态流程展示，后续将接入 Claude Code 与 MCP 知识检索能力。
+            openIndu-studio 将工业自动化项目从需求梳理到 PLC/HMI 编程拆解为可协作、可追溯的标准流程（PLC 开发六步工作流）。当前阶段提供静态流程展示，后续将接入 Claude Code 与 MCP 知识检索能力。
           </p>
         </div>
 
@@ -111,7 +111,7 @@ export function Workflow() {
                           </div>
                         </div>
                       ) : (
-                        <p className="line-clamp-2 leading-relaxed text-gray-500 text-sm sm:line-clamp-1">
+                        <p className="leading-relaxed text-gray-500 text-sm">
                           {step.description}
                         </p>
                       )}

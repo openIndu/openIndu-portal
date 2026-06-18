@@ -31,7 +31,8 @@ export function Register() {
     return () => window.clearInterval(timer);
   }, [cooldown]);
 
-  const canSendCode = phonePattern.test(phone) && cooldown === 0 && !sending;
+  // 仅在倒计时/发送中禁用按钮；手机号格式校验放到点击时提示，避免按钮静默置灰让用户误以为"无法点击"。
+  const canSendCode = cooldown === 0 && !sending;
   const canRegister = phonePattern.test(phone) && codePattern.test(code) && !submitting;
 
   async function handleSendCode() {
@@ -77,8 +78,8 @@ export function Register() {
     <section className="bg-gradient-to-br from-blue-50 via-white to-cyan-50 px-4 py-16 sm:py-24">
       <Card className="mx-auto max-w-md border-blue-100 shadow-xl">
         <CardHeader className="text-center">
-          <CardTitle>注册 openIndu 账号</CardTitle>
-          <CardDescription>手机号验证后即可浏览社区资源，首个注册用户自动成为管理员</CardDescription>
+          <CardTitle>注册 openIndu 社区账号</CardTitle>
+          <CardDescription>手机号验证后即可浏览社区资源</CardDescription>
         </CardHeader>
         <CardContent>
           <form className="space-y-5" onSubmit={handleSubmit}>

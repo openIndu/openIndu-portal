@@ -36,7 +36,8 @@ export function Login() {
     return () => window.clearInterval(timer);
   }, [cooldown]);
 
-  const canSendCode = phonePattern.test(phone) && cooldown === 0 && !sending;
+  // 仅在倒计时/发送中禁用按钮；手机号格式校验放到点击时提示，避免按钮静默置灰让用户误以为"无法点击"。
+  const canSendCode = cooldown === 0 && !sending;
   const canLogin = phonePattern.test(phone) && codePattern.test(code) && !submitting;
 
   async function handleSendCode() {

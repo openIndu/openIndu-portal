@@ -1,5 +1,5 @@
 import { Outlet, Link, useLocation, useNavigate } from "react-router";
-import { LogOut, Menu, UserRound, X } from "lucide-react";
+import { ChevronDown, LogOut, Menu, UserRound, X } from "lucide-react";
 import { useState } from "react";
 import { useAuth } from "@/store/auth";
 import logo from "/assets/logo.png";
@@ -10,11 +10,15 @@ export function Layout() {
   const navigate = useNavigate();
   const { isAuthenticated, user, logout } = useAuth();
 
-  const navigation = [
+  type NavItem = { name: string; href: string; children?: { name: string; href: string }[] };
+  const navigation: NavItem[] = [
     { name: "首页", href: "/" },
     { name: "资源中心", href: "/resources" },
-    { name: "工作流", href: "/workflow" },
-    { name: "AI+运动控制", href: "/motion-control" },
+    {
+      name: "AI+运动控制",
+      href: "/motion-control",
+      children: [{ name: "openIndu-studio", href: "/motion-control/studio" }],
+    },
     { name: "AI+视觉", href: "/vision" },
     { name: "AI+工业互联网平台", href: "/iiot-platform" },
     { name: "AI+基础设施", href: "/infrastructure" },
@@ -51,19 +55,53 @@ export function Layout() {
 
             {/* Desktop Navigation */}
             <div className="hidden min-w-0 flex-1 items-center justify-center gap-x-4 xl:gap-x-6 lg:flex">
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  className={`text-sm transition-colors whitespace-nowrap ${
-                    isActive(item.href)
-                      ? "text-blue-600 font-medium"
-                      : "text-gray-700 hover:text-blue-600"
-                  }`}
-                >
-                  {item.name}
-                </Link>
-              ))}
+              {navigation.map((item) =>
+                item.children ? (
+                  <div key={item.name} className="group relative">
+                    <Link
+                      to={item.href}
+                      className={`flex items-center gap-1 text-sm transition-colors whitespace-nowrap ${
+                        isActive(item.href)
+                          ? "text-blue-600 font-medium"
+                          : "text-gray-700 hover:text-blue-600"
+                      }`}
+                    >
+                      {item.name}
+                      <ChevronDown className="h-3.5 w-3.5 transition-transform group-hover:rotate-180" />
+                    </Link>
+                    {/* pt-2 作为悬停桥接，避免父项与面板间缝隙导致下拉收起 */}
+                    <div className="absolute left-0 top-full z-50 hidden min-w-[180px] pt-2 group-hover:block">
+                      <div className="rounded-lg border border-gray-100 bg-white py-1 shadow-lg">
+                        {item.children.map((child) => (
+                          <Link
+                            key={child.name}
+                            to={child.href}
+                            className={`block px-4 py-2 text-sm transition-colors ${
+                              isActive(child.href)
+                                ? "bg-blue-50 font-medium text-blue-600"
+                                : "text-gray-700 hover:bg-gray-50 hover:text-blue-600"
+                            }`}
+                          >
+                            {child.name}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    className={`text-sm transition-colors whitespace-nowrap ${
+                      isActive(item.href)
+                        ? "text-blue-600 font-medium"
+                        : "text-gray-700 hover:text-blue-600"
+                    }`}
+                  >
+                    {item.name}
+                  </Link>
+                )
+              )}
             </div>
 
             {/* Desktop Auth */}
@@ -117,18 +155,37 @@ export function Layout() {
         <div className="lg:hidden border-t border-gray-200 bg-white">
           <div className="space-y-1 px-4 pb-3 pt-2">
             {navigation.map((item) => (
-              <Link
-                key={item.name}
-                to={item.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className={`block px-3 py-2 rounded-lg ${
-                  isActive(item.href)
-                    ? "bg-blue-600 text-white font-medium"
-                    : "text-gray-700 hover:bg-gray-50"
-                }`}
-              >
-                {item.name}
-              </Link>
+              <div key={item.name}>
+                <Link
+                  to={item.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`block px-3 py-2 rounded-lg ${
+                    isActive(item.href)
+                      ? "bg-blue-600 text-white font-medium"
+                      : "text-gray-700 hover:bg-gray-50"
+                  }`}
+                >
+                  {item.name}
+                </Link>
+                {item.children && (
+                  <div className="ml-3 mt-1 space-y-1 border-l border-gray-100 pl-3">
+                    {item.children.map((child) => (
+                      <Link
+                        key={child.name}
+                        to={child.href}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className={`block rounded-lg px-3 py-2 text-sm ${
+                          isActive(child.href)
+                            ? "bg-blue-50 font-medium text-blue-600"
+                            : "text-gray-600 hover:bg-gray-50"
+                        }`}
+                      >
+                        {child.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
             ))}
             <div className="mt-3 border-t border-gray-100 pt-3">
               {isAuthenticated ? (
@@ -192,10 +249,10 @@ export function Layout() {
                   <Link to="/resources" className="hover:text-white">资源中心</Link>
                 </li>
                 <li>
-                  <Link to="/workflow" className="hover:text-white">工作流</Link>
+                  <Link to="/motion-control" className="hover:text-white">AI+运动控制</Link>
                 </li>
                 <li>
-                  <Link to="/motion-control" className="hover:text-white">AI+运动控制</Link>
+                  <Link to="/motion-control/studio" className="hover:text-white">openIndu-studio</Link>
                 </li>
                 <li>
                   <Link to="/vision" className="hover:text-white">AI+视觉</Link>

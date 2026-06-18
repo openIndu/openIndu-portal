@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router";
+import { createBrowserRouter, Navigate } from "react-router";
 import { AuthGuard } from "./components/AuthGuard";
 import { Layout } from "./components/Layout";
 import { NotFound } from "./components/NotFound";
@@ -21,6 +21,8 @@ export const router = createBrowserRouter([
       { path: "login", Component: Login },
       { path: "register", Component: Register },
       { path: "motion-control", Component: MotionControl },
+      // openIndu-studio 介绍（原"工作流"）：作为 AI+运动控制 的子项，公开可见，点击即显示内容
+      { path: "motion-control/studio", Component: Workflow },
       { path: "vision", Component: Vision },
       { path: "iiot-platform", Component: IIoTPlatform },
       { path: "infrastructure", Component: TokenService },
@@ -32,13 +34,8 @@ export const router = createBrowserRouter([
           { path: "resources/software", Component: Resources },
         ],
       },
-      {
-        element: <AuthGuard role="member" />,
-        children: [
-          { path: "workflow", Component: Workflow },
-        ],
-      },
       // 保留旧路由以支持现有链接
+      { path: "workflow", element: <Navigate to="/motion-control/studio" replace /> },
       { path: "platform", Component: IIoTPlatform },
       { path: "features", Component: IIoTPlatform },
       { path: "quick-start", Component: IIoTPlatform },
