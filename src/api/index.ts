@@ -210,7 +210,7 @@ export const authApi = {
     return normalizeAuthResponse(unwrap(await apiClient.post<ApiEnvelope<AuthResponse | NestedAuthResponse>>("/auth/register", { phone, code })));
   },
   async refresh(refreshToken: string) {
-    return unwrap(await apiClient.post<ApiEnvelope<AuthResponse>>("/auth/refresh", { refresh_token: refreshToken }));
+    return normalizeAuthResponse(unwrap(await apiClient.post<ApiEnvelope<AuthResponse | NestedAuthResponse>>("/auth/refresh", { refresh_token: refreshToken })));
   },
   async me() {
     return unwrap(await apiClient.get<ApiEnvelope<User>>("/auth/me"));
