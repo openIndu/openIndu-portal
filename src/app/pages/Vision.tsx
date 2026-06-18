@@ -158,56 +158,42 @@ export function Vision() {
           <div className="max-w-4xl mx-auto">
             <div className="bg-gradient-to-br from-green-50 to-teal-50 p-8 rounded-xl border border-green-200">
               <div className="space-y-6">
-                <div className="flex items-center gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 bg-green-600 text-white rounded-lg flex items-center justify-center font-bold">
-                    1
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-1">图像采集</h4>
-                    <p className="text-sm text-gray-600">
-                      工业相机、光源系统、镜头组件构成高质量图像采集系统
-                    </p>
-                  </div>
-                </div>
-                <div className="border-l-2 border-green-300 ml-6 pl-6">
-                  <div className="flex items-center gap-4">
-                    <div className="flex-shrink-0 w-12 h-12 bg-teal-600 text-white rounded-lg flex items-center justify-center font-bold">
-                      2
+                {[
+                  {
+                    step: "1",
+                    color: "bg-green-600",
+                    title: "图像采集",
+                    description: "工业相机、光源系统、镜头组件构成高质量图像采集系统",
+                  },
+                  {
+                    step: "2",
+                    color: "bg-teal-600",
+                    title: "图像预处理",
+                    description: "降噪、增强、校正等预处理算法提升图像质量",
+                  },
+                  {
+                    step: "3",
+                    color: "bg-cyan-600",
+                    title: "AI检测算法",
+                    description: "CNN、YOLO、Transformer等深度学习模型实现智能检测",
+                  },
+                  {
+                    step: "4",
+                    color: "bg-green-500",
+                    title: "结果输出",
+                    description: "检测结果可视化、数据统计分析、与MES/ERP系统集成",
+                  },
+                ].map((item) => (
+                  <div key={item.step} className="flex items-center gap-4">
+                    <div className={`flex-shrink-0 w-12 h-12 ${item.color} text-white rounded-lg flex items-center justify-center font-bold`}>
+                      {item.step}
                     </div>
                     <div>
-                      <h4 className="font-semibold text-gray-900 mb-1">图像预处理</h4>
-                      <p className="text-sm text-gray-600">
-                        降噪、增强、校正等预处理算法提升图像质量
-                      </p>
+                      <h4 className="font-semibold text-gray-900 mb-1">{item.title}</h4>
+                      <p className="text-sm text-gray-600">{item.description}</p>
                     </div>
                   </div>
-                </div>
-                <div className="border-l-2 border-green-300 ml-6 pl-6">
-                  <div className="flex items-center gap-4">
-                    <div className="flex-shrink-0 w-12 h-12 bg-cyan-600 text-white rounded-lg flex items-center justify-center font-bold">
-                      3
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900 mb-1">AI检测算法</h4>
-                      <p className="text-sm text-gray-600">
-                        CNN、YOLO、Transformer等深度学习模型实现智能检测
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div className="border-l-2 border-green-300 ml-6 pl-6">
-                  <div className="flex items-center gap-4">
-                    <div className="flex-shrink-0 w-12 h-12 bg-green-500 text-white rounded-lg flex items-center justify-center font-bold">
-                      4
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900 mb-1">结果输出</h4>
-                      <p className="text-sm text-gray-600">
-                        检测结果可视化、数据统计分析、与MES/ERP系统集成
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
           </div>

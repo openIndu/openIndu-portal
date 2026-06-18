@@ -17,7 +17,7 @@ test.describe("Home Page", () => {
     const nav = page.locator("header nav");
     await expect(nav).toBeVisible();
 
-    const links = ["首页", "资源中心", "工作流", "AI+运动控制", "AI+视觉", "AI+工业互联网平台", "AI+基础设施"];
+    const links = ["首页", "资源中心", "AI+运动控制", "AI+视觉", "AI+工业互联网平台", "AI+基础设施"];
     for (const link of links) {
       await expect(page.locator("header").getByText(link, { exact: true }).first()).toBeVisible();
     }

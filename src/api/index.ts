@@ -79,6 +79,8 @@ export interface DownloadLinkResponse {
   filename?: string;
 }
 
+export type OptionValue = string;
+
 export interface PortalContentRecord<T> {
   id?: number | string;
   section?: string;
@@ -121,6 +123,36 @@ const STORAGE_KEYS = {
   refreshToken: "openindu_portal_refresh_token",
 } as const;
 
+function normalizeApiPath(url?: string) {
+  if (!url) return "";
+  try {
+    const parsed = new URL(url, window.location.origin);
+    return parsed.pathname.replace(/^\/api\/v\d+/, "");
+  } catch {
+    return url.split("?")[0].replace(/^\/api\/v\d+/, "");
+  }
+}
+
+export function isPublicApiRequest(method?: string, url?: string) {
+  if ((method ?? "get").toLowerCase() !== "get") return false;
+  const path = normalizeApiPath(url);
+  return (
+    path === "/documents" ||
+    path === "/software" ||
+    path === "/documents/brands/list" ||
+    path === "/documents/categories/list" ||
+    path === "/software/brands/list" ||
+    path === "/software/categories/list" ||
+    path.startsWith("/portal/")
+  );
+}
+
+export function shouldRedirectToLogin(method?: string, url?: string) {
+  const path = normalizeApiPath(url);
+  if (path.startsWith("/auth/")) return false;
+  return !isPublicApiRequest(method, url);
+}
+
 export function unwrap<T>(response: AxiosResponse<ApiEnvelope<T> | T>): T {
   const body = response.data;
   if (body && typeof body === "object" && "data" in body) {
@@ -159,7 +191,7 @@ apiClient.interceptors.response.use(
       localStorage.removeItem(STORAGE_KEYS.token);
       localStorage.removeItem(STORAGE_KEYS.refreshToken);
       localStorage.removeItem("openindu_portal_user");
-      if (window.location.pathname !== "/login") {
+      if (window.location.pathname !== "/login" && shouldRedirectToLogin(error.config?.method, error.config?.url)) {
         window.location.assign(`/login?redirect=${encodeURIComponent(window.location.pathname + window.location.search)}`);
       }
     }
@@ -183,6 +215,9 @@ export const authApi = {
   async me() {
     return unwrap(await apiClient.get<ApiEnvelope<User>>("/auth/me"));
   },
+  async updateMe(payload: { nickname?: string | null }) {
+    return unwrap(await apiClient.patch<ApiEnvelope<User>>("/auth/me", payload));
+  },
   async logout() {
     return unwrap(await apiClient.post<ApiEnvelope<{ success: boolean }>>("/auth/logout"));
   },
@@ -198,6 +233,12 @@ export const documentsApi = {
   async downloadLink(id: number | string) {
     return unwrap(await apiClient.get<ApiEnvelope<DownloadLinkResponse>>(`/documents/${id}/download-link`));
   },
+  async brands() {
+    return unwrap(await apiClient.get<ApiEnvelope<OptionValue[]>>("/documents/brands/list"));
+  },
+  async categories() {
+    return unwrap(await apiClient.get<ApiEnvelope<OptionValue[]>>("/documents/categories/list"));
+  },
 };
 
 export const softwareApi = {
@@ -209,6 +250,12 @@ export const softwareApi = {
   },
   async downloadLink(id: number | string) {
     return unwrap(await apiClient.get<ApiEnvelope<DownloadLinkResponse>>(`/software/${id}/download-link`));
+  },
+  async brands() {
+    return unwrap(await apiClient.get<ApiEnvelope<OptionValue[]>>("/software/brands/list"));
+  },
+  async categories() {
+    return unwrap(await apiClient.get<ApiEnvelope<OptionValue[]>>("/software/categories/list"));
   },
 };
 

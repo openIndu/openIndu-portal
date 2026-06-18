@@ -6,9 +6,11 @@ import type { AxiosResponse } from "axios";
 vi.mock("axios", () => {
   const mockPost = vi.fn();
   const mockGet = vi.fn();
+  const mockPatch = vi.fn();
   const mockCreate = vi.fn(() => ({
     post: mockPost,
     get: mockGet,
+    patch: mockPatch,
     interceptors: {
       request: { use: vi.fn() },
       response: { use: vi.fn() },
@@ -60,6 +62,8 @@ import * as apiModule from "@/api";
 const {
   getApiErrorMessage,
   isTooManyRequests,
+  isPublicApiRequest,
+  shouldRedirectToLogin,
   authApi,
   documentsApi,
   softwareApi,
@@ -72,6 +76,8 @@ const {
 } = apiModule as unknown as {
   getApiErrorMessage: typeof apiModule.getApiErrorMessage;
   isTooManyRequests: typeof apiModule.isTooManyRequests;
+  isPublicApiRequest: typeof apiModule.isPublicApiRequest;
+  shouldRedirectToLogin: typeof apiModule.shouldRedirectToLogin;
   authApi: typeof apiModule.authApi;
   documentsApi: typeof apiModule.documentsApi;
   softwareApi: typeof apiModule.softwareApi;
@@ -228,6 +234,28 @@ describe("getApiErrorMessage", () => {
   });
 });
 
+describe("public API auth redirect helpers", () => {
+  it("treats resource list endpoints as public GET requests", () => {
+    expect(isPublicApiRequest("get", "/documents")).toBe(true);
+    expect(isPublicApiRequest("get", "/software")).toBe(true);
+    expect(isPublicApiRequest("get", "/api/v1/documents")).toBe(true);
+  });
+
+  it("does not treat download-link endpoints as public requests", () => {
+    expect(isPublicApiRequest("get", "/documents/1/download-link")).toBe(false);
+    expect(shouldRedirectToLogin("get", "/documents/1/download-link")).toBe(true);
+  });
+
+  it("does not redirect to login for public resource list 401 responses", () => {
+    expect(shouldRedirectToLogin("get", "/documents")).toBe(false);
+    expect(shouldRedirectToLogin("get", "/software")).toBe(false);
+  });
+
+  it("does not redirect to login for auth refresh failures", () => {
+    expect(shouldRedirectToLogin("post", "/auth/refresh")).toBe(false);
+  });
+});
+
 describe("isTooManyRequests", () => {
   it("should return true for 429 status", () => {
     const error = new AxiosError("Too Many", "ERR", undefined, undefined, {
@@ -355,6 +383,16 @@ describe("authApi", () => {
     expect(mockGet).toHaveBeenCalledWith("/auth/me");
   });
 
+  it("updateMe should call patch and unwrap result", async () => {
+    const mockPatch = vi.spyOn(apiClient, "patch").mockResolvedValueOnce({
+      data: { code: 200, data: { id: 1, phone: "13800000000", nickname: "Tom", role: "admin" } },
+    });
+
+    const result = await authApi.updateMe({ nickname: "Tom" });
+    expect(result).toEqual({ id: 1, phone: "13800000000", nickname: "Tom", role: "admin" });
+    expect(mockPatch).toHaveBeenCalledWith("/auth/me", { nickname: "Tom" });
+  });
+
   it("logout should call post and unwrap result", async () => {
     const mockPost = vi.spyOn(apiClient, "post").mockResolvedValueOnce({
       data: { code: 200, data: { success: true } },
@@ -371,6 +409,8 @@ describe("documentsApi", () => {
     expect(typeof documentsApi.list).toBe("function");
     expect(typeof documentsApi.get).toBe("function");
     expect(typeof documentsApi.downloadLink).toBe("function");
+    expect(typeof documentsApi.brands).toBe("function");
+    expect(typeof documentsApi.categories).toBe("function");
   });
 
   it("list should call get with params and unwrap result", async () => {
@@ -402,6 +442,17 @@ describe("documentsApi", () => {
     expect(result).toEqual({ download_url: "http://example.com/file.pdf" });
     expect(mockGet).toHaveBeenCalledWith("/documents/1/download-link");
   });
+
+  it("brands and categories should call backend option endpoints", async () => {
+    const mockGet = vi.spyOn(apiClient, "get")
+      .mockResolvedValueOnce({ data: { code: 200, data: ["siemens"] } })
+      .mockResolvedValueOnce({ data: { code: 200, data: ["plc-manual"] } });
+
+    await expect(documentsApi.brands()).resolves.toEqual(["siemens"]);
+    await expect(documentsApi.categories()).resolves.toEqual(["plc-manual"]);
+    expect(mockGet).toHaveBeenNthCalledWith(1, "/documents/brands/list");
+    expect(mockGet).toHaveBeenNthCalledWith(2, "/documents/categories/list");
+  });
 });
 
 describe("softwareApi", () => {
@@ -409,6 +460,8 @@ describe("softwareApi", () => {
     expect(typeof softwareApi.list).toBe("function");
     expect(typeof softwareApi.get).toBe("function");
     expect(typeof softwareApi.downloadLink).toBe("function");
+    expect(typeof softwareApi.brands).toBe("function");
+    expect(typeof softwareApi.categories).toBe("function");
   });
 
   it("list should call get with params and unwrap result", async () => {
@@ -439,6 +492,17 @@ describe("softwareApi", () => {
     const result = await softwareApi.downloadLink(1);
     expect(result).toEqual({ url: "http://example.com/software.zip" });
     expect(mockGet).toHaveBeenCalledWith("/software/1/download-link");
+  });
+
+  it("brands and categories should call backend option endpoints", async () => {
+    const mockGet = vi.spyOn(apiClient, "get")
+      .mockResolvedValueOnce({ data: { code: 200, data: ["siemens"] } })
+      .mockResolvedValueOnce({ data: { code: 200, data: ["utility"] } });
+
+    await expect(softwareApi.brands()).resolves.toEqual(["siemens"]);
+    await expect(softwareApi.categories()).resolves.toEqual(["utility"]);
+    expect(mockGet).toHaveBeenNthCalledWith(1, "/software/brands/list");
+    expect(mockGet).toHaveBeenNthCalledWith(2, "/software/categories/list");
   });
 });
 

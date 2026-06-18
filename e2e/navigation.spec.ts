@@ -48,7 +48,7 @@ test.describe("Navigation", () => {
     await loginLink.click();
 
     await expect(page).toHaveURL("/login");
-    await expect(page.locator("h2")).toContainText("手机号登录");
+    await expect(page.getByRole("heading", { name: "手机号登录" })).toBeVisible();
   });
 
   test("should navigate to register page from header", async ({ page }) => {
@@ -58,7 +58,7 @@ test.describe("Navigation", () => {
     await registerLink.click();
 
     await expect(page).toHaveURL("/register");
-    await expect(page.locator("h2")).toContainText("注册 openIndu 账号");
+    await expect(page.getByRole("heading", { name: "注册 openIndu 社区账号" })).toBeVisible();
   });
 
   test("should navigate back to home via logo click", async ({ page }) => {

@@ -12,36 +12,39 @@ import { Tabs, TabsList, TabsTrigger } from "../components/ui/tabs";
 
 type ResourceType = "documents" | "software";
 
-const brands = [
-  { value: "", label: "全部品牌" },
-  { value: "siemens", label: "西门子" },
-  { value: "mitsubishi", label: "三菱" },
-  { value: "omron", label: "欧姆龙" },
-  { value: "keyence", label: "基恩士" },
-  { value: "inovance", label: "汇川" },
-  { value: "other", label: "其他" },
-];
+type FilterOption = { value: string; label: string };
 
-const documentCategories = [
-  { value: "", label: "全部分类" },
-  { value: "plc-manual", label: "PLC 编程手册" },
-  { value: "hardware-manual", label: "硬件手册" },
-  { value: "driver-manual", label: "驱动器手册" },
-  { value: "hmi-manual", label: "HMI 手册" },
-  { value: "software-manual", label: "软件手册" },
-  { value: "best-practice", label: "最佳实践" },
-  { value: "electrical-standard", label: "电气规范" },
-  { value: "other", label: "其他" },
-];
+const brandLabels: Record<string, string> = {
+  siemens: "西门子",
+  mitsubishi: "三菱",
+  omron: "欧姆龙",
+  keyence: "基恩士",
+  inovance: "汇川",
+  other: "其他",
+};
 
-const softwareCategories = [
-  { value: "", label: "全部分类" },
-  { value: "plc-software", label: "PLC 编程软件" },
-  { value: "hmi-software", label: "HMI 组态软件" },
-  { value: "driver-software", label: "驱动调试软件" },
-  { value: "utility", label: "工具软件" },
-  { value: "other", label: "其他" },
-];
+const categoryLabels: Record<string, string> = {
+  "plc-manual": "PLC 编程手册",
+  "hardware-manual": "硬件手册",
+  "driver-manual": "驱动器手册",
+  "hmi-manual": "HMI 手册",
+  "software-manual": "软件手册",
+  "best-practice": "最佳实践",
+  "electrical-standard": "电气规范",
+  "plc-ide": "PLC 编程软件",
+  "hmi-ide": "HMI 组态软件",
+  "plc-driver": "PLC 驱动/通信组件",
+  utility: "工具软件",
+  firmware: "固件",
+  other: "其他",
+};
+
+function toOptions(values: string[], allLabel: string, labels: Record<string, string>): FilterOption[] {
+  return [
+    { value: "", label: allLabel },
+    ...values.map((value) => ({ value, label: labels[value] ?? value })),
+  ];
+}
 
 function normalizeList(data: PaginatedResponse<ResourceItem> | ResourceItem[] | undefined, page: number): PaginatedResponse<ResourceItem> {
   if (!data) return { items: [], total: 0, page, page_size: 10 };
@@ -71,7 +74,7 @@ function getDownloadUrl(payload: { download_url?: string; url?: string }) {
 }
 
 export function Resources() {
-  const { isMember } = useAuth();
+  const { isMember, isAuthenticated } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<ResourceType>(() => location.pathname.endsWith("/software") ? "software" : "documents");
@@ -80,12 +83,14 @@ export function Resources() {
   const [keyword, setKeyword] = useState("");
   const [page, setPage] = useState(1);
   const [data, setData] = useState<PaginatedResponse<ResourceItem>>({ items: [], total: 0, page: 1, page_size: 10 });
+  const [brandOptions, setBrandOptions] = useState<FilterOption[]>([{ value: "", label: "全部品牌" }]);
+  const [categoryOptions, setCategoryOptions] = useState<FilterOption[]>([{ value: "", label: "全部分类" }]);
+  const [filtersLoading, setFiltersLoading] = useState(false);
   const [loading, setLoading] = useState(false);
   const [downloadingId, setDownloadingId] = useState<string | number | null>(null);
   const [error, setError] = useState("");
   const [rateLimitError, setRateLimitError] = useState("");
 
-  const categories = activeTab === "documents" ? documentCategories : softwareCategories;
   const totalPages = useMemo(() => data.pages ?? Math.max(1, Math.ceil(data.total / data.page_size)), [data]);
 
   const loadResources = useCallback(async () => {
@@ -113,6 +118,26 @@ export function Resources() {
   }, [activeTab, location.pathname]);
 
   useEffect(() => {
+    const loadFilters = async () => {
+      setFiltersLoading(true);
+      try {
+        const [nextBrands, nextCategories] = activeTab === "documents"
+          ? await Promise.all([documentsApi.brands(), documentsApi.categories()])
+          : await Promise.all([softwareApi.brands(), softwareApi.categories()]);
+        setBrandOptions(toOptions(nextBrands, "全部品牌", brandLabels));
+        setCategoryOptions(toOptions(nextCategories, "全部分类", categoryLabels));
+      } catch (err) {
+        setError(getApiErrorMessage(err, "筛选项加载失败"));
+        setBrandOptions([{ value: "", label: "全部品牌" }]);
+        setCategoryOptions([{ value: "", label: "全部分类" }]);
+      } finally {
+        setFiltersLoading(false);
+      }
+    };
+    void loadFilters();
+  }, [activeTab]);
+
+  useEffect(() => {
     void loadResources();
   }, [loadResources]);
 
@@ -130,6 +155,14 @@ export function Resources() {
   }
 
   async function handleDownload(item: ResourceItem) {
+    if (!isAuthenticated) {
+      navigate("/login", { state: { from: { pathname: location.pathname } } });
+      return;
+    }
+    if (!isMember) {
+      setError("下载功能仅会员及以上角色可用，请联系管理员升级账号");
+      return;
+    }
     setDownloadingId(item.id);
     setError("");
     setRateLimitError("");
@@ -161,35 +194,37 @@ export function Resources() {
       <div className="mx-auto max-w-7xl">
         <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="mb-2 text-sm font-semibold text-blue-600">成员资源中心</p>
-            <h1 className="text-3xl font-bold text-gray-900">文档与软件下载</h1>
+            <h1 className="text-3xl font-bold text-blue-600">文档与软件下载</h1>
             <p className="mt-2 text-gray-600">按品牌、分类和关键词快速查找 PLC/HMI 开发资料与工具软件。</p>
           </div>
-          {!isMember && (
-            <div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
-              当前账号可浏览列表，下载功能仅 member 及以上角色可见。
+          {!isAuthenticated ? (
+            <div className="rounded-lg border border-blue-200 bg-blue-50 px-4 py-3 text-sm text-blue-800">
+              资源列表可直接浏览，点击下载时需要先登录。
             </div>
-          )}
+          ) : !isMember ? (
+            <div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
+              当前账号可浏览列表，下载功能仅会员及以上角色可用。
+            </div>
+          ) : null}
         </div>
 
         <Card className="mb-6">
           <CardContent className="p-4 sm:p-6">
-            <div className="mb-5 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+            <div className="mb-5">
               <Tabs>
                 <TabsList>
                   <TabsTrigger active={activeTab === "documents"} onClick={() => handleTabChange("documents")}>文档</TabsTrigger>
                   <TabsTrigger active={activeTab === "software"} onClick={() => handleTabChange("software")}>软件</TabsTrigger>
                 </TabsList>
               </Tabs>
-              <div className="text-sm text-gray-500">共 {data.total} 条资源</div>
             </div>
 
             <div className="grid grid-cols-1 gap-3 md:grid-cols-[180px_200px_1fr_auto]">
-              <Select value={brand} onChange={(event) => { setBrand(event.target.value); setPage(1); }} aria-label="品牌筛选">
-                {brands.map((item) => <option key={item.value} value={item.value}>{item.label}</option>)}
+              <Select value={brand} onChange={(event) => { setBrand(event.target.value); setPage(1); }} aria-label="品牌筛选" disabled={filtersLoading}>
+                {brandOptions.map((item) => <option key={item.value} value={item.value}>{item.label}</option>)}
               </Select>
-              <Select value={category} onChange={(event) => { setCategory(event.target.value); setPage(1); }} aria-label="分类筛选">
-                {categories.map((item) => <option key={item.value} value={item.value}>{item.label}</option>)}
+              <Select value={category} onChange={(event) => { setCategory(event.target.value); setPage(1); }} aria-label="分类筛选" disabled={filtersLoading}>
+                {categoryOptions.map((item) => <option key={item.value} value={item.value}>{item.label}</option>)}
               </Select>
               <div className="relative">
                 <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
@@ -228,12 +263,10 @@ export function Resources() {
                       </div>
                     </div>
                   </div>
-                  {isMember && (
-                    <Button type="button" variant="outline" onClick={() => void handleDownload(item)} disabled={downloadingId === item.id} className="md:self-center">
-                      {downloadingId === item.id ? <Loader2 className="animate-spin" /> : <Download />}
-                      下载
-                    </Button>
-                  )}
+                  <Button type="button" variant="outline" onClick={() => void handleDownload(item)} disabled={downloadingId === item.id} className="md:self-center">
+                    {downloadingId === item.id ? <Loader2 className="animate-spin" /> : <Download />}
+                    下载
+                  </Button>
                 </CardContent>
               </Card>
             ))
@@ -242,9 +275,12 @@ export function Resources() {
 
         <div className="mt-6 flex flex-col items-center justify-between gap-3 sm:flex-row">
           <p className="text-sm text-gray-500">第 {page} / {totalPages} 页</p>
-          <div className="flex gap-2">
-            <Button type="button" variant="outline" disabled={page <= 1 || loading} onClick={() => setPage((value) => Math.max(value - 1, 1))}>上一页</Button>
-            <Button type="button" variant="outline" disabled={page >= totalPages || loading} onClick={() => setPage((value) => value + 1)}>下一页</Button>
+          <div className="flex items-center gap-3">
+            <span className="text-sm text-gray-500">共 {data.total} 条资源</span>
+            <div className="flex gap-2">
+              <Button type="button" variant="outline" disabled={page <= 1 || loading} onClick={() => setPage((value) => Math.max(value - 1, 1))}>上一页</Button>
+              <Button type="button" variant="outline" disabled={page >= totalPages || loading} onClick={() => setPage((value) => value + 1)}>下一页</Button>
+            </div>
           </div>
         </div>
       </div>

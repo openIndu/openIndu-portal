@@ -1,23 +1,21 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Auth Guard", () => {
-  test("should redirect /resources to /login when not authenticated", async ({ page }) => {
+  test("should load /resources without login (page is now public)", async ({ page }) => {
     await page.goto("/resources");
-    await expect(page).toHaveURL(/\/login/);
-    // Login URL should contain redirect param
-    const url = new URL(page.url());
-    expect(url.searchParams.get("redirect")).toBe("/resources");
+    // Resources is publicly accessible; no redirect to login
+    await expect(page).toHaveURL("/resources");
+    await expect(page.getByText("文档与软件下载")).toBeVisible();
   });
 
-  test("should redirect /workflow to /login when not authenticated", async ({ page }) => {
+  test("should redirect /workflow to /motion-control/studio", async ({ page }) => {
     await page.goto("/workflow");
-    await expect(page).toHaveURL(/\/login/);
-    const url = new URL(page.url());
-    expect(url.searchParams.get("redirect")).toBe("/workflow");
+    // Old /workflow route redirects to the new public path
+    await expect(page).toHaveURL("/motion-control/studio");
   });
 
   test("should show resources page when authenticated as member", async ({ page }) => {
-    await page.evaluate(() => {
+    await page.addInitScript(() => {
       localStorage.setItem("openindu_portal_token", "test-token");
       localStorage.setItem("openindu_portal_user", JSON.stringify({ id: 1, phone: "13800138000", role: "member" }));
     });
@@ -25,18 +23,18 @@ test.describe("Auth Guard", () => {
 
     // Should stay on resources (not redirect to login)
     await expect(page).toHaveURL("/resources");
-    await expect(page.getByText("成员资源中心")).toBeVisible();
+    await expect(page.locator("h1")).toContainText("文档与软件下载");
   });
 
-  test("should show workflow page when authenticated as member", async ({ page }) => {
-    await page.evaluate(() => {
+  test("should show openIndu-studio page when navigating /workflow", async ({ page }) => {
+    await page.addInitScript(() => {
       localStorage.setItem("openindu_portal_token", "test-token");
       localStorage.setItem("openindu_portal_user", JSON.stringify({ id: 1, phone: "13800138000", role: "member" }));
     });
     await page.goto("/workflow");
 
-    // Should stay on workflow (not redirect to login)
-    await expect(page).toHaveURL("/workflow");
-    await expect(page.locator("h1")).toContainText("PLC 开发六步工作流");
+    // /workflow redirects to /motion-control/studio
+    await expect(page).toHaveURL("/motion-control/studio");
+    await expect(page.locator("h1")).toContainText("openIndu-studio 介绍");
   });
 });

@@ -4,7 +4,7 @@ test.describe("Register Page", () => {
   test("should load the register page", async ({ page }) => {
     await page.goto("/register");
     await expect(page).toHaveTitle(/openIndu/);
-    await expect(page.locator("h2")).toContainText("注册 openIndu 账号");
+    await expect(page.getByRole("heading", { name: "注册 openIndu 社区账号" })).toBeVisible();
   });
 
   test("should display phone input field", async ({ page }) => {

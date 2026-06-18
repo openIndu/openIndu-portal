@@ -6,9 +6,10 @@ test.describe("Motion Control Page", () => {
     await expect(page.locator("h1")).toContainText("AI+运动控制");
   });
 
-  test("should display 'coming soon' badge", async ({ page }) => {
+  test("should display launched badge", async ({ page }) => {
     await page.goto("/motion-control");
-    await expect(page.getByText("敬请期待")).toBeVisible();
+    await expect(page.getByText("正式推出", { exact: true }).first()).toBeVisible();
+    await expect(page.getByText("敬请期待", { exact: true })).toHaveCount(0);
   });
 
   test("should display PLC brand cards", async ({ page }) => {
@@ -26,7 +27,7 @@ test.describe("Vision Page", () => {
 
   test("should display 'coming soon' badge", async ({ page }) => {
     await page.goto("/vision");
-    await expect(page.getByText("敬请期待")).toBeVisible();
+    await expect(page.getByText("敬请期待", { exact: true }).first()).toBeVisible();
   });
 });
 

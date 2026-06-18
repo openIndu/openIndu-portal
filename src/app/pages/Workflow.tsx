@@ -61,11 +61,11 @@ export function Workflow() {
         <div className="mb-12 text-center">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-blue-100 px-4 py-2 text-sm font-semibold text-blue-700">
             <Bot className="h-4 w-4" />
-            AI Agent 工作流 P1 展示版
+            AI Agent 工作流
           </div>
           <h1 className="text-4xl font-bold text-gray-900">openIndu-studio 介绍</h1>
           <p className="mx-auto mt-4 max-w-3xl text-lg text-gray-600">
-            openIndu-studio 将工业自动化项目从需求梳理到 PLC/HMI 编程拆解为可协作、可追溯的标准流程（PLC 开发六步工作流）。当前阶段提供静态流程展示，后续将接入 Claude Code 与 MCP 知识检索能力。
+            openIndu-studio 将工业自动化项目从需求梳理到 PLC/HMI 编程拆解为可协作、可追溯的标准流程（PLC 开发六步工作流），并逐步接入 Claude Code 与 MCP 知识检索能力。
           </p>
         </div>
 

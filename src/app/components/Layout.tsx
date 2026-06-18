@@ -2,6 +2,7 @@ import { Outlet, Link, useLocation, useNavigate } from "react-router";
 import { ChevronDown, LogOut, Menu, UserRound, X } from "lucide-react";
 import { useState } from "react";
 import { useAuth } from "@/store/auth";
+import { getDisplayName, maskPhone } from "../utils/user";
 import logo from "/assets/logo.png";
 
 export function Layout() {
@@ -9,6 +10,7 @@ export function Layout() {
   const location = useLocation();
   const navigate = useNavigate();
   const { isAuthenticated, user, logout } = useAuth();
+  const displayName = getDisplayName(user);
 
   type NavItem = { name: string; href: string; children?: { name: string; href: string }[] };
   const navigation: NavItem[] = [
@@ -17,7 +19,10 @@ export function Layout() {
     {
       name: "AI+运动控制",
       href: "/motion-control",
-      children: [{ name: "openIndu-studio", href: "/motion-control/studio" }],
+      children: [
+        { name: "概览", href: "/motion-control" },
+        { name: "openIndu-studio 平台", href: "/motion-control/studio" },
+      ],
     },
     { name: "AI+视觉", href: "/vision" },
     { name: "AI+工业互联网平台", href: "/iiot-platform" },
@@ -77,7 +82,7 @@ export function Layout() {
                             key={child.name}
                             to={child.href}
                             className={`block px-4 py-2 text-sm transition-colors ${
-                              isActive(child.href)
+                              location.pathname === child.href
                                 ? "bg-blue-50 font-medium text-blue-600"
                                 : "text-gray-700 hover:bg-gray-50 hover:text-blue-600"
                             }`}
@@ -108,11 +113,11 @@ export function Layout() {
             <div className="hidden lg:flex lg:items-center lg:gap-3">
               {isAuthenticated ? (
                 <>
-                  <div className="flex max-w-[220px] items-center gap-2 rounded-full bg-blue-50 px-3 py-1.5 text-sm text-blue-700">
+                  <Link to="/account" className="flex max-w-[240px] items-center gap-2 rounded-full bg-blue-50 px-3 py-1.5 text-sm text-blue-700 hover:bg-blue-100">
                     <UserRound className="h-4 w-4 shrink-0" />
-                    <span className="truncate">{user?.phone ?? "已登录用户"}</span>
+                    <span className="truncate">{displayName}</span>
                     {user?.role && <span className="shrink-0 rounded-full bg-white px-2 py-0.5 text-xs uppercase">{user.role}</span>}
-                  </div>
+                  </Link>
                   <button
                     type="button"
                     onClick={() => void handleLogout()}
@@ -175,7 +180,7 @@ export function Layout() {
                         to={child.href}
                         onClick={() => setMobileMenuOpen(false)}
                         className={`block rounded-lg px-3 py-2 text-sm ${
-                          isActive(child.href)
+                          location.pathname === child.href
                             ? "bg-blue-50 font-medium text-blue-600"
                             : "text-gray-600 hover:bg-gray-50"
                         }`}
@@ -190,10 +195,11 @@ export function Layout() {
             <div className="mt-3 border-t border-gray-100 pt-3">
               {isAuthenticated ? (
                 <div className="space-y-2">
-                  <div className="rounded-lg bg-blue-50 px-3 py-2 text-sm text-blue-700">
-                    <div>{user?.phone ?? "已登录用户"}</div>
+                  <Link to="/account" onClick={() => setMobileMenuOpen(false)} className="block rounded-lg bg-blue-50 px-3 py-2 text-sm text-blue-700">
+                    <div className="font-medium">个人中心：{displayName}</div>
+                    <div className="text-xs text-blue-600">手机号：{maskPhone(user?.phone)}</div>
                     {user?.role && <div className="text-xs uppercase">角色：{user.role}</div>}
-                  </div>
+                  </Link>
                   <button
                     type="button"
                     onClick={() => void handleLogout()}
@@ -221,7 +227,7 @@ export function Layout() {
       {/* Footer */}
       <footer className="bg-gray-900 text-white mt-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
             {/* Logo and Description */}
             <div className="flex flex-col items-start">
               <div className="flex items-center gap-2 mb-4">
@@ -249,10 +255,10 @@ export function Layout() {
                   <Link to="/resources" className="hover:text-white">资源中心</Link>
                 </li>
                 <li>
-                  <Link to="/motion-control" className="hover:text-white">AI+运动控制</Link>
+                  <Link to="/motion-control" className="hover:text-white">AI+运动控制-概览</Link>
                 </li>
                 <li>
-                  <Link to="/motion-control/studio" className="hover:text-white">openIndu-studio</Link>
+                  <Link to="/motion-control/studio" className="hover:text-white">openIndu-studio 平台</Link>
                 </li>
                 <li>
                   <Link to="/vision" className="hover:text-white">AI+视觉</Link>
@@ -279,6 +285,22 @@ export function Layout() {
                   <a href="https://monitor.openindu.com/status/service" target="_blank" rel="noopener noreferrer" className="hover:text-white">
                     服务监控
                   </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Legal */}
+            <div className="flex flex-col items-start">
+              <h3 className="font-semibold text-white mb-4">法律与隐私</h3>
+              <ul className="space-y-2 text-gray-400">
+                <li>
+                  <Link to="/privacy" className="hover:text-white">隐私声明</Link>
+                </li>
+                <li>
+                  <Link to="/legal" className="hover:text-white">法律声明</Link>
+                </li>
+                <li>
+                  <Link to="/cookies" className="hover:text-white">关于 Cookies</Link>
                 </li>
               </ul>
             </div>

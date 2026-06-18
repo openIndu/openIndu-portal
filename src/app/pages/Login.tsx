@@ -21,6 +21,7 @@ export function Login() {
   const [submitting, setSubmitting] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const [privacyAccepted, setPrivacyAccepted] = useState(false);
 
   const redirectTo = typeof location.state === "object" && location.state && "from" in location.state
     ? (location.state.from as { pathname?: string }).pathname ?? "/resources"
@@ -38,7 +39,7 @@ export function Login() {
 
   // 仅在倒计时/发送中禁用按钮；手机号格式校验放到点击时提示，避免按钮静默置灰让用户误以为"无法点击"。
   const canSendCode = cooldown === 0 && !sending;
-  const canLogin = phonePattern.test(phone) && codePattern.test(code) && !submitting;
+  const canLogin = phonePattern.test(phone) && codePattern.test(code) && privacyAccepted && !submitting;
 
   async function handleSendCode() {
     setError("");
@@ -63,6 +64,10 @@ export function Login() {
     event.preventDefault();
     setError("");
     setMessage("");
+    if (!privacyAccepted) {
+      setError("请先阅读并同意隐私声明");
+      return;
+    }
     if (!canLogin) {
       setError("请输入正确手机号和 6 位验证码");
       return;
@@ -116,6 +121,17 @@ export function Login() {
                 </Button>
               </div>
             </div>
+            <label className="flex items-start gap-2 rounded-lg border border-gray-200 bg-gray-50 p-3 text-sm text-gray-700">
+              <input
+                type="checkbox"
+                checked={privacyAccepted}
+                onChange={(event) => setPrivacyAccepted(event.target.checked)}
+                className="mt-1"
+              />
+              <span>
+                我已阅读并同意 <Link to="/privacy" className="font-medium text-blue-600 hover:text-blue-700">openIndu社区隐私声明</Link>，了解平台对个人信息的处理方式。
+              </span>
+            </label>
             {message && <p className="rounded-lg bg-green-50 px-3 py-2 text-sm text-green-700">{message}</p>}
             {error && <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{error}</p>}
             <Button type="submit" disabled={!canLogin} className="w-full bg-blue-600 hover:bg-blue-700">

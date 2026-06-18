@@ -1,27 +1,21 @@
 import { test, expect } from "@playwright/test";
 
-test.describe("Workflow Page", () => {
-  test("should redirect to login when not authenticated", async ({ page }) => {
+test.describe("openIndu-studio Page", () => {
+  test("should redirect /workflow to /motion-control/studio (page is public)", async ({ page }) => {
     await page.goto("/workflow");
-    await expect(page).toHaveURL(/\/login/);
+    // /workflow redirects to the public studio path — no login required
+    await expect(page).toHaveURL("/motion-control/studio");
   });
 
-  test("should load workflow page when authenticated as member", async ({ page }) => {
-    await page.evaluate(() => {
-      localStorage.setItem("openindu_portal_token", "test-token");
-      localStorage.setItem("openindu_portal_user", JSON.stringify({ id: 1, phone: "13800138000", role: "member" }));
-    });
-    await page.goto("/workflow");
+  test("should load studio page at /motion-control/studio", async ({ page }) => {
+    await page.goto("/motion-control/studio");
 
-    await expect(page.locator("h1")).toContainText("PLC 开发六步工作流");
+    await expect(page).toHaveURL("/motion-control/studio");
+    await expect(page.locator("h1")).toContainText("openIndu-studio 介绍");
   });
 
   test("should display all 6 workflow steps", async ({ page }) => {
-    await page.evaluate(() => {
-      localStorage.setItem("openindu_portal_token", "test-token");
-      localStorage.setItem("openindu_portal_user", JSON.stringify({ id: 1, phone: "13800138000", role: "member" }));
-    });
-    await page.goto("/workflow");
+    await page.goto("/motion-control/studio");
 
     const stepTitles = [
       "电气模组梳理",
@@ -38,11 +32,7 @@ test.describe("Workflow Page", () => {
   });
 
   test("should show step badges 1-6", async ({ page }) => {
-    await page.evaluate(() => {
-      localStorage.setItem("openindu_portal_token", "test-token");
-      localStorage.setItem("openindu_portal_user", JSON.stringify({ id: 1, phone: "13800138000", role: "member" }));
-    });
-    await page.goto("/workflow");
+    await page.goto("/motion-control/studio");
 
     for (let i = 1; i <= 6; i++) {
       await expect(page.getByText(`步骤 ${i}`)).toBeVisible();
@@ -50,11 +40,7 @@ test.describe("Workflow Page", () => {
   });
 
   test("should expand step description on click", async ({ page }) => {
-    await page.evaluate(() => {
-      localStorage.setItem("openindu_portal_token", "test-token");
-      localStorage.setItem("openindu_portal_user", JSON.stringify({ id: 1, phone: "13800138000", role: "member" }));
-    });
-    await page.goto("/workflow");
+    await page.goto("/motion-control/studio");
 
     // Click the first workflow step card
     const firstCard = page.getByText("电气模组梳理", { exact: true }).locator("..");
