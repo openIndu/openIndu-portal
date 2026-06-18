@@ -4,7 +4,7 @@ test.describe("Login Page", () => {
   test("should load the login page", async ({ page }) => {
     await page.goto("/login");
     await expect(page).toHaveTitle(/openIndu/);
-    await expect(page.locator("h2")).toContainText("手机号登录");
+    await expect(page.getByRole("heading", { name: "手机号登录" })).toBeVisible();
   });
 
   test("should display phone input field", async ({ page }) => {
