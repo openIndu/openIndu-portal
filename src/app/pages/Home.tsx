@@ -1,9 +1,7 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router";
-import { ArrowRight, Github, Globe, Users, Zap, Code, ExternalLink, Cpu, Eye, Network, Server, Loader2 } from "lucide-react";
+import { ArrowRight, Github, Globe, Users, Zap, Code, ExternalLink, Cpu, Eye, Network, Server } from "lucide-react";
 import { ImageCarousel } from "../components/ImageCarousel";
 import { SEO } from "../components/SEO";
-import { portalApi, type PortalCarouselItem, type PortalSolution } from "@/api";
 
 const carouselSlides = [
   {
@@ -38,86 +36,57 @@ const carouselSlides = [
   },
 ];
 
-const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
-  cpu: Cpu,
-  eye: Eye,
-  network: Network,
-  server: Server,
-};
+const solutions = [
+  {
+    icon: Cpu,
+    title: "工业物联网平台",
+    description: "设备接入、数据采集、产线监控与告警，覆盖智能制造全场景的工业互联网基础平台。",
+    link: "/iiot-platform",
+  },
+  {
+    icon: Network,
+    title: "PLC 开发工作流",
+    description: "面向西门子、三菱、欧姆龙等主流品牌的 PLC 程序开发与调试工作流，AI 辅助编程。",
+    link: "/workflow",
+  },
+  {
+    icon: Eye,
+    title: "机器视觉解决方案",
+    description: "集成工业相机与视觉算法，实现缺陷检测、尺寸测量与产品分类的自动化视觉检测。",
+    link: "/vision",
+  },
+  {
+    icon: Server,
+    title: "AI 基础设施",
+    description: "基于 RAG + MCP 的工业知识库，为 Claude Code 等 AI Agent 提供工业领域知识检索服务。",
+    link: "/iiot-platform",
+  },
+];
 
-function resolveIcon(iconName?: string) {
-  if (!iconName) return Cpu;
-  return iconMap[iconName.toLowerCase()] ?? Cpu;
-}
+const benefits = [
+  {
+    icon: Github,
+    title: "完全开源",
+    description: "所有核心代码公开透明，支持自由使用、修改和分发",
+  },
+  {
+    icon: Users,
+    title: "社区驱动",
+    description: "由全球开发者共同参与建设，持续迭代优化",
+  },
+  {
+    icon: Zap,
+    title: "免费使用",
+    description: "无需授权费用，降低企业数字化转型成本",
+  },
+  {
+    icon: Code,
+    title: "开放协作",
+    description: "欢迎提交 Issue 和 PR，共同打造工业互联网生态",
+  },
+];
 
 export function Home() {
-  const [carouselItems, setCarouselItems] = useState<PortalCarouselItem[]>([]);
-  const [carouselLoading, setCarouselLoading] = useState(true);
-  const [carouselError, setCarouselError] = useState(false);
-  const [solutions, setSolutions] = useState<PortalSolution[]>([]);
-  const [solutionsLoading, setSolutionsLoading] = useState(true);
-  const [solutionsError, setSolutionsError] = useState(false);
-
-  useEffect(() => {
-    portalApi.carousel()
-      .then((data) => {
-        setCarouselItems(data);
-        setCarouselError(false);
-      })
-      .catch(() => {
-        setCarouselItems([]);
-        setCarouselError(true);
-      })
-      .finally(() => setCarouselLoading(false));
-  }, []);
-
-  useEffect(() => {
-    portalApi.solutions()
-      .then((data) => {
-        setSolutions(data);
-        setSolutionsError(false);
-      })
-      .catch(() => {
-        setSolutions([]);
-        setSolutionsError(true);
-      })
-      .finally(() => setSolutionsLoading(false));
-  }, []);
-
-  const benefits = [
-    {
-      icon: Github,
-      title: "完全开源",
-      description: "所有核心代码公开透明，支持自由使用、修改和分发",
-    },
-    {
-      icon: Users,
-      title: "社区驱动",
-      description: "由全球开发者共同参与建设，持续迭代优化",
-    },
-    {
-      icon: Zap,
-      title: "免费使用",
-      description: "无需授权费用，降低企业数字化转型成本",
-    },
-    {
-      icon: Code,
-      title: "开放协作",
-      description: "欢迎提交Issue和PR，共同打造工业互联网生态",
-    },
-  ];
-
-  const mappedCarouselSlides = carouselItems.length > 0
-    ? carouselItems
-        .filter((item) => item.image_url)
-        .map((item) => ({
-          src: item.image_url as string,
-          alt: item.alt ?? item.title ?? "平台功能展示",
-          title: item.title ?? "平台功能展示",
-          description: item.description ?? "",
-        }))
-    : carouselSlides;
-
   return (
     <div>
       <SEO
@@ -145,8 +114,8 @@ export function Home() {
             <p className="text-xl text-gray-600 mb-10 max-w-3xl mx-auto leading-relaxed">
               <span className="font-semibold text-blue-600 block mb-2">开源、开放、协作</span>
               <span className="block">
-                致力于智能制造场景，提供AI赋能的工业互联网解决方案。
-                融合运动控制、机器视觉、工业物联网平台与AI基础设施，由社区共同构建完整的智能制造生态。
+                致力于智能制造场景，提供 AI 赋能的工业互联网解决方案。
+                融合运动控制、机器视觉、工业物联网平台与 AI 基础设施，由社区共同构建完整的智能制造生态。
               </span>
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -177,20 +146,7 @@ export function Home() {
               六大核心功能模块，覆盖智能制造全场景
             </p>
           </div>
-          {carouselLoading ? (
-            <div className="mx-auto flex aspect-video max-w-6xl animate-pulse items-center justify-center rounded-2xl border border-gray-200 bg-white shadow-sm">
-              <Loader2 className="animate-spin h-8 w-8 text-blue-600" />
-            </div>
-          ) : (
-            <>
-              {carouselError && (
-                <div className="mx-auto mb-4 max-w-6xl rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
-                  展示内容暂时无法从服务端加载，已切换为本地默认内容。
-                </div>
-              )}
-              <ImageCarousel slides={mappedCarouselSlides} />
-            </>
-          )}
+          <ImageCarousel slides={carouselSlides} />
           <div className="text-center mt-8">
             <Link
               to="/iiot-platform"
@@ -209,54 +165,34 @@ export function Home() {
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">核心解决方案</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              四大核心解决方案，覆盖智能制造全场景，为工业4.0转型提供完整支持
+              四大核心解决方案，覆盖智能制造全场景，为工业 4.0 转型提供完整支持
             </p>
           </div>
-          {solutionsLoading ? (
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-              {[1, 2, 3, 4].map((item) => (
-                <div key={item} className="h-64 animate-pulse rounded-xl border border-gray-200 bg-gray-50" />
-              ))}
-            </div>
-          ) : solutions.length === 0 ? (
-            <div className="rounded-xl border border-gray-200 bg-gray-50 px-6 py-12 text-center text-gray-600">
-              {solutionsError ? "解决方案暂时无法从服务端加载，请稍后刷新重试。" : "暂无解决方案内容。"}
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {solutions.map((solution) => {
-                const IconComponent = resolveIcon(solution.icon);
-                return (
-                  <div
-                    key={solution.id}
-                    className="relative p-8 border border-gray-200 rounded-xl hover:border-blue-600 hover:shadow-lg transition-all group"
-                  >
-                    <div className="absolute top-4 right-4 px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">
-                      正式推出
-                    </div>
-                    <div className="flex items-center justify-center w-16 h-16 bg-blue-100 text-blue-600 rounded-lg mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                      <IconComponent className="w-8 h-8" />
-                    </div>
-                    <h3 className="text-2xl font-semibold text-gray-900 mb-3">{solution.title}</h3>
-                    <p className="text-gray-600 mb-6 min-h-[3rem]">{solution.description}</p>
-                    <Link
-                      to={solution.link ?? "#"}
-                      className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
-                    >
-                      了解更多
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </div>
-                );
-              })}
-            </div>
-          )}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {solutions.map((solution) => (
+              <div
+                key={solution.title}
+                className="relative p-8 border border-gray-200 rounded-xl hover:border-blue-600 hover:shadow-lg transition-all group"
+              >
+                <div className="flex items-center justify-center w-16 h-16 bg-blue-100 text-blue-600 rounded-lg mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                  <solution.icon className="w-8 h-8" />
+                </div>
+                <h3 className="text-2xl font-semibold text-gray-900 mb-3">{solution.title}</h3>
+                <p className="text-gray-600 mb-6 min-h-[3rem]">{solution.description}</p>
+                <Link
+                  to={solution.link}
+                  className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
+                >
+                  了解更多
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Open Source Benefits Section */}
-      {/* TODO: Benefits are currently hardcoded. Consider adding a portal API endpoint for benefits
-          when the backend supports it (e.g., GET /portal/benefits). */}
       <section className="py-20 bg-gradient-to-br from-blue-50 via-cyan-50 to-blue-50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -269,9 +205,9 @@ export function Home() {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-            {benefits.map((benefit, index) => (
+            {benefits.map((benefit) => (
               <div
-                key={index}
+                key={benefit.title}
                 className="bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition-all"
               >
                 <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-blue-600 to-cyan-600 text-white rounded-lg mb-4">
@@ -282,8 +218,6 @@ export function Home() {
               </div>
             ))}
           </div>
-
-          {/* Repository Links */}
           <div className="text-center">
             <p className="text-gray-700 mb-6 font-medium">立即访问我们的开源仓库，查看代码并参与贡献</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -295,10 +229,12 @@ export function Home() {
               >
                 <div className="flex items-center gap-4 mb-4">
                   <Github className="w-12 h-12" />
-                  <h3 className="text-2xl font-semibold mb-2">GitHub</h3>
-                  <p className="text-gray-300">在 GitHub 上查看项目和贡献代码</p>
+                  <div>
+                    <h3 className="text-2xl font-semibold">GitHub</h3>
+                    <p className="text-gray-300">在 GitHub 上查看项目和贡献代码</p>
+                  </div>
                 </div>
-                <div className={`flex items-center text-gray-300 font-medium group-hover:text-white transition-colors`}>
+                <div className="flex items-center text-gray-300 font-medium group-hover:text-white transition-colors">
                   访问仓库
                   <ExternalLink className="ml-2 h-5 w-5" />
                 </div>
@@ -311,10 +247,12 @@ export function Home() {
               >
                 <div className="flex items-center gap-4 mb-4">
                   <Globe className="w-12 h-12" />
-                  <h3 className="text-2xl font-semibold mb-2">Gitee</h3>
-                  <p className="text-red-100">在 Gitee 上查看项目和贡献代码</p>
+                  <div>
+                    <h3 className="text-2xl font-semibold">Gitee</h3>
+                    <p className="text-red-100">在 Gitee 上查看项目和贡献代码</p>
+                  </div>
                 </div>
-                <div className={`flex items-center text-red-200 font-medium group-hover:text-white transition-colors`}>
+                <div className="flex items-center text-red-200 font-medium group-hover:text-white transition-colors">
                   访问仓库
                   <ExternalLink className="ml-2 h-5 w-5" />
                 </div>
@@ -327,7 +265,7 @@ export function Home() {
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-blue-600 to-cyan-600 text-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold mb-4">加入openIndu社区</h2>
+          <h2 className="text-3xl font-bold mb-4">加入 openIndu 社区</h2>
           <p className="text-xl mb-10 text-blue-100">
             立即体验开源工业互联网平台，与全球开发者共同构建智能制造生态
           </p>
