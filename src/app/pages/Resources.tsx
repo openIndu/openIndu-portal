@@ -71,7 +71,7 @@ function getDownloadUrl(payload: { download_url?: string; url?: string }) {
 }
 
 export function Resources() {
-  const { isMember } = useAuth();
+  const { isMember, isAuthenticated } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<ResourceType>(() => location.pathname.endsWith("/software") ? "software" : "documents");
@@ -130,6 +130,14 @@ export function Resources() {
   }
 
   async function handleDownload(item: ResourceItem) {
+    if (!isAuthenticated) {
+      navigate("/login", { state: { from: { pathname: location.pathname } } });
+      return;
+    }
+    if (!isMember) {
+      setError("下载功能仅会员及以上角色可用，请联系管理员升级账号");
+      return;
+    }
     setDownloadingId(item.id);
     setError("");
     setRateLimitError("");
@@ -161,27 +169,25 @@ export function Resources() {
       <div className="mx-auto max-w-7xl">
         <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="mb-2 text-sm font-semibold text-blue-600">成员资源中心</p>
-            <h1 className="text-3xl font-bold text-gray-900">文档与软件下载</h1>
+            <h1 className="text-3xl font-bold text-blue-600">文档与软件下载</h1>
             <p className="mt-2 text-gray-600">按品牌、分类和关键词快速查找 PLC/HMI 开发资料与工具软件。</p>
           </div>
           {!isMember && (
             <div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
-              当前账号可浏览列表，下载功能仅 member 及以上角色可见。
+              当前账号可浏览列表，下载功能仅会员及以上角色可见。
             </div>
           )}
         </div>
 
         <Card className="mb-6">
           <CardContent className="p-4 sm:p-6">
-            <div className="mb-5 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+            <div className="mb-5">
               <Tabs>
                 <TabsList>
                   <TabsTrigger active={activeTab === "documents"} onClick={() => handleTabChange("documents")}>文档</TabsTrigger>
                   <TabsTrigger active={activeTab === "software"} onClick={() => handleTabChange("software")}>软件</TabsTrigger>
                 </TabsList>
               </Tabs>
-              <div className="text-sm text-gray-500">共 {data.total} 条资源</div>
             </div>
 
             <div className="grid grid-cols-1 gap-3 md:grid-cols-[180px_200px_1fr_auto]">
@@ -228,12 +234,10 @@ export function Resources() {
                       </div>
                     </div>
                   </div>
-                  {isMember && (
-                    <Button type="button" variant="outline" onClick={() => void handleDownload(item)} disabled={downloadingId === item.id} className="md:self-center">
-                      {downloadingId === item.id ? <Loader2 className="animate-spin" /> : <Download />}
-                      下载
-                    </Button>
-                  )}
+                  <Button type="button" variant="outline" onClick={() => void handleDownload(item)} disabled={downloadingId === item.id} className="md:self-center">
+                    {downloadingId === item.id ? <Loader2 className="animate-spin" /> : <Download />}
+                    下载
+                  </Button>
                 </CardContent>
               </Card>
             ))
@@ -242,9 +246,12 @@ export function Resources() {
 
         <div className="mt-6 flex flex-col items-center justify-between gap-3 sm:flex-row">
           <p className="text-sm text-gray-500">第 {page} / {totalPages} 页</p>
-          <div className="flex gap-2">
-            <Button type="button" variant="outline" disabled={page <= 1 || loading} onClick={() => setPage((value) => Math.max(value - 1, 1))}>上一页</Button>
-            <Button type="button" variant="outline" disabled={page >= totalPages || loading} onClick={() => setPage((value) => value + 1)}>下一页</Button>
+          <div className="flex items-center gap-3">
+            <span className="text-sm text-gray-500">共 {data.total} 条资源</span>
+            <div className="flex gap-2">
+              <Button type="button" variant="outline" disabled={page <= 1 || loading} onClick={() => setPage((value) => Math.max(value - 1, 1))}>上一页</Button>
+              <Button type="button" variant="outline" disabled={page >= totalPages || loading} onClick={() => setPage((value) => value + 1)}>下一页</Button>
+            </div>
           </div>
         </div>
       </div>

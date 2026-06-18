@@ -1,5 +1,4 @@
 import { createBrowserRouter, Navigate } from "react-router";
-import { AuthGuard } from "./components/AuthGuard";
 import { Layout } from "./components/Layout";
 import { NotFound } from "./components/NotFound";
 import { Home } from "./pages/Home";
@@ -26,14 +25,9 @@ export const router = createBrowserRouter([
       { path: "vision", Component: Vision },
       { path: "iiot-platform", Component: IIoTPlatform },
       { path: "infrastructure", Component: TokenService },
-      {
-        Component: AuthGuard,
-        children: [
-          { path: "resources", Component: Resources },
-          { path: "resources/documents", Component: Resources },
-          { path: "resources/software", Component: Resources },
-        ],
-      },
+      { path: "resources", Component: Resources },
+      { path: "resources/documents", Component: Resources },
+      { path: "resources/software", Component: Resources },
       // 保留旧路由以支持现有链接
       { path: "workflow", element: <Navigate to="/motion-control/studio" replace /> },
       { path: "platform", Component: IIoTPlatform },

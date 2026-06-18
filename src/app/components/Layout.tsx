@@ -17,7 +17,10 @@ export function Layout() {
     {
       name: "AI+运动控制",
       href: "/motion-control",
-      children: [{ name: "openIndu-studio", href: "/motion-control/studio" }],
+      children: [
+        { name: "概览", href: "/motion-control" },
+        { name: "openIndu-studio 平台", href: "/motion-control/studio" },
+      ],
     },
     { name: "AI+视觉", href: "/vision" },
     { name: "AI+工业互联网平台", href: "/iiot-platform" },
@@ -77,7 +80,7 @@ export function Layout() {
                             key={child.name}
                             to={child.href}
                             className={`block px-4 py-2 text-sm transition-colors ${
-                              isActive(child.href)
+                              location.pathname === child.href
                                 ? "bg-blue-50 font-medium text-blue-600"
                                 : "text-gray-700 hover:bg-gray-50 hover:text-blue-600"
                             }`}
@@ -175,7 +178,7 @@ export function Layout() {
                         to={child.href}
                         onClick={() => setMobileMenuOpen(false)}
                         className={`block rounded-lg px-3 py-2 text-sm ${
-                          isActive(child.href)
+                          location.pathname === child.href
                             ? "bg-blue-50 font-medium text-blue-600"
                             : "text-gray-600 hover:bg-gray-50"
                         }`}
@@ -249,10 +252,10 @@ export function Layout() {
                   <Link to="/resources" className="hover:text-white">资源中心</Link>
                 </li>
                 <li>
-                  <Link to="/motion-control" className="hover:text-white">AI+运动控制</Link>
+                  <Link to="/motion-control" className="hover:text-white">概览（AI+运动控制）</Link>
                 </li>
                 <li>
-                  <Link to="/motion-control/studio" className="hover:text-white">openIndu-studio</Link>
+                  <Link to="/motion-control/studio" className="hover:text-white">openIndu-studio 平台</Link>
                 </li>
                 <li>
                   <Link to="/vision" className="hover:text-white">AI+视觉</Link>
