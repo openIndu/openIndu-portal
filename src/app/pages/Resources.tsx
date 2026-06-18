@@ -172,11 +172,15 @@ export function Resources() {
             <h1 className="text-3xl font-bold text-blue-600">文档与软件下载</h1>
             <p className="mt-2 text-gray-600">按品牌、分类和关键词快速查找 PLC/HMI 开发资料与工具软件。</p>
           </div>
-          {!isMember && (
-            <div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
-              当前账号可浏览列表，下载功能仅会员及以上角色可见。
+          {!isAuthenticated ? (
+            <div className="rounded-lg border border-blue-200 bg-blue-50 px-4 py-3 text-sm text-blue-800">
+              资源列表可直接浏览，点击下载时需要先登录。
             </div>
-          )}
+          ) : !isMember ? (
+            <div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
+              当前账号可浏览列表，下载功能仅会员及以上角色可用。
+            </div>
+          ) : null}
         </div>
 
         <Card className="mb-6">

@@ -1,4 +1,4 @@
-import { Cpu, Clock, Layers, Code2 } from "lucide-react";
+import { Cpu, CheckCircle, Layers, Code2 } from "lucide-react";
 
 export function MotionControl() {
   const features = [
@@ -86,8 +86,8 @@ export function MotionControl() {
           </p>
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2 px-4 py-2 bg-orange-100 text-orange-700 rounded-lg">
-              <Clock className="w-5 h-5" />
-              <span className="font-medium">敬请期待</span>
+              <CheckCircle className="w-5 h-5" />
+              <span className="font-medium">正式推出</span>
             </div>
           </div>
         </div>
@@ -245,11 +245,11 @@ export function MotionControl() {
       <section className="py-16 bg-gradient-to-r from-orange-600 to-red-600 text-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <div className="flex items-center justify-center gap-3 mb-4">
-            <Clock className="w-12 h-12" />
+            <CheckCircle className="w-12 h-12" />
           </div>
-          <h2 className="text-3xl font-bold mb-4">即将推出</h2>
+          <h2 className="text-3xl font-bold mb-4">正式推出</h2>
           <p className="text-xl mb-8 text-orange-100">
-            AI+运动控制解决方案正在紧张开发中，敬请期待
+            AI+运动控制解决方案已正式推出，欢迎联系 openIndu 获取方案支持
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a

@@ -15,8 +15,8 @@ test.describe("Resources Page", () => {
     });
     await page.goto("/resources");
 
-    await expect(page.getByText("文档")).toBeVisible();
-    await expect(page.getByText("软件")).toBeVisible();
+    await expect(page.getByRole("button", { name: "文档" })).toBeVisible();
+    await expect(page.getByRole("button", { name: "软件" })).toBeVisible();
   });
 
   test("should display search and filter controls when authenticated", async ({ page }) => {

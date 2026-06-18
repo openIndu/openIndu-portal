@@ -10,6 +10,7 @@ import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
 import { Resources } from "./pages/Resources";
 import { Workflow } from "./pages/Workflow";
+import { AccountSettings } from "./pages/AccountSettings";
 
 export const router = createBrowserRouter([
   {
@@ -19,6 +20,7 @@ export const router = createBrowserRouter([
       { index: true, Component: Home },
       { path: "login", Component: Login },
       { path: "register", Component: Register },
+      { path: "account", Component: AccountSettings },
       { path: "motion-control", Component: MotionControl },
       // openIndu-studio 介绍（原"工作流"）：作为 AI+运动控制 的子项，公开可见，点击即显示内容
       { path: "motion-control/studio", Component: Workflow },

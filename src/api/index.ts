@@ -183,6 +183,9 @@ export const authApi = {
   async me() {
     return unwrap(await apiClient.get<ApiEnvelope<User>>("/auth/me"));
   },
+  async updateMe(payload: { nickname?: string | null }) {
+    return unwrap(await apiClient.patch<ApiEnvelope<User>>("/auth/me", payload));
+  },
   async logout() {
     return unwrap(await apiClient.post<ApiEnvelope<{ success: boolean }>>("/auth/logout"));
   },

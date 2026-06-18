@@ -6,9 +6,11 @@ import type { AxiosResponse } from "axios";
 vi.mock("axios", () => {
   const mockPost = vi.fn();
   const mockGet = vi.fn();
+  const mockPatch = vi.fn();
   const mockCreate = vi.fn(() => ({
     post: mockPost,
     get: mockGet,
+    patch: mockPatch,
     interceptors: {
       request: { use: vi.fn() },
       response: { use: vi.fn() },
@@ -353,6 +355,16 @@ describe("authApi", () => {
     const result = await authApi.me();
     expect(result).toEqual({ id: 1, phone: "13800000000", role: "admin" });
     expect(mockGet).toHaveBeenCalledWith("/auth/me");
+  });
+
+  it("updateMe should call patch and unwrap result", async () => {
+    const mockPatch = vi.spyOn(apiClient, "patch").mockResolvedValueOnce({
+      data: { code: 200, data: { id: 1, phone: "13800000000", nickname: "Tom", role: "admin" } },
+    });
+
+    const result = await authApi.updateMe({ nickname: "Tom" });
+    expect(result).toEqual({ id: 1, phone: "13800000000", nickname: "Tom", role: "admin" });
+    expect(mockPatch).toHaveBeenCalledWith("/auth/me", { nickname: "Tom" });
   });
 
   it("logout should call post and unwrap result", async () => {

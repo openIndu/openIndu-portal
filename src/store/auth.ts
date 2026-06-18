@@ -18,6 +18,7 @@ interface AuthContextValue {
   login: (payload: AuthResponse) => Promise<void>;
   logout: () => Promise<void>;
   refreshToken: () => Promise<string | null>;
+  updateProfile: (payload: { nickname?: string | null }) => Promise<User>;
   setUser: (user: User | null) => void;
   hasRole: (role?: UserRole) => boolean;
 }
@@ -135,6 +136,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return nextToken;
   }, [refreshTokenValue, user]);
 
+  const updateProfile = useCallback(async (payload: { nickname?: string | null }) => {
+    const updatedUser = await authApi.updateMe(payload);
+    setUser(updatedUser);
+    return updatedUser;
+  }, [setUser]);
+
   const hasRole = useCallback((role?: UserRole) => {
     if (!role) return Boolean(token);
     if (!user) return false;
@@ -152,9 +159,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     login,
     logout,
     refreshToken,
+    updateProfile,
     setUser,
     hasRole,
-  }), [token, refreshTokenValue, user, isLoading, login, logout, refreshToken, setUser, hasRole]);
+  }), [token, refreshTokenValue, user, isLoading, login, logout, refreshToken, updateProfile, setUser, hasRole]);
 
   return createElement(AuthContext.Provider, { value }, children);
 }

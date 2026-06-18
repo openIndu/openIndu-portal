@@ -6,6 +6,7 @@ vi.mock("@/api", () => ({
   authApi: {
     refresh: vi.fn(),
     me: vi.fn(),
+    updateMe: vi.fn(),
     logout: vi.fn(),
   },
 }));
@@ -16,6 +17,7 @@ import { AuthProvider, useAuth } from "@/store/auth";
 const authApiMock = authApi as unknown as {
   refresh: ReturnType<typeof vi.fn>;
   me: ReturnType<typeof vi.fn>;
+  updateMe: ReturnType<typeof vi.fn>;
   logout: ReturnType<typeof vi.fn>;
 };
 
@@ -46,6 +48,7 @@ function Consumer() {
       <button type="button" onClick={() => void auth.login({ access_token: "login-token", refresh_token: "login-refresh" })}>login-me</button>
       <button type="button" onClick={() => void auth.refreshToken()}>refresh</button>
       <button type="button" onClick={() => auth.setUser({ id: 2, phone: "13900000000", role: "member" })}>set-user</button>
+      <button type="button" onClick={() => void auth.updateProfile({ nickname: "Tom" })}>update-profile</button>
       <button type="button" onClick={() => auth.setUser(null)}>clear-user</button>
       <button type="button" onClick={() => void auth.logout()}>logout</button>
     </div>
@@ -137,6 +140,10 @@ describe("AuthProvider", () => {
 
     await act(async () => screen.getByText("set-user").click());
     expect(screen.getByTestId("phone").textContent).toBe("13900000000");
+
+    authApiMock.updateMe.mockResolvedValue({ id: 2, phone: "13900000000", role: "member", nickname: "Tom" });
+    await act(async () => screen.getByText("update-profile").click());
+    expect(authApiMock.updateMe).toHaveBeenCalledWith({ nickname: "Tom" });
 
     await act(async () => screen.getByText("clear-user").click());
     expect(screen.getByTestId("phone").textContent).toBe("none");

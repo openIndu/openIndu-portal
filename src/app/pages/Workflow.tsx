@@ -61,7 +61,7 @@ export function Workflow() {
         <div className="mb-12 text-center">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-blue-100 px-4 py-2 text-sm font-semibold text-blue-700">
             <Bot className="h-4 w-4" />
-            AI Agent 工作流 P1 展示版
+            AI Agent 工作流
           </div>
           <h1 className="text-4xl font-bold text-gray-900">openIndu-studio 介绍</h1>
           <p className="mx-auto mt-4 max-w-3xl text-lg text-gray-600">

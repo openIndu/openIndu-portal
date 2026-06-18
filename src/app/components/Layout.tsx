@@ -2,6 +2,7 @@ import { Outlet, Link, useLocation, useNavigate } from "react-router";
 import { ChevronDown, LogOut, Menu, UserRound, X } from "lucide-react";
 import { useState } from "react";
 import { useAuth } from "@/store/auth";
+import { getDisplayName, maskPhone } from "../utils/user";
 import logo from "/assets/logo.png";
 
 export function Layout() {
@@ -9,6 +10,7 @@ export function Layout() {
   const location = useLocation();
   const navigate = useNavigate();
   const { isAuthenticated, user, logout } = useAuth();
+  const displayName = getDisplayName(user);
 
   type NavItem = { name: string; href: string; children?: { name: string; href: string }[] };
   const navigation: NavItem[] = [
@@ -111,11 +113,11 @@ export function Layout() {
             <div className="hidden lg:flex lg:items-center lg:gap-3">
               {isAuthenticated ? (
                 <>
-                  <div className="flex max-w-[220px] items-center gap-2 rounded-full bg-blue-50 px-3 py-1.5 text-sm text-blue-700">
+                  <Link to="/account" className="flex max-w-[240px] items-center gap-2 rounded-full bg-blue-50 px-3 py-1.5 text-sm text-blue-700 hover:bg-blue-100">
                     <UserRound className="h-4 w-4 shrink-0" />
-                    <span className="truncate">{user?.phone ?? "已登录用户"}</span>
+                    <span className="truncate">{displayName}</span>
                     {user?.role && <span className="shrink-0 rounded-full bg-white px-2 py-0.5 text-xs uppercase">{user.role}</span>}
-                  </div>
+                  </Link>
                   <button
                     type="button"
                     onClick={() => void handleLogout()}
@@ -193,10 +195,11 @@ export function Layout() {
             <div className="mt-3 border-t border-gray-100 pt-3">
               {isAuthenticated ? (
                 <div className="space-y-2">
-                  <div className="rounded-lg bg-blue-50 px-3 py-2 text-sm text-blue-700">
-                    <div>{user?.phone ?? "已登录用户"}</div>
+                  <Link to="/account" onClick={() => setMobileMenuOpen(false)} className="block rounded-lg bg-blue-50 px-3 py-2 text-sm text-blue-700">
+                    <div className="font-medium">个人中心：{displayName}</div>
+                    <div className="text-xs text-blue-600">手机号：{maskPhone(user?.phone)}</div>
                     {user?.role && <div className="text-xs uppercase">角色：{user.role}</div>}
-                  </div>
+                  </Link>
                   <button
                     type="button"
                     onClick={() => void handleLogout()}
