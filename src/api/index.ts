@@ -81,31 +81,6 @@ export interface DownloadLinkResponse {
 
 export type OptionValue = string;
 
-export interface PortalContentRecord<T> {
-  id?: number | string;
-  section?: string;
-  content?: T;
-  sort_order?: number;
-  is_active?: boolean;
-  updated_at?: string;
-}
-
-export interface PortalSolution {
-  id: number | string;
-  title: string;
-  description: string;
-  link?: string;
-  icon?: string;
-  status?: string;
-}
-
-export interface PortalCarouselItem {
-  id: number | string;
-  title?: string;
-  description?: string;
-  image_url?: string;
-  alt?: string;
-}
 
 const STORAGE_KEYS = {
   token: "openindu_portal_token",
@@ -131,8 +106,7 @@ export function isPublicApiRequest(method?: string, url?: string) {
     path === "/documents/brands/list" ||
     path === "/documents/categories/list" ||
     path === "/software/brands/list" ||
-    path === "/software/categories/list" ||
-    path.startsWith("/portal/")
+    path === "/software/categories/list"
   );
 }
 
@@ -248,27 +222,6 @@ export const softwareApi = {
   },
 };
 
-export function unwrapPortalContent<T>(value: T | PortalContentRecord<T>): T {
-  if (value && typeof value === "object" && "content" in value) {
-    return ((value as PortalContentRecord<T>).content ?? {}) as T;
-  }
-  return value as T;
-}
-
-export function unwrapPortalList<T>(value: T[] | { items?: Array<T | PortalContentRecord<T>> } | undefined): T[] {
-  const list = Array.isArray(value) ? value : value?.items;
-  if (!Array.isArray(list)) return [];
-  return list.map((item) => unwrapPortalContent<T>(item));
-}
-
-export const portalApi = {
-  async solutions() {
-    return unwrapPortalList<PortalSolution>(unwrap(await apiClient.get<ApiEnvelope<PortalSolution[] | { items?: Array<PortalSolution | PortalContentRecord<PortalSolution>> }>>("/portal/solutions")));
-  },
-  async carousel() {
-    return unwrapPortalList<PortalCarouselItem>(unwrap(await apiClient.get<ApiEnvelope<PortalCarouselItem[] | { items?: Array<PortalCarouselItem | PortalContentRecord<PortalCarouselItem>> }>>("/portal/carousel")));
-  },
-};
 
 export function getApiErrorMessage(error: unknown, fallback = "请求失败，请稍后重试") {
   if (axios.isAxiosError<ApiEnvelope<unknown>>(error)) {
