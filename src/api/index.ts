@@ -90,17 +90,6 @@ export interface PortalContentRecord<T> {
   updated_at?: string;
 }
 
-export interface PortalHero {
-  title?: string;
-  subtitle?: string;
-  primary_cta_text?: string;
-  primary_cta_link?: string;
-  secondary_cta_text?: string;
-  secondary_cta_link?: string;
-  cta_text?: string;
-  cta_link?: string;
-}
-
 export interface PortalSolution {
   id: number | string;
   title: string;
@@ -273,9 +262,6 @@ export function unwrapPortalList<T>(value: T[] | { items?: Array<T | PortalConte
 }
 
 export const portalApi = {
-  async hero() {
-    return unwrapPortalContent<PortalHero>(unwrap(await apiClient.get<ApiEnvelope<PortalHero | PortalContentRecord<PortalHero>>>("/portal/hero")));
-  },
   async solutions() {
     return unwrapPortalList<PortalSolution>(unwrap(await apiClient.get<ApiEnvelope<PortalSolution[] | { items?: Array<PortalSolution | PortalContentRecord<PortalSolution>> }>>("/portal/solutions")));
   },
