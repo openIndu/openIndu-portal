@@ -62,6 +62,8 @@ import * as apiModule from "@/api";
 const {
   getApiErrorMessage,
   isTooManyRequests,
+  isPublicApiRequest,
+  shouldRedirectToLogin,
   authApi,
   documentsApi,
   softwareApi,
@@ -74,6 +76,8 @@ const {
 } = apiModule as unknown as {
   getApiErrorMessage: typeof apiModule.getApiErrorMessage;
   isTooManyRequests: typeof apiModule.isTooManyRequests;
+  isPublicApiRequest: typeof apiModule.isPublicApiRequest;
+  shouldRedirectToLogin: typeof apiModule.shouldRedirectToLogin;
   authApi: typeof apiModule.authApi;
   documentsApi: typeof apiModule.documentsApi;
   softwareApi: typeof apiModule.softwareApi;
@@ -227,6 +231,28 @@ describe("getApiErrorMessage", () => {
   it("should return default fallback when not provided", () => {
     (mockedAxios.isAxiosError as unknown as ReturnType<typeof vi.fn>).mockReturnValue(false);
     expect(getApiErrorMessage("unknown")).toBe("请求失败，请稍后重试");
+  });
+});
+
+describe("public API auth redirect helpers", () => {
+  it("treats resource list endpoints as public GET requests", () => {
+    expect(isPublicApiRequest("get", "/documents")).toBe(true);
+    expect(isPublicApiRequest("get", "/software")).toBe(true);
+    expect(isPublicApiRequest("get", "/api/v1/documents")).toBe(true);
+  });
+
+  it("does not treat download-link endpoints as public requests", () => {
+    expect(isPublicApiRequest("get", "/documents/1/download-link")).toBe(false);
+    expect(shouldRedirectToLogin("get", "/documents/1/download-link")).toBe(true);
+  });
+
+  it("does not redirect to login for public resource list 401 responses", () => {
+    expect(shouldRedirectToLogin("get", "/documents")).toBe(false);
+    expect(shouldRedirectToLogin("get", "/software")).toBe(false);
+  });
+
+  it("does not redirect to login for auth refresh failures", () => {
+    expect(shouldRedirectToLogin("post", "/auth/refresh")).toBe(false);
   });
 });
 

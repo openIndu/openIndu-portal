@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
-import { ArrowRight, Github, Globe, Users, Zap, Code, ExternalLink, Clock, Cpu, Eye, Network, Server, Loader2 } from "lucide-react";
+import { ArrowRight, Github, Globe, Users, Zap, Code, ExternalLink, Cpu, Eye, Network, Server, Loader2 } from "lucide-react";
 import { ImageCarousel } from "../components/ImageCarousel";
 import { SEO } from "../components/SEO";
 import { portalApi, type PortalCarouselItem, type PortalHero, type PortalSolution } from "@/api";
@@ -276,41 +276,26 @@ export function Home() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {solutions.map((solution) => {
                 const IconComponent = resolveIcon(solution.icon);
-                const isActive = solution.status !== "coming-soon";
                 return (
                   <div
                     key={solution.id}
                     className="relative p-8 border border-gray-200 rounded-xl hover:border-blue-600 hover:shadow-lg transition-all group"
                   >
-                    {!isActive && (
-                      <div className="absolute top-4 right-4 flex items-center gap-1 px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-sm">
-                        <Clock className="w-4 h-4" />
-                        <span>敬请期待</span>
-                      </div>
-                    )}
-                    {isActive && (
-                      <div className="absolute top-4 right-4 px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">
-                        可用
-                      </div>
-                    )}
+                    <div className="absolute top-4 right-4 px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">
+                      正式推出
+                    </div>
                     <div className="flex items-center justify-center w-16 h-16 bg-blue-100 text-blue-600 rounded-lg mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
                       <IconComponent className="w-8 h-8" />
                     </div>
                     <h3 className="text-2xl font-semibold text-gray-900 mb-3">{solution.title}</h3>
                     <p className="text-gray-600 mb-6 min-h-[3rem]">{solution.description}</p>
-                    {isActive ? (
-                      <Link
-                        to={solution.link ?? "#"}
-                        className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
-                      >
-                        了解更多
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                      </Link>
-                    ) : (
-                      <span className="inline-flex items-center text-gray-400 font-medium">
-                        即将推出
-                      </span>
-                    )}
+                    <Link
+                      to={solution.link ?? "#"}
+                      className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
+                    >
+                      了解更多
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
                   </div>
                 );
               })}
