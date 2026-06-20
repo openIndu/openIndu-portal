@@ -1,4 +1,4 @@
-import axios, { AxiosError, type AxiosResponse } from "axios";
+import axios, { AxiosError, type AxiosResponse, type InternalAxiosRequestConfig } from "axios";
 
 export type UserRole = "user" | "member" | "admin";
 
@@ -82,9 +82,10 @@ export interface DownloadLinkResponse {
 export type OptionValue = string;
 
 
-const STORAGE_KEYS = {
+export const STORAGE_KEYS = {
   token: "openindu_portal_token",
   refreshToken: "openindu_portal_refresh_token",
+  user: "openindu_portal_user",
 } as const;
 
 function normalizeApiPath(url?: string) {
@@ -110,9 +111,18 @@ export function isPublicApiRequest(method?: string, url?: string) {
   );
 }
 
+// Auth endpoints that don't require authentication (public)
+const PUBLIC_AUTH_ENDPOINTS = [
+  "/auth/send-code",
+  "/auth/login",
+  "/auth/register",
+  "/auth/refresh",
+];
+
 export function shouldRedirectToLogin(method?: string, url?: string) {
   const path = normalizeApiPath(url);
-  if (path.startsWith("/auth/")) return false;
+  // Only exclude public auth endpoints, NOT all /auth/* paths
+  if (PUBLIC_AUTH_ENDPOINTS.includes(path)) return false;
   return !isPublicApiRequest(method, url);
 }
 
@@ -139,9 +149,33 @@ export const apiClient = axios.create({
   timeout: 15_000,
 });
 
+// Token refresh state
+let isRefreshing = false;
+let failedQueue: Array<{
+  resolve: (token: string) => void;
+  reject: (error: unknown) => void;
+}> = [];
+
+function processQueue(error: unknown, token: string | null = null) {
+  failedQueue.forEach((prom) => {
+    if (error) {
+      prom.reject(error);
+    } else if (token) {
+      prom.resolve(token);
+    }
+  });
+  failedQueue = [];
+}
+
+export function clearAuthStorage() {
+  localStorage.removeItem(STORAGE_KEYS.token);
+  localStorage.removeItem(STORAGE_KEYS.refreshToken);
+  localStorage.removeItem(STORAGE_KEYS.user);
+}
+
 apiClient.interceptors.request.use((config) => {
   const token = localStorage.getItem(STORAGE_KEYS.token);
-  if (token) {
+  if (token && config.headers) {
     config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
@@ -149,15 +183,95 @@ apiClient.interceptors.request.use((config) => {
 
 apiClient.interceptors.response.use(
   (response) => response,
-  (error: AxiosError<ApiEnvelope<unknown>>) => {
+  async (error: AxiosError<ApiEnvelope<unknown>>) => {
+    const originalRequest = error.config as InternalAxiosRequestConfig & { _retry?: boolean };
+    const requestPath = normalizeApiPath(originalRequest.url);
+
+    // Special case: /auth/refresh itself returning 401 means refresh token is invalid
+    // Skip refresh logic, clear storage and redirect immediately
+    if (error.response?.status === 401 && requestPath === "/auth/refresh") {
+      clearAuthStorage();
+      isRefreshing = false;
+      if (window.location.pathname !== "/login") {
+        window.location.assign(`/login?redirect=${encodeURIComponent(window.location.pathname + window.location.search)}`);
+      }
+      return Promise.reject(error);
+    }
+
+    // Normal 401 handling: try to refresh token first
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      if (isRefreshing) {
+        return new Promise((resolve, reject) => {
+          failedQueue.push({ resolve, reject });
+        })
+          .then((token) => {
+            if (originalRequest.headers) {
+              originalRequest.headers.Authorization = `Bearer ${token}`;
+            }
+            return apiClient(originalRequest);
+          })
+          .catch((err) => Promise.reject(err));
+      }
+
+      originalRequest._retry = true;
+      isRefreshing = true;
+
+      const refreshToken = localStorage.getItem(STORAGE_KEYS.refreshToken);
+
+      if (!refreshToken) {
+        clearAuthStorage();
+        isRefreshing = false;
+        if (window.location.pathname !== "/login" && shouldRedirectToLogin(originalRequest.method, originalRequest.url)) {
+          window.location.assign(`/login?redirect=${encodeURIComponent(window.location.pathname + window.location.search)}`);
+        }
+        return Promise.reject(error);
+      }
+
+      try {
+        const response = await apiClient.post<ApiEnvelope<AuthResponse | NestedAuthResponse>>("/auth/refresh", {
+          refresh_token: refreshToken,
+        });
+        const result = normalizeAuthResponse(unwrap(response));
+        const newToken = result.access_token;
+        const newRefreshToken = result.refresh_token;
+
+        if (newToken) {
+          localStorage.setItem(STORAGE_KEYS.token, newToken);
+        }
+        if (newRefreshToken) {
+          localStorage.setItem(STORAGE_KEYS.refreshToken, newRefreshToken);
+        }
+        if (result.user) {
+          localStorage.setItem(STORAGE_KEYS.user, JSON.stringify(result.user));
+        }
+
+        processQueue(null, newToken);
+
+        if (originalRequest.headers) {
+          originalRequest.headers.Authorization = `Bearer ${newToken}`;
+        }
+        return apiClient(originalRequest);
+      } catch (refreshError) {
+        clearAuthStorage();
+        processQueue(refreshError, null);
+        // Force redirect to login on refresh token failure - token is definitely invalid
+        if (window.location.pathname !== "/login") {
+          window.location.assign(`/login?redirect=${encodeURIComponent(window.location.pathname + window.location.search)}`);
+        }
+        return Promise.reject(refreshError);
+      } finally {
+        isRefreshing = false;
+      }
+    }
+
+    // For other 401 errors (not during token refresh), clear storage and redirect
     if (error.response?.status === 401) {
-      localStorage.removeItem(STORAGE_KEYS.token);
-      localStorage.removeItem(STORAGE_KEYS.refreshToken);
-      localStorage.removeItem("openindu_portal_user");
-      if (window.location.pathname !== "/login" && shouldRedirectToLogin(error.config?.method, error.config?.url)) {
+      clearAuthStorage();
+      if (window.location.pathname !== "/login" && shouldRedirectToLogin(originalRequest.method, originalRequest.url)) {
         window.location.assign(`/login?redirect=${encodeURIComponent(window.location.pathname + window.location.search)}`);
       }
     }
+
     return Promise.reject(error);
   },
 );
@@ -183,6 +297,12 @@ export const authApi = {
   },
   async logout() {
     return unwrap(await apiClient.post<ApiEnvelope<{ success: boolean }>>("/auth/logout"));
+  },
+  async deleteAccount() {
+    return unwrap(await apiClient.delete<ApiEnvelope<{ success: boolean }>>("/auth/me"));
+  },
+  async changePhone(newPhone: string, code: string) {
+    return unwrap(await apiClient.post<ApiEnvelope<{ user: User }>>("/auth/change-phone", { new_phone: newPhone, code }));
   },
 };
 

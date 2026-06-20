@@ -437,7 +437,7 @@ export function IIoTPlatform() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row items-center gap-8 sm:gap-12">
             <div className="flex-1 text-center lg:text-left">
-              <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">加入 openIndu 社区</h2>
+              <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">加入 openIndu社区</h2>
               <p className="text-base sm:text-xl mb-6 sm:mb-8 text-blue-100">
                 立即体验企业级工业互联网平台，与全球开发者共同构建智能制造生态
               </p>

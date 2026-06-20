@@ -1,5 +1,5 @@
 import { createContext, createElement, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
-import { authApi, type AuthResponse, type User, type UserRole } from "@/api";
+import { authApi, clearAuthStorage, type AuthResponse, type User, type UserRole } from "@/api";
 
 const STORAGE_KEYS = {
   token: "openindu_portal_token",
@@ -77,8 +77,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setUserState(nextUser);
       })
       .catch(() => {
-        // Refresh failed — clear stale tokens but keep the user in state if they
-        // exist locally so the UI can show a logged-out state gracefully.
+        // Refresh failed - clear ALL auth state to show proper logged-out state
+        clearAuthStorage();
+        setToken(null);
+        setRefreshTokenValue(null);
+        setUserState(null);
       })
       .finally(() => setIsLoading(false));
   }, []);
