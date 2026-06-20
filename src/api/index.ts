@@ -222,6 +222,12 @@ export const softwareApi = {
   },
 };
 
+export const visitsApi = {
+  async track(path = window.location.pathname) {
+    return unwrap(await apiClient.post<ApiEnvelope<{ tracked: boolean }>>("/visits/track", { path }));
+  },
+};
+
 
 export function getApiErrorMessage(error: unknown, fallback = "请求失败，请稍后重试") {
   if (axios.isAxiosError<ApiEnvelope<unknown>>(error)) {
