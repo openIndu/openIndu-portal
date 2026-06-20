@@ -23,6 +23,7 @@ vi.mock("@/api", () => ({
   authApi: {
     refresh: vi.fn(),
   },
+  clearAuthStorage: vi.fn(),
 }));
 
 // Mock navigate
