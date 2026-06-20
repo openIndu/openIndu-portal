@@ -1,6 +1,6 @@
 import { Outlet, Link, useLocation, useNavigate } from "react-router";
 import { ChevronDown, LogOut, Menu, UserRound, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "@/store/auth";
 import { getDisplayName, maskPhone } from "../utils/user";
 import logo from "/assets/logo.png";
@@ -9,6 +9,11 @@ export function Layout() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+
+  // Scroll to top on every page navigation
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
   const { isAuthenticated, user, logout } = useAuth();
   const displayName = getDisplayName(user);
 
