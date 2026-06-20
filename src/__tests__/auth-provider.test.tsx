@@ -9,6 +9,7 @@ vi.mock("@/api", () => ({
     updateMe: vi.fn(),
     logout: vi.fn(),
   },
+  clearAuthStorage: vi.fn(),
 }));
 
 import { authApi } from "@/api";
