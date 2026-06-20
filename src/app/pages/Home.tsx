@@ -1,5 +1,7 @@
+import { useEffect } from "react";
 import { Link } from "react-router";
 import { ArrowRight, Github, Globe, Users, Zap, Code, ExternalLink, Cpu, Eye, Network, Server } from "lucide-react";
+import { visitsApi } from "@/api";
 import { ImageCarousel } from "../components/ImageCarousel";
 import { SEO } from "../components/SEO";
 
@@ -87,6 +89,10 @@ const benefits = [
 ];
 
 export function Home() {
+  useEffect(() => {
+    void visitsApi.track('/').catch(() => {})
+  }, [])
+
   return (
     <div>
       <SEO
