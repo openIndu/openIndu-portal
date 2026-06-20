@@ -12,6 +12,8 @@ export function Layout() {
   const { isAuthenticated, user, logout } = useAuth();
   const displayName = getDisplayName(user);
 
+  const ROLE_LABELS: Record<string, string> = { user: "普通用户", member: "会员", admin: "管理员" };
+
   type NavItem = { name: string; href: string; children?: { name: string; href: string }[] };
   const navigation: NavItem[] = [
     { name: "首页", href: "/" },
@@ -116,7 +118,7 @@ export function Layout() {
                   <Link to="/account" className="flex max-w-[240px] items-center gap-2 rounded-full bg-blue-50 px-3 py-1.5 text-sm text-blue-700 hover:bg-blue-100">
                     <UserRound className="h-4 w-4 shrink-0" />
                     <span className="truncate">{displayName}</span>
-                    {user?.role && <span className="shrink-0 rounded-full bg-white px-2 py-0.5 text-xs uppercase">{user.role}</span>}
+                    {user?.role && <span className="shrink-0 rounded-full bg-white px-2 py-0.5 text-xs">{ROLE_LABELS[user.role] ?? user.role}</span>}
                   </Link>
                   <button
                     type="button"
@@ -198,7 +200,7 @@ export function Layout() {
                   <Link to="/account" onClick={() => setMobileMenuOpen(false)} className="block rounded-lg bg-blue-50 px-3 py-2 text-sm text-blue-700">
                     <div className="font-medium">个人中心：{displayName}</div>
                     <div className="text-xs text-blue-600">手机号：{maskPhone(user?.phone)}</div>
-                    {user?.role && <div className="text-xs uppercase">角色：{user.role}</div>}
+                    {user?.role && <div className="text-xs">角色：{ROLE_LABELS[user.role] ?? user.role}</div>}
                   </Link>
                   <button
                     type="button"
