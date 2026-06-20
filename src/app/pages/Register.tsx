@@ -83,7 +83,7 @@ export function Register() {
     <section className="bg-gradient-to-br from-blue-50 via-white to-cyan-50 px-4 py-16 sm:py-24">
       <Card className="mx-auto max-w-md border-blue-100 shadow-xl">
         <CardHeader className="text-center">
-          <CardTitle>注册 openIndu 社区账号</CardTitle>
+          <CardTitle>注册 openIndu社区账号</CardTitle>
           <CardDescription>手机号验证后即可注册成功</CardDescription>
         </CardHeader>
         <CardContent>

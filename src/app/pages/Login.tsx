@@ -90,7 +90,7 @@ export function Login() {
       <Card className="mx-auto max-w-md border-blue-100 shadow-xl">
         <CardHeader className="text-center">
           <CardTitle>手机号登录</CardTitle>
-          <CardDescription>使用短信验证码登录 openIndu 社区门户</CardDescription>
+          <CardDescription>使用短信验证码登录 openIndu社区账号</CardDescription>
         </CardHeader>
         <CardContent>
           <form className="space-y-5" onSubmit={handleSubmit}>

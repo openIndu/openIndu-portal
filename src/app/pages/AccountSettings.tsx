@@ -1,6 +1,6 @@
 import { useEffect, useState, type FormEvent } from "react";
-import { Navigate } from "react-router";
-import { Loader2, ShieldCheck, UserRound } from "lucide-react";
+import { Navigate, useNavigate } from "react-router";
+import { Loader2, LogOut, ShieldCheck, UserRound } from "lucide-react";
 import { getApiErrorMessage } from "@/api";
 import { useAuth } from "@/store/auth";
 import { maskPhone } from "../utils/user";
@@ -9,10 +9,18 @@ import { Button } from "../components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card";
 import { Input } from "../components/ui/input";
 
+const ROLE_LABELS: Record<string, string> = {
+  user: "普通用户",
+  member: "会员",
+  admin: "管理员",
+};
+
 export function AccountSettings() {
-  const { isAuthenticated, isLoading, user, updateProfile } = useAuth();
+  const { isAuthenticated, isLoading, user, updateProfile, logout } = useAuth();
+  const navigate = useNavigate();
   const [nickname, setNickname] = useState(user?.nickname ?? "");
   const [saving, setSaving] = useState(false);
+  const [loggingOut, setLoggingOut] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
 
@@ -44,11 +52,21 @@ export function AccountSettings() {
     }
   }
 
+  async function handleLogout() {
+    setLoggingOut(true);
+    try {
+      await logout();
+      navigate("/");
+    } finally {
+      setLoggingOut(false);
+    }
+  }
+
   return (
     <section className="bg-gradient-to-br from-blue-50 via-white to-cyan-50 px-4 py-12 sm:px-6 lg:px-8">
       <SEO
         title="账号设置｜openIndu"
-        description="管理 openIndu 社区门户账号昵称与个人资料。"
+        description="管理 openIndu社区账号昵称与个人资料。"
         canonicalPath="/account"
       />
       <div className="mx-auto max-w-3xl">
@@ -88,6 +106,13 @@ export function AccountSettings() {
                 <p className="mt-1 text-xs text-gray-500">为保护隐私，手机号不完整展示。</p>
               </div>
 
+              <div className="rounded-xl border border-gray-100 bg-gray-50 p-4">
+                <div className="mb-1 text-sm font-medium text-gray-700">账号角色</div>
+                <p className="text-base font-semibold text-gray-900">
+                  {user?.role ? (ROLE_LABELS[user.role] ?? user.role) : "—"}
+                </p>
+              </div>
+
               {message && <p className="rounded-lg bg-green-50 px-3 py-2 text-sm text-green-700">{message}</p>}
               {error && <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{error}</p>}
 
@@ -98,6 +123,20 @@ export function AccountSettings() {
             </form>
           </CardContent>
         </Card>
+
+        <div className="mt-6 rounded-xl border border-red-100 bg-red-50 p-4">
+          <p className="mb-3 text-sm text-gray-600">注销后将清除本地登录状态并返回首页。</p>
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => void handleLogout()}
+            disabled={loggingOut}
+            className="border-red-200 text-red-600 hover:bg-red-100 hover:text-red-700"
+          >
+            {loggingOut ? <Loader2 className="h-4 w-4 animate-spin" /> : <LogOut className="h-4 w-4" />}
+            注销登录
+          </Button>
+        </div>
       </div>
     </section>
   );
