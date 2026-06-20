@@ -228,6 +228,47 @@ export const visitsApi = {
   },
 };
 
+export interface PortalContentRecord<T = Record<string, unknown>> {
+  id: number;
+  content?: T | null;
+}
+
+export function unwrapPortalContent<T>(value: T | PortalContentRecord<T>): T {
+  if (value !== null && typeof value === "object" && "content" in value) {
+    const record = value as PortalContentRecord<T>;
+    return (record.content ?? {}) as T;
+  }
+  return value as T;
+}
+
+export function unwrapPortalList<T>(
+  value: T[] | { items?: Array<T | PortalContentRecord<T>> | null } | undefined,
+): T[] {
+  if (!value) return [];
+  if (Array.isArray(value)) return value;
+  if ("items" in value) {
+    const items = (value as { items?: unknown[] | null }).items;
+    if (!items || !Array.isArray(items)) return [];
+    return items.map((item) => unwrapPortalContent(item as T | PortalContentRecord<T>)) as T[];
+  }
+  return [];
+}
+
+export const portalApi = {
+  async hero() {
+    const raw = unwrap(await apiClient.get<ApiEnvelope<unknown>>("/portal/hero"));
+    return unwrapPortalContent(raw);
+  },
+  async solutions() {
+    const raw = unwrap(await apiClient.get<ApiEnvelope<unknown>>("/portal/solutions"));
+    return unwrapPortalList(raw as unknown[] | { items?: Array<unknown> | null });
+  },
+  async carousel() {
+    const raw = unwrap(await apiClient.get<ApiEnvelope<unknown>>("/portal/carousel"));
+    return unwrapPortalList(raw as unknown[] | { items?: Array<unknown> | null });
+  },
+};
+
 
 export function getApiErrorMessage(error: unknown, fallback = "请求失败，请稍后重试") {
   if (axios.isAxiosError<ApiEnvelope<unknown>>(error)) {
