@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
-import { Download, FileText, Loader2, Package, Search } from "lucide-react";
+import { Download, Eye, FileText, Loader2, Package, Search } from "lucide-react";
 import { documentsApi, getApiErrorMessage, isTooManyRequests, softwareApi, type PaginatedResponse, type ResourceItem } from "@/api";
 import { useAuth } from "@/store/auth";
 import { SEO } from "../components/SEO";
@@ -88,6 +88,7 @@ export function Resources() {
   const [filtersLoading, setFiltersLoading] = useState(false);
   const [loading, setLoading] = useState(false);
   const [downloadingId, setDownloadingId] = useState<string | number | null>(null);
+  const [previewingId, setPreviewingId] = useState<string | number | null>(null);
   const [error, setError] = useState("");
   const [rateLimitError, setRateLimitError] = useState("");
 
@@ -97,7 +98,7 @@ export function Resources() {
     setLoading(true);
     setError("");
     try {
-      const params = { page, page_size: 10, brand: brand || undefined, category: category || undefined, keyword: keyword || undefined };
+      const params = { page, page_size: 10, brand: brand || undefined, category: category || undefined, keyword: keyword || undefined, ...(activeTab === "documents" ? { published_only: true } : {}) };
       const result = activeTab === "documents" ? await documentsApi.list(params) : await softwareApi.list(params);
       setData(normalizeList(result, page));
     } catch (err) {
@@ -154,33 +155,53 @@ export function Resources() {
     void loadResources();
   }
 
-  async function handleDownload(item: ResourceItem) {
+  async function getLink(item: ResourceItem): Promise<string | null> {
     if (!isAuthenticated) {
       navigate("/login", { state: { from: { pathname: location.pathname } } });
-      return;
+      return null;
     }
     if (!isMember) {
       setError("下载功能仅会员及以上角色可用，请联系管理员升级账号");
-      return;
+      return null;
     }
-    setDownloadingId(item.id);
     setError("");
     setRateLimitError("");
     try {
       const result = activeTab === "documents" ? await documentsApi.downloadLink(item.id) : await softwareApi.downloadLink(item.id);
       const url = getDownloadUrl(result);
       if (!url) throw new Error("后端未返回下载链接");
-      window.open(url, "_blank", "noopener,noreferrer");
       void loadResources();
+      return url;
     } catch (err) {
       if (isTooManyRequests(err)) {
         setRateLimitError("今日下载次数已用完，请明天再试");
       } else {
         setError(getApiErrorMessage(err, "下载链接获取失败"));
       }
-    } finally {
-      setDownloadingId(null);
+      return null;
     }
+  }
+
+  async function handlePreview(item: ResourceItem) {
+    setPreviewingId(item.id);
+    const url = await getLink(item);
+    setPreviewingId(null);
+    if (url) window.open(url, "_blank", "noopener,noreferrer");
+  }
+
+  async function handleDownload(item: ResourceItem) {
+    setDownloadingId(item.id);
+    const url = await getLink(item);
+    setDownloadingId(null);
+    if (!url) return;
+    const filename = getTitle(item);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    a.rel = "noopener noreferrer";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
   }
 
   return (
@@ -263,10 +284,16 @@ export function Resources() {
                       </div>
                     </div>
                   </div>
-                  <Button type="button" variant="outline" onClick={() => void handleDownload(item)} disabled={downloadingId === item.id} className="md:self-center">
-                    {downloadingId === item.id ? <Loader2 className="animate-spin" /> : <Download />}
-                    下载
-                  </Button>
+                  <div className="flex shrink-0 gap-2 md:self-center">
+                    <Button type="button" variant="outline" onClick={() => void handlePreview(item)} disabled={previewingId === item.id || downloadingId === item.id}>
+                      {previewingId === item.id ? <Loader2 className="animate-spin" /> : <Eye />}
+                      在线预览
+                    </Button>
+                    <Button type="button" variant="outline" onClick={() => void handleDownload(item)} disabled={downloadingId === item.id || previewingId === item.id}>
+                      {downloadingId === item.id ? <Loader2 className="animate-spin" /> : <Download />}
+                      下载
+                    </Button>
+                  </div>
                 </CardContent>
               </Card>
             ))

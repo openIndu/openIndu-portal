@@ -45,6 +45,7 @@ export interface PaginationParams {
   keyword?: string;
   brand?: string;
   category?: string;
+  published_only?: boolean;
 }
 
 export interface PaginatedResponse<T> {
