@@ -161,7 +161,7 @@ export function Resources() {
       return null;
     }
     if (!isMember) {
-      setError("下载功能仅会员及以上角色可用，请联系管理员升级账号");
+      setError("在线预览和下载功能仅会员及以上角色可用，请联系管理员升级账号");
       return null;
     }
     setError("");
@@ -220,11 +220,11 @@ export function Resources() {
           </div>
           {!isAuthenticated ? (
             <div className="rounded-lg border border-blue-200 bg-blue-50 px-4 py-3 text-sm text-blue-800">
-              资源列表可直接浏览，点击下载时需要先登录。
+              资源列表可直接浏览，在线预览和下载需要先登录。
             </div>
           ) : !isMember ? (
             <div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
-              当前账号可浏览列表，下载功能仅会员及以上角色可用。
+              当前账号可浏览列表，在线预览和下载仅会员及以上角色可用。
             </div>
           ) : null}
         </div>
