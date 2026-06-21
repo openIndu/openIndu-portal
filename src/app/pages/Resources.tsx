@@ -98,7 +98,7 @@ export function Resources() {
     setLoading(true);
     setError("");
     try {
-      const params = { page, page_size: 10, brand: brand || undefined, category: category || undefined, keyword: keyword || undefined, ...(activeTab === "documents" ? { published_only: true } : {}) };
+      const params = { page, page_size: 10, brand: brand || undefined, category: category || undefined, keyword: keyword || undefined, published_only: true };
       const result = activeTab === "documents" ? await documentsApi.list(params) : await softwareApi.list(params);
       setData(normalizeList(result, page));
     } catch (err) {
