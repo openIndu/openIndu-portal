@@ -285,10 +285,12 @@ export function Resources() {
                     </div>
                   </div>
                   <div className="flex shrink-0 gap-2 md:self-center">
-                    <Button type="button" variant="outline" onClick={() => void handlePreview(item)} disabled={previewingId === item.id || downloadingId === item.id}>
-                      {previewingId === item.id ? <Loader2 className="animate-spin" /> : <Eye />}
-                      在线预览
-                    </Button>
+                    {activeTab === "documents" && (
+                      <Button type="button" variant="outline" onClick={() => void handlePreview(item)} disabled={previewingId === item.id || downloadingId === item.id}>
+                        {previewingId === item.id ? <Loader2 className="animate-spin" /> : <Eye />}
+                        在线预览
+                      </Button>
+                    )}
                     <Button type="button" variant="outline" onClick={() => void handleDownload(item)} disabled={downloadingId === item.id || previewingId === item.id}>
                       {downloadingId === item.id ? <Loader2 className="animate-spin" /> : <Download />}
                       下载
