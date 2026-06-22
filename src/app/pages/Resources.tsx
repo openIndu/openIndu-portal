@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { Download, Eye, FileText, Loader2, Package, Search } from "lucide-react";
-import { documentsApi, getApiErrorMessage, isTooManyRequests, softwareApi, type PaginatedResponse, type ResourceItem } from "@/api";
+import { documentsApi, getApiErrorMessage, isTooManyRequests, softwareApi, tagsApi, type PaginatedResponse, type ResourceItem, type ResourceTag } from "@/api";
 import { useAuth } from "@/store/auth";
 import { SEO } from "../components/SEO";
 import { Button } from "../components/ui/button";
@@ -14,36 +14,17 @@ type ResourceType = "documents" | "software";
 
 type FilterOption = { value: string; label: string };
 
-const brandLabels: Record<string, string> = {
-  siemens: "西门子",
-  mitsubishi: "三菱",
-  omron: "欧姆龙",
-  keyence: "基恩士",
-  inovance: "汇川",
-  other: "其他",
-};
-
-const categoryLabels: Record<string, string> = {
-  "plc-manual": "PLC 编程手册",
-  "hardware-manual": "硬件手册",
-  "driver-manual": "驱动器手册",
-  "hmi-manual": "HMI 手册",
-  "software-manual": "软件手册",
-  "best-practice": "最佳实践",
-  "electrical-standard": "电气规范",
-  "plc-ide": "PLC 编程软件",
-  "hmi-ide": "HMI 组态软件",
-  "plc-driver": "PLC 驱动/通信组件",
-  utility: "工具软件",
-  firmware: "固件",
-  other: "其他",
-};
-
-function toOptions(values: string[], allLabel: string, labels: Record<string, string>): FilterOption[] {
+function tagOptions(tags: ResourceTag[] | undefined, allLabel: string): FilterOption[] {
   return [
     { value: "", label: allLabel },
-    ...values.map((value) => ({ value, label: labels[value] ?? value })),
+    ...(tags ?? [])
+      .filter((tag) => tag.is_active)
+      .map((tag) => ({ value: tag.value, label: tag.label_zh })),
   ];
+}
+
+function optionMap(options: FilterOption[]): Record<string, string> {
+  return Object.fromEntries(options.filter((option) => option.value).map((option) => [option.value, option.label]));
 }
 
 function normalizeList(data: PaginatedResponse<ResourceItem> | ResourceItem[] | undefined, page: number): PaginatedResponse<ResourceItem> {
@@ -80,11 +61,14 @@ export function Resources() {
   const [activeTab, setActiveTab] = useState<ResourceType>(() => location.pathname.endsWith("/software") ? "software" : "documents");
   const [brand, setBrand] = useState("");
   const [category, setCategory] = useState("");
+  const [series, setSeries] = useState("");
   const [keyword, setKeyword] = useState("");
   const [page, setPage] = useState(1);
   const [data, setData] = useState<PaginatedResponse<ResourceItem>>({ items: [], total: 0, page: 1, page_size: 10 });
   const [brandOptions, setBrandOptions] = useState<FilterOption[]>([{ value: "", label: "全部品牌" }]);
-  const [categoryOptions, setCategoryOptions] = useState<FilterOption[]>([{ value: "", label: "全部分类" }]);
+  const [categoryOptions, setCategoryOptions] = useState<FilterOption[]>([{ value: "", label: "全部类型" }]);
+  const [seriesOptions, setSeriesOptions] = useState<FilterOption[]>([{ value: "", label: "全部系列" }]);
+  const [allSeriesOptions, setAllSeriesOptions] = useState<FilterOption[]>([{ value: "", label: "全部系列" }]);
   const [filtersLoading, setFiltersLoading] = useState(false);
   const [loading, setLoading] = useState(false);
   const [downloadingId, setDownloadingId] = useState<string | number | null>(null);
@@ -93,12 +77,15 @@ export function Resources() {
   const [rateLimitError, setRateLimitError] = useState("");
 
   const totalPages = useMemo(() => data.pages ?? Math.max(1, Math.ceil(data.total / data.page_size)), [data]);
+  const brandMap = useMemo(() => optionMap(brandOptions), [brandOptions]);
+  const categoryMap = useMemo(() => optionMap(categoryOptions), [categoryOptions]);
+  const seriesMap = useMemo(() => optionMap(allSeriesOptions), [allSeriesOptions]);
 
   const loadResources = useCallback(async () => {
     setLoading(true);
     setError("");
     try {
-      const params = { page, page_size: 10, brand: brand || undefined, category: category || undefined, keyword: keyword || undefined, published_only: true };
+      const params = { page, page_size: 10, brand: brand || undefined, category: category || undefined, series: series || undefined, keyword: keyword || undefined, published_only: true };
       const result = activeTab === "documents" ? await documentsApi.list(params) : await softwareApi.list(params);
       setData(normalizeList(result, page));
     } catch (err) {
@@ -107,13 +94,15 @@ export function Resources() {
     } finally {
       setLoading(false);
     }
-  }, [activeTab, brand, category, keyword, page]);
+  }, [activeTab, brand, category, series, keyword, page]);
 
   useEffect(() => {
     const routeTab = location.pathname.endsWith("/software") ? "software" : "documents";
     if (routeTab !== activeTab) {
       setActiveTab(routeTab);
+      setBrand("");
       setCategory("");
+      setSeries("");
       setPage(1);
     }
   }, [activeTab, location.pathname]);
@@ -122,15 +111,20 @@ export function Resources() {
     const loadFilters = async () => {
       setFiltersLoading(true);
       try {
-        const [nextBrands, nextCategories] = activeTab === "documents"
-          ? await Promise.all([documentsApi.brands(), documentsApi.categories()])
-          : await Promise.all([softwareApi.brands(), softwareApi.categories()]);
-        setBrandOptions(toOptions(nextBrands, "全部品牌", brandLabels));
-        setCategoryOptions(toOptions(nextCategories, "全部分类", categoryLabels));
+        const tagPrefix = activeTab === "documents" ? "doc" : "sw";
+        const [nextBrands, nextCategories, nextSeries] = await Promise.all([
+          tagsApi.list(`${tagPrefix}_brand`),
+          tagsApi.list(`${tagPrefix}_category`),
+          tagsApi.list(`${tagPrefix}_series`),
+        ]);
+        setBrandOptions(tagOptions(nextBrands, "全部品牌"));
+        setCategoryOptions(tagOptions(nextCategories, "全部类型"));
+        setAllSeriesOptions(tagOptions(nextSeries, "全部系列"));
       } catch (err) {
         setError(getApiErrorMessage(err, "筛选项加载失败"));
         setBrandOptions([{ value: "", label: "全部品牌" }]);
-        setCategoryOptions([{ value: "", label: "全部分类" }]);
+        setCategoryOptions([{ value: "", label: "全部类型" }]);
+        setAllSeriesOptions([{ value: "", label: "全部系列" }]);
       } finally {
         setFiltersLoading(false);
       }
@@ -139,12 +133,36 @@ export function Resources() {
   }, [activeTab]);
 
   useEffect(() => {
+    const loadSeries = async () => {
+      if (!category) {
+        setSeriesOptions([{ value: "", label: "全部系列" }]);
+        setSeries("");
+        return;
+      }
+      setFiltersLoading(true);
+      try {
+        const tagPrefix = activeTab === "documents" ? "doc" : "sw";
+        const nextSeries = await tagsApi.list(`${tagPrefix}_series`, category, brand || undefined);
+        setSeriesOptions(tagOptions(nextSeries, "全部系列"));
+      } catch (err) {
+        setError(getApiErrorMessage(err, "系列筛选项加载失败"));
+        setSeriesOptions([{ value: "", label: "全部系列" }]);
+      } finally {
+        setFiltersLoading(false);
+      }
+    };
+    void loadSeries();
+  }, [activeTab, brand, category]);
+
+  useEffect(() => {
     void loadResources();
   }, [loadResources]);
 
   function handleTabChange(nextTab: ResourceType) {
     setActiveTab(nextTab);
+    setBrand("");
     setCategory("");
+    setSeries("");
     setPage(1);
     setError("");
     navigate(nextTab === "documents" ? "/resources/documents" : "/resources/software");
@@ -240,12 +258,15 @@ export function Resources() {
               </Tabs>
             </div>
 
-            <div className="grid grid-cols-1 gap-3 md:grid-cols-[180px_200px_1fr_auto]">
-              <Select value={brand} onChange={(event) => { setBrand(event.target.value); setPage(1); }} aria-label="品牌筛选" disabled={filtersLoading}>
+            <div className="grid grid-cols-1 gap-3 lg:grid-cols-[160px_180px_180px_1fr_auto]">
+              <Select value={brand} onChange={(event) => { setBrand(event.target.value); setSeries(""); setPage(1); }} aria-label="品牌筛选" disabled={filtersLoading}>
                 {brandOptions.map((item) => <option key={item.value} value={item.value}>{item.label}</option>)}
               </Select>
-              <Select value={category} onChange={(event) => { setCategory(event.target.value); setPage(1); }} aria-label="分类筛选" disabled={filtersLoading}>
+              <Select value={category} onChange={(event) => { setCategory(event.target.value); setSeries(""); setPage(1); }} aria-label="类型筛选" disabled={filtersLoading}>
                 {categoryOptions.map((item) => <option key={item.value} value={item.value}>{item.label}</option>)}
+              </Select>
+              <Select value={series} onChange={(event) => { setSeries(event.target.value); setPage(1); }} aria-label="系列筛选" disabled={filtersLoading || !category || seriesOptions.length <= 1}>
+                {seriesOptions.map((item) => <option key={item.value} value={item.value}>{item.label}</option>)}
               </Select>
               <div className="relative">
                 <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
@@ -276,8 +297,9 @@ export function Resources() {
                       <h2 className="text-lg font-semibold text-gray-900">{getTitle(item)}</h2>
                       <p className="mt-1 line-clamp-2 text-sm text-gray-600">{item.description || "暂无资源简介"}</p>
                       <div className="mt-3 flex flex-wrap gap-2 text-xs text-gray-500">
-                        <span className="rounded-full bg-gray-100 px-2 py-1">品牌：{item.brand || "未分类"}</span>
-                        <span className="rounded-full bg-gray-100 px-2 py-1">分类：{item.category || "未分类"}</span>
+                        <span className="rounded-full bg-gray-100 px-2 py-1">品牌：{item.brand ? (brandMap[item.brand] ?? item.brand) : "未分类"}</span>
+                        <span className="rounded-full bg-gray-100 px-2 py-1">类型：{item.category ? (categoryMap[item.category] ?? item.category) : "未分类"}</span>
+                        {item.series ? <span className="rounded-full bg-gray-100 px-2 py-1">系列：{seriesMap[item.series] ?? item.series}</span> : null}
                         <span className="rounded-full bg-gray-100 px-2 py-1">大小：{formatFileSize(item.file_size)}</span>
                         {activeTab === "software" && (item.latest_version || item.version) && <span className="rounded-full bg-gray-100 px-2 py-1">版本：{item.latest_version || item.version}</span>}
                         <span className="rounded-full bg-blue-50 px-2 py-1 text-blue-700">下载 {item.download_count ?? 0} 次</span>
