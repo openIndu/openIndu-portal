@@ -27,16 +27,41 @@ function optionMap(options: FilterOption[]): Record<string, string> {
   return Object.fromEntries(options.filter((option) => option.value).map((option) => [option.value, option.label]));
 }
 
-function normalizeList(data: PaginatedResponse<ResourceItem> | ResourceItem[] | undefined, page: number): PaginatedResponse<ResourceItem> {
-  if (!data) return { items: [], total: 0, page, page_size: 10 };
-  if (Array.isArray(data)) return { items: data, total: data.length, page, page_size: 10 };
+function normalizeList(data: PaginatedResponse<ResourceItem> | ResourceItem[] | undefined, page: number, pageSize: number): PaginatedResponse<ResourceItem> {
+  if (!data) return { items: [], total: 0, page, page_size: pageSize };
+  if (Array.isArray(data)) return { items: data, total: data.length, page, page_size: pageSize };
   return {
     items: data.items ?? [],
     total: data.total ?? data.items?.length ?? 0,
     page: data.page ?? page,
-    page_size: data.page_size ?? 10,
+    page_size: data.size ?? data.page_size ?? pageSize,
     pages: data.pages,
   };
+}
+
+const PAGE_SIZE_OPTIONS = [10, 20, 50];
+
+function ChipBar({ label, options, selected, onSelect, disabled }: { label: string; options: FilterOption[]; selected: string; onSelect: (v: string) => void; disabled?: boolean }) {
+  return (
+    <div className="flex flex-wrap items-center gap-2 text-sm">
+      <span className="shrink-0 font-medium text-gray-500">{label}</span>
+      {options.map((option) => (
+        <button
+          key={option.value}
+          type="button"
+          disabled={disabled}
+          onClick={() => onSelect(option.value)}
+          className={`rounded-full border px-3 py-1 text-xs transition-colors disabled:opacity-50 ${
+            selected === option.value
+              ? "border-blue-600 bg-blue-600 text-white"
+              : "border-gray-300 bg-white text-gray-700 hover:border-blue-400 hover:bg-blue-50"
+          }`}
+        >
+          {option.value === "" ? "全部" : option.label}
+        </button>
+      ))}
+    </div>
+  );
 }
 
 function getTitle(item: ResourceItem) {
@@ -64,6 +89,7 @@ export function Resources() {
   const [series, setSeries] = useState("");
   const [keyword, setKeyword] = useState("");
   const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
   const [data, setData] = useState<PaginatedResponse<ResourceItem>>({ items: [], total: 0, page: 1, page_size: 10 });
   const [brandOptions, setBrandOptions] = useState<FilterOption[]>([{ value: "", label: "全部品牌" }]);
   const [categoryOptions, setCategoryOptions] = useState<FilterOption[]>([{ value: "", label: "全部类型" }]);
@@ -85,16 +111,16 @@ export function Resources() {
     setLoading(true);
     setError("");
     try {
-      const params = { page, page_size: 10, brand: brand || undefined, category: category || undefined, series: series || undefined, keyword: keyword || undefined, published_only: true };
+      const params = { page, size: pageSize, brand: brand || undefined, category: category || undefined, series: series || undefined, keyword: keyword || undefined, published_only: true };
       const result = activeTab === "documents" ? await documentsApi.list(params) : await softwareApi.list(params);
-      setData(normalizeList(result, page));
+      setData(normalizeList(result, page, pageSize));
     } catch (err) {
       setError(getApiErrorMessage(err, "资源加载失败"));
-      setData({ items: [], total: 0, page, page_size: 10 });
+      setData({ items: [], total: 0, page, page_size: pageSize });
     } finally {
       setLoading(false);
     }
-  }, [activeTab, brand, category, series, keyword, page]);
+  }, [activeTab, brand, category, series, keyword, page, pageSize]);
 
   useEffect(() => {
     const routeTab = location.pathname.endsWith("/software") ? "software" : "documents";
@@ -258,21 +284,22 @@ export function Resources() {
               </Tabs>
             </div>
 
-            <div className="grid grid-cols-1 gap-3 lg:grid-cols-[160px_180px_180px_1fr_auto]">
-              <Select value={brand} onChange={(event) => { setBrand(event.target.value); setSeries(""); setPage(1); }} aria-label="品牌筛选" disabled={filtersLoading}>
-                {brandOptions.map((item) => <option key={item.value} value={item.value}>{item.label}</option>)}
-              </Select>
-              <Select value={category} onChange={(event) => { setCategory(event.target.value); setSeries(""); setPage(1); }} aria-label="类型筛选" disabled={filtersLoading}>
-                {categoryOptions.map((item) => <option key={item.value} value={item.value}>{item.label}</option>)}
-              </Select>
-              <Select value={series} onChange={(event) => { setSeries(event.target.value); setPage(1); }} aria-label="系列筛选" disabled={filtersLoading || !category || seriesOptions.length <= 1}>
-                {seriesOptions.map((item) => <option key={item.value} value={item.value}>{item.label}</option>)}
-              </Select>
-              <div className="relative">
-                <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
-                <Input className="pl-9" value={keyword} onChange={(event) => setKeyword(event.target.value)} onKeyDown={(event) => { if (event.key === "Enter") handleSearch(); }} placeholder="输入关键词搜索资源" />
+            <div className="space-y-3">
+              <ChipBar label="品牌：" options={brandOptions} selected={brand} disabled={filtersLoading} onSelect={(value) => { setBrand(value); setSeries(""); setPage(1); }} />
+              <ChipBar label="类型：" options={categoryOptions} selected={category} disabled={filtersLoading} onSelect={(value) => { setCategory(value); setSeries(""); setPage(1); }} />
+              {category && seriesOptions.length > 1 ? (
+                <ChipBar label="系列：" options={seriesOptions} selected={series} disabled={filtersLoading} onSelect={(value) => { setSeries(value); setPage(1); }} />
+              ) : null}
+              <div className="flex flex-wrap items-center gap-2">
+                <div className="relative min-w-[220px] flex-1 sm:max-w-md">
+                  <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+                  <Input className="pl-9" value={keyword} onChange={(event) => setKeyword(event.target.value)} onKeyDown={(event) => { if (event.key === "Enter") handleSearch(); }} placeholder="输入关键词搜索资源" />
+                </div>
+                <Button type="button" onClick={handleSearch} className="bg-blue-600 hover:bg-blue-700">搜索</Button>
+                {(brand || category || series || keyword) ? (
+                  <Button type="button" variant="outline" onClick={() => { setBrand(""); setCategory(""); setSeries(""); setKeyword(""); setPage(1); }}>清空筛选</Button>
+                ) : null}
               </div>
-              <Button type="button" onClick={handleSearch} className="bg-blue-600 hover:bg-blue-700">搜索</Button>
             </div>
           </CardContent>
         </Card>
@@ -328,6 +355,9 @@ export function Resources() {
           <p className="text-sm text-gray-500">第 {page} / {totalPages} 页</p>
           <div className="flex items-center gap-3">
             <span className="text-sm text-gray-500">共 {data.total} 条资源</span>
+            <Select className="h-9 w-24" value={String(pageSize)} onChange={(event) => { setPageSize(Number(event.target.value)); setPage(1); }} aria-label="每页数量">
+              {PAGE_SIZE_OPTIONS.map((n) => <option key={n} value={n}>{n} 条/页</option>)}
+            </Select>
             <div className="flex gap-2">
               <Button type="button" variant="outline" disabled={page <= 1 || loading} onClick={() => setPage((value) => Math.max(value - 1, 1))}>上一页</Button>
               <Button type="button" variant="outline" disabled={page >= totalPages || loading} onClick={() => setPage((value) => value + 1)}>下一页</Button>

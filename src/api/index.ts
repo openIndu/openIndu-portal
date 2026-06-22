@@ -41,6 +41,7 @@ export interface ApiEnvelope<T> {
 
 export interface PaginationParams {
   page?: number;
+  size?: number;
   page_size?: number;
   keyword?: string;
   brand?: string;
@@ -53,6 +54,7 @@ export interface PaginatedResponse<T> {
   items: T[];
   total: number;
   page: number;
+  size?: number;
   page_size: number;
   pages?: number;
 }
