@@ -45,6 +45,7 @@ export interface PaginationParams {
   keyword?: string;
   brand?: string;
   category?: string;
+  series?: string;
   published_only?: boolean;
 }
 
@@ -64,6 +65,7 @@ export interface ResourceItem {
   original_name?: string;
   brand?: string;
   category?: string;
+  series?: string;
   description?: string;
   file_size?: number;
   download_count?: number;
@@ -81,6 +83,18 @@ export interface DownloadLinkResponse {
 }
 
 export type OptionValue = string;
+
+export interface ResourceTag {
+  id: number;
+  type: string;
+  value: string;
+  label_zh: string;
+  parent_value?: string;
+  brand_value?: string;
+  is_active: boolean;
+  sort_order: number;
+  created_at?: string;
+}
 
 
 export const STORAGE_KEYS = {
@@ -105,6 +119,7 @@ export function isPublicApiRequest(method?: string, url?: string) {
   return (
     path === "/documents" ||
     path === "/software" ||
+    path === "/tags" ||
     path === "/documents/brands/list" ||
     path === "/documents/categories/list" ||
     path === "/software/brands/list" ||
@@ -304,6 +319,12 @@ export const authApi = {
   },
   async changePhone(newPhone: string, code: string) {
     return unwrap(await apiClient.post<ApiEnvelope<{ user: User }>>("/auth/change-phone", { new_phone: newPhone, code }));
+  },
+};
+
+export const tagsApi = {
+  async list(type?: string, parent?: string, brand?: string) {
+    return unwrap(await apiClient.get<ApiEnvelope<ResourceTag[]>>("/tags", { params: { ...(type && { type }), ...(parent !== undefined && { parent }), ...(brand !== undefined && { brand }) } }));
   },
 };
 
