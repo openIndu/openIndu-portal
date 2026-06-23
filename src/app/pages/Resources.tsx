@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { Download, Eye, FileText, Loader2, Package, Search } from "lucide-react";
 import { documentsApi, getApiErrorMessage, isTooManyRequests, softwareApi, tagsApi, type PaginatedResponse, type ResourceItem, type ResourceTag } from "@/api";
@@ -103,6 +103,10 @@ export function Resources() {
   const [previewingId, setPreviewingId] = useState<string | number | null>(null);
   const [error, setError] = useState("");
   const [rateLimitError, setRateLimitError] = useState("");
+  // Stays in lockstep with activeTab so async handlers can compare against
+  // the latest value (the captured prop in their closure may be stale).
+  const activeTabRef = useRef(activeTab);
+  useEffect(() => { activeTabRef.current = activeTab; }, [activeTab]);
 
   const totalPages = useMemo(() => data.pages ?? Math.max(1, Math.ceil(data.total / data.page_size)), [data]);
   const brandMap = useMemo(() => optionMap(brandOptions), [brandOptions]);
@@ -112,18 +116,23 @@ export function Resources() {
   const loadResources = useCallback(async () => {
     setLoading(true);
     setError("");
+    const requestedTab = activeTab;
     try {
       const baseParams = { page, size: pageSize, brand: brand || undefined, category: category || undefined, series: series || undefined, keyword: keyword || undefined, published_only: true };
       // Software tab: expand each version into its own row so users can
       // see and download a specific version, not just the latest.
-      const params = activeTab === "software" ? { ...baseParams, expand_versions: true } : baseParams;
-      const result = activeTab === "documents" ? await documentsApi.list(params) : await softwareApi.list(params);
+      const params = requestedTab === "software" ? { ...baseParams, expand_versions: true } : baseParams;
+      const result = requestedTab === "documents" ? await documentsApi.list(params) : await softwareApi.list(params);
+      // Compare against the ref — if the user clicked the other tab while
+      // this request was in flight, drop the stale result.
+      if (requestedTab !== activeTabRef.current) return;
       setData(normalizeList(result, page, pageSize));
     } catch (err) {
+      if (requestedTab !== activeTabRef.current) return;
       setError(getApiErrorMessage(err, "资源加载失败"));
       setData({ items: [], total: 0, page, page_size: pageSize });
     } finally {
-      setLoading(false);
+      if (requestedTab === activeTabRef.current) setLoading(false);
     }
   }, [activeTab, brand, category, series, keyword, page, pageSize]);
 
