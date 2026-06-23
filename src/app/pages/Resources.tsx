@@ -229,9 +229,36 @@ export function Resources() {
     }
   }
 
+  async function getPreviewUrl(item: ResourceItem): Promise<string | null> {
+    if (!isAuthenticated) {
+      navigate("/login", { state: { from: { pathname: location.pathname } } });
+      return null;
+    }
+    if (!isMember) {
+      setError("在线预览和下载功能仅会员及以上角色可用，请联系管理员升级账号");
+      return null;
+    }
+    setError("");
+    setRateLimitError("");
+    try {
+      const result = await documentsApi.previewLink(item.id);
+      const url = result.preview_url || result.url || "";
+      if (!url) throw new Error("后端未返回预览链接");
+      void loadResources();
+      return url;
+    } catch (err) {
+      if (isTooManyRequests(err)) {
+        setRateLimitError("今日文档预览次数已用完，请明天再试");
+      } else {
+        setError(getApiErrorMessage(err, "预览链接获取失败"));
+      }
+      return null;
+    }
+  }
+
   async function handlePreview(item: ResourceItem) {
     setPreviewingId(item.id);
-    const url = await getLink(item);
+    const url = await getPreviewUrl(item);
     setPreviewingId(null);
     if (url) window.open(url, "_blank", "noopener,noreferrer");
   }

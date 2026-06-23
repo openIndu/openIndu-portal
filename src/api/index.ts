@@ -84,6 +84,13 @@ export interface DownloadLinkResponse {
   filename?: string;
 }
 
+export interface PreviewLinkResponse {
+  preview_url?: string;
+  url?: string;
+  expires_in?: number;
+  filename?: string;
+}
+
 export type OptionValue = string;
 
 export interface ResourceTag {
@@ -339,6 +346,9 @@ export const documentsApi = {
   },
   async downloadLink(id: number | string) {
     return unwrap(await apiClient.get<ApiEnvelope<DownloadLinkResponse>>(`/documents/${id}/download-link`));
+  },
+  async previewLink(id: number | string) {
+    return unwrap(await apiClient.get<ApiEnvelope<PreviewLinkResponse>>(`/documents/${id}/preview-link`));
   },
   async brands() {
     return unwrap(await apiClient.get<ApiEnvelope<OptionValue[]>>("/documents/brands/list"));
