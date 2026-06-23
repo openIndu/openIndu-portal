@@ -15,9 +15,11 @@ type ResourceType = "documents" | "software";
 type FilterOption = { value: string; label: string };
 
 function tagOptions(tags: ResourceTag[] | undefined, allLabel: string): FilterOption[] {
+  // Be defensive: the API may return a non-array (e.g. {} when a list is empty),
+  // so guard with Array.isArray instead of relying on `?? []` (which only catches null/undefined).
   return [
     { value: "", label: allLabel },
-    ...(tags ?? [])
+    ...(Array.isArray(tags) ? tags : [])
       .filter((tag) => tag.is_active)
       .map((tag) => ({ value: tag.value, label: tag.label_zh })),
   ];
@@ -138,10 +140,11 @@ export function Resources() {
       setFiltersLoading(true);
       try {
         const tagPrefix = activeTab === "documents" ? "doc" : "sw";
+        // Software has no "series" concept — only documents load series tags.
         const [nextBrands, nextCategories, nextSeries] = await Promise.all([
           tagsApi.list(`${tagPrefix}_brand`),
           tagsApi.list(`${tagPrefix}_category`),
-          tagsApi.list(`${tagPrefix}_series`),
+          activeTab === "documents" ? tagsApi.list("doc_series") : Promise.resolve([]),
         ]);
         setBrandOptions(tagOptions(nextBrands, "全部品牌"));
         setCategoryOptions(tagOptions(nextCategories, "全部类型"));
@@ -160,15 +163,15 @@ export function Resources() {
 
   useEffect(() => {
     const loadSeries = async () => {
-      if (!category) {
+      // Software has no "series" concept — skip the cascading series fetch entirely.
+      if (activeTab !== "documents" || !category) {
         setSeriesOptions([{ value: "", label: "全部系列" }]);
         setSeries("");
         return;
       }
       setFiltersLoading(true);
       try {
-        const tagPrefix = activeTab === "documents" ? "doc" : "sw";
-        const nextSeries = await tagsApi.list(`${tagPrefix}_series`, category, brand || undefined);
+        const nextSeries = await tagsApi.list("doc_series", category, brand || undefined);
         setSeriesOptions(tagOptions(nextSeries, "全部系列"));
       } catch (err) {
         setError(getApiErrorMessage(err, "系列筛选项加载失败"));
@@ -251,15 +254,15 @@ export function Resources() {
   return (
     <section className="bg-gray-50 px-4 py-10 sm:px-6 lg:px-8">
       <SEO
-        title="资源中心｜openIndu"
-        description="openIndu 资源中心提供 PLC/HMI 开发资料、品牌手册、软件工具与最佳实践下载。"
-        keywords="PLC手册,HMI手册,工业软件,品牌资料,openIndu资源中心"
+        title="下载中心｜openIndu"
+        description="openIndu 下载中心提供 PLC/HMI 开发资料、品牌手册、软件工具与最佳实践下载。"
+        keywords="PLC手册,HMI手册,工业软件,品牌资料,openIndu下载中心"
         canonicalPath="/resources"
       />
       <div className="mx-auto max-w-7xl">
         <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-blue-600">文档与软件下载</h1>
+            <h1 className="text-3xl font-bold text-blue-600">下载中心</h1>
             <p className="mt-2 text-gray-600">按品牌、分类和关键词快速查找 PLC/HMI 开发资料与工具软件。</p>
           </div>
           {!isAuthenticated ? (
@@ -287,7 +290,7 @@ export function Resources() {
             <div className="space-y-3">
               <ChipBar label="品牌：" options={brandOptions} selected={brand} disabled={filtersLoading} onSelect={(value) => { setBrand(value); setSeries(""); setPage(1); }} />
               <ChipBar label="类型：" options={categoryOptions} selected={category} disabled={filtersLoading} onSelect={(value) => { setCategory(value); setSeries(""); setPage(1); }} />
-              {category && seriesOptions.length > 1 ? (
+              {activeTab === "documents" && category && seriesOptions.length > 1 ? (
                 <ChipBar label="系列：" options={seriesOptions} selected={series} disabled={filtersLoading} onSelect={(value) => { setSeries(value); setPage(1); }} />
               ) : null}
               <div className="flex flex-wrap items-center gap-2">
@@ -326,7 +329,7 @@ export function Resources() {
                       <div className="mt-3 flex flex-wrap gap-2 text-xs text-gray-500">
                         <span className="rounded-full bg-gray-100 px-2 py-1">品牌：{item.brand ? (brandMap[item.brand] ?? item.brand) : "未分类"}</span>
                         <span className="rounded-full bg-gray-100 px-2 py-1">类型：{item.category ? (categoryMap[item.category] ?? item.category) : "未分类"}</span>
-                        {item.series ? <span className="rounded-full bg-gray-100 px-2 py-1">系列：{seriesMap[item.series] ?? item.series}</span> : null}
+                        {activeTab === "documents" && item.series ? <span className="rounded-full bg-gray-100 px-2 py-1">系列：{seriesMap[item.series] ?? item.series}</span> : null}
                         <span className="rounded-full bg-gray-100 px-2 py-1">大小：{formatFileSize(item.file_size)}</span>
                         {activeTab === "software" && (item.latest_version || item.version) && <span className="rounded-full bg-gray-100 px-2 py-1">版本：{item.latest_version || item.version}</span>}
                         <span className="rounded-full bg-blue-50 px-2 py-1 text-blue-700">下载 {item.download_count ?? 0} 次</span>

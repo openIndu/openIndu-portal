@@ -97,7 +97,7 @@ export function Home() {
     <div>
       <SEO
         title="openIndu Community｜开源智能制造工业生态"
-        description="openIndu Community 面向智能制造场景，提供工业互联网平台、PLC 开发工作流、资源中心与 AI 赋能解决方案。"
+        description="openIndu Community 面向智能制造场景，提供工业互联网平台、PLC 开发工作流、下载中心与 AI 赋能解决方案。"
         keywords="openIndu,智能制造,工业互联网,PLC,HMI,AI Agent,RAG,MCP"
         canonicalPath="/"
       />
