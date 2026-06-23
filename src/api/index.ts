@@ -73,6 +73,8 @@ export interface ResourceItem {
   download_count?: number;
   version?: string;
   latest_version?: string;
+  latest_version_size?: number;
+  versions_count?: number;
   created_at?: string;
   upload_time?: string;
 }

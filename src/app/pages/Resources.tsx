@@ -357,8 +357,15 @@ export function Resources() {
                         <span className="rounded-full bg-gray-100 px-2 py-1">品牌：{item.brand ? (brandMap[item.brand] ?? item.brand) : "未分类"}</span>
                         <span className="rounded-full bg-gray-100 px-2 py-1">类型：{item.category ? (categoryMap[item.category] ?? item.category) : "未分类"}</span>
                         {activeTab === "documents" && item.series ? <span className="rounded-full bg-gray-100 px-2 py-1">系列：{seriesMap[item.series] ?? item.series}</span> : null}
-                        <span className="rounded-full bg-gray-100 px-2 py-1">大小：{formatFileSize(item.file_size)}</span>
-                        {activeTab === "software" && (item.latest_version || item.version) && <span className="rounded-full bg-gray-100 px-2 py-1">版本：{item.latest_version || item.version}</span>}
+                        <span className="rounded-full bg-gray-100 px-2 py-1">大小：{formatFileSize(item.file_size ?? item.latest_version_size)}</span>
+                        {activeTab === "software" && (item.latest_version || item.version) && (
+                          <span className="rounded-full bg-gray-100 px-2 py-1">
+                            版本：{item.latest_version || item.version}
+                            {(item.versions_count ?? 0) > 1 && (
+                              <span className="ml-1 text-xs text-blue-600">(共 {item.versions_count} 个版本)</span>
+                            )}
+                          </span>
+                        )}
                         <span className="rounded-full bg-blue-50 px-2 py-1 text-blue-700">下载 {item.download_count ?? 0} 次</span>
                       </div>
                     </div>
