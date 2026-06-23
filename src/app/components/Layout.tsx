@@ -22,7 +22,7 @@ export function Layout() {
   type NavItem = { name: string; href: string; children?: { name: string; href: string }[] };
   const navigation: NavItem[] = [
     { name: "首页", href: "/" },
-    { name: "资源中心", href: "/resources" },
+    { name: "下载中心", href: "/resources" },
     {
       name: "AI+运动控制",
       href: "/motion-control",
@@ -259,7 +259,7 @@ export function Layout() {
                   <Link to="/" className="hover:text-white">首页</Link>
                 </li>
                 <li>
-                  <Link to="/resources" className="hover:text-white">资源中心</Link>
+                  <Link to="/resources" className="hover:text-white">下载中心</Link>
                 </li>
                 <li>
                   <Link to="/motion-control" className="hover:text-white">AI+运动控制-概览</Link>
