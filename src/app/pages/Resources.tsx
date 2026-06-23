@@ -113,7 +113,10 @@ export function Resources() {
     setLoading(true);
     setError("");
     try {
-      const params = { page, size: pageSize, brand: brand || undefined, category: category || undefined, series: series || undefined, keyword: keyword || undefined, published_only: true };
+      const baseParams = { page, size: pageSize, brand: brand || undefined, category: category || undefined, series: series || undefined, keyword: keyword || undefined, published_only: true };
+      // Software tab: expand each version into its own row so users can
+      // see and download a specific version, not just the latest.
+      const params = activeTab === "software" ? { ...baseParams, expand_versions: true } : baseParams;
       const result = activeTab === "documents" ? await documentsApi.list(params) : await softwareApi.list(params);
       setData(normalizeList(result, page, pageSize));
     } catch (err) {
@@ -214,7 +217,13 @@ export function Resources() {
     setError("");
     setRateLimitError("");
     try {
-      const result = activeTab === "documents" ? await documentsApi.downloadLink(item.id) : await softwareApi.downloadLink(item.id);
+      // Software in expand-versions mode carries version_id — request the
+      // exact version's link, not just the latest.
+      const result = activeTab === "documents"
+        ? await documentsApi.downloadLink(item.id)
+        : (item.version_id
+            ? await softwareApi.downloadVersionLink(item.id, item.version_id)
+            : await softwareApi.downloadLink(item.id));
       const url = getDownloadUrl(result);
       if (!url) throw new Error("后端未返回下载链接");
       void loadResources();
@@ -344,7 +353,7 @@ export function Resources() {
             <Card><CardContent className="p-10 text-center text-gray-500">暂无匹配资源，请调整筛选条件后重试。</CardContent></Card>
           ) : (
             data.items.map((item) => (
-              <Card key={item.id} className="hover:border-blue-200 hover:shadow-md">
+              <Card key={`${item.id}-${item.version_id ?? 'none'}`} className="hover:border-blue-200 hover:shadow-md">
                 <CardContent className="flex flex-col gap-4 p-5 md:flex-row md:items-center md:justify-between">
                   <div className="flex gap-4">
                     <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
@@ -358,12 +367,10 @@ export function Resources() {
                         <span className="rounded-full bg-gray-100 px-2 py-1">类型：{item.category ? (categoryMap[item.category] ?? item.category) : "未分类"}</span>
                         {activeTab === "documents" && item.series ? <span className="rounded-full bg-gray-100 px-2 py-1">系列：{seriesMap[item.series] ?? item.series}</span> : null}
                         <span className="rounded-full bg-gray-100 px-2 py-1">大小：{formatFileSize(item.file_size ?? item.latest_version_size)}</span>
-                        {activeTab === "software" && (item.latest_version || item.version) && (
+                        {activeTab === "software" && (item.version || item.latest_version) && (
                           <span className="rounded-full bg-gray-100 px-2 py-1">
-                            版本：{item.latest_version || item.version}
-                            {(item.versions_count ?? 0) > 1 && (
-                              <span className="ml-1 text-xs text-blue-600">(共 {item.versions_count} 个版本)</span>
-                            )}
+                            版本：{item.version || item.latest_version}
+                            {item.is_latest_version && <span className="ml-1 text-blue-600">(最新)</span>}
                           </span>
                         )}
                         <span className="rounded-full bg-blue-50 px-2 py-1 text-blue-700">下载 {item.download_count ?? 0} 次</span>

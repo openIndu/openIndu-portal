@@ -48,6 +48,7 @@ export interface PaginationParams {
   category?: string;
   series?: string;
   published_only?: boolean;
+  expand_versions?: boolean;
 }
 
 export interface PaginatedResponse<T> {
@@ -75,6 +76,11 @@ export interface ResourceItem {
   latest_version?: string;
   latest_version_size?: number;
   versions_count?: number;
+  // present when the list is fetched with expand_versions=true
+  version_id?: number;
+  version_upload_time?: string;
+  version_download_count?: number;
+  is_latest_version?: boolean;
   created_at?: string;
   upload_time?: string;
 }
@@ -369,6 +375,9 @@ export const softwareApi = {
   },
   async downloadLink(id: number | string) {
     return unwrap(await apiClient.get<ApiEnvelope<DownloadLinkResponse>>(`/software/${id}/download-link`));
+  },
+  async downloadVersionLink(id: number | string, versionId: number | string) {
+    return unwrap(await apiClient.get<ApiEnvelope<DownloadLinkResponse>>(`/software/${id}/versions/${versionId}/download-link`));
   },
   async brands() {
     return unwrap(await apiClient.get<ApiEnvelope<OptionValue[]>>("/software/brands/list"));
