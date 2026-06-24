@@ -279,15 +279,10 @@ export function Layout() {
               </ul>
             </div>
 
-            {/* Support */}
+            {/* Related platforms */}
             <div className="flex flex-col items-start">
-              <h3 className="font-semibold text-white mb-4">技术支持</h3>
+              <h3 className="font-semibold text-white mb-4">相关平台</h3>
               <ul className="space-y-2 text-gray-400">
-                <li>
-                  <a href="https://gitee.com/openIndu/openindu-platform/tree/feature/docs" target="_blank" rel="noopener noreferrer" className="hover:text-white">
-                    工业互联网平台文档
-                  </a>
-                </li>
                 <li>
                   <a href="https://monitor.openindu.com/status/service" target="_blank" rel="noopener noreferrer" className="hover:text-white">
                     服务监控
