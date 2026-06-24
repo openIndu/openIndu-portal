@@ -285,7 +285,7 @@ export function Layout() {
               <ul className="space-y-2 text-gray-400">
                 <li>
                   <a href="https://monitor.openindu.com/status/service" target="_blank" rel="noopener noreferrer" className="hover:text-white">
-                    服务监控
+                    社区服务状态
                   </a>
                 </li>
                 <li>
