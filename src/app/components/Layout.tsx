@@ -293,6 +293,11 @@ export function Layout() {
                     服务监控
                   </a>
                 </li>
+                <li>
+                  <a href="https://admin.openindu.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white">
+                    社区管理平台
+                  </a>
+                </li>
               </ul>
             </div>
 

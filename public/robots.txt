@@ -1,0 +1,10 @@
+# openIndu Community 社区官网 — https://openindu.com
+User-agent: *
+Allow: /
+
+# 私有/认证页面无 SEO 价值，禁止收录
+Disallow: /login
+Disallow: /register
+Disallow: /account
+
+Sitemap: https://openindu.com/sitemap.xml
