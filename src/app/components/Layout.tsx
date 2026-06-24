@@ -2,6 +2,7 @@ import { Outlet, Link, useLocation, useNavigate } from "react-router";
 import { ChevronDown, LogOut, Menu, UserRound, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/store/auth";
+import { visitsApi } from "@/api";
 import { getDisplayName, maskPhone } from "../utils/user";
 import logo from "/assets/logo.png";
 
@@ -13,6 +14,15 @@ export function Layout() {
   // Scroll to top on every page navigation
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, [location.pathname]);
+
+  // Report every SPA navigation to /visits/track. The shared axios client
+  // attaches the Bearer token automatically when one is in localStorage, so
+  // an authenticated user's pageviews land with user_id set — which is what
+  // the dashboard "本月登录访问趋势" chart counts. Failures are swallowed:
+  // analytics must never break navigation.
+  useEffect(() => {
+    void visitsApi.track(location.pathname).catch(() => {});
   }, [location.pathname]);
   const { isAuthenticated, user, logout } = useAuth();
   const displayName = getDisplayName(user);
