@@ -1,4 +1,4 @@
-# openIndu Community 社区官网 — https://openindu.com
+# openIndu Community 社区官网 — https://www.openindu.com
 User-agent: *
 Allow: /
 
@@ -16,4 +16,4 @@ Disallow: /login
 Disallow: /register
 Disallow: /account
 
-Sitemap: https://openindu.com/sitemap.xml
+Sitemap: https://www.openindu.com/sitemap.xml
