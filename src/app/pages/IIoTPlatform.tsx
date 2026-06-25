@@ -3,6 +3,7 @@ import {
   Database, Smartphone, Users, Layers, Server, CheckCircle,
   Code, Network, Zap, BarChart3, ExternalLink
 } from "lucide-react";
+import { SEO } from "../components/SEO";
 
 const features = [
   {
@@ -236,6 +237,12 @@ function FeatureRow({ feature, reversed }: { feature: (typeof features)[0]; reve
 export function IIoTPlatform() {
   return (
     <div>
+      <SEO
+        title="工业互联网平台 IIoT｜openIndu"
+        description="openIndu 工业互联网平台：面向 3C 电子制造的企业级 IIoT，设备管理、数据采集、可视化看板与追溯一体化。"
+        keywords="工业互联网,IIoT,设备管理,数据采集,3C 制造,openIndu"
+        canonicalPath="/iiot-platform"
+      />
       {/* ===== Hero Section ===== */}
       <section className="bg-gradient-to-br from-blue-600 via-blue-700 to-cyan-600 text-white py-12 sm:py-16 lg:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "@/store/auth";
 import { visitsApi } from "@/api";
 import { getDisplayName, maskPhone } from "../utils/user";
+import { StructuredData } from "./StructuredData";
 import logo from "/assets/logo.png";
 
 export function Layout() {
@@ -61,6 +62,7 @@ export function Layout() {
 
   return (
     <div className="min-h-screen bg-white">
+      <StructuredData />
       {/* Header */}
       <header className="sticky top-0 z-50 border-b border-gray-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80">
         <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

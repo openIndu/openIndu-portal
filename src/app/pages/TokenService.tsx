@@ -1,4 +1,5 @@
 import { Server, Zap, CheckCircle, Cpu, ExternalLink, MessageSquare, Image, Mic } from "lucide-react";
+import { SEO } from "../components/SEO";
 
 export function TokenService() {
   const features = [
@@ -36,6 +37,12 @@ export function TokenService() {
 
   return (
     <div className="py-12">
+      <SEO
+        title="AI+基础设施｜openIndu"
+        description="openIndu 基础设施：面向工业 AI 的算力与凭证服务，提供大模型推理、向量检索与 MCP 工具集成的底座能力。"
+        keywords="AI 基础设施,算力,MCP,RAG,凭证服务,openIndu"
+        canonicalPath="/infrastructure"
+      />
       {/* Hero */}
       <section className="bg-gradient-to-br from-purple-50 via-blue-50 to-cyan-50 py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
