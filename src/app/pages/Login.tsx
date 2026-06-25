@@ -100,8 +100,8 @@ export function Login() {
         <CardHeader className="text-center">
           <CardTitle>手机号登录 / 注册</CardTitle>
           <CardDescription className="space-y-1">
-            <span className="block">使用手机号和短信验证码登录。</span>
-            <span className="block">未注册手机号验证通过后，将自动创建 openIndu 社区账号。</span>
+            <span className="block">使用手机号和短信验证码登录</span>
+            <span className="block">未注册手机号验证通过后，将自动创建 openIndu 社区账号</span>
           </CardDescription>
         </CardHeader>
         <CardContent>
