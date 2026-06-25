@@ -19,10 +19,12 @@ export interface AuthTokens {
 
 export interface AuthResponse extends AuthTokens {
   user?: User;
+  is_new_user?: boolean;
 }
 
 export interface NestedAuthResponse {
   user?: User;
+  is_new_user?: boolean;
   tokens?: AuthTokens & {
     expires_in?: number;
     access_jti?: string;
@@ -149,6 +151,7 @@ const PUBLIC_AUTH_ENDPOINTS = [
   "/auth/send-code",
   "/auth/login",
   "/auth/register",
+  "/auth/sign-in",
   "/auth/refresh",
 ];
 
@@ -172,6 +175,7 @@ export function normalizeAuthResponse(payload: AuthResponse | NestedAuthResponse
     return {
       ...payload.tokens,
       user: payload.user,
+      is_new_user: payload.is_new_user,
     };
   }
   return payload as AuthResponse;
@@ -318,6 +322,9 @@ export const authApi = {
   },
   async register(phone: string, code: string) {
     return normalizeAuthResponse(unwrap(await apiClient.post<ApiEnvelope<AuthResponse | NestedAuthResponse>>("/auth/register", { phone, code })));
+  },
+  async signIn(phone: string, code: string) {
+    return normalizeAuthResponse(unwrap(await apiClient.post<ApiEnvelope<AuthResponse | NestedAuthResponse>>("/auth/sign-in", { phone, code })));
   },
   async refresh(refreshToken: string) {
     return normalizeAuthResponse(unwrap(await apiClient.post<ApiEnvelope<AuthResponse | NestedAuthResponse>>("/auth/refresh", { refresh_token: refreshToken })));

@@ -7,7 +7,6 @@ import { Vision } from "./pages/Vision";
 import { IIoTPlatform } from "./pages/IIoTPlatform";
 import { TokenService } from "./pages/TokenService";
 import { Login } from "./pages/Login";
-import { Register } from "./pages/Register";
 import { Resources } from "./pages/Resources";
 import { Workflow } from "./pages/Workflow";
 import { AccountSettings } from "./pages/AccountSettings";
@@ -20,7 +19,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true, Component: Home },
       { path: "login", Component: Login },
-      { path: "register", Component: Register },
+      { path: "register", element: <Navigate to="/login" replace /> },
       { path: "account", Component: AccountSettings },
       { path: "privacy", Component: PrivacyPolicy },
       { path: "legal", Component: LegalNotice },

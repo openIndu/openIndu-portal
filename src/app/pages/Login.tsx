@@ -39,7 +39,7 @@ export function Login() {
 
   // 仅在倒计时/发送中禁用按钮；手机号格式校验放到点击时提示，避免按钮静默置灰让用户误以为"无法点击"。
   const canSendCode = cooldown === 0 && !sending;
-  const canLogin = phonePattern.test(phone) && codePattern.test(code) && privacyAccepted && !submitting;
+  const canSubmit = phonePattern.test(phone) && codePattern.test(code) && privacyAccepted && !submitting;
 
   async function handleSendCode() {
     setError("");
@@ -52,9 +52,15 @@ export function Login() {
     try {
       await authApi.sendCode(phone);
       setCooldown(60);
-      setMessage("验证码已发送，请在 5 分钟内完成登录");
+      setMessage("验证码已发送，请在 5 分钟内完成登录/注册");
     } catch (err) {
-      setError(getApiErrorMessage(err, "验证码发送失败"));
+      const msg = getApiErrorMessage(err, "验证码发送失败");
+      if (msg.includes("过于频繁")) {
+        setCooldown(60);
+        setError(`${msg}，请等待 60 秒后再试`);
+      } else {
+        setError(msg);
+      }
     } finally {
       setSending(false);
     }
@@ -68,18 +74,21 @@ export function Login() {
       setError("请先阅读并同意隐私声明");
       return;
     }
-    if (!canLogin) {
+    if (!canSubmit) {
       setError("请输入正确手机号和 6 位验证码");
       return;
     }
     setSubmitting(true);
     try {
-      const result = await authApi.login(phone, code);
+      const result = await authApi.signIn(phone, code);
       await login(result);
+      if (result.is_new_user) {
+        setMessage("首次登录，已为你创建 openIndu 社区账号");
+      }
       // 登录会更新 AuthProvider 状态；等待 isAuthenticated 变为 true 后由上方 effect 跳转，
       // 避免在同一个事件周期内直接进入受保护路由导致 AuthGuard 读到旧状态并回跳登录页。
     } catch (err) {
-      setError(getApiErrorMessage(err, "登录失败，请检查验证码"));
+      setError(getApiErrorMessage(err, "登录/注册失败，请检查验证码"));
     } finally {
       setSubmitting(false);
     }
@@ -89,8 +98,8 @@ export function Login() {
     <section className="bg-gradient-to-br from-blue-50 via-white to-cyan-50 px-4 py-16 sm:py-24">
       <Card className="mx-auto max-w-md border-blue-100 shadow-xl">
         <CardHeader className="text-center">
-          <CardTitle>手机号登录</CardTitle>
-          <CardDescription>使用短信验证码登录 openIndu社区账号</CardDescription>
+          <CardTitle>手机号登录 / 注册</CardTitle>
+          <CardDescription>输入手机号和短信验证码；未注册手机号将自动创建 openIndu 社区账号</CardDescription>
         </CardHeader>
         <CardContent>
           <form className="space-y-5" onSubmit={handleSubmit}>
@@ -134,13 +143,10 @@ export function Login() {
             </label>
             {message && <p className="rounded-lg bg-green-50 px-3 py-2 text-sm text-green-700">{message}</p>}
             {error && <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{error}</p>}
-            <Button type="submit" disabled={!canLogin} className="w-full bg-blue-600 hover:bg-blue-700">
-              {submitting ? <Loader2 className="animate-spin" /> : "登录"}
+            <Button type="submit" disabled={!canSubmit} className="w-full bg-blue-600 hover:bg-blue-700">
+              {submitting ? <Loader2 className="animate-spin" /> : "登录 / 注册"}
             </Button>
           </form>
-          <p className="mt-6 text-center text-sm text-gray-600">
-            第一次使用？ <Link to="/register" className="font-medium text-blue-600 hover:text-blue-700">立即注册</Link>
-          </p>
         </CardContent>
       </Card>
     </section>
