@@ -1,4 +1,5 @@
 import { Cpu, CheckCircle, Layers, Code2 } from "lucide-react";
+import { SEO } from "../components/SEO";
 
 export function MotionControl() {
   const features = [
@@ -70,6 +71,12 @@ export function MotionControl() {
 
   return (
     <div className="py-12">
+      <SEO
+        title="AI+运动控制｜openIndu 智能制造"
+        description="openIndu 运动控制：AI 赋能的 PLC 运动控制开发，可视化编程工作流与轴组态，加速智能制造装备落地。"
+        keywords="运动控制,PLC,运动控制开发,AI Agent,openIndu,智能制造"
+        canonicalPath="/motion-control"
+      />
       {/* Hero */}
       <section className="bg-gradient-to-br from-orange-50 via-red-50 to-pink-50 py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

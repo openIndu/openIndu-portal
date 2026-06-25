@@ -1,4 +1,5 @@
 import { Eye, Camera, Scan, Target, Clock } from "lucide-react";
+import { SEO } from "../components/SEO";
 
 export function Vision() {
   const features = [
@@ -21,6 +22,12 @@ export function Vision() {
 
   return (
     <div className="py-12">
+      <SEO
+        title="AI+视觉｜openIndu 工业机器视觉"
+        description="openIndu 机器视觉：AI 驱动的工业视觉检测与识别方案，覆盖缺陷检测、定位测量与质量管控。"
+        keywords="机器视觉,工业视觉,缺陷检测,AI,openIndu,智能制造"
+        canonicalPath="/vision"
+      />
       {/* Hero */}
       <section className="bg-gradient-to-br from-green-50 via-teal-50 to-cyan-50 py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
