@@ -20,6 +20,24 @@
     <meta name="twitter:image" content="https://openindu.com/assets/logo.png" />
     <!-- Google Search Console verification (HTML-tag method). -->
     <meta name="google-site-verification" content="f-2txzJO6gJp-tuhLf91xNajygdg2C6HLyKTmDcBepI" />
+    <!-- Baidu 站长平台 verification — replace the content with the token from
+         https://ziyuan.baidu.com/ (站点管理 → 添加站点 → HTML 标签验证). -->
+    <meta name="baidu-site-verification" content="REPLACE_WITH_BAIDU_TOKEN" />
+    <!-- Baidu 主动推送 (自动推送) — pings push.zhanzhang.baidu.com with the
+         current URL on every page load, accelerating indexation of new pages.
+         Safe to ship even before site verification; Baidu just discards
+         pushes for unverified sites. async so it never blocks rendering. -->
+    <script async>
+      (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        bp.src = (curProtocol === 'https')
+          ? 'https://zz.bdstatic.com/linksubmit/push.js'
+          : 'http://push.zhanzhang.baidu.com/push.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(bp, s);
+      })();
+    </script>
     <title>openIndu Community｜开源智能制造工业生态</title>
   </head>
   <body>

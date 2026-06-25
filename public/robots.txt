@@ -7,4 +7,13 @@ Disallow: /login
 Disallow: /register
 Disallow: /account
 
+# Baidu spider — explicit section so Baidu's crawler-specific rules win when
+# they diverge from the generic *. Same allow/disallow set; kept explicit to
+# survive future tightening of the wildcard rules.
+User-agent: Baiduspider
+Allow: /
+Disallow: /login
+Disallow: /register
+Disallow: /account
+
 Sitemap: https://openindu.com/sitemap.xml
