@@ -8,7 +8,7 @@ const carouselSlides = [
     src: "/assets/iiot/login.png",
     alt: "智能登录界面",
     title: "智能登录 · 安全便捷",
-    description: "账号密码登录与注册，JWT Token 双令牌认证机制",
+    description: "手机号验证码登录/注册，JWT Token 双令牌认证机制",
   },
   {
     src: "/assets/iiot/workbench.png",
