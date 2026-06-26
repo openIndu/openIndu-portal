@@ -1,4 +1,5 @@
 import axios, { AxiosError, type AxiosResponse, type InternalAxiosRequestConfig } from "axios";
+import { getClientId, getVisitorId } from "@/lib/clientIdentity";
 
 export type UserRole = "user" | "member" | "admin";
 
@@ -261,9 +262,12 @@ function performRefresh(staleAccess: string | null): Promise<string> {
 
 apiClient.interceptors.request.use((config) => {
   const token = localStorage.getItem(STORAGE_KEYS.token);
-  if (token && config.headers) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
+  const setHeader = (key: string, value: string) => {
+    if (typeof config.headers.set === "function") config.headers.set(key, value);
+    else (config.headers as Record<string, string>)[key] = value;
+  };
+  setHeader("X-OpenIndu-Client-Id", getClientId());
+  if (token) setHeader("Authorization", `Bearer ${token}`);
   return config;
 });
 
@@ -429,9 +433,22 @@ export const softwareApi = {
   },
 };
 
+let lastTrackKey = "";
+
 export const visitsApi = {
   async track(path = window.location.pathname) {
-    return unwrap(await apiClient.post<ApiEnvelope<{ tracked: boolean }>>("/visits/track", { path }));
+    // React StrictMode/dev and rapid route effects can double-fire. Bucket by
+    // second so normal refreshes are still counted while duplicate same-path
+    // effects do not inflate PV.
+    const bucket = Math.floor(Date.now() / 1000);
+    const key = `${path}:${bucket}`;
+    if (lastTrackKey === key) return { tracked: false, deduped: true };
+    lastTrackKey = key;
+    return unwrap(await apiClient.post<ApiEnvelope<{ tracked: boolean }>>("/visits/track", {
+      path,
+      visitor_id: getVisitorId(),
+      event_type: "page_view",
+    }));
   },
 };
 
