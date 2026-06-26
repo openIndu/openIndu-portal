@@ -53,6 +53,8 @@ export interface PaginationParams {
   expand_versions?: boolean;
 }
 
+export type SoftwarePaginationParams = Omit<PaginationParams, "series">;
+
 export interface PaginatedResponse<T> {
   items: T[];
   total: number;
@@ -407,7 +409,7 @@ export const documentsApi = {
 };
 
 export const softwareApi = {
-  async list(params: PaginationParams) {
+  async list(params: SoftwarePaginationParams) {
     return unwrap(await apiClient.get<ApiEnvelope<PaginatedResponse<ResourceItem>>>("/software", { params }));
   },
   async get(id: number | string) {
