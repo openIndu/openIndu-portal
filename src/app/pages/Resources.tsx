@@ -118,10 +118,13 @@ export function Resources() {
     setError("");
     const requestedTab = activeTab;
     try {
-      const baseParams = { page, size: pageSize, brand: brand || undefined, category: category || undefined, series: series || undefined, keyword: keyword || undefined, published_only: true };
-      // Software tab: expand each version into its own row so users can
-      // see and download a specific version, not just the latest.
-      const params = requestedTab === "software" ? { ...baseParams, expand_versions: true } : baseParams;
+      const baseParams = { page, size: pageSize, brand: brand || undefined, category: category || undefined, keyword: keyword || undefined, published_only: true };
+      // Only documents have a "series" dimension. Do not leak the document
+      // series filter into software requests; the backend has removed the
+      // legacy software.series field entirely.
+      const params = requestedTab === "software"
+        ? { ...baseParams, expand_versions: true }
+        : { ...baseParams, series: series || undefined };
       const result = requestedTab === "documents" ? await documentsApi.list(params) : await softwareApi.list(params);
       // Compare against the ref — if the user clicked the other tab while
       // this request was in flight, drop the stale result.
