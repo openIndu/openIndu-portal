@@ -34,7 +34,7 @@ function LegalPage({
       <SEO title={`${title}｜openIndu社区`} description={description} canonicalPath={canonicalPath} />
       <div className="mx-auto max-w-4xl rounded-2xl bg-white p-6 shadow-sm sm:p-10">
         <div className="mb-8 border-b border-gray-100 pb-6">
-          <p className="mb-3 text-sm font-semibold text-blue-600">openIndu社区</p>
+          <p className="mb-3 text-base font-semibold text-blue-600">openIndu社区</p>
           <h1 className="text-3xl font-bold text-gray-900">{title}</h1>
           <p className="mt-3 text-gray-600">{description}</p>
           <p className="mt-2 text-sm text-gray-500">最后更新：{updatedAt}</p>
@@ -405,7 +405,6 @@ export function CookiesPolicy() {
           title: "六、声明更新",
           paragraphs: [
             "随着功能演进，openIndu社区可能调整本地存储的使用方式，并在本页面更新说明。如有重大变更，将通过网站公告提前告知。",
-            "如你对本说明有任何疑问，请通过 contact@openindu.com 联系我们。",
           ],
         },
       ]}
