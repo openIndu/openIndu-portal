@@ -5,6 +5,7 @@ import "@testing-library/jest-dom/vitest";
 import { MemoryRouter } from "react-router";
 import { AuthProvider } from "@/store/auth";
 import { AuthGuard } from "@/app/components/AuthGuard";
+import { authApi } from "@/api";
 
 // Mock localStorage
 const storage = new Map<string, string>();
@@ -22,6 +23,7 @@ Object.defineProperty(globalThis, "localStorage", {
 vi.mock("@/api", () => ({
   authApi: {
     refresh: vi.fn(),
+    me: vi.fn(),
   },
   clearAuthStorage: vi.fn(),
 }));
@@ -41,6 +43,12 @@ vi.mock("react-router", async () => {
 beforeEach(() => {
   storage.clear();
   vi.clearAllMocks();
+  // The provider now validates the persisted session via /auth/me on mount.
+  // Resolve it to whatever user the test placed in storage so the synchronously
+  // rendered auth state stays put instead of being cleared by a failed check.
+  vi.mocked(authApi.me).mockImplementation(() =>
+    Promise.resolve(JSON.parse(storage.get("openindu_portal_user") || "null")),
+  );
 });
 
 function Wrapper({ children }: { children: React.ReactNode }) {

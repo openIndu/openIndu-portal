@@ -80,26 +80,24 @@ describe("AuthProvider", () => {
     expect(screen.getByTestId("has-any").textContent).toBe("false");
   });
 
-  it("refreshes existing sessions on mount", async () => {
+  it("restores an existing session on mount via /auth/me", async () => {
+    storage.set("openindu_portal_token", "existing-token");
     storage.set("openindu_portal_refresh_token", "old-refresh");
-    authApiMock.refresh.mockResolvedValue({
-      access_token: "new-token",
-      refresh_token: "new-refresh",
-      user: { id: 1, phone: "13800000000", role: "member" },
-    });
+    authApiMock.me.mockResolvedValue({ id: 1, phone: "13800000000", role: "member" });
 
     render(<AuthProvider><Consumer /></AuthProvider>);
 
     await waitFor(() => expect(screen.getByTestId("loading").textContent).toBe("false"));
-    expect(authApiMock.refresh).toHaveBeenCalledWith("old-refresh");
-    expect(storage.get("openindu_portal_token")).toBe("new-token");
+    expect(authApiMock.me).toHaveBeenCalled();
+    expect(screen.getByTestId("authed").textContent).toBe("true");
     expect(screen.getByTestId("member").textContent).toBe("true");
     expect(screen.getByTestId("has-member").textContent).toBe("true");
   });
 
-  it("handles failed startup refresh gracefully", async () => {
+  it("clears the session when /auth/me fails on mount", async () => {
+    storage.set("openindu_portal_token", "stale-token");
     storage.set("openindu_portal_refresh_token", "bad-refresh");
-    authApiMock.refresh.mockRejectedValue(new Error("bad"));
+    authApiMock.me.mockRejectedValue(new Error("unauthorized"));
 
     render(<AuthProvider><Consumer /></AuthProvider>);
 
@@ -131,9 +129,10 @@ describe("AuthProvider", () => {
   });
 
   it("supports setting, clearing, refreshing, and logging out", async () => {
+    storage.set("openindu_portal_token", "initial");
     storage.set("openindu_portal_refresh_token", "refresh-token");
-    authApiMock.refresh.mockResolvedValueOnce({ access_token: "initial", refresh_token: "refresh-token", user: { id: 1, phone: "13800000000", role: "user" } });
-    authApiMock.refresh.mockResolvedValueOnce({ access_token: "refreshed", refresh_token: "refresh-token", user: { id: 1, phone: "13800000000", role: "admin" } });
+    authApiMock.me.mockResolvedValue({ id: 1, phone: "13800000000", role: "user" });
+    authApiMock.refresh.mockResolvedValue({ access_token: "refreshed", refresh_token: "refresh-token", user: { id: 1, phone: "13800000000", role: "admin" } });
     authApiMock.logout.mockResolvedValue({ success: true });
 
     render(<AuthProvider><Consumer /></AuthProvider>);

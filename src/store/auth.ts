@@ -1,4 +1,4 @@
-import { createContext, createElement, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
+import { createContext, createElement, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { authApi, clearAuthStorage, type AuthResponse, type User, type UserRole } from "@/api";
 
 const STORAGE_KEYS = {
@@ -59,31 +59,63 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUserState] = useState<User | null>(() => readUser());
   const [isLoading, setIsLoading] = useState(true);
 
+  const didInit = useRef(false);
   useEffect(() => {
+    // Guard against React StrictMode's double-invoke in dev: without this the
+    // bootstrap fired twice, and because the backend rotates refresh tokens
+    // (old jti blacklisted on every /auth/refresh) the second call used an
+    // already-rotated token, 401'd, and logged the user out on load.
+    if (didInit.current) return;
+    didInit.current = true;
+
+    const storedToken = localStorage.getItem(STORAGE_KEYS.token);
     const storedRefreshToken = localStorage.getItem(STORAGE_KEYS.refreshToken);
-    if (!storedRefreshToken) {
+    if (!storedToken && !storedRefreshToken) {
       setIsLoading(false);
       return;
     }
+
+    // Validate the session via /auth/me. If the access token has expired the
+    // response interceptor refreshes once -- single-flighted within the tab and
+    // serialized across tabs via Web Locks -- and retries, so we never fire a
+    // second concurrent refresh from here.
     authApi
-      .refresh(storedRefreshToken)
-      .then((refreshed) => {
-        const nextToken = refreshed.access_token;
-        const nextRefreshToken = refreshed.refresh_token ?? storedRefreshToken;
-        const nextUser = refreshed.user ?? readUser();
-        persistAuth(nextToken, nextRefreshToken, nextUser);
-        setToken(nextToken);
-        setRefreshTokenValue(nextRefreshToken);
+      .me()
+      .then((nextUser) => {
         setUserState(nextUser);
+        // Tokens may have been rotated by the interceptor mid-flight; re-sync.
+        setToken(localStorage.getItem(STORAGE_KEYS.token));
+        setRefreshTokenValue(localStorage.getItem(STORAGE_KEYS.refreshToken));
+        if (nextUser) localStorage.setItem(STORAGE_KEYS.user, JSON.stringify(nextUser));
       })
       .catch(() => {
-        // Refresh failed - clear ALL auth state to show proper logged-out state
+        // Session invalid (refresh also failed) - clear ALL auth state.
         clearAuthStorage();
         setToken(null);
         setRefreshTokenValue(null);
         setUserState(null);
       })
       .finally(() => setIsLoading(false));
+  }, []);
+
+  // Cross-tab auth sync: a storage event fires only in *other* tabs. When one
+  // tab logs out (token removed) or refreshes (token rotated), mirror that into
+  // this tab's in-memory state. Portal has public pages, so we don't force a
+  // redirect here -- route guards handle protected pages.
+  useEffect(() => {
+    const onStorage = (e: StorageEvent) => {
+      if (e.key !== STORAGE_KEYS.token) return;
+      if (e.newValue === null) {
+        setToken(null);
+        setRefreshTokenValue(null);
+        setUserState(null);
+      } else {
+        setToken(e.newValue);
+        setRefreshTokenValue(localStorage.getItem(STORAGE_KEYS.refreshToken));
+      }
+    };
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
   }, []);
 
   const setUser = useCallback((nextUser: User | null) => {

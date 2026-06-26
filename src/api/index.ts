@@ -210,6 +210,53 @@ export function clearAuthStorage() {
   localStorage.removeItem(STORAGE_KEYS.user);
 }
 
+// --- Cross-tab refresh coordination ------------------------------------
+// The backend ROTATES refresh tokens: every /auth/refresh blacklists the
+// presented token's jti and returns a fresh pair. Two concurrent refreshes
+// with the same token therefore make the second one 401. `isRefreshing` above
+// single-flights within a tab; the Web Locks API serializes across tabs of the
+// same browser. A bare axios instance is used for the refresh call so a 401
+// from the refresh endpoint itself does not recurse through this interceptor.
+const rawRefreshClient = axios.create({
+  baseURL: import.meta.env.VITE_API_BASE || "/api/v1",
+  timeout: 15_000,
+});
+
+async function rawRefresh(refreshToken: string): Promise<AuthResponse> {
+  const response = await rawRefreshClient.post<ApiEnvelope<AuthResponse | NestedAuthResponse>>("/auth/refresh", {
+    refresh_token: refreshToken,
+  });
+  return normalizeAuthResponse(unwrap(response));
+}
+
+function withRefreshLock<T>(fn: () => Promise<T>): Promise<T> {
+  const nav = navigator as Navigator & {
+    locks?: { request?: (name: string, cb: () => Promise<T>) => Promise<T> };
+  };
+  if (typeof navigator !== "undefined" && nav.locks?.request) {
+    return nav.locks.request("openindu-portal-token-refresh", fn);
+  }
+  return fn();
+}
+
+// Refresh inside the cross-tab lock. `staleAccess` is the access token that just
+// 401'd; if storage already holds a different one, another tab refreshed while
+// we waited for the lock, so reuse it instead of rotating the token again.
+function performRefresh(staleAccess: string | null): Promise<string> {
+  return withRefreshLock(async () => {
+    const current = localStorage.getItem(STORAGE_KEYS.token);
+    if (current && current !== staleAccess) return current;
+    const refreshToken = localStorage.getItem(STORAGE_KEYS.refreshToken);
+    if (!refreshToken) throw new Error("missing_refresh_token");
+    const result = await rawRefresh(refreshToken);
+    if (!result.access_token) throw new Error("refresh_failed");
+    localStorage.setItem(STORAGE_KEYS.token, result.access_token);
+    if (result.refresh_token) localStorage.setItem(STORAGE_KEYS.refreshToken, result.refresh_token);
+    if (result.user) localStorage.setItem(STORAGE_KEYS.user, JSON.stringify(result.user));
+    return result.access_token;
+  });
+}
+
 apiClient.interceptors.request.use((config) => {
   const token = localStorage.getItem(STORAGE_KEYS.token);
   if (token && config.headers) {
@@ -264,23 +311,9 @@ apiClient.interceptors.response.use(
         return Promise.reject(error);
       }
 
+      const failedAccessToken = localStorage.getItem(STORAGE_KEYS.token);
       try {
-        const response = await apiClient.post<ApiEnvelope<AuthResponse | NestedAuthResponse>>("/auth/refresh", {
-          refresh_token: refreshToken,
-        });
-        const result = normalizeAuthResponse(unwrap(response));
-        const newToken = result.access_token;
-        const newRefreshToken = result.refresh_token;
-
-        if (newToken) {
-          localStorage.setItem(STORAGE_KEYS.token, newToken);
-        }
-        if (newRefreshToken) {
-          localStorage.setItem(STORAGE_KEYS.refreshToken, newRefreshToken);
-        }
-        if (result.user) {
-          localStorage.setItem(STORAGE_KEYS.user, JSON.stringify(result.user));
-        }
+        const newToken = await performRefresh(failedAccessToken);
 
         processQueue(null, newToken);
 
