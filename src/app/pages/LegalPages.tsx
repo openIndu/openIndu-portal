@@ -34,7 +34,6 @@ function LegalPage({
       <SEO title={`${title}｜openIndu社区`} description={description} canonicalPath={canonicalPath} />
       <div className="mx-auto max-w-4xl rounded-2xl bg-white p-6 shadow-sm sm:p-10">
         <div className="mb-8 border-b border-gray-100 pb-6">
-          <p className="mb-3 text-base font-semibold text-blue-600">openIndu社区</p>
           <h1 className="text-3xl font-bold text-gray-900">{title}</h1>
           <p className="mt-3 text-gray-600">{description}</p>
           <p className="mt-2 text-sm text-gray-500">最后更新：{updatedAt}</p>
