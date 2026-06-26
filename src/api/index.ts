@@ -1,5 +1,5 @@
 import axios, { AxiosError, type AxiosResponse, type InternalAxiosRequestConfig } from "axios";
-import { getClientId, getVisitorId } from "@/lib/clientIdentity";
+import { getClientId } from "@/lib/clientIdentity";
 
 export type UserRole = "user" | "member" | "admin";
 
@@ -446,7 +446,7 @@ export const visitsApi = {
     lastTrackKey = key;
     return unwrap(await apiClient.post<ApiEnvelope<{ tracked: boolean }>>("/visits/track", {
       path,
-      visitor_id: getVisitorId(),
+      client_id: getClientId(),
       event_type: "page_view",
     }));
   },

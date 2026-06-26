@@ -358,6 +358,10 @@ export function Resources() {
         {error && <div className="mb-4 rounded-lg bg-red-50 px-4 py-3 text-sm text-red-700">{error}</div>}
         {rateLimitError && <div className="mb-4 rounded-lg bg-amber-50 px-4 py-3 text-sm text-amber-800">{rateLimitError}</div>}
 
+        <div className="mb-4 rounded-lg border border-gray-200 bg-white px-4 py-3 text-xs text-gray-500">
+          版权说明：所有技术文档和软件的版权归原作者或原厂商所有，本平台仅提供检索与分发服务。如有侵权，请通过 contact@openindu.com 联系我们立即处理。
+        </div>
+
         <div className="space-y-4">
           {loading ? (
             <Card><CardContent className="flex items-center justify-center gap-2 p-10 text-gray-600"><Loader2 className="animate-spin" /> 正在加载资源...</CardContent></Card>
