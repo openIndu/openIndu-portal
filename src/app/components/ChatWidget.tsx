@@ -24,10 +24,25 @@ export function ChatWidget() {
   const [streaming, setStreaming] = useState(false);
   const abortRef = useRef<AbortController | null>(null);
   const scrollRef = useRef<HTMLDivElement | null>(null);
+  const taRef = useRef<HTMLTextAreaElement | null>(null);
+
+  // 自适应输入框高度：每次内容变化时把 height 重置为 auto，再设为 scrollHeight，
+  // 让 textarea 随内容增长；超过 CSS max-h 后浏览器自动夹紧、内部滚动。
+  function autoSizeTextarea() {
+    const el = taRef.current;
+    if (!el) return;
+    el.style.height = "auto";
+    el.style.height = `${el.scrollHeight}px`;
+  }
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight });
   }, [messages, open]);
+
+  // 面板打开后，初始化一次输入框高度（保证 rows={2} 起始尺寸正确）
+  useEffect(() => {
+    if (open) autoSizeTextarea();
+  }, [open]);
 
   // 卸载时中断进行中的流
   useEffect(() => () => abortRef.current?.abort(), []);
@@ -45,6 +60,8 @@ export function ChatWidget() {
     const q = input.trim();
     if (!q || streaming) return;
     setInput("");
+    // 清空后重置高度，避免发送后还保持着上一条问题的撑高
+    if (taRef.current) taRef.current.style.height = "auto";
     const history = messages
       .filter((m) => !m.error)
       .slice(-6)
@@ -81,13 +98,17 @@ export function ChatWidget() {
         {open ? <X className="h-6 w-6" /> : <MessageCircle className="h-6 w-6" />}
       </button>
 
-      {/* 对话面板 */}
+      {/* 对话面板 — 响应式递进：
+            手机 / 小屏(<lg)：92vw × 80vh, max 480×720
+            lg(≥1024px)：560×820
+            xl(≥1280px)：640×88vh
+          越大屏越释放空间，小屏不遮挡内容。 */}
       {open && (
-        <div className="fixed bottom-24 right-6 z-50 flex h-[70vh] max-h-[560px] w-[92vw] max-w-[400px] flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-2xl">
+        <div className="fixed bottom-24 right-6 z-50 flex h-[80vh] max-h-[720px] w-[92vw] max-w-[480px] flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-2xl lg:max-h-[820px] lg:max-w-[560px] xl:max-h-[88vh] xl:max-w-[640px]">
           <div className="flex items-center justify-between bg-blue-600 px-4 py-3 text-white">
             <div>
               <div className="text-sm font-semibold">openIndu 智能咨询</div>
-              <div className="text-xs text-blue-100">基于平台知识库的工业问答</div>
+              <div className="text-xs text-blue-100">基于平台知识库的工业问答机器人</div>
             </div>
             <button type="button" onClick={() => setOpen(false)} aria-label="关闭">
               <X className="h-5 w-5" />
@@ -131,7 +152,7 @@ export function ChatWidget() {
                       </div>
                     )}
                     <div
-                      className={`inline-block max-w-[85%] whitespace-pre-wrap rounded-2xl px-3 py-2 text-left text-sm ${
+                      className={`inline-block max-w-[85%] whitespace-pre-wrap break-words rounded-2xl px-3 py-2 text-left text-sm ${
                         m.role === "user"
                           ? "bg-blue-600 text-white"
                           : m.error
@@ -168,29 +189,33 @@ export function ChatWidget() {
               <div className="border-t border-gray-100 p-3">
                 <div className="flex items-end gap-2">
                   <textarea
+                    ref={taRef}
                     value={input}
-                    onChange={(e) => setInput(e.target.value)}
+                    onChange={(e) => {
+                      setInput(e.target.value);
+                      autoSizeTextarea();
+                    }}
                     onKeyDown={(e) => {
                       if (e.key === "Enter" && !e.shiftKey) {
                         e.preventDefault();
                         void handleSend();
                       }
                     }}
-                    rows={1}
-                    placeholder="输入你的工业问题…"
-                    className="max-h-28 flex-1 resize-none rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
+                    rows={2}
+                    placeholder="输入你的工业问题，可粘贴报错日志 / 程序段… (Enter 发送，Shift+Enter 换行)"
+                    className="max-h-60 flex-1 resize-none overflow-y-auto break-words rounded-lg border border-gray-200 px-3 py-2 text-sm leading-relaxed focus:border-blue-500 focus:outline-none lg:max-h-72 xl:max-h-96"
                   />
                   <button
                     type="button"
                     onClick={() => void handleSend()}
                     disabled={streaming || !input.trim()}
                     aria-label="发送"
-                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-blue-600 text-white disabled:opacity-40"
+                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-blue-600 text-white transition hover:bg-blue-700 disabled:opacity-40"
                   >
-                    {streaming ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
+                    {streaming ? <Loader2 className="h-5 w-5 animate-spin" /> : <Send className="h-5 w-5" />}
                   </button>
                 </div>
-                <p className="mt-1 text-center text-[11px] text-gray-300">答案由 AI 依据知识库生成，仅供参考</p>
+                <p className="mt-1.5 text-center text-[11px] text-gray-300">答案由 AI 依据知识库生成，仅供参考</p>
               </div>
             </>
           )}
