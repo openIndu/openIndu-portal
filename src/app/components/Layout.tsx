@@ -5,6 +5,7 @@ import { useAuth } from "@/store/auth";
 import { visitsApi } from "@/api";
 import { getDisplayName, maskPhone } from "../utils/user";
 import { StructuredData } from "./StructuredData";
+import { ChatWidget } from "./ChatWidget";
 import logo from "/assets/logo.png";
 
 export function Layout() {
@@ -333,6 +334,9 @@ export function Layout() {
           </div>
         </div>
       </footer>
+
+      {/* 智能咨询悬浮组件（全站可用，面向 member） */}
+      <ChatWidget />
     </div>
   );
 }
