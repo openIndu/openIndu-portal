@@ -493,6 +493,151 @@ export const portalApi = {
   },
 };
 
+// --- 智能咨询 / RAG 对话（SSE 流式，§4.3.12）---------------------------------
+// axios 不适合读取流式响应，改用 fetch + ReadableStream 手动解析 SSE 帧。
+
+export interface ChatSource {
+  document_name: string;
+  page: number;
+  brand?: string;
+  category?: string;
+  score?: number;
+}
+
+export interface ChatQuota {
+  limit: number;
+  used: number;
+  remaining: number | null;
+  unlimited: boolean;
+}
+
+export interface ChatStreamBody {
+  message: string;
+  history?: Array<{ role: "user" | "assistant"; content: string }>;
+  filters?: { brand?: string; category?: string };
+}
+
+export interface ChatStreamHandlers {
+  onSources?: (sources: ChatSource[]) => void;
+  onDelta?: (text: string) => void;
+  onDone?: (payload: unknown) => void;
+  onError?: (detail: string) => void;
+  signal?: AbortSignal;
+}
+
+interface ParsedSseEvent {
+  event: string;
+  data: string;
+}
+
+// 解析 SSE 帧缓冲：返回完整事件列表 + 残留（不完整）尾串。纯函数，便于单测。
+export function parseSseFrames(buffer: string): { events: ParsedSseEvent[]; rest: string } {
+  const normalized = buffer.replace(/\r\n/g, "\n");
+  const parts = normalized.split("\n\n");
+  const rest = parts.pop() ?? "";
+  const events: ParsedSseEvent[] = [];
+  for (const block of parts) {
+    if (!block.trim()) continue;
+    let event = "message";
+    const dataLines: string[] = [];
+    for (const line of block.split("\n")) {
+      if (line.startsWith("event:")) event = line.slice(6).trim();
+      else if (line.startsWith("data:")) dataLines.push(line.slice(5).replace(/^ /, ""));
+    }
+    events.push({ event, data: dataLines.join("\n") });
+  }
+  return { events, rest };
+}
+
+export const chatApi = {
+  async quota(): Promise<ChatQuota> {
+    return unwrap(await apiClient.get<ApiEnvelope<ChatQuota>>("/chat/quota"));
+  },
+
+  // 发起一次流式问答。通过 handlers 回调 sources/delta/done/error。
+  async stream(body: ChatStreamBody, handlers: ChatStreamHandlers = {}): Promise<void> {
+    const base = import.meta.env.VITE_API_BASE || "/api/v1";
+    const token = localStorage.getItem(STORAGE_KEYS.token);
+    let resp: Response;
+    try {
+      resp = await fetch(`${base}/chat`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-OpenIndu-Client-Id": getClientId(),
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+        body: JSON.stringify(body),
+        signal: handlers.signal,
+      });
+    } catch {
+      handlers.onError?.("网络错误，请稍后重试");
+      return;
+    }
+
+    if (!resp.ok || !resp.body) {
+      let detail = `请求失败（${resp.status}）`;
+      if (resp.status === 401) detail = "登录态已失效，请重新登录";
+      else if (resp.status === 403) detail = "智能咨询面向会员开放";
+      else if (resp.status === 429) detail = "今日咨询次数已用完，请明天再来";
+      else {
+        try {
+          const j = (await resp.json()) as { detail?: string; message?: string };
+          detail = j?.detail || j?.message || detail;
+        } catch {
+          /* 非 JSON 错误体，沿用默认文案 */
+        }
+      }
+      handlers.onError?.(detail);
+      return;
+    }
+
+    const reader = resp.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = "";
+    try {
+      for (;;) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        buffer += decoder.decode(value, { stream: true });
+        const { events, rest } = parseSseFrames(buffer);
+        buffer = rest;
+        for (const ev of events) {
+          if (ev.event === "delta") {
+            try {
+              handlers.onDelta?.((JSON.parse(ev.data) as { text?: string }).text ?? "");
+            } catch {
+              /* ignore malformed delta */
+            }
+          } else if (ev.event === "sources") {
+            try {
+              handlers.onSources?.(JSON.parse(ev.data) as ChatSource[]);
+            } catch {
+              /* ignore */
+            }
+          } else if (ev.event === "done") {
+            try {
+              handlers.onDone?.(JSON.parse(ev.data));
+            } catch {
+              handlers.onDone?.({});
+            }
+          } else if (ev.event === "error") {
+            try {
+              handlers.onError?.((JSON.parse(ev.data) as { detail?: string }).detail ?? "生成失败");
+            } catch {
+              handlers.onError?.("生成失败");
+            }
+          }
+        }
+      }
+    } catch (e) {
+      if ((e as { name?: string })?.name !== "AbortError") {
+        handlers.onError?.("连接中断，请重试");
+      }
+    }
+  },
+};
+
 
 export function getApiErrorMessage(error: unknown, fallback = "请求失败，请稍后重试") {
   if (axios.isAxiosError<ApiEnvelope<unknown>>(error)) {
