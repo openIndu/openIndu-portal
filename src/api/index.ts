@@ -519,11 +519,14 @@ export interface ChatStreamBody {
 
 export interface ChatStreamHandlers {
   onSources?: (sources: ChatSource[]) => void;
+  onMode?: (mode: ChatMode) => void;
   onDelta?: (text: string) => void;
   onDone?: (payload: unknown) => void;
   onError?: (detail: string) => void;
   signal?: AbortSignal;
 }
+
+export type ChatMode = "grounded" | "fallback";
 
 interface ParsedSseEvent {
   event: string;
@@ -612,6 +615,13 @@ export const chatApi = {
           } else if (ev.event === "sources") {
             try {
               handlers.onSources?.(JSON.parse(ev.data) as ChatSource[]);
+            } catch {
+              /* ignore */
+            }
+          } else if (ev.event === "mode") {
+            try {
+              const m = (JSON.parse(ev.data) as { mode?: ChatMode }).mode;
+              if (m === "grounded" || m === "fallback") handlers.onMode?.(m);
             } catch {
               /* ignore */
             }

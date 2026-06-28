@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
-import { FileText, Loader2, MessageCircle, Send, X } from "lucide-react";
+import { AlertTriangle, FileText, Loader2, MessageCircle, Send, X } from "lucide-react";
 import { useAuth } from "@/store/auth";
-import { chatApi, type ChatSource } from "@/api";
+import { chatApi, type ChatMode, type ChatSource } from "@/api";
 
 interface Msg {
   role: "user" | "assistant";
   content: string;
   sources?: ChatSource[];
+  mode?: ChatMode;
   error?: boolean;
 }
 
@@ -58,6 +59,7 @@ export function ChatWidget() {
       {
         signal: ctrl.signal,
         onSources: (sources) => patchLast((m) => { m.sources = sources; }),
+        onMode: (mode) => patchLast((m) => { m.mode = mode; }),
         onDelta: (text) => patchLast((m) => { m.content += text; }),
         onError: (detail) => patchLast((m) => { m.content = detail; m.error = true; }),
       },
@@ -122,13 +124,21 @@ export function ChatWidget() {
                 )}
                 {messages.map((m, i) => (
                   <div key={i} className={m.role === "user" ? "text-right" : "text-left"}>
+                    {m.role === "assistant" && m.mode === "fallback" && !m.error && (
+                      <div className="mb-1 inline-flex items-start gap-1.5 rounded-lg bg-amber-50 px-2.5 py-1.5 text-left text-[11px] leading-snug text-amber-700 ring-1 ring-amber-200">
+                        <AlertTriangle className="h-3.5 w-3.5 shrink-0 mt-px" />
+                        <span>以下回答<strong>非来自</strong>本平台知识库，由 AI 通用知识生成，关键参数请以厂家原版手册为准。</span>
+                      </div>
+                    )}
                     <div
                       className={`inline-block max-w-[85%] whitespace-pre-wrap rounded-2xl px-3 py-2 text-left text-sm ${
                         m.role === "user"
                           ? "bg-blue-600 text-white"
                           : m.error
                             ? "bg-red-50 text-red-600"
-                            : "bg-gray-100 text-gray-800"
+                            : m.mode === "fallback"
+                              ? "bg-amber-50 text-gray-800 ring-1 ring-amber-200"
+                              : "bg-gray-100 text-gray-800"
                       }`}
                     >
                       {m.content ||
