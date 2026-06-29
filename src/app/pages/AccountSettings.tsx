@@ -1,6 +1,6 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { Navigate, useNavigate } from "react-router";
-import { AlertTriangle, CheckCircle2, Loader2, LogOut, Trash2, UserRound } from "lucide-react";
+import { AlertTriangle, CheckCircle2, Loader2, LogOut, ShieldCheck, Trash2, UserRound } from "lucide-react";
 import { authApi, getApiErrorMessage, memberApplicationApi, type MemberApplicationStatus } from "@/api";
 import { useAuth } from "@/store/auth";
 import { maskPhone } from "../utils/user";
@@ -189,53 +189,6 @@ export function AccountSettings() {
                 />
               </div>
 
-              <div className="rounded-xl border border-gray-100 bg-gray-50 py-4 px-3">
-                <div className="mb-1 text-sm font-medium text-gray-700 text-left">账号角色</div>
-                <p className="text-base font-semibold text-gray-900">
-                  {user?.role ? (ROLE_LABELS[user.role] ?? user.role) : "—"}
-                </p>
-                {user?.role === "user" && (
-                  <div className="mt-3">
-                    {application === undefined ? null : application?.status === "pending" ? (
-                      <div className="flex items-center gap-1.5 text-sm text-amber-700">
-                        <AlertTriangle className="h-4 w-4 shrink-0" />
-                        申请已提交，等待管理员审核
-                      </div>
-                    ) : application?.status === "approved" ? (
-                      <div className="flex items-center gap-1.5 text-sm text-green-700">
-                        <CheckCircle2 className="h-4 w-4 shrink-0" />
-                        申请已通过，请重新登录生效
-                      </div>
-                    ) : (
-                      <Button
-                        type="button"
-                        size="sm"
-                        disabled={applying}
-                        className="bg-blue-600 hover:bg-blue-700"
-                        onClick={async () => {
-                          setApplyError("");
-                          setApplying(true);
-                          try {
-                            const result = await memberApplicationApi.apply();
-                            setApplication(result);
-                          } catch (err) {
-                            setApplyError(getApiErrorMessage(err, "申请失败，请稍后重试"));
-                          } finally {
-                            setApplying(false);
-                          }
-                        }}
-                      >
-                        {applying ? <Loader2 className="animate-spin mr-1.5 h-3.5 w-3.5" /> : null}
-                        申请成为会员
-                      </Button>
-                    )}
-                    {applyError && (
-                      <p className="mt-2 text-xs text-red-600">{applyError}</p>
-                    )}
-                  </div>
-                )}
-              </div>
-
               {message && <p className="rounded-lg bg-green-50 px-3 py-2 text-sm text-green-700">{message}</p>}
               {error && <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{error}</p>}
 
@@ -244,6 +197,64 @@ export function AccountSettings() {
                 保存昵称
               </Button>
             </form>
+          </CardContent>
+        </Card>
+
+        {/* 账号角色 - 独立卡片 */}
+        <Card className="border-blue-100 shadow-sm mb-6">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <ShieldCheck className="h-5 w-5 text-blue-600" />
+              账号角色
+            </CardTitle>
+            <CardDescription>当前账号的权限级别。普通用户可申请升级为会员。</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="rounded-xl border border-gray-100 bg-gray-50 py-4 px-4">
+              <p className="text-base font-semibold text-gray-900">
+                {user?.role ? (ROLE_LABELS[user.role] ?? user.role) : "—"}
+              </p>
+            </div>
+            {user?.role === "user" && (
+              <div className="mt-4">
+                {application === undefined ? null : application?.status === "pending" ? (
+                  <div className="flex items-center gap-1.5 text-sm text-amber-700">
+                    <AlertTriangle className="h-4 w-4 shrink-0" />
+                    申请已提交，等待管理员审核
+                  </div>
+                ) : application?.status === "approved" ? (
+                  <div className="flex items-center gap-1.5 text-sm text-green-700">
+                    <CheckCircle2 className="h-4 w-4 shrink-0" />
+                    申请已通过，请重新登录生效
+                  </div>
+                ) : (
+                  <Button
+                    type="button"
+                    size="sm"
+                    disabled={applying}
+                    className="bg-blue-600 hover:bg-blue-700"
+                    onClick={async () => {
+                      setApplyError("");
+                      setApplying(true);
+                      try {
+                        const result = await memberApplicationApi.apply();
+                        setApplication(result);
+                      } catch (err) {
+                        setApplyError(getApiErrorMessage(err, "申请失败，请稍后重试"));
+                      } finally {
+                        setApplying(false);
+                      }
+                    }}
+                  >
+                    {applying ? <Loader2 className="animate-spin mr-1.5 h-3.5 w-3.5" /> : null}
+                    申请成为会员
+                  </Button>
+                )}
+                {applyError && (
+                  <p className="mt-2 text-xs text-red-600">{applyError}</p>
+                )}
+              </div>
+            )}
           </CardContent>
         </Card>
 
