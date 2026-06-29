@@ -227,6 +227,34 @@ export function AccountSettings() {
                     <CheckCircle2 className="h-4 w-4 shrink-0" />
                     申请已通过，请重新登录生效
                   </div>
+                ) : application?.status === "rejected" ? (
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-1.5 text-sm text-red-600">
+                      <AlertTriangle className="h-4 w-4 shrink-0" />
+                      申请已被驳回，可重新提交申请
+                    </div>
+                    <Button
+                      type="button"
+                      size="sm"
+                      disabled={applying}
+                      className="bg-blue-600 hover:bg-blue-700"
+                      onClick={async () => {
+                        setApplyError("");
+                        setApplying(true);
+                        try {
+                          const result = await memberApplicationApi.apply();
+                          setApplication(result);
+                        } catch (err) {
+                          setApplyError(getApiErrorMessage(err, "申请失败，请稍后重试"));
+                        } finally {
+                          setApplying(false);
+                        }
+                      }}
+                    >
+                      {applying ? <Loader2 className="animate-spin mr-1.5 h-3.5 w-3.5" /> : null}
+                      重新申请
+                    </Button>
+                  </div>
                 ) : (
                   <Button
                     type="button"

@@ -141,6 +141,32 @@ export function ChatWidget() {
                     <CheckCircle2 className="h-4 w-4 shrink-0" />
                     申请已通过，请重新登录生效
                   </div>
+                ) : application?.status === "rejected" ? (
+                  <div className="flex flex-col items-center gap-2">
+                    <div className="flex items-center gap-1.5 text-sm text-red-600">
+                      <AlertTriangle className="h-4 w-4 shrink-0" />
+                      申请已被驳回，可重新提交
+                    </div>
+                    <button
+                      type="button"
+                      disabled={applying}
+                      onClick={async () => {
+                        setApplying(true);
+                        try {
+                          const result = await memberApplicationApi.apply();
+                          setApplication(result);
+                        } catch (err) {
+                          alert(getApiErrorMessage(err, "申请失败，请稍后重试"));
+                        } finally {
+                          setApplying(false);
+                        }
+                      }}
+                      className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50 flex items-center gap-1.5"
+                    >
+                      {applying ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
+                      重新申请
+                    </button>
+                  </div>
                 ) : (
                   <button
                     type="button"
