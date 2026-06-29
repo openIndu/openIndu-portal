@@ -651,7 +651,7 @@ export const chatApi = {
 
 export interface MemberApplicationStatus {
   id: number;
-  status: "pending" | "approved";
+  status: "pending" | "approved" | "rejected";
   created_at?: string;
 }
 
