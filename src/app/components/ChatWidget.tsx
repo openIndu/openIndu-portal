@@ -20,7 +20,14 @@ export function ChatWidget() {
   const { isMember, isAuthenticated } = useAuth();
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
-  const [messages, setMessages] = useState<Msg[]>([]);
+  const [messages, setMessages] = useState<Msg[]>(() => {
+    try {
+      const stored = sessionStorage.getItem("openindu_chat_messages");
+      return stored ? (JSON.parse(stored) as Msg[]) : [];
+    } catch {
+      return [];
+    }
+  });
   const [streaming, setStreaming] = useState(false);
   const abortRef = useRef<AbortController | null>(null);
   const scrollRef = useRef<HTMLDivElement | null>(null);
@@ -48,6 +55,14 @@ export function ChatWidget() {
 
   // 卸载时中断进行中的流
   useEffect(() => () => abortRef.current?.abort(), []);
+
+  // 流式结束后将消息持久化到 sessionStorage，刷新页面后恢复
+  useEffect(() => {
+    if (streaming) return;
+    try {
+      sessionStorage.setItem("openindu_chat_messages", JSON.stringify(messages));
+    } catch {}
+  }, [messages, streaming]);
 
   // 面板打开时，若是已登录非会员，拉取申请状态
   useEffect(() => {
