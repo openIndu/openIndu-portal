@@ -12,6 +12,18 @@ interface Msg {
   error?: boolean;
 }
 
+const EXAMPLE_PROMPTS = [
+  "S7-1200 怎么配置 Modbus TCP？",
+  "三菱 FX3U 怎么做串口通信？",
+  "欧姆龙 NJ 系列支持哪些现场总线？",
+  "变频器过流报警如何排查？",
+];
+
+const STREAMING_HINTS = [
+  "正在检索知识库…",
+  "AI 正在整理答案…",
+];
+
 /**
  * 智能咨询悬浮组件（§2.2.7）。全站右下角气泡，面向 member 及以上；
  * 非会员/未登录点击引导登录。问答经 /api/v1/chat SSE 流式返回。
@@ -29,6 +41,7 @@ export function ChatWidget() {
     }
   });
   const [streaming, setStreaming] = useState(false);
+  const [streamingPhase, setStreamingPhase] = useState(0);
   const abortRef = useRef<AbortController | null>(null);
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const taRef = useRef<HTMLTextAreaElement | null>(null);
@@ -56,6 +69,13 @@ export function ChatWidget() {
   // 卸载时中断进行中的流
   useEffect(() => () => abortRef.current?.abort(), []);
 
+  // 流式生成中每 2 秒切换提示文字相位
+  useEffect(() => {
+    if (!streaming) { setStreamingPhase(0); return; }
+    const timer = setInterval(() => setStreamingPhase((p) => (p + 1) % STREAMING_HINTS.length), 2000);
+    return () => clearInterval(timer);
+  }, [streaming]);
+
   // 流式结束后将消息持久化到 sessionStorage，刷新页面后恢复
   useEffect(() => {
     if (streaming) return;
@@ -80,11 +100,9 @@ export function ChatWidget() {
     });
   }
 
-  async function handleSend() {
-    const q = input.trim();
+  async function sendPrompt(q: string) {
     if (!q || streaming) return;
     setInput("");
-    // 清空后重置高度，避免发送后还保持着上一条问题的撑高
     if (taRef.current) taRef.current.style.height = "auto";
     const history = messages
       .filter((m) => !m.error)
@@ -109,6 +127,8 @@ export function ChatWidget() {
     setStreaming(false);
     abortRef.current = null;
   }
+
+  function handleSend() { return sendPrompt(input.trim()); }
 
   return (
     <>
@@ -217,10 +237,18 @@ export function ChatWidget() {
             <>
               <div ref={scrollRef} className="flex-1 space-y-3 overflow-y-auto p-4">
                 {messages.length === 0 && (
-                  <div className="mt-6 text-center text-sm text-gray-400">
-                    试着问我：
-                    <br />
-                    「S7-1200 怎么配置 Modbus TCP？」
+                  <div className="mt-4 space-y-2">
+                    <p className="text-center text-sm text-gray-400">试着问我：</p>
+                    {EXAMPLE_PROMPTS.map((prompt) => (
+                      <button
+                        key={prompt}
+                        type="button"
+                        onClick={() => void sendPrompt(prompt)}
+                        className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-left text-sm text-gray-600 transition-colors hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700"
+                      >
+                        {prompt}
+                      </button>
+                    ))}
                   </div>
                 )}
                 {messages.map((m, i) => (
@@ -244,7 +272,10 @@ export function ChatWidget() {
                     >
                       {m.content ||
                         (streaming && i === messages.length - 1 ? (
-                          <Loader2 className="h-4 w-4 animate-spin" />
+                          <span className="flex items-center gap-2 text-gray-400">
+                            <Loader2 className="h-3.5 w-3.5 shrink-0 animate-spin" />
+                            <span className="text-sm">{STREAMING_HINTS[streamingPhase]}</span>
+                          </span>
                         ) : (
                           ""
                         ))}
