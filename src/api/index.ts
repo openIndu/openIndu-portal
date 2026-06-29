@@ -649,6 +649,19 @@ export const chatApi = {
 };
 
 
+export interface MemberApplicationStatus {
+  id: number;
+  status: "pending" | "approved";
+  created_at?: string;
+}
+
+export const memberApplicationApi = {
+  apply: async (note?: string) =>
+    unwrap<MemberApplicationStatus>(await apiClient.post("/member-applications", { note: note ?? null })),
+  mine: async () =>
+    unwrap<MemberApplicationStatus | null>(await apiClient.get("/member-applications/mine")),
+};
+
 export function getApiErrorMessage(error: unknown, fallback = "请求失败，请稍后重试") {
   if (axios.isAxiosError<ApiEnvelope<unknown>>(error)) {
     const data = error.response?.data;
