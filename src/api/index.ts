@@ -552,6 +552,37 @@ export function parseSseFrames(buffer: string): { events: ParsedSseEvent[]; rest
   return { events, rest };
 }
 
+// --- 多会话管理 -----------------------------------------------------------
+
+export interface ChatSession {
+  id: number;
+  title: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export const chatSessionApi = {
+  async list(): Promise<ChatSession[]> {
+    return unwrap(await apiClient.get<ApiEnvelope<ChatSession[]>>("/chat/sessions"));
+  },
+  async create(): Promise<ChatSession> {
+    return unwrap(await apiClient.post<ApiEnvelope<ChatSession>>("/chat/sessions"));
+  },
+  async rename(id: number, title: string): Promise<ChatSession> {
+    return unwrap(await apiClient.patch<ApiEnvelope<ChatSession>>(`/chat/sessions/${id}`, { title }));
+  },
+  async remove(id: number): Promise<void> {
+    await apiClient.delete(`/chat/sessions/${id}`);
+  },
+  async messages(id: number) {
+    return unwrap(
+      await apiClient.get<ApiEnvelope<Array<{ id: number; role: string; content: string; sources?: ChatSource[] | null; mode?: ChatMode | null }>>>(
+        `/chat/sessions/${id}/messages`
+      )
+    );
+  },
+};
+
 export const chatApi = {
   async quota(): Promise<ChatQuota> {
     return unwrap(await apiClient.get<ApiEnvelope<ChatQuota>>("/chat/quota"));
@@ -637,6 +668,76 @@ export const chatApi = {
             } catch {
               handlers.onError?.("生成失败");
             }
+          }
+        }
+      }
+    } catch (e) {
+      if ((e as { name?: string })?.name !== "AbortError") {
+        handlers.onError?.("连接中断，请重试");
+      }
+    }
+  },
+
+  // 会话模式流式问答（history 由后端从 DB 读取）
+  async streamSession(sessionId: number, message: string, handlers: ChatStreamHandlers = {}): Promise<void> {
+    const base = import.meta.env.VITE_API_BASE || "/api/v1";
+    const token = localStorage.getItem(STORAGE_KEYS.token);
+    let resp: Response;
+    try {
+      resp = await fetch(`${base}/chat/sessions/${sessionId}/stream`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-OpenIndu-Client-Id": getClientId(),
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+        body: JSON.stringify({ message }),
+        signal: handlers.signal,
+      });
+    } catch {
+      handlers.onError?.("网络错误，请稍后重试");
+      return;
+    }
+
+    if (!resp.ok || !resp.body) {
+      let detail = `请求失败（${resp.status}）`;
+      if (resp.status === 401) detail = "登录态已失效，请重新登录";
+      else if (resp.status === 403) detail = "智能咨询面向会员开放";
+      else if (resp.status === 429) detail = "今日咨询次数已用完，请明天再来";
+      else {
+        try {
+          const j = (await resp.json()) as { detail?: string; message?: string };
+          detail = j?.detail || j?.message || detail;
+        } catch { /* ignore */ }
+      }
+      handlers.onError?.(detail);
+      return;
+    }
+
+    const reader = resp.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = "";
+    try {
+      for (;;) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        buffer += decoder.decode(value, { stream: true });
+        const { events, rest } = parseSseFrames(buffer);
+        buffer = rest;
+        for (const ev of events) {
+          if (ev.event === "delta") {
+            try { handlers.onDelta?.((JSON.parse(ev.data) as { text?: string }).text ?? ""); } catch { /* ignore */ }
+          } else if (ev.event === "sources") {
+            try { handlers.onSources?.(JSON.parse(ev.data) as ChatSource[]); } catch { /* ignore */ }
+          } else if (ev.event === "mode") {
+            try {
+              const m = (JSON.parse(ev.data) as { mode?: ChatMode }).mode;
+              if (m === "grounded" || m === "fallback") handlers.onMode?.(m);
+            } catch { /* ignore */ }
+          } else if (ev.event === "done") {
+            try { handlers.onDone?.(JSON.parse(ev.data)); } catch { handlers.onDone?.({}); }
+          } else if (ev.event === "error") {
+            try { handlers.onError?.((JSON.parse(ev.data) as { detail?: string }).detail ?? "生成失败"); } catch { handlers.onError?.("生成失败"); }
           }
         }
       }
