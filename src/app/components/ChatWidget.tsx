@@ -408,7 +408,7 @@ export function ChatWidget() {
                         <span>以下回答<strong>非来自</strong>本平台知识库，由 AI 通用知识生成，关键参数请以厂家原版手册为准。</span>
                       </div>
                     )}
-                    <div className="group relative inline-block max-w-[85%]">
+                    <div className={`group inline-flex max-w-[85%] items-start gap-1 ${m.role === "user" ? "flex-row-reverse" : "flex-row"}`}>
                       <div
                         className={`whitespace-pre-wrap break-words rounded-2xl px-3 py-2 text-left text-sm ${
                           m.role === "user"
@@ -430,15 +430,13 @@ export function ChatWidget() {
                             ""
                           ))}
                       </div>
-                      {/* Copy button — visible on hover, only when content exists */}
+                      {/* Copy button — in flex flow so moving mouse to it stays inside group hover zone */}
                       {m.content && (
                         <button
                           type="button"
                           title="复制"
                           onClick={() => void copyMessage(m.content, i)}
-                          className={`absolute -top-1 right-0 hidden rounded-md p-1 text-gray-400 transition-colors hover:text-gray-600 group-hover:flex ${
-                            m.role === "user" ? "right-full mr-1" : "left-full ml-1"
-                          }`}
+                          className="mt-0.5 hidden shrink-0 rounded-md p-1 text-gray-400 transition-colors hover:text-gray-600 group-hover:flex"
                         >
                           {copiedIdx === i ? (
                             <Check className="h-3.5 w-3.5 text-green-500" />
