@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
-import { AlertTriangle, FileText, Loader2, MessageCircle, Send, X } from "lucide-react";
+import { AlertTriangle, CheckCircle2, FileText, Loader2, MessageCircle, Send, X } from "lucide-react";
 import { useAuth } from "@/store/auth";
-import { chatApi, type ChatMode, type ChatSource } from "@/api";
+import { chatApi, getApiErrorMessage, memberApplicationApi, type ChatMode, type ChatSource, type MemberApplicationStatus } from "@/api";
 
 interface Msg {
   role: "user" | "assistant";
@@ -25,6 +25,8 @@ export function ChatWidget() {
   const abortRef = useRef<AbortController | null>(null);
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const taRef = useRef<HTMLTextAreaElement | null>(null);
+  const [application, setApplication] = useState<MemberApplicationStatus | null | undefined>(undefined);
+  const [applying, setApplying] = useState(false);
 
   // 自适应输入框高度：每次内容变化时把 height 重置为 auto，再设为 scrollHeight，
   // 让 textarea 随内容增长；超过 CSS max-h 后浏览器自动夹紧、内部滚动。
@@ -46,6 +48,13 @@ export function ChatWidget() {
 
   // 卸载时中断进行中的流
   useEffect(() => () => abortRef.current?.abort(), []);
+
+  // 面板打开时，若是已登录非会员，拉取申请状态
+  useEffect(() => {
+    if (open && isAuthenticated && !isMember && application === undefined) {
+      memberApplicationApi.mine().then((v) => setApplication(v ?? null)).catch(() => setApplication(null));
+    }
+  }, [open, isAuthenticated, isMember, application]);
 
   function patchLast(fn: (m: Msg) => void) {
     setMessages((prev) => {
@@ -122,7 +131,37 @@ export function ChatWidget() {
                 智能咨询面向<strong>会员</strong>开放
               </p>
               {isAuthenticated ? (
-                <p className="text-xs text-gray-400">当前账号暂无会员权限，请联系管理员升级。</p>
+                application?.status === "pending" ? (
+                  <div className="flex items-center gap-1.5 text-sm text-amber-700">
+                    <AlertTriangle className="h-4 w-4 shrink-0" />
+                    申请已提交，等待管理员审核
+                  </div>
+                ) : application?.status === "approved" ? (
+                  <div className="flex items-center gap-1.5 text-sm text-green-700">
+                    <CheckCircle2 className="h-4 w-4 shrink-0" />
+                    申请已通过，请重新登录生效
+                  </div>
+                ) : (
+                  <button
+                    type="button"
+                    disabled={applying}
+                    onClick={async () => {
+                      setApplying(true);
+                      try {
+                        const result = await memberApplicationApi.apply();
+                        setApplication(result);
+                      } catch (err) {
+                        alert(getApiErrorMessage(err, "申请失败，请稍后重试"));
+                      } finally {
+                        setApplying(false);
+                      }
+                    }}
+                    className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50 flex items-center gap-1.5"
+                  >
+                    {applying ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
+                    申请成为会员
+                  </button>
+                )
               ) : (
                 <Link
                   to="/login"

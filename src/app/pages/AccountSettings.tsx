@@ -1,7 +1,7 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { Navigate, useNavigate } from "react-router";
-import { AlertTriangle, Loader2, LogOut, Trash2, UserRound } from "lucide-react";
-import { authApi, getApiErrorMessage } from "@/api";
+import { AlertTriangle, CheckCircle2, Loader2, LogOut, Trash2, UserRound } from "lucide-react";
+import { authApi, getApiErrorMessage, memberApplicationApi, type MemberApplicationStatus } from "@/api";
 import { useAuth } from "@/store/auth";
 import { maskPhone } from "../utils/user";
 import { SEO } from "../components/SEO";
@@ -37,6 +37,9 @@ export function AccountSettings() {
   const [deleting, setDeleting] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const [application, setApplication] = useState<MemberApplicationStatus | null | undefined>(undefined);
+  const [applying, setApplying] = useState(false);
+  const [applyError, setApplyError] = useState("");
 
   // Phone change state - separate state for phone change messages
   const [showPhoneChange, setShowPhoneChange] = useState(false);
@@ -51,6 +54,12 @@ export function AccountSettings() {
   useEffect(() => {
     setNickname(user?.nickname ?? "");
   }, [user?.nickname]);
+
+  useEffect(() => {
+    if (user?.role === "user") {
+      memberApplicationApi.mine().then((v) => setApplication(v ?? null)).catch(() => setApplication(null));
+    }
+  }, [user?.role]);
 
   useEffect(() => {
     if (cooldown <= 0) return;
@@ -185,6 +194,46 @@ export function AccountSettings() {
                 <p className="text-base font-semibold text-gray-900">
                   {user?.role ? (ROLE_LABELS[user.role] ?? user.role) : "—"}
                 </p>
+                {user?.role === "user" && (
+                  <div className="mt-3">
+                    {application === undefined ? null : application?.status === "pending" ? (
+                      <div className="flex items-center gap-1.5 text-sm text-amber-700">
+                        <AlertTriangle className="h-4 w-4 shrink-0" />
+                        申请已提交，等待管理员审核
+                      </div>
+                    ) : application?.status === "approved" ? (
+                      <div className="flex items-center gap-1.5 text-sm text-green-700">
+                        <CheckCircle2 className="h-4 w-4 shrink-0" />
+                        申请已通过，请重新登录生效
+                      </div>
+                    ) : (
+                      <Button
+                        type="button"
+                        size="sm"
+                        disabled={applying}
+                        className="bg-blue-600 hover:bg-blue-700"
+                        onClick={async () => {
+                          setApplyError("");
+                          setApplying(true);
+                          try {
+                            const result = await memberApplicationApi.apply();
+                            setApplication(result);
+                          } catch (err) {
+                            setApplyError(getApiErrorMessage(err, "申请失败，请稍后重试"));
+                          } finally {
+                            setApplying(false);
+                          }
+                        }}
+                      >
+                        {applying ? <Loader2 className="animate-spin mr-1.5 h-3.5 w-3.5" /> : null}
+                        申请成为会员
+                      </Button>
+                    )}
+                    {applyError && (
+                      <p className="mt-2 text-xs text-red-600">{applyError}</p>
+                    )}
+                  </div>
+                )}
               </div>
 
               {message && <p className="rounded-lg bg-green-50 px-3 py-2 text-sm text-green-700">{message}</p>}
