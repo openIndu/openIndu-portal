@@ -107,7 +107,7 @@ export function ChatWidget() {
         <div className="fixed bottom-24 right-6 z-50 flex h-[80vh] max-h-[720px] w-[92vw] max-w-[480px] flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-2xl lg:max-h-[820px] lg:max-w-[560px] xl:max-h-[88vh] xl:max-w-[640px]">
           <div className="flex items-center justify-between bg-blue-600 px-4 py-3 text-white">
             <div>
-              <div className="text-sm font-semibold">openIndu 智能咨询</div>
+              <div className="text-sm font-semibold">openIndu社区智能咨询</div>
               <div className="text-xs text-blue-100">基于平台知识库的工业问答机器人</div>
             </div>
             <button type="button" onClick={() => setOpen(false)} aria-label="关闭">
@@ -118,8 +118,8 @@ export function ChatWidget() {
           {!isMember ? (
             <div className="flex flex-1 flex-col items-center justify-center gap-3 p-6 text-center">
               <MessageCircle className="h-10 w-10 text-blue-500" />
-              <p className="text-sm text-gray-600">
-                智能咨询面向<strong>会员</strong>开放。
+              <p className="text-lg text-gray-600">
+                智能咨询面向<strong>会员</strong>开放
               </p>
               {isAuthenticated ? (
                 <p className="text-xs text-gray-400">当前账号暂无会员权限，请联系管理员升级。</p>
