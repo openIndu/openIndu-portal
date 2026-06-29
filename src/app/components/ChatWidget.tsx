@@ -1,8 +1,17 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
-import { AlertTriangle, CheckCircle2, FileText, Loader2, MessageCircle, Send, X } from "lucide-react";
+import { AlertTriangle, Check, CheckCircle2, Copy, FileText, Loader2, MessageCircle, Plus, Send, Trash2, X } from "lucide-react";
 import { useAuth } from "@/store/auth";
-import { chatApi, getApiErrorMessage, memberApplicationApi, type ChatMode, type ChatSource, type MemberApplicationStatus } from "@/api";
+import {
+  chatApi,
+  chatSessionApi,
+  getApiErrorMessage,
+  memberApplicationApi,
+  type ChatMode,
+  type ChatSession,
+  type ChatSource,
+  type MemberApplicationStatus,
+} from "@/api";
 
 interface Msg {
   role: "user" | "assistant";
@@ -24,22 +33,11 @@ const STREAMING_HINTS = [
   "AI 正在整理答案…",
 ];
 
-/**
- * 智能咨询悬浮组件（§2.2.7）。全站右下角气泡，面向 member 及以上；
- * 非会员/未登录点击引导登录。问答经 /api/v1/chat SSE 流式返回。
- */
 export function ChatWidget() {
   const { isMember, isAuthenticated } = useAuth();
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
-  const [messages, setMessages] = useState<Msg[]>(() => {
-    try {
-      const stored = sessionStorage.getItem("openindu_chat_messages");
-      return stored ? (JSON.parse(stored) as Msg[]) : [];
-    } catch {
-      return [];
-    }
-  });
+  const [messages, setMessages] = useState<Msg[]>([]);
   const [streaming, setStreaming] = useState(false);
   const [streamingPhase, setStreamingPhase] = useState(0);
   const abortRef = useRef<AbortController | null>(null);
@@ -48,8 +46,15 @@ export function ChatWidget() {
   const [application, setApplication] = useState<MemberApplicationStatus | null | undefined>(undefined);
   const [applying, setApplying] = useState(false);
 
-  // 自适应输入框高度：每次内容变化时把 height 重置为 auto，再设为 scrollHeight，
-  // 让 textarea 随内容增长；超过 CSS max-h 后浏览器自动夹紧、内部滚动。
+  // Session state
+  const [sessions, setSessions] = useState<ChatSession[]>([]);
+  const [activeSessionId, setActiveSessionId] = useState<number | null>(null);
+  const [sessionsLoading, setSessionsLoading] = useState(false);
+  const [msgsLoading, setMsgsLoading] = useState(false);
+
+  // Copy state: tracks which message index was last copied
+  const [copiedIdx, setCopiedIdx] = useState<number | null>(null);
+
   function autoSizeTextarea() {
     const el = taRef.current;
     if (!el) return;
@@ -61,35 +66,103 @@ export function ChatWidget() {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight });
   }, [messages, open]);
 
-  // 面板打开后，初始化一次输入框高度（保证 rows={2} 起始尺寸正确）
   useEffect(() => {
     if (open) autoSizeTextarea();
   }, [open]);
 
-  // 卸载时中断进行中的流
   useEffect(() => () => abortRef.current?.abort(), []);
 
-  // 流式生成中每 2 秒切换提示文字相位
   useEffect(() => {
     if (!streaming) { setStreamingPhase(0); return; }
     const timer = setInterval(() => setStreamingPhase((p) => (p + 1) % STREAMING_HINTS.length), 2000);
     return () => clearInterval(timer);
   }, [streaming]);
 
-  // 流式结束后将消息持久化到 sessionStorage，刷新页面后恢复
-  useEffect(() => {
-    if (streaming) return;
-    try {
-      sessionStorage.setItem("openindu_chat_messages", JSON.stringify(messages));
-    } catch {}
-  }, [messages, streaming]);
-
-  // 面板打开时，若是已登录非会员，拉取申请状态
+  // Load member application status
   useEffect(() => {
     if (open && isAuthenticated && !isMember && application === undefined) {
       memberApplicationApi.mine().then((v) => setApplication(v ?? null)).catch(() => setApplication(null));
     }
   }, [open, isAuthenticated, isMember, application]);
+
+  // Load sessions when member opens the widget
+  useEffect(() => {
+    if (open && isMember && sessions.length === 0 && !sessionsLoading) {
+      void loadSessions();
+    }
+  }, [open, isMember]);
+
+  async function loadSessions() {
+    setSessionsLoading(true);
+    try {
+      const list = await chatSessionApi.list();
+      setSessions(list);
+      if (list.length > 0) {
+        await switchSession(list[0].id, list);
+      } else {
+        // Auto-create first session
+        const s = await chatSessionApi.create();
+        setSessions([s]);
+        setActiveSessionId(s.id);
+        setMessages([]);
+      }
+    } catch {
+      /* ignore */
+    } finally {
+      setSessionsLoading(false);
+    }
+  }
+
+  async function switchSession(id: number, list?: ChatSession[]) {
+    if (streaming) return;
+    setActiveSessionId(id);
+    setMessages([]);
+    setMsgsLoading(true);
+    try {
+      const raw = await chatSessionApi.messages(id);
+      setMessages(
+        raw.map((m) => ({
+          role: m.role as "user" | "assistant",
+          content: m.content,
+          sources: m.sources ?? undefined,
+          mode: m.mode ?? undefined,
+        }))
+      );
+      if (list) setSessions(list);
+    } catch {
+      setMessages([]);
+    } finally {
+      setMsgsLoading(false);
+    }
+  }
+
+  async function handleNewSession() {
+    if (streaming) return;
+    try {
+      const s = await chatSessionApi.create();
+      setSessions((prev) => [s, ...prev]);
+      setActiveSessionId(s.id);
+      setMessages([]);
+    } catch { /* ignore */ }
+  }
+
+  async function handleDeleteSession() {
+    if (!activeSessionId || streaming) return;
+    const id = activeSessionId;
+    try {
+      await chatSessionApi.remove(id);
+      const next = sessions.filter((s) => s.id !== id);
+      if (next.length === 0) {
+        const s = await chatSessionApi.create();
+        setSessions([s]);
+        setActiveSessionId(s.id);
+        setMessages([]);
+      } else {
+        setSessions(next);
+        await switchSession(next[0].id);
+      }
+    } catch { /* ignore */ }
+  }
 
   function patchLast(fn: (m: Msg) => void) {
     setMessages((prev) => {
@@ -100,39 +173,48 @@ export function ChatWidget() {
     });
   }
 
+  // After streaming ends, refresh session title (backend may have auto-set it)
+  async function refreshSessionTitle(id: number) {
+    try {
+      const list = await chatSessionApi.list();
+      setSessions(list);
+    } catch { /* ignore */ }
+  }
+
   async function sendPrompt(q: string) {
-    if (!q || streaming) return;
+    if (!q || streaming || !activeSessionId) return;
     setInput("");
     if (taRef.current) taRef.current.style.height = "auto";
-    const history = messages
-      .filter((m) => !m.error)
-      .slice(-6)
-      .map((m) => ({ role: m.role, content: m.content }));
     setMessages((prev) => [...prev, { role: "user", content: q }, { role: "assistant", content: "" }]);
     setStreaming(true);
     const ctrl = new AbortController();
     abortRef.current = ctrl;
 
-    await chatApi.stream(
-      { message: q, history },
-      {
-        signal: ctrl.signal,
-        onSources: (sources) => patchLast((m) => { m.sources = sources; }),
-        onMode: (mode) => patchLast((m) => { m.mode = mode; }),
-        onDelta: (text) => patchLast((m) => { m.content += text; }),
-        onError: (detail) => patchLast((m) => { m.content = detail; m.error = true; }),
-      },
-    );
+    await chatApi.streamSession(activeSessionId, q, {
+      signal: ctrl.signal,
+      onSources: (sources) => patchLast((m) => { m.sources = sources; }),
+      onMode: (mode) => patchLast((m) => { m.mode = mode; }),
+      onDelta: (text) => patchLast((m) => { m.content += text; }),
+      onError: (detail) => patchLast((m) => { m.content = detail; m.error = true; }),
+    });
 
     setStreaming(false);
     abortRef.current = null;
+    void refreshSessionTitle(activeSessionId);
   }
 
   function handleSend() { return sendPrompt(input.trim()); }
 
+  async function copyMessage(content: string, idx: number) {
+    try {
+      await navigator.clipboard.writeText(content);
+      setCopiedIdx(idx);
+      setTimeout(() => setCopiedIdx(null), 1500);
+    } catch { /* ignore */ }
+  }
+
   return (
     <>
-      {/* 悬浮气泡 */}
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
@@ -142,21 +224,53 @@ export function ChatWidget() {
         {open ? <X className="h-6 w-6" /> : <MessageCircle className="h-6 w-6" />}
       </button>
 
-      {/* 对话面板 — 响应式递进：
-            手机 / 小屏(<lg)：92vw × 80vh, max 480×720
-            lg(≥1024px)：560×820
-            xl(≥1280px)：640×88vh
-          越大屏越释放空间，小屏不遮挡内容。 */}
       {open && (
         <div className="fixed bottom-24 right-6 z-50 flex h-[80vh] max-h-[720px] w-[92vw] max-w-[480px] flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-2xl lg:max-h-[820px] lg:max-w-[560px] xl:max-h-[88vh] xl:max-w-[640px]">
-          <div className="flex items-center justify-between bg-blue-600 px-4 py-3 text-white">
-            <div>
-              <div className="text-sm font-semibold">openIndu社区智能咨询</div>
-              <div className="text-xs text-blue-100">基于平台知识库的工业问答机器人</div>
+          {/* Header */}
+          <div className="bg-blue-600 px-4 py-3 text-white">
+            <div className="flex items-center justify-between">
+              <div>
+                <div className="text-sm font-semibold">openIndu社区智能咨询</div>
+                <div className="text-xs text-blue-100">基于平台知识库的工业问答机器人</div>
+              </div>
+              <button type="button" onClick={() => setOpen(false)} aria-label="关闭">
+                <X className="h-5 w-5" />
+              </button>
             </div>
-            <button type="button" onClick={() => setOpen(false)} aria-label="关闭">
-              <X className="h-5 w-5" />
-            </button>
+
+            {/* Session bar — only for members */}
+            {isMember && (
+              <div className="mt-2 flex items-center gap-2">
+                <select
+                  className="flex-1 truncate rounded-lg bg-blue-700 px-2 py-1 text-xs text-white focus:outline-none disabled:opacity-50"
+                  value={activeSessionId ?? ""}
+                  disabled={streaming || sessionsLoading}
+                  onChange={(e) => void switchSession(Number(e.target.value))}
+                >
+                  {sessions.map((s) => (
+                    <option key={s.id} value={s.id}>{s.title}</option>
+                  ))}
+                </select>
+                <button
+                  type="button"
+                  title="新建会话"
+                  disabled={streaming}
+                  onClick={() => void handleNewSession()}
+                  className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-blue-700 text-white hover:bg-blue-800 disabled:opacity-50"
+                >
+                  <Plus className="h-3.5 w-3.5" />
+                </button>
+                <button
+                  type="button"
+                  title="删除当前会话"
+                  disabled={streaming || !activeSessionId}
+                  onClick={() => void handleDeleteSession()}
+                  className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-blue-700 text-white hover:bg-red-600 disabled:opacity-50"
+                >
+                  <Trash2 className="h-3.5 w-3.5" />
+                </button>
+              </div>
+            )}
           </div>
 
           {!isMember ? (
@@ -196,7 +310,7 @@ export function ChatWidget() {
                           setApplying(false);
                         }
                       }}
-                      className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50 flex items-center gap-1.5"
+                      className="flex items-center gap-1.5 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50"
                     >
                       {applying ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
                       重新申请
@@ -217,7 +331,7 @@ export function ChatWidget() {
                         setApplying(false);
                       }
                     }}
-                    className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50 flex items-center gap-1.5"
+                    className="flex items-center gap-1.5 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50"
                   >
                     {applying ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
                     申请成为会员
@@ -236,7 +350,13 @@ export function ChatWidget() {
           ) : (
             <>
               <div ref={scrollRef} className="flex-1 space-y-3 overflow-y-auto p-4">
-                {messages.length === 0 && (
+                {(sessionsLoading || msgsLoading) && (
+                  <div className="flex justify-center py-8">
+                    <Loader2 className="h-5 w-5 animate-spin text-gray-400" />
+                  </div>
+                )}
+
+                {!sessionsLoading && !msgsLoading && messages.length === 0 && (
                   <div className="mt-4 space-y-2">
                     <p className="text-center text-sm text-gray-400">试着问我：</p>
                     {EXAMPLE_PROMPTS.map((prompt) => (
@@ -251,34 +371,54 @@ export function ChatWidget() {
                     ))}
                   </div>
                 )}
+
                 {messages.map((m, i) => (
                   <div key={i} className={m.role === "user" ? "text-right" : "text-left"}>
                     {m.role === "assistant" && m.mode === "fallback" && !m.error && (
                       <div className="mb-1 inline-flex items-start gap-1.5 rounded-lg bg-amber-50 px-2.5 py-1.5 text-left text-[11px] leading-snug text-amber-700 ring-1 ring-amber-200">
-                        <AlertTriangle className="h-3.5 w-3.5 shrink-0 mt-px" />
+                        <AlertTriangle className="mt-px h-3.5 w-3.5 shrink-0" />
                         <span>以下回答<strong>非来自</strong>本平台知识库，由 AI 通用知识生成，关键参数请以厂家原版手册为准。</span>
                       </div>
                     )}
-                    <div
-                      className={`inline-block max-w-[85%] whitespace-pre-wrap break-words rounded-2xl px-3 py-2 text-left text-sm ${
-                        m.role === "user"
-                          ? "bg-blue-600 text-white"
-                          : m.error
-                            ? "bg-red-50 text-red-600"
-                            : m.mode === "fallback"
-                              ? "bg-amber-50 text-gray-800 ring-1 ring-amber-200"
-                              : "bg-gray-100 text-gray-800"
-                      }`}
-                    >
-                      {m.content ||
-                        (streaming && i === messages.length - 1 ? (
-                          <span className="flex items-center gap-2 text-gray-400">
-                            <Loader2 className="h-3.5 w-3.5 shrink-0 animate-spin" />
-                            <span className="text-sm">{STREAMING_HINTS[streamingPhase]}</span>
-                          </span>
-                        ) : (
-                          ""
-                        ))}
+                    <div className="group relative inline-block max-w-[85%]">
+                      <div
+                        className={`whitespace-pre-wrap break-words rounded-2xl px-3 py-2 text-left text-sm ${
+                          m.role === "user"
+                            ? "bg-blue-600 text-white"
+                            : m.error
+                              ? "bg-red-50 text-red-600"
+                              : m.mode === "fallback"
+                                ? "bg-amber-50 text-gray-800 ring-1 ring-amber-200"
+                                : "bg-gray-100 text-gray-800"
+                        }`}
+                      >
+                        {m.content ||
+                          (streaming && i === messages.length - 1 ? (
+                            <span className="flex items-center gap-2 text-gray-400">
+                              <Loader2 className="h-3.5 w-3.5 shrink-0 animate-spin" />
+                              <span className="text-sm">{STREAMING_HINTS[streamingPhase]}</span>
+                            </span>
+                          ) : (
+                            ""
+                          ))}
+                      </div>
+                      {/* Copy button — visible on hover, only when content exists */}
+                      {m.content && (
+                        <button
+                          type="button"
+                          title="复制"
+                          onClick={() => void copyMessage(m.content, i)}
+                          className={`absolute -top-1 right-0 hidden rounded-md p-1 text-gray-400 transition-colors hover:text-gray-600 group-hover:flex ${
+                            m.role === "user" ? "right-full mr-1" : "left-full ml-1"
+                          }`}
+                        >
+                          {copiedIdx === i ? (
+                            <Check className="h-3.5 w-3.5 text-green-500" />
+                          ) : (
+                            <Copy className="h-3.5 w-3.5" />
+                          )}
+                        </button>
+                      )}
                     </div>
                     {m.sources && m.sources.length > 0 && (
                       <div className="mt-1 space-y-1">
