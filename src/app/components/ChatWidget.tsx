@@ -174,7 +174,7 @@ export function ChatWidget() {
   }
 
   // After streaming ends, refresh session title (backend may have auto-set it)
-  async function refreshSessionTitle(id: number) {
+  async function refreshSessionTitle() {
     try {
       const list = await chatSessionApi.list();
       setSessions(list);
@@ -200,7 +200,7 @@ export function ChatWidget() {
 
     setStreaming(false);
     abortRef.current = null;
-    void refreshSessionTitle(activeSessionId);
+    void refreshSessionTitle();
   }
 
   function handleSend() { return sendPrompt(input.trim()); }
