@@ -206,11 +206,39 @@ export function ChatWidget() {
   function handleSend() { return sendPrompt(input.trim()); }
 
   async function copyMessage(content: string, idx: number) {
-    try {
-      await navigator.clipboard.writeText(content);
+    let ok = false;
+    // 优先 Clipboard API（仅安全上下文可用：HTTPS / localhost）
+    if (navigator.clipboard?.writeText) {
+      try {
+        await navigator.clipboard.writeText(content);
+        ok = true;
+      } catch (err) {
+        // HTTPS 下也可能因焦点/权限/iframe 策略被拒，落到 execCommand 兜底
+        console.warn("clipboard.writeText 失败，回退 execCommand：", err);
+      }
+    }
+    // 兜底：execCommand（非安全上下文，或 writeText 被拒时仍可用）
+    if (!ok) {
+      try {
+        const ta = document.createElement("textarea");
+        ta.value = content;
+        ta.setAttribute("readonly", "");
+        ta.style.position = "fixed";
+        ta.style.left = "-9999px";
+        document.body.appendChild(ta);
+        ta.select();
+        ok = document.execCommand("copy");
+        document.body.removeChild(ta);
+      } catch (err) {
+        console.warn("execCommand 复制失败：", err);
+      }
+    }
+    if (ok) {
       setCopiedIdx(idx);
       setTimeout(() => setCopiedIdx(null), 1500);
-    } catch { /* ignore */ }
+    } else {
+      console.warn("复制失败：当前环境不支持任何剪贴板写入方式");
+    }
   }
 
   return (
