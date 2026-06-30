@@ -59,7 +59,7 @@ const solutions = [
     icon: Server,
     title: "AI 基础设施",
     description: "基于 RAG + MCP 的工业知识库，为 Claude Code 等 AI Agent 提供工业领域知识检索服务。",
-    link: "/iiot-platform",
+    link: "/infrastructure",
   },
 ];
 
