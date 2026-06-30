@@ -524,6 +524,7 @@ export interface ChatStreamHandlers {
   onDone?: (payload: unknown) => void;
   onError?: (detail: string) => void;
   signal?: AbortSignal;
+  filters?: { brand?: string; category?: string };
 }
 
 export type ChatMode = "grounded" | "fallback";
@@ -691,7 +692,7 @@ export const chatApi = {
           "X-OpenIndu-Client-Id": getClientId(),
           ...(token ? { Authorization: `Bearer ${token}` } : {}),
         },
-        body: JSON.stringify({ message }),
+        body: JSON.stringify({ message, ...(handlers.filters ? { filters: handlers.filters } : {}) }),
         signal: handlers.signal,
       });
     } catch {
