@@ -7,10 +7,12 @@ import {
   chatSessionApi,
   getApiErrorMessage,
   memberApplicationApi,
+  tagsApi,
   type ChatMode,
   type ChatSession,
   type ChatSource,
   type MemberApplicationStatus,
+  type ResourceTag,
 } from "@/api";
 
 interface Msg {
@@ -55,6 +57,12 @@ export function ChatWidget() {
   // Copy state: tracks which message index was last copied
   const [copiedIdx, setCopiedIdx] = useState<number | null>(null);
 
+  // Range filter state
+  const [filterBrand, setFilterBrand] = useState("");
+  const [filterCategory, setFilterCategory] = useState("");
+  const [brandOpts, setBrandOpts] = useState<ResourceTag[]>([]);
+  const [categoryOpts, setCategoryOpts] = useState<ResourceTag[]>([]);
+
   function autoSizeTextarea() {
     const el = taRef.current;
     if (!el) return;
@@ -84,6 +92,14 @@ export function ChatWidget() {
       memberApplicationApi.mine().then((v) => setApplication(v ?? null)).catch(() => setApplication(null));
     }
   }, [open, isAuthenticated, isMember, application]);
+
+  // Load brand/category options once when member panel first opens
+  useEffect(() => {
+    if (open && isMember && brandOpts.length === 0) {
+      tagsApi.list("doc_brand").then(setBrandOpts).catch(() => {});
+      tagsApi.list("doc_category").then(setCategoryOpts).catch(() => {});
+    }
+  }, [open, isMember]);
 
   // Load sessions when member opens the widget
   useEffect(() => {
@@ -192,6 +208,7 @@ export function ChatWidget() {
 
     await chatApi.streamSession(activeSessionId, q, {
       signal: ctrl.signal,
+      filters: filterBrand || filterCategory ? { brand: filterBrand || undefined, category: filterCategory || undefined } : undefined,
       onSources: (sources) => patchLast((m) => { m.sources = sources; }),
       onMode: (mode) => patchLast((m) => { m.mode = mode; }),
       onDelta: (text) => patchLast((m) => { m.content += text; }),
@@ -297,6 +314,34 @@ export function ChatWidget() {
                 >
                   <Trash2 className="h-3.5 w-3.5" />
                 </button>
+              </div>
+            )}
+
+            {/* Range filter — show once options are loaded */}
+            {isMember && (brandOpts.length > 0 || categoryOpts.length > 0) && (
+              <div className="mt-2 flex items-center gap-2">
+                <select
+                  className="flex-1 truncate rounded-lg bg-blue-700 px-2 py-1 text-xs text-white focus:outline-none disabled:opacity-50"
+                  value={filterBrand}
+                  disabled={streaming}
+                  onChange={(e) => setFilterBrand(e.target.value)}
+                >
+                  <option value="">全部品牌</option>
+                  {brandOpts.map((b) => (
+                    <option key={b.value} value={b.value}>{b.label_zh}</option>
+                  ))}
+                </select>
+                <select
+                  className="flex-1 truncate rounded-lg bg-blue-700 px-2 py-1 text-xs text-white focus:outline-none disabled:opacity-50"
+                  value={filterCategory}
+                  disabled={streaming}
+                  onChange={(e) => setFilterCategory(e.target.value)}
+                >
+                  <option value="">全部分类</option>
+                  {categoryOpts.map((c) => (
+                    <option key={c.value} value={c.value}>{c.label_zh}</option>
+                  ))}
+                </select>
               </div>
             )}
           </div>
