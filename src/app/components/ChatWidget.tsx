@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
-import { AlertTriangle, Check, CheckCircle2, Copy, FileText, Loader2, MessageCircle, Plus, Send, Trash2, X } from "lucide-react";
+import { AlertTriangle, Check, CheckCircle2, Copy, FileText, Loader2, MessageCircle, Plus, Send, ThumbsDown, ThumbsUp, Trash2, X } from "lucide-react";
 import { useAuth } from "@/store/auth";
 import {
   chatApi,
@@ -16,10 +16,12 @@ import {
 } from "@/api";
 
 interface Msg {
+  id?: number;
   role: "user" | "assistant";
   content: string;
   sources?: ChatSource[];
   mode?: ChatMode;
+  feedback?: number | null;
   error?: boolean;
 }
 
@@ -138,10 +140,12 @@ export function ChatWidget() {
       const raw = await chatSessionApi.messages(id);
       setMessages(
         raw.map((m) => ({
+          id: m.id,
           role: m.role as "user" | "assistant",
           content: m.content,
           sources: m.sources ?? undefined,
           mode: m.mode ?? undefined,
+          feedback: m.feedback ?? null,
         }))
       );
       if (list) setSessions(list);
@@ -189,11 +193,22 @@ export function ChatWidget() {
     });
   }
 
-  // After streaming ends, refresh session title (backend may have auto-set it)
-  async function refreshSessionTitle() {
+  // After streaming ends, refresh session list + reload messages to get server-assigned IDs
+  async function refreshAfterStream(sessionId: number) {
     try {
-      const list = await chatSessionApi.list();
+      const [list, raw] = await Promise.all([
+        chatSessionApi.list(),
+        chatSessionApi.messages(sessionId),
+      ]);
       setSessions(list);
+      setMessages(raw.map((m) => ({
+        id: m.id,
+        role: m.role as "user" | "assistant",
+        content: m.content,
+        sources: m.sources ?? undefined,
+        mode: m.mode ?? undefined,
+        feedback: m.feedback ?? null,
+      })));
     } catch { /* ignore */ }
   }
 
@@ -217,7 +232,7 @@ export function ChatWidget() {
 
     setStreaming(false);
     abortRef.current = null;
-    void refreshSessionTitle();
+    void refreshAfterStream(activeSessionId);
   }
 
   function handleSend() { return sendPrompt(input.trim()); }
@@ -445,7 +460,15 @@ export function ChatWidget() {
                   </div>
                 )}
 
-                {messages.map((m, i) => (
+                {messages.map((m, i) => {
+                  async function handleFeedback(value: 1 | -1) {
+                    if (!m.id || !activeSessionId) return;
+                    try {
+                      await chatSessionApi.feedback(activeSessionId, m.id, value);
+                      setMessages((prev) => prev.map((msg, idx) => idx === i ? { ...msg, feedback: value } : msg));
+                    } catch { /* ignore */ }
+                  }
+                  return (
                   <div key={i} className={m.role === "user" ? "text-right" : "text-left"}>
                     {m.role === "assistant" && m.mode === "fallback" && !m.error && (
                       <div className="mb-1 inline-flex items-start gap-1.5 rounded-lg bg-amber-50 px-2.5 py-1.5 text-left text-[11px] leading-snug text-amber-700 ring-1 ring-amber-200">
@@ -475,20 +498,42 @@ export function ChatWidget() {
                             ""
                           ))}
                       </div>
-                      {/* Copy button — in flex flow so moving mouse to it stays inside group hover zone */}
+                      {/* Copy + feedback buttons (assistant only) — visible on group hover */}
                       {m.content && (
-                        <button
-                          type="button"
-                          title="复制"
-                          onClick={() => void copyMessage(m.content, i)}
-                          className="mt-0.5 hidden shrink-0 rounded-md p-1 text-gray-400 transition-colors hover:text-gray-600 group-hover:flex"
-                        >
-                          {copiedIdx === i ? (
-                            <Check className="h-3.5 w-3.5 text-green-500" />
-                          ) : (
-                            <Copy className="h-3.5 w-3.5" />
+                        <>
+                          <button
+                            type="button"
+                            title="复制"
+                            onClick={() => void copyMessage(m.content, i)}
+                            className="mt-0.5 hidden shrink-0 rounded-md p-1 text-gray-400 transition-colors hover:text-gray-600 group-hover:flex"
+                          >
+                            {copiedIdx === i ? (
+                              <Check className="h-3.5 w-3.5 text-green-500" />
+                            ) : (
+                              <Copy className="h-3.5 w-3.5" />
+                            )}
+                          </button>
+                          {m.role === "assistant" && !m.error && m.id && (
+                            <>
+                              <button
+                                type="button"
+                                title="有帮助"
+                                onClick={() => void handleFeedback(1)}
+                                className={`mt-0.5 shrink-0 rounded-md p-1 transition-colors group-hover:flex ${m.feedback === 1 ? "flex text-green-500" : "hidden text-gray-400 hover:text-green-500"}`}
+                              >
+                                <ThumbsUp className="h-3.5 w-3.5" />
+                              </button>
+                              <button
+                                type="button"
+                                title="无帮助"
+                                onClick={() => void handleFeedback(-1)}
+                                className={`mt-0.5 shrink-0 rounded-md p-1 transition-colors group-hover:flex ${m.feedback === -1 ? "flex text-red-500" : "hidden text-gray-400 hover:text-red-500"}`}
+                              >
+                                <ThumbsDown className="h-3.5 w-3.5" />
+                              </button>
+                            </>
                           )}
-                        </button>
+                        </>
                       )}
                     </div>
                     {m.sources && m.sources.length > 0 && (
@@ -505,7 +550,8 @@ export function ChatWidget() {
                       </div>
                     )}
                   </div>
-                ))}
+                  );
+                })}
               </div>
 
               <div className="border-t border-gray-100 p-3">

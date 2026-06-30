@@ -577,10 +577,13 @@ export const chatSessionApi = {
   },
   async messages(id: number) {
     return unwrap(
-      await apiClient.get<ApiEnvelope<Array<{ id: number; role: string; content: string; sources?: ChatSource[] | null; mode?: ChatMode | null }>>>(
+      await apiClient.get<ApiEnvelope<Array<{ id: number; role: string; content: string; sources?: ChatSource[] | null; mode?: ChatMode | null; feedback?: number | null }>>>(
         `/chat/sessions/${id}/messages`
       )
     );
+  },
+  async feedback(sessionId: number, messageId: number, value: 1 | -1): Promise<void> {
+    await apiClient.post(`/chat/sessions/${sessionId}/messages/${messageId}/feedback`, { value });
   },
 };
 
