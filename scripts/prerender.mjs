@@ -148,11 +148,23 @@ async function main() {
   const server = await startPreviewServer();
   console.log("✓ Preview server ready\n");
 
-  // 2. Launch browser
-  const browser = await puppeteer.launch({
-    headless: true,
-    args: ["--no-sandbox", "--disable-setuid-sandbox"],
-  });
+  // 2. Launch browser (gracefully skip if Chromium is unavailable, e.g. in
+  //    Docker builds from China where apt downloads are unreliable).
+  let browser;
+  try {
+    browser = await puppeteer.launch({
+      headless: true,
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    });
+  } catch (err) {
+    console.warn(
+      `⚠ Could not launch browser: ${err.message}\n` +
+        "  Skipping prerender — the SPA fallback will serve client-rendered pages.\n" +
+        "  Install Chromium for static HTML generation: apt install chromium\n"
+    );
+    server.kill("SIGTERM");
+    process.exit(0);
+  }
 
   let successCount = 0;
   let failCount = 0;
@@ -163,7 +175,7 @@ async function main() {
       try {
         process.stdout.write(`  Rendering ${route}... `);
         const html = await renderRoute(browser, route);
-        const outPath = saveHtml(route, html);
+        saveHtml(route, html);
 
         // Extract title for verification
         const titleMatch = html.match(/<title>([^<]*)<\/title>/);

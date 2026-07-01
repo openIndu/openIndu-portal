@@ -10,20 +10,11 @@ COPY package.json package-lock.json ./
 # Install dependencies
 RUN npm config set registry https://registry.npmmirror.com
 
-# Skip Puppeteer's bundled Chrome download — we install Chromium from apt instead.
-# This avoids unreliable Google storage.googleapis.com downloads in China.
+# Skip Puppeteer's bundled Chrome download (large, unreliable from China).
+# The prerender script gracefully skips when no browser is available.
 ENV PUPPETEER_SKIP_DOWNLOAD=true
 
 RUN npm ci
-
-# Install Chromium for Puppeteer prerender step (Debian apt, stable & fast in China
-# via the npmmirror apt proxy if configured).
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends chromium && \
-    rm -rf /var/lib/apt/lists/*
-
-# Tell Puppeteer to use the system Chromium
-ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
 
 # Copy source code
 COPY . .
