@@ -1,5 +1,6 @@
 # Stage 1: Build the application
-FROM node:20-alpine AS builder
+# Debian-based (not Alpine) — Puppeteer/Chromium for prerender needs glibc.
+FROM node:20 AS builder
 
 WORKDIR /app
 
@@ -9,12 +10,16 @@ COPY package.json package-lock.json ./
 # Install dependencies
 RUN npm config set registry https://registry.npmmirror.com
 
+# Skip Puppeteer's bundled Chrome download (large, unreliable from China).
+# The prerender script gracefully skips when no browser is available.
+ENV PUPPETEER_SKIP_DOWNLOAD=true
+
 RUN npm ci
 
 # Copy source code
 COPY . .
 
-# Build the application
+# Build the application (tsc + vite + puppeteer prerender)
 RUN npm run build
 
 # Stage 2: Production image with nginx
