@@ -1,5 +1,6 @@
 # Stage 1: Build the application
-FROM node:20-alpine AS builder
+# Debian-based (not Alpine) — Puppeteer/Chromium for prerender needs glibc.
+FROM node:20 AS builder
 
 WORKDIR /app
 
