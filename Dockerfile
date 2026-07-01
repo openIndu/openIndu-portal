@@ -12,10 +12,13 @@ RUN npm config set registry https://registry.npmmirror.com
 
 RUN npm ci
 
+# Install Chromium for Puppeteer (prerender step needs headless browser)
+RUN npx puppeteer browsers install chrome
+
 # Copy source code
 COPY . .
 
-# Build the application
+# Build the application (tsc + vite + puppeteer prerender)
 RUN npm run build
 
 # Stage 2: Production image with nginx
