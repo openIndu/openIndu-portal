@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import type { Components } from "react-markdown";
 import { AlertTriangle, Check, CheckCircle2, Copy, FileText, Loader2, MessageCircle, Plus, Send, ThumbsDown, ThumbsUp, Trash2, X } from "lucide-react";
 import { useAuth } from "@/store/auth";
 import {
@@ -36,6 +39,50 @@ const STREAMING_HINTS = [
   "正在检索知识库…",
   "AI 正在整理答案…",
 ];
+
+const MARKDOWN_COMPONENTS: Partial<Components> = {
+  a: ({ href, children }) => (
+    <a href={href} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline hover:text-blue-800">
+      {children}
+    </a>
+  ),
+  ul: ({ children }) => <ul className="list-disc space-y-1 pl-5 my-1.5">{children}</ul>,
+  ol: ({ children }) => <ol className="list-decimal space-y-1 pl-5 my-1.5">{children}</ol>,
+  li: ({ children }) => <li className="text-sm leading-relaxed">{children}</li>,
+  p: ({ children }) => <p className="my-1.5 text-sm leading-relaxed first:mt-0 last:mb-0">{children}</p>,
+  strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
+  em: ({ children }) => <em className="italic">{children}</em>,
+  code: ({ className, children, ...props }) => {
+    // Inline code: react-markdown passes `className="language-xxx"` for fenced blocks
+    const isBlock = (props as any).node?.tagName === "pre" || (className ?? "").startsWith("language-");
+    if (isBlock) {
+      return <code className={className}>{children}</code>;
+    }
+    return <code className="rounded bg-gray-200 px-1 py-0.5 text-xs text-red-700">{children}</code>;
+  },
+  pre: ({ children }) => (
+    <pre className="my-2 overflow-x-auto rounded-lg bg-gray-800 p-3 text-xs leading-relaxed text-gray-100">
+      {children}
+    </pre>
+  ),
+  blockquote: ({ children }) => (
+    <blockquote className="my-1.5 border-l-3 border-blue-400 pl-3 text-sm italic text-gray-600">{children}</blockquote>
+  ),
+  table: ({ children }) => (
+    <div className="my-2 overflow-x-auto">
+      <table className="min-w-full border-collapse text-xs">{children}</table>
+    </div>
+  ),
+  th: ({ children }) => <th className="border border-gray-300 bg-gray-100 px-2 py-1 text-left font-semibold">{children}</th>,
+  td: ({ children }) => <td className="border border-gray-300 px-2 py-1">{children}</td>,
+  hr: () => <hr className="my-2 border-gray-200" />,
+  h1: ({ children }) => <h1 className="my-2 text-base font-bold">{children}</h1>,
+  h2: ({ children }) => <h2 className="my-1.5 text-sm font-bold">{children}</h2>,
+  h3: ({ children }) => <h3 className="my-1 text-sm font-semibold">{children}</h3>,
+  h4: ({ children }) => <h4 className="my-1 text-sm font-medium">{children}</h4>,
+  h5: ({ children }) => <h5 className="my-1 text-sm font-medium">{children}</h5>,
+  h6: ({ children }) => <h6 className="my-1 text-sm font-medium">{children}</h6>,
+};
 
 export function ChatWidget() {
   const { isMember, isAuthenticated } = useAuth();
@@ -478,9 +525,9 @@ export function ChatWidget() {
                     )}
                     <div className={`group inline-flex max-w-[85%] items-start gap-1 ${m.role === "user" ? "flex-row-reverse" : "flex-row"}`}>
                       <div
-                        className={`whitespace-pre-wrap break-words rounded-2xl px-3 py-2 text-left text-sm ${
+                        className={`break-words rounded-2xl px-3 py-2 text-left text-sm ${
                           m.role === "user"
-                            ? "bg-blue-600 text-white"
+                            ? "bg-blue-600 text-white whitespace-pre-wrap"
                             : m.error
                               ? "bg-red-50 text-red-600"
                               : m.mode === "fallback"
@@ -488,15 +535,22 @@ export function ChatWidget() {
                                 : "bg-gray-100 text-gray-800"
                         }`}
                       >
-                        {m.content ||
-                          (streaming && i === messages.length - 1 ? (
-                            <span className="flex items-center gap-2 text-gray-400">
-                              <Loader2 className="h-3.5 w-3.5 shrink-0 animate-spin" />
-                              <span className="text-sm">{STREAMING_HINTS[streamingPhase]}</span>
-                            </span>
+                        {m.content ? (
+                          m.role === "assistant" && !m.error ? (
+                            <ReactMarkdown remarkPlugins={[remarkGfm]} components={MARKDOWN_COMPONENTS}>
+                              {m.content}
+                            </ReactMarkdown>
                           ) : (
-                            ""
-                          ))}
+                            m.content
+                          )
+                        ) : streaming && i === messages.length - 1 ? (
+                          <span className="flex items-center gap-2 text-gray-400">
+                            <Loader2 className="h-3.5 w-3.5 shrink-0 animate-spin" />
+                            <span className="text-sm">{STREAMING_HINTS[streamingPhase]}</span>
+                          </span>
+                        ) : (
+                          ""
+                        )}
                       </div>
                       {/* Copy + feedback buttons (assistant only) — visible on group hover */}
                       {m.content && (
