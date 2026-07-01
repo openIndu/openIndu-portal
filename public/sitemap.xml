@@ -2,56 +2,79 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.openindu.com/</loc>
+    <lastmod>2026-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.openindu.com/resources</loc>
+    <lastmod>2026-07-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://www.openindu.com/resources/documents</loc>
+    <lastmod>2026-07-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.openindu.com/resources/software</loc>
+    <lastmod>2026-07-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.openindu.com/motion-control</loc>
+    <lastmod>2026-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.openindu.com/motion-control/studio</loc>
+    <lastmod>2026-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.openindu.com/vision</loc>
+    <lastmod>2026-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.openindu.com/iiot-platform</loc>
+    <lastmod>2026-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.openindu.com/infrastructure</loc>
+    <lastmod>2026-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.openindu.com/privacy</loc>
+    <lastmod>2026-07-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://www.openindu.com/legal</loc>
+    <lastmod>2026-07-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://www.openindu.com/cookies</loc>
+    <lastmod>2026-07-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://www.openindu.com/legal-center</loc>
+    <lastmod>2026-07-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>

@@ -16,4 +16,49 @@ Disallow: /login
 Disallow: /register
 Disallow: /account
 
+# AI crawlers — explicitly allowed so that LLM providers can index the site
+# for AI-powered search and retrieval (ChatGPT, Claude, Perplexity, etc.).
+User-agent: GPTBot
+Allow: /
+Disallow: /login
+Disallow: /register
+Disallow: /account
+
+User-agent: Claude-Web
+Allow: /
+Disallow: /login
+Disallow: /register
+Disallow: /account
+
+User-agent: anthropic-ai
+Allow: /
+Disallow: /login
+Disallow: /register
+Disallow: /account
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /login
+Disallow: /register
+Disallow: /account
+
+User-agent: Applebot
+Allow: /
+Disallow: /login
+Disallow: /register
+Disallow: /account
+
+User-agent: Bytespider
+Allow: /
+Disallow: /login
+Disallow: /register
+Disallow: /account
+
+User-agent: Bingbot
+Allow: /
+Disallow: /login
+Disallow: /register
+Disallow: /account
+
 Sitemap: https://www.openindu.com/sitemap.xml
+LLMs.txt: https://www.openindu.com/llms.txt

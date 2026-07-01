@@ -1,0 +1,27 @@
+# openIndu Community
+
+> 面向智能制造场景的开源工业生态，提供工业互联网平台、PLC 开发工作流、资源中心与 AI 赋能解决方案。
+
+## 核心页面
+
+- [首页](https://www.openindu.com/): openIndu Community 开源智能制造工业生态 — 四大核心解决方案（工业物联网平台、PLC 开发工作流、机器视觉、AI 基础设施），完全开源、社区驱动。
+- [下载中心](https://www.openindu.com/resources): PLC/HMI 开发资料、品牌手册、软件工具与最佳实践下载，支持按品牌和分类筛选。
+- [AI+运动控制](https://www.openindu.com/motion-control): AI 赋能的 PLC 运动控制开发，覆盖三菱、西门子、欧姆龙、基恩士、汇川等主流品牌。
+- [openIndu-studio 平台](https://www.openindu.com/motion-control/studio): 将电气模组、电路图、BOM、IO 地址、PLC 编程与 HMI 编程串联为可追溯的 AI Agent 工作流。
+- [AI+视觉](https://www.openindu.com/vision): AI 驱动的工业视觉检测与识别方案，覆盖缺陷检测、定位测量与质量管控。
+- [AI+工业互联网平台](https://www.openindu.com/iiot-platform): 面向 3C 电子制造的企业级 IIoT，设备管理、数据采集、可视化看板与追溯一体化。
+- [AI+基础设施](https://www.openindu.com/infrastructure): 面向工业 AI 的算力与凭证服务，提供大模型推理、向量检索与 MCP 工具集成的底座能力。
+
+## 法律页面
+
+- [法律与隐私](https://www.openindu.com/legal-center): openIndu社区法律与隐私相关声明汇总。
+- [隐私声明](https://www.openindu.com/privacy): 说明 openIndu社区如何收集、使用、存储和保护用户信息。
+- [法律声明](https://www.openindu.com/legal): 网站访问条件、知识产权、免责事项及用户行为规范。
+- [关于 Cookies](https://www.openindu.com/cookies): 解释 openIndu社区如何使用 Cookies 及本地存储技术。
+
+## 平台链接
+
+- [GitHub](https://github.com/openindu/): openIndu 开源组织，所有核心代码公开。
+- [Gitee](https://gitee.com/openIndu/): openIndu 国内镜像，方便国内开发者访问。
+- [管理后台](https://admin.openindu.com/): 社区管理平台，需登录。
+- [服务状态](https://monitor.openindu.com/status/service): 社区服务运行状态监控。
