@@ -327,9 +327,9 @@ export function Layout() {
 
           {/* Copyright */}
           <div className="border-t border-gray-800 mt-8 pt-8">
-            <p className="text-center text-gray-400 text-sm">© 2026 openIndu Community. 版本 0.0.1-SNAPSHOT</p>
+            <p className="text-center text-gray-400 text-sm">© 2026 openIndu Community. 最后更新: 2026-07-04</p>
             <p className="text-center text-gray-400 text-sm mt-2">
-              最后更新: 2026-02-10 | 备案号: <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">蜀ICP备2025160760号-1</a>
+              备案号: <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">蜀ICP备2025160760号-1</a>
             </p>
           </div>
         </div>
