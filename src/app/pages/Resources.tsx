@@ -124,7 +124,7 @@ export function Resources() {
       // legacy software.series field entirely.
       const params = requestedTab === "software"
         ? { ...baseParams, expand_versions: true, sort_by: "brand", sort_order: "asc" }
-        : { ...baseParams, series: series || undefined };
+        : { ...baseParams, series: series || undefined, sort_by: "brand", sort_order: "asc" };
       const result = requestedTab === "documents" ? await documentsApi.list(params) : await softwareApi.list(params);
       // Compare against the ref — if the user clicked the other tab while
       // this request was in flight, drop the stale result.
