@@ -123,7 +123,7 @@ export function Resources() {
       // series filter into software requests; the backend has removed the
       // legacy software.series field entirely.
       const params = requestedTab === "software"
-        ? { ...baseParams, expand_versions: true }
+        ? { ...baseParams, expand_versions: true, sort_by: "brand", sort_order: "asc" }
         : { ...baseParams, series: series || undefined };
       const result = requestedTab === "documents" ? await documentsApi.list(params) : await softwareApi.list(params);
       // Compare against the ref — if the user clicked the other tab while
