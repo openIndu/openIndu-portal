@@ -52,6 +52,8 @@ export interface PaginationParams {
   series?: string;
   published_only?: boolean;
   expand_versions?: boolean;
+  sort_by?: string;
+  sort_order?: string;
 }
 
 export type SoftwarePaginationParams = Omit<PaginationParams, "series">;
