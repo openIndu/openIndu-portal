@@ -46,6 +46,7 @@ export function Layout() {
     { name: "AI+视觉", href: "/vision" },
     { name: "AI+工业互联网平台", href: "/iiot-platform" },
     { name: "AI+基础设施", href: "/infrastructure" },
+    { name: "智能咨询", href: "/chat" },
   ];
 
   const isActive = (path: string) => {
@@ -245,7 +246,7 @@ export function Layout() {
       {/* Footer */}
       <footer className="bg-gray-900 text-white mt-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-5">
             {/* Logo and Description */}
             <div className="flex flex-col items-start">
               <div className="flex items-center gap-2 mb-4">
@@ -276,9 +277,6 @@ export function Layout() {
                   <Link to="/motion-control" className="hover:text-white">AI+运动控制-概览</Link>
                 </li>
                 <li>
-                  <Link to="/motion-control/studio" className="hover:text-white">openIndu-studio 平台</Link>
-                </li>
-                <li>
                   <Link to="/vision" className="hover:text-white">AI+视觉</Link>
                 </li>
                 <li>
@@ -286,6 +284,19 @@ export function Layout() {
                 </li>
                 <li>
                   <Link to="/infrastructure" className="hover:text-white">AI+基础设施</Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Core Services */}
+            <div className="flex flex-col items-start">
+              <h3 className="font-semibold text-white mb-4">核心服务</h3>
+              <ul className="space-y-2 text-gray-400">
+                <li>
+                  <Link to="/motion-control/studio" className="hover:text-white">openIndu-studio 平台</Link>
+                </li>
+                <li>
+                  <Link to="/chat" className="hover:text-white">智能咨询机器人</Link>
                 </li>
               </ul>
             </div>
