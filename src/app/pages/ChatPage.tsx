@@ -339,7 +339,7 @@ export default function ChatPage() {
           </div>
 
           {/* Messages */}
-          <div ref={scrollRef} className="flex-1 space-y-3 overflow-y-auto p-4">
+          <div ref={scrollRef} className="flex-1 space-y-3 overflow-y-scroll p-4">
             {(sessionsLoading || msgsLoading) && (
               <div className="flex justify-center py-8"><Loader2 className="h-5 w-5 animate-spin text-gray-400" /></div>
             )}
