@@ -254,7 +254,7 @@ export default function ChatPage() {
   }
 
   return (
-    <div className="mx-auto flex h-[calc(100vh-8rem)] max-w-4xl flex-col px-4 py-6">
+    <div className="mx-auto flex h-[calc(100vh-8rem)] max-w-7xl flex-col px-4 sm:px-6 lg:px-8 py-6">
       {/* Header */}
       <div className="mb-4 shrink-0">
         <h1 className="text-2xl font-bold text-gray-900">智能咨询</h1>
