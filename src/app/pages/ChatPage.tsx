@@ -388,17 +388,17 @@ export default function ChatPage() {
                     {m.content && (
                       <>
                         <button type="button" title="复制" onClick={() => void copyMessage(m.content, i)}
-                          className="mt-0.5 hidden shrink-0 rounded-md p-1 text-gray-400 transition-colors hover:text-gray-600 group-hover:flex">
+                          className="mt-0.5 shrink-0 rounded-md p-1 text-gray-400 transition-colors hover:text-gray-600 invisible group-hover:visible">
                           {copiedIdx === i ? <Check className="h-3.5 w-3.5 text-green-500" /> : <Copy className="h-3.5 w-3.5" />}
                         </button>
                         {m.role === "assistant" && !m.error && m.id && (
                           <>
                             <button type="button" title="有帮助" onClick={() => void handleFeedback(1)}
-                              className={`mt-0.5 shrink-0 rounded-md p-1 transition-colors group-hover:flex ${m.feedback === 1 ? "flex text-green-500" : "hidden text-gray-400 hover:text-green-500"}`}>
+                              className={`mt-0.5 shrink-0 rounded-md p-1 transition-colors invisible group-hover:visible ${m.feedback === 1 ? "visible text-green-500" : "text-gray-400 hover:text-green-500"}`}>
                               <ThumbsUp className="h-3.5 w-3.5" />
                             </button>
                             <button type="button" title="无帮助" onClick={() => void handleFeedback(-1)}
-                              className={`mt-0.5 shrink-0 rounded-md p-1 transition-colors group-hover:flex ${m.feedback === -1 ? "flex text-red-500" : "hidden text-gray-400 hover:text-red-500"}`}>
+                              className={`mt-0.5 shrink-0 rounded-md p-1 transition-colors invisible group-hover:visible ${m.feedback === -1 ? "visible text-red-500" : "text-gray-400 hover:text-red-500"}`}>
                               <ThumbsDown className="h-3.5 w-3.5" />
                             </button>
                           </>
