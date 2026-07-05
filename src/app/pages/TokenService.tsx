@@ -68,7 +68,7 @@ export function TokenService() {
       {/* Quick Access */}
       <section className="py-16 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-to-br from-purple-600 to-blue-600 rounded-2xl p-12 text-center">
+          <div className="bg-gradient-to-br from-purple-600 to-blue-600 rounded-2xl p-6 sm:p-12 text-center">
             <Server className="w-16 h-16 mx-auto mb-6 opacity-80" />
             <h2 className="text-4xl font-bold mb-4 text-white">开始使用</h2>
             <p className="text-xl mb-8 text-purple-100">
@@ -192,7 +192,7 @@ export function TokenService() {
             <p className="text-lg text-gray-600">简单的API调用，快速接入</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-gray-900 rounded-2xl p-8 overflow-x-auto">
+            <div className="bg-gray-900 rounded-2xl p-4 sm:p-8 overflow-x-auto">
               <pre className="text-green-400 text-sm">
                 {`# 使用示例 - Python
 import openai
