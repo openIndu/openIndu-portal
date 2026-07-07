@@ -229,7 +229,11 @@ export default function ChatPage() {
       onSources: (sources) => patchLast((m) => { m.sources = sources; }),
       onMode: (mode) => patchLast((m) => { m.mode = mode; }),
       onDelta: (text) => patchLast((m) => { m.content += text; }),
-      onError: (detail) => patchLast((m) => { m.content = detail; m.error = true; }),
+      onError: (detail) => {
+        patchLast((m) => { m.content = detail; m.error = true; });
+        // Restore user input so typed content is not lost on error
+        setInput(q);
+      },
     });
     setStreaming(false);
     abortRef.current = null;

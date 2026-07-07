@@ -597,10 +597,10 @@ export const chatApi = {
   // 发起一次流式问答。通过 handlers 回调 sources/delta/done/error。
   async stream(body: ChatStreamBody, handlers: ChatStreamHandlers = {}): Promise<void> {
     const base = import.meta.env.VITE_API_BASE || "/api/v1";
-    const token = localStorage.getItem(STORAGE_KEYS.token);
-    let resp: Response;
-    try {
-      resp = await fetch(`${base}/chat`, {
+
+    async function doFetch(): Promise<Response> {
+      const token = localStorage.getItem(STORAGE_KEYS.token);
+      return fetch(`${base}/chat`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -610,9 +610,34 @@ export const chatApi = {
         body: JSON.stringify(body),
         signal: handlers.signal,
       });
+    }
+
+    let resp: Response;
+    try {
+      resp = await doFetch();
     } catch {
       handlers.onError?.("网络错误，请稍后重试");
       return;
+    }
+
+    // On 401, try to refresh the access token and retry once.
+    // Raw fetch() does NOT go through the axios interceptor that handles
+    // automatic token refresh, so we must handle it here explicitly.
+    if (resp.status === 401) {
+      const refreshTok = localStorage.getItem(STORAGE_KEYS.refreshToken);
+      if (refreshTok) {
+        try {
+          await performRefresh(localStorage.getItem(STORAGE_KEYS.token));
+          try {
+            resp = await doFetch();
+          } catch {
+            handlers.onError?.("网络错误，请稍后重试");
+            return;
+          }
+        } catch {
+          // Refresh failed; fall through to show the 401 error below
+        }
+      }
     }
 
     if (!resp.ok || !resp.body) {
@@ -687,10 +712,10 @@ export const chatApi = {
   // 会话模式流式问答（history 由后端从 DB 读取）
   async streamSession(sessionId: number, message: string, handlers: ChatStreamHandlers = {}): Promise<void> {
     const base = import.meta.env.VITE_API_BASE || "/api/v1";
-    const token = localStorage.getItem(STORAGE_KEYS.token);
-    let resp: Response;
-    try {
-      resp = await fetch(`${base}/chat/sessions/${sessionId}/stream`, {
+
+    async function doFetch(): Promise<Response> {
+      const token = localStorage.getItem(STORAGE_KEYS.token);
+      return fetch(`${base}/chat/sessions/${sessionId}/stream`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -700,9 +725,34 @@ export const chatApi = {
         body: JSON.stringify({ message, ...(handlers.filters ? { filters: handlers.filters } : {}) }),
         signal: handlers.signal,
       });
+    }
+
+    let resp: Response;
+    try {
+      resp = await doFetch();
     } catch {
       handlers.onError?.("网络错误，请稍后重试");
       return;
+    }
+
+    // On 401, try to refresh the access token and retry once.
+    // Raw fetch() does NOT go through the axios interceptor that handles
+    // automatic token refresh, so we must handle it here explicitly.
+    if (resp.status === 401) {
+      const refreshTok = localStorage.getItem(STORAGE_KEYS.refreshToken);
+      if (refreshTok) {
+        try {
+          await performRefresh(localStorage.getItem(STORAGE_KEYS.token));
+          try {
+            resp = await doFetch();
+          } catch {
+            handlers.onError?.("网络错误，请稍后重试");
+            return;
+          }
+        } catch {
+          // Refresh failed; fall through to show the 401 error below
+        }
+      }
     }
 
     if (!resp.ok || !resp.body) {
