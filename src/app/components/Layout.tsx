@@ -1,5 +1,5 @@
 import { Outlet, Link, useLocation, useNavigate } from "react-router";
-import { ChevronDown, LogOut, Menu, UserRound, X } from "lucide-react";
+import { ArrowRight, ChevronDown, ChevronRight, LogOut, Menu, UserRound, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/store/auth";
 import { visitsApi } from "@/api";
@@ -211,25 +211,50 @@ export function Layout() {
                 )}
               </div>
             ))}
-            <div className="mt-3 border-t border-gray-100 pt-3">
+            <div className="mt-3 border-t border-gray-200 pt-3">
               {isAuthenticated ? (
                 <div className="space-y-2">
-                  <Link to="/account" onClick={() => setMobileMenuOpen(false)} className="block rounded-lg bg-blue-50 px-3 py-2 text-sm text-blue-700">
-                    <div className="font-medium">个人中心：{displayName}</div>
-                    <div className="text-xs text-blue-600">手机号：{maskPhone(user?.phone)}</div>
-                    {user?.role && <div className="text-xs">角色：{ROLE_LABELS[user.role] ?? user.role}</div>}
+                  <Link
+                    to="/account"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center gap-3 rounded-xl bg-blue-50 px-3 py-3 hover:bg-blue-100"
+                  >
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-600 text-white">
+                      <UserRound className="h-5 w-5" />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-2">
+                        <span className="truncate font-medium text-gray-900">{displayName}</span>
+                        {user?.role && (
+                          <span className="shrink-0 rounded-full bg-white px-2 py-0.5 text-xs text-blue-700">
+                            {ROLE_LABELS[user.role] ?? user.role}
+                          </span>
+                        )}
+                      </div>
+                      <div className="mt-0.5 truncate text-xs text-blue-600/80">{maskPhone(user?.phone)}</div>
+                    </div>
+                    <ChevronRight className="h-5 w-5 shrink-0 text-blue-400" />
                   </Link>
                   <button
                     type="button"
                     onClick={() => void handleLogout()}
-                    className="block w-full rounded-lg px-3 py-2 text-left text-gray-700 hover:bg-gray-50"
+                    className="flex w-full items-center justify-center gap-2 rounded-xl border border-gray-200 px-3 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-600"
                   >
+                    <LogOut className="h-4 w-4" />
                     退出登录
                   </button>
                 </div>
               ) : (
-                <div className="grid grid-cols-1 gap-2">
-                  <Link to="/login" onClick={() => setMobileMenuOpen(false)} className="rounded-lg bg-blue-600 px-3 py-2 text-center text-white">登录 / 注册</Link>
+                <div className="rounded-xl border border-gray-200 bg-gray-50 p-3">
+                  <p className="mb-2 text-center text-xs text-gray-500">登录后可下载资料、使用智能咨询与工作流</p>
+                  <Link
+                    to="/login"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center justify-center gap-1.5 rounded-lg bg-blue-600 px-3 py-2.5 text-sm font-medium text-white hover:bg-blue-700"
+                  >
+                    登录 / 注册
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
                 </div>
               )}
             </div>
