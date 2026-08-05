@@ -41,9 +41,10 @@ test.describe("Home Page", () => {
     await expect(page.getByText("电气模组梳理").first()).toBeVisible();
   });
 
-  test("should display WeChat QR block", async ({ page }) => {
+  test("should display WeChat QR block with search promotion style", async ({ page }) => {
     await page.goto("/");
-    await expect(page.getByText("关注微信公众号")).toBeVisible();
+    await expect(page.getByText("搜一搜")).toBeVisible();
+    await expect(page.getByText("微信扫码关注公众号")).toBeVisible();
     await expect(page.locator('img[alt="openIndu 微信公众号二维码"]')).toBeVisible();
   });
 

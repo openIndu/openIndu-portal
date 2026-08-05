@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { ArrowRight, ArrowDown, Bot, Cog, Github, Globe, Users, Zap, Code, ExternalLink, Cpu, Eye, Network, Server, FileSpreadsheet, ListChecks, MonitorCog, Layers, TrendingUp, Workflow as WorkflowIcon } from "lucide-react";
+import { ArrowRight, ArrowDown, Bot, Cog, Github, Globe, Users, Zap, Code, ExternalLink, Cpu, FileSpreadsheet, ListChecks, MonitorCog, Layers, TrendingUp, Search, Workflow as WorkflowIcon } from "lucide-react";
 import { SEO } from "../components/SEO";
 
 const workflowSteps = [
@@ -77,33 +77,6 @@ const strategicLayers = [
     title: "向上突破：工艺知识专栏",
     description:
       "聚焦面板行业与半导体行业核心工艺流程，汇聚社区专家经验，打造开放、可追溯的工艺知识库 —— 即将推出，敬请期待。",
-  },
-];
-
-const solutions = [
-  {
-    icon: Cpu,
-    title: "PLC 开发工作流",
-    description: "AI 辅助的 PLC/HMI 程序开发与调试工作流，面向西门子、三菱、欧姆龙等主流品牌，从电路图到代码草案全链路可追溯。",
-    link: "/motion-control/studio",
-  },
-  {
-    icon: Network,
-    title: "工业物联网平台",
-    description: "设备接入、数据采集、产线监控与告警，覆盖智能制造全场景的工业互联网基础平台。",
-    link: "/iiot-platform",
-  },
-  {
-    icon: Eye,
-    title: "机器视觉解决方案",
-    description: "集成工业相机与视觉算法，实现缺陷检测、尺寸测量与产品分类的自动化视觉检测。",
-    link: "/vision",
-  },
-  {
-    icon: Server,
-    title: "AI 基础设施",
-    description: "基于 RAG + MCP 的工业知识库，为 Claude Code 等 AI Agent 提供工业领域知识检索服务。",
-    link: "/infrastructure",
   },
 ];
 
@@ -299,39 +272,6 @@ export function Home() {
         </div>
       </section>
 
-      {/* Solutions Grid */}
-      <section className="py-16 sm:py-20 bg-gray-50">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">核心解决方案</h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              覆盖非标自动化全场景，为智能制造转型提供完整解决方案
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {solutions.map((solution) => (
-              <div
-                key={solution.title}
-                className="relative p-8 border border-gray-200 rounded-xl hover:border-blue-600 hover:shadow-lg transition-all group"
-              >
-                <div className="flex items-center justify-center w-16 h-16 bg-blue-100 text-blue-600 rounded-lg mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                  <solution.icon className="w-8 h-8" />
-                </div>
-                <h3 className="text-2xl font-semibold text-gray-900 mb-3">{solution.title}</h3>
-                <p className="text-gray-600 mb-6 min-h-[3rem]">{solution.description}</p>
-                <Link
-                  to={solution.link}
-                  className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
-                >
-                  了解更多
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Open Source Benefits Section */}
       <section className="py-20 bg-gradient-to-br from-blue-50 via-cyan-50 to-blue-50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -428,15 +368,37 @@ export function Home() {
               了解平台
             </a>
           </div>
-          <div className="mt-12 flex flex-col items-center">
-            <div className="bg-white rounded-2xl p-5 sm:p-6 shadow-xl max-w-xs w-full">
-              <p className="text-center text-gray-700 font-semibold mb-4">关注微信公众号</p>
-              <img
-                src="/assets/iiot/qr-code.jpg"
-                alt="openIndu 微信公众号二维码"
-                className="w-48 sm:w-56 mx-auto"
-              />
-              <p className="text-center text-gray-500 text-xs sm:text-sm mt-3">获取最新动态与技术分享</p>
+          <div className="mt-12 flex justify-center">
+            {/* 微信公众号：微信官方搜一搜联合传播样式 */}
+            <div className="bg-[#07C160] rounded-2xl p-5 sm:p-6 shadow-xl max-w-md w-full">
+              <div className="flex flex-col sm:flex-row items-center gap-5">
+                {/* 左侧：二维码 — 白色圆角卡片内嵌 */}
+                <div className="shrink-0 bg-white rounded-xl p-3">
+                  <img
+                    src="/assets/iiot/qr-code.jpg"
+                    alt="openIndu 微信公众号二维码"
+                    className="w-32 h-32 sm:w-36 sm:h-36 rounded-lg"
+                  />
+                </div>
+                {/* 右侧：搜一搜引导信息（白字绿底） */}
+                <div className="flex flex-col items-center sm:items-start text-center sm:text-left min-w-0">
+                  {/* 搜一搜图标 + 标签 */}
+                  <div className="flex items-center gap-1.5 mb-2">
+                    <Search className="w-4 h-4 text-white/80" />
+                    <span className="text-sm text-white/80 font-medium">搜一搜</span>
+                  </div>
+                  {/* 公众号名称 */}
+                  <p className="text-lg font-semibold text-white mb-3">openIndu</p>
+                  {/* 搜索框模拟 */}
+                  <div className="flex items-center gap-2 bg-white/20 rounded-full px-4 py-2 mb-3 w-full max-w-[200px]">
+                    <Search className="w-3.5 h-3.5 text-white/60 shrink-0" />
+                    <span className="text-sm text-white/60 truncate">openIndu</span>
+                  </div>
+                  {/* CTA 文案 */}
+                  <p className="text-sm text-white/90">微信扫码关注公众号</p>
+                  <p className="text-xs text-white/60 mt-1">获取最新动态与技术分享</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
