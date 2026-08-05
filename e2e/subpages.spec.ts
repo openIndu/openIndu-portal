@@ -41,6 +41,11 @@ test.describe("IIoT Platform Page", () => {
     await page.goto("/iiot-platform");
     await expect(page.getByText("技术架构")).toBeVisible();
   });
+
+  test("should not display WeChat QR block (moved to home)", async ({ page }) => {
+    await page.goto("/iiot-platform");
+    await expect(page.getByText("关注微信公众号")).toHaveCount(0);
+  });
 });
 
 test.describe("Infrastructure Page", () => {
