@@ -31,7 +31,7 @@ function LegalPage({
 }) {
   return (
     <section className="bg-gray-50 px-4 py-12 sm:px-6 lg:px-8">
-      <SEO title={`${title}｜openIndu社区`} description={description} canonicalPath={canonicalPath} />
+      <SEO title={`${title}｜openIndu社区`} description={description} canonicalPath={canonicalPath} localized={false} />
       <div className="mx-auto max-w-4xl rounded-2xl bg-white p-6 shadow-sm sm:p-10">
         <div className="mb-8 border-b border-gray-100 pb-6">
           <h1 className="text-3xl font-bold text-gray-900">{title}</h1>
@@ -425,7 +425,7 @@ export function CookiesPolicy() {
 export function LegalIndex() {
   return (
     <section className="bg-gray-50 px-4 py-12 sm:px-6 lg:px-8">
-      <SEO title="法律与隐私｜openIndu社区" description="openIndu社区法律与隐私相关声明。" canonicalPath="/legal-center" />
+      <SEO title="法律与隐私｜openIndu社区" description="openIndu社区法律与隐私相关声明。" canonicalPath="/legal-center" localized={false} />
       <div className="mx-auto max-w-4xl rounded-2xl bg-white p-8 shadow-sm">
         <h1 className="text-3xl font-bold text-gray-900">法律与隐私</h1>
         <p className="mt-3 text-gray-600">openIndu社区承诺保护用户隐私并遵守适用法律。以下文件说明我们如何收集信息、保护权利及规范使用行为。</p>
