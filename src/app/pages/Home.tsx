@@ -276,17 +276,8 @@ export function Home() {
       <section className="py-14 sm:py-20 bg-gradient-to-r from-blue-600 to-cyan-600 text-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row items-center justify-center gap-10 lg:gap-20">
-            {/* WeChat QR */}
-            <div className="flex flex-col items-center text-center order-1">
-              <h3 className="text-xl sm:text-2xl font-semibold mb-5">微信扫码关注公众号</h3>
-              <img
-                src="/assets/iiot/qr-code.jpg"
-                alt="openIndu 微信公众号二维码"
-                className="w-56 h-56 sm:w-64 sm:h-64 rounded-xl bg-white p-2 shadow-lg"
-              />
-            </div>
             {/* CTA copy */}
-            <div className="text-center lg:text-left order-2">
+            <div className="text-center lg:text-left order-1">
               <h2 className="text-2xl sm:text-3xl font-bold mb-4">加入 openIndu 社区</h2>
               <p className="text-base sm:text-xl mb-8 sm:mb-10 text-blue-100 max-w-2xl">
                 从工艺参数到产线数据，一个栈打通。与全球开发者共同构建工业自动化开源生态
@@ -308,6 +299,15 @@ export function Home() {
                   了解平台
                 </Link>
               </div>
+            </div>
+            {/* WeChat QR */}
+            <div className="flex flex-col items-center text-center order-2">
+              <h3 className="text-xl sm:text-2xl font-semibold mb-5">微信扫码关注公众号</h3>
+              <img
+                src="/assets/iiot/qr-code.jpg"
+                alt="openIndu 微信公众号二维码"
+                className="w-64 h-80 sm:w-72 sm:h-96 rounded-xl bg-white p-2 shadow-lg object-contain"
+              />
             </div>
           </div>
         </div>
