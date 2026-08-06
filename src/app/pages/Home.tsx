@@ -306,7 +306,7 @@ export function Home() {
               <img
                 src="/assets/iiot/qr-code.jpg"
                 alt="openIndu 微信公众号二维码"
-                className="w-64 h-80 sm:w-72 sm:h-96 rounded-xl bg-white p-2 shadow-lg object-contain"
+                className="w-72 h-72 sm:w-80 sm:h-80"
               />
             </div>
           </div>
