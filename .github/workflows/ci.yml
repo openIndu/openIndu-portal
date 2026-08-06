@@ -17,6 +17,8 @@ jobs:
   build:
     name: Type-check & Build
     runs-on: ubuntu-latest
+    # Guard: a hung prerender used to burn the full 6h job limit before failing.
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -29,6 +31,7 @@ jobs:
   test:
     name: Unit Tests (vitest)
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
