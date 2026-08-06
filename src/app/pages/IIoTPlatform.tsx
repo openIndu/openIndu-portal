@@ -469,17 +469,6 @@ export function IIoTPlatform() {
                 </a>
               </div>
             </div>
-            <div className="flex-shrink-0">
-              <div className="bg-white rounded-2xl p-4 sm:p-6 shadow-xl max-w-[380px] sm:max-w-none mx-auto">
-                <p className="text-center text-gray-700 font-semibold mb-3 sm:mb-4 text-sm sm:text-base">关注微信公众号</p>
-                <img
-                  src="/assets/iiot/qr-code.jpg"
-                  alt="openIndu 微信公众号二维码"
-                  className="w-full sm:w-96 h-auto mx-auto"
-                />
-                <p className="text-center text-gray-500 text-xs sm:text-sm mt-2 sm:mt-3">获取更多最新动态</p>
-              </div>
-            </div>
           </div>
         </div>
       </section>
