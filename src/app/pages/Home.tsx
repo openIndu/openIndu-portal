@@ -2,35 +2,6 @@ import { Link } from "react-router";
 import { ArrowRight, Bot, Cog, Github, Globe, Users, Code, ExternalLink, Cpu, Search, Database, BarChart3, Plug, Workflow as WorkflowIcon } from "lucide-react";
 import { SEO } from "../components/SEO";
 
-/** 五段痛点 —— 每段都有工具，没有一段连着下一段 */
-const painPoints = [
-  {
-    icon: Search,
-    stage: "工艺知识",
-    text: "工艺窗口在老师傅脑子里。人走了，参数为什么这么设就没人说得清。",
-  },
-  {
-    icon: WorkflowIcon,
-    stage: "工程生成",
-    text: "电气图、BOM、IO 表、PLC 程序活在四个互不相通的工具里。改一处，四处手工同步。",
-  },
-  {
-    icon: Cpu,
-    stage: "跨品牌执行",
-    text: "换一个 PLC 品牌，程序全部重写。你的软件被硬件厂商的生态绑死。",
-  },
-  {
-    icon: Database,
-    stage: "采集与数据",
-    text: "运行数据锁在控制器里。要拿出来，得再买一套系统。",
-  },
-  {
-    icon: BarChart3,
-    stage: "分析洞察",
-    text: "良率掉了查不到根因。就算查到了，结论也回不到下一次设计里。",
-  },
-];
-
 /** 五节点闭环 */
 const architectureNodes = [
   {
@@ -137,13 +108,13 @@ export function Home() {
               <Github className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               Apache-2.0 · 开源 · 开放 · 协作
             </span>
-            <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight tracking-tight">
               一栈贯通，开放智造
-              <span className="block text-blue-600 text-xl sm:text-2xl md:text-4xl mt-3 sm:mt-4">
+              <span className="block text-blue-600 text-2xl sm:text-3xl md:text-5xl mt-4 sm:mt-6">
                 工业自动化的端到端开源操作系统
               </span>
             </h1>
-            <p className="text-base sm:text-lg text-gray-600 mb-8 sm:mb-10 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg sm:text-xl text-gray-600 mb-8 sm:mb-10 max-w-3xl mx-auto leading-relaxed">
               从工艺参数到产线数据，一个栈打通。任意品牌 PLC，全部开源。
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
@@ -165,34 +136,7 @@ export function Home() {
         </div>
       </section>
 
-      {/* ── 2. 五段痛点 ── */}
-      <section className="py-14 sm:py-20 bg-white">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-8 sm:mb-12 text-center leading-snug">
-            工控行业不缺工具，缺的是把工具连起来的东西
-          </h2>
-          <div className="max-w-4xl mx-auto space-y-3 sm:space-y-4">
-            {painPoints.map((p) => (
-              <div
-                key={p.stage}
-                className="flex items-start gap-3 sm:gap-4 bg-gray-50 rounded-xl p-4 sm:p-5 border border-gray-100"
-              >
-                <div className="flex-shrink-0 flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 bg-white text-gray-500 rounded-lg border border-gray-200">
-                  <p.icon className="w-4 h-4 sm:w-5 sm:h-5" />
-                </div>
-                <div className="min-w-0">
-                  <span className="inline-block text-xs sm:text-sm font-semibold text-blue-700 mb-1">
-                    {p.stage}
-                  </span>
-                  <p className="text-sm sm:text-base text-gray-700 leading-relaxed">{p.text}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── 3. 三大核心产品 ── */}
+      {/* ── 2. 三大核心产品 ── */}
       <section className="py-14 sm:py-20 bg-gray-50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-12">
@@ -231,7 +175,7 @@ export function Home() {
         </div>
       </section>
 
-      {/* ── 4. 五节点闭环 ── */}
+      {/* ── 3. 五节点闭环 ── */}
       <section className="py-14 sm:py-20 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-12">
@@ -263,7 +207,7 @@ export function Home() {
         </div>
       </section>
 
-      {/* ── 5. 开源仓库 ── */}
+      {/* ── 4. 开源仓库 ── */}
       <section className="py-14 sm:py-20 bg-gray-50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10 sm:mb-14">
@@ -292,43 +236,43 @@ export function Home() {
               查看代码，参与贡献
             </h3>
             <p className="text-base sm:text-lg text-gray-600 mb-8">全部仓库公开，Apache-2.0 授权</p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-5xl mx-auto">
               <a
                 href="https://github.com/openindu/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-between gap-4 bg-white border border-gray-200 rounded-xl p-6 hover:border-gray-400 hover:shadow-md transition-all group"
+                className="flex items-center justify-between gap-4 bg-[#24292f] rounded-2xl p-8 lg:p-10 hover:bg-[#1b1f24] hover:shadow-xl transition-all group"
               >
-                <div className="flex items-center gap-4 min-w-0">
-                  <Github className="w-9 h-9 text-gray-700 flex-shrink-0" />
+                <div className="flex items-center gap-5 min-w-0">
+                  <Github className="w-12 h-12 lg:w-14 lg:h-14 text-white flex-shrink-0" />
                   <div className="text-left min-w-0">
-                    <h4 className="text-lg font-semibold text-gray-900">GitHub</h4>
-                    <p className="text-sm text-gray-500 truncate">github.com/openIndu</p>
+                    <h4 className="text-2xl font-semibold text-white">GitHub</h4>
+                    <p className="text-base text-gray-400 truncate">github.com/openIndu</p>
                   </div>
                 </div>
-                <ExternalLink className="w-5 h-5 text-gray-400 group-hover:text-gray-700 transition-colors flex-shrink-0" />
+                <ExternalLink className="w-6 h-6 text-gray-500 group-hover:text-white transition-colors flex-shrink-0" />
               </a>
               <a
                 href="https://gitee.com/openIndu/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-between gap-4 bg-white border border-gray-200 rounded-xl p-6 hover:border-gray-400 hover:shadow-md transition-all group"
+                className="flex items-center justify-between gap-4 bg-[#c71d23] rounded-2xl p-8 lg:p-10 hover:bg-[#a8181d] hover:shadow-xl transition-all group"
               >
-                <div className="flex items-center gap-4 min-w-0">
-                  <Globe className="w-9 h-9 text-gray-700 flex-shrink-0" />
+                <div className="flex items-center gap-5 min-w-0">
+                  <Globe className="w-12 h-12 lg:w-14 lg:h-14 text-white flex-shrink-0" />
                   <div className="text-left min-w-0">
-                    <h4 className="text-lg font-semibold text-gray-900">Gitee</h4>
-                    <p className="text-sm text-gray-500 truncate">gitee.com/openIndu</p>
+                    <h4 className="text-2xl font-semibold text-white">Gitee</h4>
+                    <p className="text-base text-gray-200 truncate">gitee.com/openIndu</p>
                   </div>
                 </div>
-                <ExternalLink className="w-5 h-5 text-gray-400 group-hover:text-gray-700 transition-colors flex-shrink-0" />
+                <ExternalLink className="w-6 h-6 text-white/70 group-hover:text-white transition-colors flex-shrink-0" />
               </a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── 6. CTA ── */}
+      {/* ── 5. CTA ── */}
       <section className="py-14 sm:py-20 bg-gradient-to-r from-blue-600 to-cyan-600 text-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-2xl sm:text-3xl font-bold mb-4">加入 openIndu 社区</h2>

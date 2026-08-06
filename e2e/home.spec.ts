@@ -19,14 +19,6 @@ test.describe("Home Page", () => {
     await expect(page.getByText("从工艺参数到产线数据，一个栈打通。任意品牌 PLC，全部开源。")).toBeVisible();
   });
 
-  test("should display the five pain points", async ({ page }) => {
-    await page.goto("/");
-    await expect(page.getByText("工控行业不缺工具，缺的是把工具连起来的东西")).toBeVisible();
-    for (const stage of ["工艺知识", "工程生成", "跨品牌执行", "采集与数据", "分析洞察"]) {
-      await expect(page.getByText(stage, { exact: true }).first()).toBeVisible();
-    }
-  });
-
   test("should display three core products section", async ({ page }) => {
     await page.goto("/");
     await expect(page.getByText("三大核心产品")).toBeVisible();
