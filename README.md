@@ -1,163 +1,165 @@
 # openIndu Portal
 
-OpenIndu 门户前端应用，基于 React + Vite + Tailwind CSS 构建，容器化部署到 Kubernetes 集群。
+> **Language:** English | [中文](README_ZH.md)
 
-## 技术栈
+The openIndu community website frontend, built with React + Vite + Tailwind CSS, containerized for deployment on Kubernetes.
 
-- **前端框架**: React 18 + TypeScript
-- **构建工具**: Vite 6
-- **样式**: Tailwind CSS 4
-- **容器化**: Docker + Nginx
-- **编排**: Kubernetes
+## Tech Stack
 
-## 项目结构
+- **Frontend framework**: React 18 + TypeScript
+- **Build tooling**: Vite 6
+- **Styling**: Tailwind CSS 4
+- **Containerization**: Docker + Nginx
+- **Orchestration**: Kubernetes
+
+## Project Structure
 
 ```
 openIndu-portal/
 ├── src/
-│   ├── app/           # 应用组件
+│   ├── app/           # Application components
 │   │   ├── components/
 │   │   └── pages/
-│   ├── styles/        # 样式文件
-│   └── main.tsx       # 入口文件
+│   ├── styles/        # Style files
+│   └── main.tsx       # Entry point
 ├── deploy/
-│   └── kubernetes/    # K8s 部署配置
+│   └── kubernetes/    # K8s deployment config
 │       ├── deployment.yaml
 │       ├── service.yaml
 │       ├── ingress.yaml
 │       └── deploy.sh
 ├── Dockerfile
-├── build.sh           # 镜像构建脚本
+├── build.sh           # Image build script
 ├── nginx.conf
 └── package.json
 ```
 
-## 本地开发
+## Local Development
 
-### 环境要求
+### Prerequisites
 
 - Node.js 20+
-- npm 或 pnpm
+- npm or pnpm
 
-### 安装依赖
+### Install Dependencies
 
 ```bash
 npm install
 ```
 
-### 启动开发服务器
+### Start Dev Server
 
 ```bash
 npm run dev
 ```
 
-### 构建生产版本
+### Build for Production
 
 ```bash
 npm run build
 ```
 
-### 预览构建结果
+### Preview Build
 
 ```bash
 npm run preview
 ```
 
-## Docker 构建
+## Docker Build
 
-### 构建镜像
+### Build Image
 
 ```bash
-# 使用 git commit hash 作为 tag
+# Use git commit hash as tag
 ./build.sh
 
-# 指定版本 tag
+# Specify a version tag
 ./build.sh -t v0.0.1
 
-# 同时打 latest 标签
+# Also tag as latest
 ./build.sh -l
 
-# 构建并推送到阿里云镜像仓库
-./build.sh --push -u <用户名> -p <密码>
+# Build and push to Alibaba Cloud Container Registry
+./build.sh --push -u <username> -p <password>
 ```
 
-### 本地运行容器
+### Run Container Locally
 
 ```bash
 docker run -p 8080:80 crpi-f7ll8pm177asmofl.cn-chengdu.personal.cr.aliyuncs.com/openindu/openindu-portal:latest
 ```
 
-访问 http://localhost:8080
+Visit http://localhost:8080
 
-## Kubernetes 部署
+## Kubernetes Deployment
 
-### 前置条件
+### Prerequisites
 
-- Kubernetes 集群 (v1.20+)
-- kubectl 已配置并连接集群
-- nginx-ingress-controller 已安装
+- Kubernetes cluster (v1.20+)
+- kubectl configured and connected to the cluster
+- nginx-ingress-controller installed
 
-### 快速部署
+### Quick Deploy
 
 ```bash
 cd deploy/kubernetes
 
-# 应用所有资源
+# Apply all resources
 kubectl apply -f deployment.yaml -f service.yaml -f ingress.yaml -n openindu-portal
 
-# 或使用部署脚本
+# Or use the deploy script
 ./deploy.sh
 ```
 
-### 验证部署
+### Verify Deployment
 
 ```bash
-# 查看 Pod 状态
+# Check pod status
 kubectl get pods -n openindu-portal -l app=openindu-portal
 
-# 查看服务
+# Check service
 kubectl get svc -n openindu-portal
 
-# 查看 Ingress
+# Check ingress
 kubectl get ingress -n openindu-portal
 
-# 查看日志
+# Tail logs
 kubectl logs -n openindu-portal -l app=openindu-portal -f
 ```
 
-### 当前部署配置
+### Current Deployment Config
 
-| 配置项 | 值 |
-|--------|-----|
-| 命名空间 | openindu-portal |
-| 副本数 | 2 |
-| 镜像 | crpi-f7ll8pm177asmofl.cn-chengdu.personal.cr.aliyuncs.com/openindu/openindu-portal |
-| CPU 请求/限制 | 100m / 500m |
-| 内存请求/限制 | 128Mi / 256Mi |
-| 域名 | www.openindu.com |
+| Setting | Value |
+|---------|-------|
+| Namespace | openindu-portal |
+| Replicas | 2 |
+| Image | crpi-f7ll8pm177asmofl.cn-chengdu.personal.cr.aliyuncs.com/openindu/openindu-portal |
+| CPU request/limit | 100m / 500m |
+| Memory request/limit | 128Mi / 256Mi |
+| Domain | www.openindu.com |
 
-### 常用运维命令
+### Common Ops Commands
 
 ```bash
-# 扩缩容
+# Scale
 kubectl scale deployment openindu-portal -n openindu-portal --replicas=3
 
-# 重启部署
+# Restart
 kubectl rollout restart deployment/openindu-portal -n openindu-portal
 
-# 回滚
+# Rollback
 kubectl rollout undo deployment/openindu-portal -n openindu-portal
 
-# 进入容器
+# Shell into container
 kubectl exec -it -n openindu-portal deployment/openindu-portal -- /bin/sh
 
-# 删除部署
+# Delete deployment
 kubectl delete -f deploy/kubernetes/ -n openindu-portal
 ```
 
-## 镜像仓库
+## Image Registry
 
-镜像托管于阿里云容器镜像服务（成都区域）：
+Images are hosted on Alibaba Cloud Container Registry (Chengdu region):
 
 ```
 crpi-f7ll8pm177asmofl.cn-chengdu.personal.cr.aliyuncs.com/openindu/openindu-portal
@@ -165,4 +167,4 @@ crpi-f7ll8pm177asmofl.cn-chengdu.personal.cr.aliyuncs.com/openindu/openindu-port
 
 ## License
 
-MIT
+Apache-2.0
