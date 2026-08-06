@@ -1,0 +1,55 @@
+{
+  "nav": {
+    "home": "Home",
+    "downloads": "Downloads",
+    "motionControl": "AI + Motion Control",
+    "overview": "Overview",
+    "studioPlatform": "openIndu-studio Platform",
+    "vision": "AI + Machine Vision",
+    "iiotPlatform": "AI + Industrial IoT Platform",
+    "infrastructure": "AI + Infrastructure",
+    "aiAssistant": "AI Assistant"
+  },
+  "auth": {
+    "signIn": "Sign in / Sign up",
+    "signOut": "Sign out",
+    "signOutFull": "Sign out",
+    "ctaBanner": "Sign in to download resources, use AI Assistant and workflow"
+  },
+  "role": {
+    "user": "User",
+    "member": "Member",
+    "admin": "Admin"
+  },
+  "footer": {
+    "description": "From process parameters to line data — one stack, end to end. The end-to-end open-source OS for industrial automation: Process Knowledge, Engineering Generation, Cross-Brand Execution, Acquisition & Data, and Analytics & Insight. All open source.",
+    "quickLinks": "Quick Links",
+    "home": "Home",
+    "downloads": "Downloads",
+    "motionControl": "AI + Motion Control — Overview",
+    "vision": "AI + Machine Vision",
+    "iiotPlatform": "AI + Industrial IoT Platform",
+    "infrastructure": "AI + Infrastructure",
+    "coreServices": "Core Services",
+    "studioPlatform": "openIndu-studio Platform",
+    "aiAssistantBot": "AI Assistant Bot",
+    "relatedPlatforms": "Related Platforms",
+    "serviceStatus": "Service Status",
+    "communityAdmin": "Community Admin",
+    "legalAndPrivacy": "Legal & Privacy",
+    "privacyStatement": "Privacy Statement (中文)",
+    "legalNotice": "Legal Notice (中文)",
+    "aboutCookies": "About Cookies (中文)",
+    "copyright": "© 2026 openIndu Community. Last updated: 2026-07-04",
+    "icpFiling": "ICP Filing No."
+  },
+  "language": {
+    "label": "Language",
+    "zh": "简体中文",
+    "en": "English"
+  },
+  "a11y": {
+    "mobileMenuOpen": "Open navigation menu",
+    "mobileMenuClose": "Close navigation menu"
+  }
+}

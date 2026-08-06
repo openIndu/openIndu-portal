@@ -1,16 +1,20 @@
 import { Outlet, Link, useLocation, useNavigate } from "react-router";
 import { ArrowRight, ChevronDown, ChevronRight, LogOut, Menu, UserRound, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useAuth } from "@/store/auth";
 import { visitsApi } from "@/api";
 import { getDisplayName, maskPhone } from "../utils/user";
 import { StructuredData } from "./StructuredData";
+import { LanguageSwitcher, LanguageSwitcherMobile } from "./LanguageSwitcher";
 import logo from "/assets/logo.png";
 
 export function Layout() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation("common");
+  const locale = i18n.language; // "zh" | "en"
 
   // Scroll to top on every page navigation
   useEffect(() => {
@@ -20,33 +24,47 @@ export function Layout() {
   // Report every SPA navigation to /visits/track. The shared axios client
   // attaches the Bearer token automatically when one is in localStorage, so
   // an authenticated user's pageviews land with user_id set — which is what
-  // the dashboard "本月登录访问趋势" chart counts. Failures are swallowed:
-  // analytics must never break navigation.
+  // the dashboard "Monthly Active Login Users" chart counts. Failures are
+  // swallowed: analytics must never break navigation.
   useEffect(() => {
     void visitsApi.track(location.pathname).catch(() => {});
   }, [location.pathname]);
   const { isAuthenticated, user, logout } = useAuth();
   const displayName = getDisplayName(user);
 
-  const ROLE_LABELS: Record<string, string> = { user: "普通用户", member: "会员", admin: "管理员" };
+  const ROLE_LABELS: Record<string, string> = useMemo(
+    () => ({
+      user: t("role.user"),
+      member: t("role.member"),
+      admin: t("role.admin"),
+    }),
+    [t],
+  );
 
-  type NavItem = { name: string; href: string; children?: { name: string; href: string }[] };
-  const navigation: NavItem[] = [
-    { name: "首页", href: "/" },
-    { name: "下载中心", href: "/resources" },
-    {
-      name: "AI+运动控制",
-      href: "/motion-control",
-      children: [
-        { name: "概览", href: "/motion-control" },
-        { name: "openIndu-studio 平台", href: "/motion-control/studio" },
-      ],
-    },
-    { name: "AI+视觉", href: "/vision" },
-    { name: "AI+工业互联网平台", href: "/iiot-platform" },
-    { name: "AI+基础设施", href: "/infrastructure" },
-    { name: "智能咨询", href: "/chat" },
-  ];
+  type NavItem = { name: string; href: string; testid?: string; children?: NavItem[] };
+  const navigation: NavItem[] = useMemo(() => {
+    const items: NavItem[] = [
+      { name: t("nav.home"), href: "/", testid: "nav-home" },
+      { name: t("nav.downloads"), href: "/resources", testid: "nav-downloads" },
+      {
+        name: t("nav.motionControl"),
+        href: "/motion-control",
+        testid: "nav-motion-control",
+        children: [
+          { name: t("nav.overview"), href: "/motion-control", testid: "nav-motion-control-overview" },
+          { name: t("nav.studioPlatform"), href: "/motion-control/studio", testid: "nav-studio" },
+        ],
+      },
+      { name: t("nav.vision"), href: "/vision", testid: "nav-vision" },
+      { name: t("nav.iiotPlatform"), href: "/iiot-platform", testid: "nav-iiot-platform" },
+      { name: t("nav.infrastructure"), href: "/infrastructure", testid: "nav-infrastructure" },
+    ];
+    // Hide AI Assistant on EN — the RAG knowledge base is Chinese-only
+    if (locale === "zh") {
+      items.push({ name: t("nav.aiAssistant"), href: "/chat", testid: "nav-ai-assistant" });
+    }
+    return items;
+  }, [t, locale]);
 
   const isActive = (path: string) => {
     if (path === "/") {
@@ -64,6 +82,16 @@ export function Layout() {
   return (
     <div className="min-h-screen bg-white">
       <StructuredData pagePath={location.pathname === "/" ? "/" : location.pathname} />
+
+      {/* Language utility bar (desktop only, above sticky header) */}
+      <div className="hidden lg:block border-b border-gray-200 bg-gray-50">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex h-8 items-center justify-end">
+            <LanguageSwitcher />
+          </div>
+        </div>
+      </div>
+
       {/* Header */}
       <header className="sticky top-0 z-50 border-b border-gray-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80">
         <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -85,6 +113,7 @@ export function Layout() {
                   <div key={item.name} className="group relative">
                     <Link
                       to={item.href}
+                      data-testid={item.testid}
                       className={`flex items-center gap-1 text-sm transition-colors whitespace-nowrap ${
                         isActive(item.href)
                           ? "text-blue-600 font-medium"
@@ -94,13 +123,14 @@ export function Layout() {
                       {item.name}
                       <ChevronDown className="h-3.5 w-3.5 transition-transform group-hover:rotate-180" />
                     </Link>
-                    {/* pt-2 作为悬停桥接，避免父项与面板间缝隙导致下拉收起 */}
+                    {/* pt-2 bridges the hover gap between parent item and dropdown */}
                     <div className="absolute left-0 top-full z-50 hidden min-w-[180px] pt-2 group-hover:block">
                       <div className="rounded-lg border border-gray-100 bg-white py-1 shadow-lg">
                         {item.children.map((child) => (
                           <Link
                             key={child.name}
                             to={child.href}
+                            data-testid={child.testid}
                             className={`block px-4 py-2 text-sm transition-colors ${
                               location.pathname === child.href
                                 ? "bg-blue-50 font-medium text-blue-600"
@@ -117,6 +147,7 @@ export function Layout() {
                   <Link
                     key={item.name}
                     to={item.href}
+                    data-testid={item.testid}
                     className={`text-sm transition-colors whitespace-nowrap ${
                       isActive(item.href)
                         ? "text-blue-600 font-medium"
@@ -144,12 +175,12 @@ export function Layout() {
                     className="inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-600"
                   >
                     <LogOut className="h-4 w-4" />
-                    退出
+                    {t("auth.signOut")}
                   </button>
                 </>
               ) : (
                 <>
-                  <Link to="/login" className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700">登录 / 注册</Link>
+                  <Link to="/login" className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700">{t("auth.signIn")}</Link>
                 </>
               )}
             </div>
@@ -162,7 +193,7 @@ export function Layout() {
                 setMobileMenuOpen(!mobileMenuOpen);
                 if (!mobileMenuOpen) window.scrollTo({ top: 0, behavior: "smooth" });
               }}
-              aria-label="打开导航菜单"
+              aria-label={mobileMenuOpen ? t("a11y.mobileMenuClose") : t("a11y.mobileMenuOpen")}
             >
               {mobileMenuOpen ? (
                 <X className="h-6 w-6" />
@@ -182,6 +213,7 @@ export function Layout() {
               <div key={item.name}>
                 <Link
                   to={item.href}
+                  data-testid={item.testid}
                   onClick={() => setMobileMenuOpen(false)}
                   className={`block px-3 py-2 rounded-lg ${
                     isActive(item.href)
@@ -197,6 +229,7 @@ export function Layout() {
                       <Link
                         key={child.name}
                         to={child.href}
+                        data-testid={child.testid}
                         onClick={() => setMobileMenuOpen(false)}
                         className={`block rounded-lg px-3 py-2 text-sm ${
                           location.pathname === child.href
@@ -211,7 +244,11 @@ export function Layout() {
                 )}
               </div>
             ))}
+            {/* Language switcher (mobile) — segment control above auth block */}
             <div className="mt-3 border-t border-gray-200 pt-3">
+              <LanguageSwitcherMobile onNavigate={() => setMobileMenuOpen(false)} />
+            </div>
+            <div className="border-t border-gray-200 pt-3">
               {isAuthenticated ? (
                 <div className="space-y-2">
                   <Link
@@ -241,18 +278,18 @@ export function Layout() {
                     className="flex w-full items-center justify-center gap-2 rounded-xl border border-gray-200 px-3 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-600"
                   >
                     <LogOut className="h-4 w-4" />
-                    退出登录
+                    {t("auth.signOutFull")}
                   </button>
                 </div>
               ) : (
                 <div className="rounded-xl border border-gray-200 bg-gray-50 p-3">
-                  <p className="mb-2 text-center text-xs text-gray-500">登录后可下载资料、使用智能咨询与工作流</p>
+                  <p className="mb-2 text-center text-xs text-gray-500">{t("auth.ctaBanner")}</p>
                   <Link
                     to="/login"
                     onClick={() => setMobileMenuOpen(false)}
                     className="flex items-center justify-center gap-1.5 rounded-lg bg-blue-600 px-3 py-2.5 text-sm font-medium text-white hover:bg-blue-700"
                   >
-                    登录 / 注册
+                    {t("auth.signIn")}
                     <ArrowRight className="h-4 w-4" />
                   </Link>
                 </div>
@@ -270,7 +307,7 @@ export function Layout() {
       {/* Footer */}
       <footer className="bg-gray-900 text-white mt-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-5">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-6">
             {/* Logo and Description */}
             <div className="flex flex-col items-start">
               <div className="flex items-center gap-2 mb-4">
@@ -282,62 +319,60 @@ export function Layout() {
                 <span className="text-xl font-semibold text-white">openIndu Community</span>
               </div>
               <p className="text-gray-400 max-w-md">
-                从工艺参数到产线数据，一个栈打通。工业自动化的端到端开源操作系统——
-                工艺知识、工程生成、跨品牌执行、采集与数据、分析洞察，五节点闭环，
-                全部开源。
+                {t("footer.description")}
               </p>
             </div>
 
             {/* Quick Links */}
             <div className="flex flex-col items-start">
-              <h3 className="font-semibold text-white mb-4">快速链接</h3>
+              <h3 className="font-semibold text-white mb-4">{t("footer.quickLinks")}</h3>
               <ul className="space-y-2 text-gray-400">
                 <li>
-                  <Link to="/" className="hover:text-white">首页</Link>
+                  <Link to="/" className="hover:text-white">{t("footer.home")}</Link>
                 </li>
                 <li>
-                  <Link to="/resources" className="hover:text-white">下载中心</Link>
+                  <Link to="/resources" className="hover:text-white">{t("footer.downloads")}</Link>
                 </li>
                 <li>
-                  <Link to="/motion-control" className="hover:text-white">AI+运动控制-概览</Link>
+                  <Link to="/motion-control" className="hover:text-white">{t("footer.motionControl")}</Link>
                 </li>
                 <li>
-                  <Link to="/vision" className="hover:text-white">AI+视觉</Link>
+                  <Link to="/vision" className="hover:text-white">{t("footer.vision")}</Link>
                 </li>
                 <li>
-                  <Link to="/iiot-platform" className="hover:text-white">AI+工业互联网平台</Link>
+                  <Link to="/iiot-platform" className="hover:text-white">{t("footer.iiotPlatform")}</Link>
                 </li>
                 <li>
-                  <Link to="/infrastructure" className="hover:text-white">AI+基础设施</Link>
+                  <Link to="/infrastructure" className="hover:text-white">{t("footer.infrastructure")}</Link>
                 </li>
               </ul>
             </div>
 
             {/* Core Services */}
             <div className="flex flex-col items-start">
-              <h3 className="font-semibold text-white mb-4">核心服务</h3>
+              <h3 className="font-semibold text-white mb-4">{t("footer.coreServices")}</h3>
               <ul className="space-y-2 text-gray-400">
                 <li>
-                  <Link to="/motion-control/studio" className="hover:text-white">openIndu-studio 平台</Link>
+                  <Link to="/motion-control/studio" className="hover:text-white">{t("footer.studioPlatform")}</Link>
                 </li>
                 <li>
-                  <Link to="/chat" className="hover:text-white">智能咨询机器人</Link>
+                  <Link to="/chat" className="hover:text-white">{t("footer.aiAssistantBot")}</Link>
                 </li>
               </ul>
             </div>
 
             {/* Related platforms */}
             <div className="flex flex-col items-start">
-              <h3 className="font-semibold text-white mb-4">相关平台</h3>
+              <h3 className="font-semibold text-white mb-4">{t("footer.relatedPlatforms")}</h3>
               <ul className="space-y-2 text-gray-400">
                 <li>
                   <a href="https://monitor.openindu.com/status/service" target="_blank" rel="noopener noreferrer" className="hover:text-white">
-                    社区服务状态
+                    {t("footer.serviceStatus")}
                   </a>
                 </li>
                 <li>
                   <a href="https://admin.openindu.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white">
-                    社区管理平台
+                    {t("footer.communityAdmin")}
                   </a>
                 </li>
               </ul>
@@ -345,27 +380,46 @@ export function Layout() {
 
             {/* Legal */}
             <div className="flex flex-col items-start">
-              <h3 className="font-semibold text-white mb-4">法律与隐私</h3>
+              <h3 className="font-semibold text-white mb-4">{t("footer.legalAndPrivacy")}</h3>
               <ul className="space-y-2 text-gray-400">
                 <li>
-                  <Link to="/privacy" className="hover:text-white">隐私声明</Link>
+                  {locale === "en" ? (
+                    <a href="/privacy" className="hover:text-white">{t("footer.privacyStatement")}</a>
+                  ) : (
+                    <Link to="/privacy" className="hover:text-white">{t("footer.privacyStatement")}</Link>
+                  )}
                 </li>
                 <li>
-                  <Link to="/legal" className="hover:text-white">法律声明</Link>
+                  {locale === "en" ? (
+                    <a href="/legal" className="hover:text-white">{t("footer.legalNotice")}</a>
+                  ) : (
+                    <Link to="/legal" className="hover:text-white">{t("footer.legalNotice")}</Link>
+                  )}
                 </li>
                 <li>
-                  <Link to="/cookies" className="hover:text-white">关于 Cookies</Link>
+                  {locale === "en" ? (
+                    <a href="/cookies" className="hover:text-white">{t("footer.aboutCookies")}</a>
+                  ) : (
+                    <Link to="/cookies" className="hover:text-white">{t("footer.aboutCookies")}</Link>
+                  )}
                 </li>
               </ul>
+            </div>
+
+            {/* Language (footer column) */}
+            <div className="flex flex-col items-start">
+              <h3 className="font-semibold text-white mb-4">{t("language.label")}</h3>
+              <LanguageSwitcher />
             </div>
 
           </div>
 
           {/* Copyright */}
           <div className="border-t border-gray-800 mt-8 pt-8">
-            <p className="text-center text-gray-400 text-sm">© 2026 openIndu Community. 最后更新: 2026-07-04</p>
+            <p className="text-center text-gray-400 text-sm">{t("footer.copyright")}</p>
             <p className="text-center text-gray-400 text-sm mt-2">
-              备案号: <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">蜀ICP备2025160760号-1</a>
+              {`${t("footer.icpFiling")}: `}
+              <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">蜀ICP备2025160760号-1</a>
             </p>
           </div>
         </div>
