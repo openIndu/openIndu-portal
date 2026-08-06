@@ -270,7 +270,7 @@ export function Layout() {
       {/* Footer */}
       <footer className="bg-gray-900 text-white mt-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-6">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-5">
             {/* Logo and Description */}
             <div className="flex flex-col items-start">
               <div className="flex items-center gap-2 mb-4">
@@ -341,17 +341,6 @@ export function Layout() {
                   </a>
                 </li>
               </ul>
-            </div>
-
-            {/* WeChat QR */}
-            <div className="flex flex-col items-start">
-              <h3 className="font-semibold text-white mb-4">微信公众号</h3>
-              <img
-                src="/assets/iiot/qr-code.jpg"
-                alt="openIndu 微信公众号二维码"
-                className="w-36 h-36 rounded-lg border border-gray-700"
-              />
-              <p className="text-gray-400 text-sm mt-2">微信扫码关注公众号</p>
             </div>
 
             {/* Legal */}

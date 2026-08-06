@@ -46,11 +46,11 @@ test.describe("Home Page", () => {
     await expect(page.getByText("开箱即用的协议支持")).toBeVisible();
   });
 
-  test("should display WeChat QR block in footer", async ({ page }) => {
+  test("should display WeChat QR block next to CTA", async ({ page }) => {
     await page.goto("/");
-    await expect(page.locator("footer").getByText("微信公众号")).toBeVisible();
-    await expect(page.locator("footer").getByText("微信扫码关注公众号")).toBeVisible();
-    await expect(page.locator('footer img[alt="openIndu 微信公众号二维码"]')).toBeVisible();
+    await expect(page.getByText("加入 openIndu 社区")).toBeVisible();
+    await expect(page.getByText("微信扫码关注公众号")).toBeVisible();
+    await expect(page.locator('img[alt="openIndu 微信公众号二维码"]')).toBeVisible();
   });
 
   test("should display navigation links in header", async ({ page }) => {

@@ -274,27 +274,41 @@ export function Home() {
 
       {/* ── 5. CTA ── */}
       <section className="py-14 sm:py-20 bg-gradient-to-r from-blue-600 to-cyan-600 text-white">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold mb-4">加入 openIndu 社区</h2>
-          <p className="text-base sm:text-xl mb-8 sm:mb-10 text-blue-100 max-w-2xl mx-auto">
-            从工艺参数到产线数据，一个栈打通。与全球开发者共同构建工业自动化开源生态
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-            <a
-              href="https://github.com/openIndu/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-white text-blue-600 rounded-lg hover:bg-blue-50 transition-colors font-medium"
-            >
-              快速开始
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </a>
-            <Link
-              to="/iiot-platform"
-              className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-transparent border-2 border-white text-white rounded-lg hover:bg-white/10 transition-colors font-medium"
-            >
-              了解平台
-            </Link>
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col lg:flex-row items-center justify-center gap-10 lg:gap-20">
+            {/* WeChat QR */}
+            <div className="flex flex-col items-center text-center order-2 lg:order-1">
+              <h3 className="text-xl sm:text-2xl font-semibold mb-5">微信扫码关注公众号</h3>
+              <img
+                src="/assets/iiot/qr-code.jpg"
+                alt="openIndu 微信公众号二维码"
+                className="w-40 h-40 sm:w-44 sm:h-44 rounded-xl bg-white p-2 shadow-lg"
+              />
+            </div>
+            {/* CTA copy */}
+            <div className="text-center lg:text-left order-1 lg:order-2">
+              <h2 className="text-2xl sm:text-3xl font-bold mb-4">加入 openIndu 社区</h2>
+              <p className="text-base sm:text-xl mb-8 sm:mb-10 text-blue-100 max-w-2xl">
+                从工艺参数到产线数据，一个栈打通。与全球开发者共同构建工业自动化开源生态
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
+                <a
+                  href="https://github.com/openIndu/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-white text-blue-600 rounded-lg hover:bg-blue-50 transition-colors font-medium"
+                >
+                  快速开始
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </a>
+                <Link
+                  to="/iiot-platform"
+                  className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-transparent border-2 border-white text-white rounded-lg hover:bg-white/10 transition-colors font-medium"
+                >
+                  了解平台
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>
