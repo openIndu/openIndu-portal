@@ -25,7 +25,6 @@ test.describe("Home Page", () => {
     for (const stage of ["工艺知识", "工程生成", "跨品牌执行", "采集与数据", "分析洞察"]) {
       await expect(page.getByText(stage, { exact: true }).first()).toBeVisible();
     }
-    await expect(page.getByText("没有一段连着下一段")).toBeVisible();
   });
 
   test("should display three core products section", async ({ page }) => {
@@ -39,31 +38,27 @@ test.describe("Home Page", () => {
   test("should display the five-node closed loop", async ({ page }) => {
     await page.goto("/");
     await expect(page.getByText("五节点闭环")).toBeVisible();
+    await expect(page.getByText("工艺约束 → 生成 → 执行 → 数据 → 洞察 → 回到工艺约束")).toBeVisible();
+    for (const node of ["工艺知识", "工程生成", "跨品牌执行", "采集与数据", "分析洞察"]) {
+      await expect(page.getByText(node, { exact: true }).first()).toBeVisible();
+    }
     await expect(page.getByText("西门子 / 三菱 / 欧姆龙 / 基恩士 / 汇川")).toBeVisible();
     await expect(page.getByText("Apache PLC4X 协议层 · 时序库")).toBeVisible();
-    await expect(page.getByText("闭环回流：")).toBeVisible();
   });
 
-  test("should display studio workflow as the engineering node detail", async ({ page }) => {
+  test("should display open-source repos section", async ({ page }) => {
     await page.goto("/");
-    await expect(page.getByText("工程生成节点 · 展开")).toBeVisible();
-    await expect(page.getByText("openIndu-studio 六步工作流")).toBeVisible();
-    await expect(page.getByText("电气模组梳理").first()).toBeVisible();
+    await expect(page.getByText("开源、开放标准、开放协作")).toBeVisible();
+    await expect(page.getByText("查看代码，参与贡献")).toBeVisible();
+    await expect(page.getByText("全部仓库公开，Apache-2.0 授权")).toBeVisible();
+    await expect(page.getByText("开箱即用的协议支持")).toBeVisible();
   });
 
-  test("should display the value propositions", async ({ page }) => {
+  test("should display WeChat QR block in footer", async ({ page }) => {
     await page.goto("/");
-    await expect(page.getByText("你拿到什么")).toBeVisible();
-    await expect(page.getByText("跨品牌中立", { exact: true })).toBeVisible();
-    await expect(page.getByText("数据主权", { exact: true })).toBeVisible();
-    await expect(page.getByText("可验证", { exact: true })).toBeVisible();
-  });
-
-  test("should display WeChat QR block with search promotion style", async ({ page }) => {
-    await page.goto("/");
-    await expect(page.getByText("搜一搜")).toBeVisible();
-    await expect(page.getByText("微信扫码关注公众号")).toBeVisible();
-    await expect(page.locator('img[alt="openIndu 微信公众号二维码"]')).toBeVisible();
+    await expect(page.locator("footer").getByText("微信公众号")).toBeVisible();
+    await expect(page.locator("footer").getByText("微信扫码关注公众号")).toBeVisible();
+    await expect(page.locator('footer img[alt="openIndu 微信公众号二维码"]')).toBeVisible();
   });
 
   test("should display navigation links in header", async ({ page }) => {

@@ -270,7 +270,7 @@ export function Layout() {
       {/* Footer */}
       <footer className="bg-gray-900 text-white mt-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-5">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-6">
             {/* Logo and Description */}
             <div className="flex flex-col items-start">
               <div className="flex items-center gap-2 mb-4">
@@ -282,8 +282,9 @@ export function Layout() {
                 <span className="text-xl font-semibold text-white">openIndu Community</span>
               </div>
               <p className="text-gray-400 max-w-md">
-                致力于智能制造场景，提供AI赋能的工业互联网解决方案。
-                融合运动控制、机器视觉、工业物联网平台与AI基础设施，构建完整的智能制造生态。
+                从工艺参数到产线数据，一个栈打通。工业自动化的端到端开源操作系统——
+                工艺知识、工程生成、跨品牌执行、采集与数据、分析洞察，五节点闭环，
+                全部开源。
               </p>
             </div>
 
@@ -323,6 +324,17 @@ export function Layout() {
                   <Link to="/chat" className="hover:text-white">智能咨询机器人</Link>
                 </li>
               </ul>
+            </div>
+
+            {/* WeChat QR */}
+            <div className="flex flex-col items-start">
+              <h3 className="font-semibold text-white mb-4">微信公众号</h3>
+              <img
+                src="/assets/iiot/qr-code.jpg"
+                alt="openIndu 微信公众号二维码"
+                className="w-28 h-28 rounded-lg border border-gray-700"
+              />
+              <p className="text-gray-400 text-sm mt-2">微信扫码关注公众号</p>
             </div>
 
             {/* Related platforms */}
