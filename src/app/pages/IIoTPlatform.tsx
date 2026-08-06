@@ -1,7 +1,7 @@
 import {
   ArrowRight, Cpu, Shield, LayoutDashboard, Monitor,
   Database, Smartphone, Users, Layers, Server, CheckCircle,
-  Code, Network, Zap, BarChart3, ExternalLink
+  Network, Zap, BarChart3
 } from "lucide-react";
 import { SEO } from "../components/SEO";
 
@@ -439,39 +439,6 @@ export function IIoTPlatform() {
         </div>
       </section>
 
-      {/* ===== CTA Section ===== */}
-      <section className="py-12 sm:py-20 bg-gradient-to-r from-blue-600 to-cyan-600 text-white">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row items-center gap-8 sm:gap-12">
-            <div className="flex-1 text-center lg:text-left">
-              <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">加入 openIndu社区</h2>
-              <p className="text-base sm:text-xl mb-6 sm:mb-8 text-blue-100">
-                立即体验企业级工业互联网平台，与全球开发者共同构建智能制造生态
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
-                <a
-                  href="https://website.openindu.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center px-6 py-3 sm:px-8 sm:py-4 bg-white text-blue-600 rounded-lg hover:bg-blue-50 transition-colors font-medium text-base sm:text-lg"
-                >
-                  访问平台
-                  <ExternalLink className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
-                </a>
-                <a
-                  href="https://gitee.com/openIndu/openIndu-platform"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center px-6 py-3 sm:px-8 sm:py-4 bg-transparent border-2 border-white text-white rounded-lg hover:bg-white/10 transition-colors font-medium text-base sm:text-lg"
-                >
-                  查看代码
-                  <Code className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

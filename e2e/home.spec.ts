@@ -29,7 +29,7 @@ test.describe("Home Page", () => {
 
   test("should display the five-node closed loop", async ({ page }) => {
     await page.goto("/");
-    await expect(page.getByText("五节点闭环")).toBeVisible();
+    await expect(page.getByText("五大节点闭环")).toBeVisible();
     await expect(page.getByText("工艺约束 → 生成 → 执行 → 数据 → 洞察 → 回到工艺约束")).toBeVisible();
     for (const node of ["工艺知识", "工程生成", "跨品牌执行", "采集与数据", "分析洞察"]) {
       await expect(page.getByText(node, { exact: true }).first()).toBeVisible();

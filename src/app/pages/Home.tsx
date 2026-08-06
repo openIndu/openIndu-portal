@@ -2,7 +2,7 @@ import { Link } from "react-router";
 import { ArrowRight, Bot, Cog, Github, Globe, Users, Code, ExternalLink, Cpu, Search, Database, BarChart3, Plug, Workflow as WorkflowIcon } from "lucide-react";
 import { SEO } from "../components/SEO";
 
-/** 五节点闭环 */
+/** 五大节点闭环 */
 const architectureNodes = [
   {
     icon: Search,
@@ -175,11 +175,11 @@ export function Home() {
         </div>
       </section>
 
-      {/* ── 3. 五节点闭环 ── */}
+      {/* ── 3. 五大节点闭环 ── */}
       <section className="py-14 sm:py-20 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-12">
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-3">五节点闭环</h2>
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-3">五大节点闭环</h2>
             <p className="text-sm sm:text-base text-gray-600">
               工艺约束 → 生成 → 执行 → 数据 → 洞察 → 回到工艺约束
             </p>
