@@ -51,6 +51,8 @@ function startPreviewServer() {
       cwd: ROOT,
       stdio: ["ignore", "pipe", "pipe"],
       shell: true,
+      // Own process group on POSIX so stopServer() can signal the whole tree.
+      detached: process.platform !== "win32",
     });
 
     const timeout = setTimeout(() => {
@@ -76,6 +78,35 @@ function startPreviewServer() {
       reject(err);
     });
   });
+}
+
+/** Stop the preview server and everything it spawned.
+ *
+ *  `shell: true` makes `server.pid` the wrapping shell rather than vite itself, so
+ *  a plain `server.kill()` orphans the real `npm exec vite preview`. The orphan
+ *  keeps the stdio pipes it inherited from us open, Node's event loop never
+ *  drains, and the build hangs until the CI job hits its 6h timeout. */
+function stopServer(server) {
+  if (!server || server.exitCode !== null || server.signalCode !== null) return;
+
+  if (process.platform === "win32") {
+    try {
+      spawn("taskkill", ["/F", "/T", "/PID", String(server.pid)], { stdio: "ignore" });
+    } catch {
+      // best-effort cleanup
+    }
+    return;
+  }
+
+  try {
+    process.kill(-server.pid, "SIGTERM"); // negative pid = the whole process group
+  } catch {
+    try {
+      server.kill("SIGTERM");
+    } catch {
+      // best-effort cleanup
+    }
+  }
 }
 
 /** Render a single route to static HTML. Returns the HTML string. */
@@ -162,7 +193,7 @@ async function main() {
         "  Skipping prerender — the SPA fallback will serve client-rendered pages.\n" +
         "  Install Chromium for static HTML generation: apt install chromium\n"
     );
-    server.kill("SIGTERM");
+    stopServer(server);
     process.exit(0);
   }
 
@@ -189,18 +220,7 @@ async function main() {
     }
   } finally {
     await browser.close();
-    server.kill("SIGTERM");
-
-    // Cleanup: vite preview sometimes leaves orphan processes on Windows
-    if (process.platform === "win32") {
-      try {
-        spawn("taskkill", ["/F", "/T", "/PID", String(server.pid)], {
-          stdio: "ignore",
-        });
-      } catch {
-        // best-effort cleanup
-      }
-    }
+    stopServer(server);
   }
 
   // 4. Summary
@@ -208,9 +228,9 @@ async function main() {
     `\n${successCount} prerendered, ${failCount} failed, ${ROUTES.length} total\n`
   );
 
-  if (failCount > 0) {
-    process.exit(1);
-  }
+  // Exit explicitly — a stray handle left by the preview server would otherwise
+  // keep this process alive, and a build step that never returns reads as a hang.
+  process.exit(failCount > 0 ? 1 : 0);
 }
 
 main();
