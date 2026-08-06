@@ -49,7 +49,7 @@ const coreProducts = [
   {
     icon: Globe,
     title: "openIndu-platform",
-    stage: "采集与数据",
+    stage: "工业互联网平台",
     description:
       "工业物联网平台。设备接入、数据采集、产线监控、产品追溯一体化。协议层基于 Apache PLC4X，S7、Modbus、EtherNet/IP、OPC-UA 全覆盖。",
     link: "/iiot-platform",
@@ -277,16 +277,16 @@ export function Home() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row items-center justify-center gap-10 lg:gap-20">
             {/* WeChat QR */}
-            <div className="flex flex-col items-center text-center order-2 lg:order-1">
+            <div className="flex flex-col items-center text-center order-1">
               <h3 className="text-xl sm:text-2xl font-semibold mb-5">微信扫码关注公众号</h3>
               <img
                 src="/assets/iiot/qr-code.jpg"
                 alt="openIndu 微信公众号二维码"
-                className="w-40 h-40 sm:w-44 sm:h-44 rounded-xl bg-white p-2 shadow-lg"
+                className="w-48 h-48 sm:w-56 sm:h-56 rounded-xl bg-white p-2 shadow-lg"
               />
             </div>
             {/* CTA copy */}
-            <div className="text-center lg:text-left order-1 lg:order-2">
+            <div className="text-center lg:text-left order-2">
               <h2 className="text-2xl sm:text-3xl font-bold mb-4">加入 openIndu 社区</h2>
               <p className="text-base sm:text-xl mb-8 sm:mb-10 text-blue-100 max-w-2xl">
                 从工艺参数到产线数据，一个栈打通。与全球开发者共同构建工业自动化开源生态
