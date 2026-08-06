@@ -282,7 +282,7 @@ export function Home() {
               <img
                 src="/assets/iiot/qr-code.jpg"
                 alt="openIndu 微信公众号二维码"
-                className="w-48 h-48 sm:w-56 sm:h-56 rounded-xl bg-white p-2 shadow-lg"
+                className="w-56 h-56 sm:w-64 sm:h-64 rounded-xl bg-white p-2 shadow-lg"
               />
             </div>
             {/* CTA copy */}
