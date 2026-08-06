@@ -282,8 +282,9 @@ export function Layout() {
                 <span className="text-xl font-semibold text-white">openIndu Community</span>
               </div>
               <p className="text-gray-400 max-w-md">
-                致力于智能制造场景，提供AI赋能的工业互联网解决方案。
-                融合运动控制、机器视觉、工业物联网平台与AI基础设施，构建完整的智能制造生态。
+                从工艺参数到产线数据，一个栈打通。工业自动化的端到端开源操作系统——
+                工艺知识、工程生成、跨品牌执行、采集与数据、分析洞察，五节点闭环，
+                全部开源。
               </p>
             </div>
 

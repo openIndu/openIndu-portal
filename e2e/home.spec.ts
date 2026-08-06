@@ -12,11 +12,11 @@ test.describe("Home Page", () => {
     await expect(heading.first()).toBeVisible();
   });
 
-  test("should display new hero strategy messaging", async ({ page }) => {
+  test("should display hero OS positioning", async ({ page }) => {
     await page.goto("/");
-    await expect(page.getByText("非标自动化全链路工具链")).toBeVisible();
-    await expect(page.getByText("OT/IT · 端侧 AI")).toBeVisible();
-    await expect(page.getByText("工艺知识", { exact: true }).first()).toBeVisible();
+    await expect(page.getByText("一栈贯通，开放智造")).toBeVisible();
+    await expect(page.getByText("工业自动化的端到端开源操作系统")).toBeVisible();
+    await expect(page.getByText("从工艺参数到产线数据，一个栈打通。任意品牌 PLC，全部开源。")).toBeVisible();
   });
 
   test("should display three core products section", async ({ page }) => {
@@ -27,23 +27,28 @@ test.describe("Home Page", () => {
     await expect(page.getByText("openindu-station").first()).toBeVisible();
   });
 
-  test("should display strategic layers section", async ({ page }) => {
+  test("should display the five-node closed loop", async ({ page }) => {
     await page.goto("/");
-    await expect(page.getByText("上中下战略")).toBeVisible();
-    await expect(page.getByText("向下扎根").first()).toBeVisible();
-    await expect(page.getByText("中间深耕").first()).toBeVisible();
-    await expect(page.getByText("向上突破").first()).toBeVisible();
+    await expect(page.getByText("五大节点闭环")).toBeVisible();
+    await expect(page.getByText("工艺约束 → 生成 → 执行 → 数据 → 洞察 → 回到工艺约束")).toBeVisible();
+    for (const node of ["工艺知识", "工程生成", "跨品牌执行", "采集与数据", "分析洞察"]) {
+      await expect(page.getByText(node, { exact: true }).first()).toBeVisible();
+    }
+    await expect(page.getByText("西门子 / 三菱 / 欧姆龙 / 基恩士 / 汇川")).toBeVisible();
+    await expect(page.getByText("Apache PLC4X 协议层 · 时序库")).toBeVisible();
   });
 
-  test("should display studio workflow section", async ({ page }) => {
+  test("should display open-source repos section", async ({ page }) => {
     await page.goto("/");
-    await expect(page.getByText("openIndu-studio 开发工作流")).toBeVisible();
-    await expect(page.getByText("电气模组梳理").first()).toBeVisible();
+    await expect(page.getByText("开源、开放标准、开放协作")).toBeVisible();
+    await expect(page.getByText("查看代码，参与贡献")).toBeVisible();
+    await expect(page.getByText("全部仓库公开，Apache-2.0 授权")).toBeVisible();
+    await expect(page.getByText("开箱即用的协议支持")).toBeVisible();
   });
 
-  test("should display WeChat QR block with search promotion style", async ({ page }) => {
+  test("should display WeChat QR block next to CTA", async ({ page }) => {
     await page.goto("/");
-    await expect(page.getByText("搜一搜")).toBeVisible();
+    await expect(page.getByText("加入 openIndu 社区")).toBeVisible();
     await expect(page.getByText("微信扫码关注公众号")).toBeVisible();
     await expect(page.locator('img[alt="openIndu 微信公众号二维码"]')).toBeVisible();
   });
