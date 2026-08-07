@@ -6,7 +6,7 @@ import { detectLocale } from "./locale";
 // Uses Vite's import.meta.glob so zero manual import list to maintain —
 // adding a new namespace file is enough to register it.
 const localeModules = import.meta.glob<{ default: Record<string, string> }>(
-  "./locales/*/*.json",
+  "../locales/*/*.json",
   { eager: true },
 );
 
@@ -29,6 +29,7 @@ i18next.use(initReactI18next).init({
   lng: detectLocale(),
   fallbackLng: "zh",
   interpolation: { escapeValue: false }, // React already escapes
+  initImmediate: false, // resources are eager-loaded synchronously; first render must be final (prerender safety)
   react: { useSuspense: false },
 });
 

@@ -1,0 +1,58 @@
+{
+  "seo": {
+    "title": "openIndu Community｜工业自动化的端到端开源操作系统",
+    "description": "从工艺参数到产线数据，一个栈打通。AI 辅助全链路工控开发（电气→BOM→IO→PLC/HMI）、跨品牌代码生成、工业物联网数据采集与良率分析。任意品牌 PLC，Apache-2.0 全开源。",
+    "keywords": "openIndu,工业自动化,开源,PLC,HMI,跨品牌,电气设计,BOM,IO地址表,工业互联网,PLC4X,OEE,良率分析,非标自动化"
+  },
+  "hero": {
+    "badge": "Apache-2.0 · 开源 · 开放 · 协作",
+    "titleLine1": "一栈贯通，开放智造",
+    "titleLine2": "工业自动化的端到端开源操作系统",
+    "subtitle": "从工艺参数到产线数据，一个栈打通。任意品牌 PLC，全部开源。",
+    "ctaStudio": "了解 openIndu-studio",
+    "ctaSolutions": "查看解决方案"
+  },
+  "products": {
+    "heading": "三大核心产品",
+    "subheading": "全部 Apache-2.0 开源，覆盖从工艺知识到生产洞察的完整链路",
+    "studio": {
+      "stage": "工艺知识 + 工程生成",
+      "description": "AI 辅助全链路工控开发工具链。电气模组 → 电路图 → BOM → IO 地址表 → PLC 程序 → HMI 画面，六步一个工具，多品牌输出。"
+    },
+    "platform": {
+      "stage": "工业互联网平台",
+      "description": "工业物联网平台。设备接入、数据采集、产线监控、产品追溯一体化。协议层基于 Apache PLC4X，S7、Modbus、EtherNet/IP、OPC-UA 全覆盖。"
+    },
+    "station": {
+      "stage": "工站软件",
+      "description": "C# 工控站控应用。运动控制 · 机器视觉 · 扫码读码 · 点胶 · 激光 —— 非标自动化工站的软件基座。"
+    }
+  },
+  "nodes": {
+    "heading": "五大节点闭环",
+    "subheading": "工艺约束 → 生成 → 执行 → 数据 → 洞察 → 回到工艺约束",
+    "processKnowledge": { "title": "工艺知识", "duty": "工艺窗口 · 缺陷图谱 · 节拍模型", "owner": "openIndu-studio" },
+    "engineering": { "title": "工程生成", "duty": "电气 → BOM → IO → PLC/HMI", "owner": "openIndu-studio" },
+    "crossBrand": { "title": "跨品牌执行", "duty": "西门子 / 三菱 / 欧姆龙 / 基恩士 / 汇川", "owner": "studio 产出" },
+    "dataAcquisition": { "title": "采集与数据", "duty": "Apache PLC4X 协议层 · 时序库", "owner": "openIndu-platform" },
+    "insight": { "title": "分析洞察", "duty": "BI · OEE · 良率归因", "owner": "openIndu-admin" }
+  },
+  "openSource": {
+    "heading": "开源、开放标准、开放协作",
+    "subheading": "最小的有效贡献是一条数据条目，不是一个写满代码的 PR",
+    "openSourceEndToEnd": { "title": "全链路开源", "description": "电气 → BOM → IO → PLC/HMI 每一步都看得见、验得了，Apache-2.0 授权" },
+    "protocols": { "title": "开箱即用的协议支持", "description": "S7、Modbus、EtherNet/IP、OPC-UA 等主流工业协议，接上就能采数据" },
+    "contribute": { "title": "贡献不必写代码", "description": "一条品牌映射、一张 IO 表、一个工艺窗口，都是实打实的贡献" },
+    "collaborate": { "title": "开放协作", "description": "欢迎提交 Issue 和 PR，共同打造工业自动化开源生态" },
+    "ctaHeading": "查看代码，参与贡献",
+    "ctaSubheading": "全部仓库公开，Apache-2.0 授权"
+  },
+  "cta": {
+    "heading": "加入 openIndu 社区",
+    "description": "从工艺参数到产线数据，一个栈打通。与全球开发者共同构建工业自动化开源生态",
+    "quickStart": "快速开始",
+    "learnPlatform": "了解平台",
+    "wechatHeading": "微信扫码关注公众号",
+    "wechatAlt": "openIndu 微信公众号二维码"
+  }
+}
