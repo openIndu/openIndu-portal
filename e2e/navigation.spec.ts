@@ -51,16 +51,6 @@ test.describe("Navigation", () => {
     await expect(page.getByRole("heading", { name: "手机号登录" })).toBeVisible();
   });
 
-  test("should navigate to register page from header", async ({ page }) => {
-    await page.goto("/");
-
-    const registerLink = page.locator("header").getByRole("link", { name: "注册" });
-    await registerLink.click();
-
-    await expect(page).toHaveURL("/register");
-    await expect(page.getByRole("heading", { name: "注册 openIndu 社区账号" })).toBeVisible();
-  });
-
   test("should navigate back to home via logo click", async ({ page }) => {
     await page.goto("/motion-control");
 

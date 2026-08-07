@@ -41,6 +41,11 @@ pnpm-lock.yaml
 .stylelintcache
 .eslintcache
 
+# Playwright
+test-results
+playwright-report
+blob-report
+
 # claude code
 .claude/.claude/agents/docs/sessions/*.json
 .playwright-mcp/*.log
