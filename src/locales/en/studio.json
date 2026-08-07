@@ -1,0 +1,55 @@
+{
+  "seo": {
+    "title": "openIndu-studio Overview | openIndu",
+    "description": "openIndu-studio chains electrical modules, circuit diagrams, BOM, I/O addressing, PLC programming, and HMI programming into a traceable AI Agent workflow.",
+    "keywords": "openIndu-studio,PLC workflow,electrical design,BOM,I/O address table,PLC programming,HMI programming,AI Agent"
+  },
+  "hero": {
+    "badge": "AI Agent Workflow",
+    "title": "openIndu-studio Overview",
+    "subtitle": "openIndu-studio breaks industrial-automation projects down -- from requirements to PLC/HMI programming -- into a collaborative, traceable standard process (the six-step PLC development workflow), progressively integrating Claude Code and MCP knowledge retrieval."
+  },
+  "stepLabel": "Step",
+  "deliverablesLabel": "Stage Deliverables",
+  "steps": {
+    "electrical": {
+      "title": "Electrical Module Breakdown",
+      "description": "Split electrical modules based on the equipment list and process requirements, defining each module's functional boundaries, actuators, and sensor needs.",
+      "deliverables": ["Module boundary list", "Initial action/signal table", "Safety & interlock constraints"]
+    },
+    "circuit": {
+      "title": "Circuit Diagram Design",
+      "description": "Generate circuit-diagram design recommendations around power, control, drive, safety, and communication circuits, and output preliminary I/O requirements.",
+      "deliverables": ["Power/control circuit sketch", "Drive & communication topology", "DXF/DWG render input"]
+    },
+    "bom": {
+      "title": "BOM List",
+      "description": "Compile a bill of materials -- PLCs, HMIs, drives, low-voltage electrical components, cable terminals -- based on the circuit diagram and brand-selection rules.",
+      "deliverables": ["Itemized BOM", "Brand/model mapping", "Procurement notes & substitutes"]
+    },
+    "io": {
+      "title": "I/O Address Planning",
+      "description": "Generate an I/O address table from equipment actions, signal types, and brand addressing conventions, providing the basis for PLC variable definitions.",
+      "deliverables": ["I/O address table", "Variable naming convention", "Terminal/module allocation check"]
+    },
+    "plc": {
+      "title": "PLC Programming",
+      "description": "Design the program structure from the I/O table and process flow, generating draft core logic for sequencing, alarms, manual/auto modes, and communication.",
+      "deliverables": ["Draft ST code", "Device-comment CSV", "Import & debugging guide"]
+    },
+    "hmi": {
+      "title": "HMI Programming",
+      "description": "Design HMI screens and variable-binding schemes around equipment operation, status monitoring, alarm diagnostics, and parameter maintenance.",
+      "deliverables": ["HMI tag CSV", "Screen specification", "Alarm/parameter interaction macros"]
+    }
+  },
+  "artifactChain": {
+    "heading": "End-to-End Deliverable Chain",
+    "description": "Workflow output converges into a structured IR, which the converters engine then renders into real engineering files -- covering BOM, I/O tables, circuit diagrams, PLC/HMI middleware, and project reports.",
+    "items": ["Structured project.json", "BOM / I/O Excel", "DXF circuit diagrams", "ST + CSV program drafts"]
+  },
+  "roadmap": {
+    "heading": "Roadmap",
+    "description": "Phase P2 will integrate brand-manual RAG retrieval, agent orchestration, file-template generation, and project-level workflow logging -- enabling end-to-end assisted development from design input to code drafts."
+  }
+}

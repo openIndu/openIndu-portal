@@ -1,23 +1,40 @@
 import { test, expect } from "@playwright/test";
 
-test.describe("Motion Control Page", () => {
-  test("should load the motion control page", async ({ page }) => {
-    await page.goto("/motion-control");
-    await expect(page.locator("h1")).toContainText("AI+运动控制");
-  });
+// Motion Control is translated (PR-3); Vision/IIoT/Infrastructure below are
+// still ZH-only pending PR-4, so only this block is locale-parameterized.
+const MOTION_CONTROL_GOLDEN = {
+  h1: { zh: "AI+运动控制", en: "AI + Motion Control" },
+  launchedBadge: { zh: "正式推出", en: "Generally Available" },
+  comingSoonBadge: { zh: "敬请期待", en: "Coming soon" },
+  mitsubishi: { zh: "三菱PLC", en: "Mitsubishi PLC" },
+  siemens: { zh: "西门子PLC", en: "Siemens PLC" },
+} as const;
 
-  test("should display launched badge", async ({ page }) => {
-    await page.goto("/motion-control");
-    await expect(page.getByText("正式推出", { exact: true }).first()).toBeVisible();
-    await expect(page.getByText("敬请期待", { exact: true })).toHaveCount(0);
-  });
+const LOCALES = [
+  { locale: "zh" as const, prefix: "", label: "Chinese" },
+  { locale: "en" as const, prefix: "/en", label: "English" },
+] as const;
 
-  test("should display PLC brand cards", async ({ page }) => {
-    await page.goto("/motion-control");
-    await expect(page.getByText("三菱PLC")).toBeVisible();
-    await expect(page.getByText("西门子PLC")).toBeVisible();
+for (const { locale, prefix, label } of LOCALES) {
+  test.describe(`Motion Control Page (${label})`, () => {
+    test("should load the motion control page", async ({ page }) => {
+      await page.goto(prefix + "/motion-control");
+      await expect(page.locator("h1")).toContainText(MOTION_CONTROL_GOLDEN.h1[locale]);
+    });
+
+    test("should display launched badge", async ({ page }) => {
+      await page.goto(prefix + "/motion-control");
+      await expect(page.getByText(MOTION_CONTROL_GOLDEN.launchedBadge[locale], { exact: true }).first()).toBeVisible();
+      await expect(page.getByText(MOTION_CONTROL_GOLDEN.comingSoonBadge[locale], { exact: true })).toHaveCount(0);
+    });
+
+    test("should display PLC brand cards", async ({ page }) => {
+      await page.goto(prefix + "/motion-control");
+      await expect(page.getByText(MOTION_CONTROL_GOLDEN.mitsubishi[locale])).toBeVisible();
+      await expect(page.getByText(MOTION_CONTROL_GOLDEN.siemens[locale])).toBeVisible();
+    });
   });
-});
+}
 
 test.describe("Vision Page", () => {
   test("should load the vision page", async ({ page }) => {
