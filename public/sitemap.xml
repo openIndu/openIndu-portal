@@ -1,58 +1,166 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.openindu.com/</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-08-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.openindu.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.openindu.com/en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.openindu.com/"/>
+  </url>
+  <url>
+    <loc>https://www.openindu.com/en</loc>
+    <lastmod>2026-08-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.openindu.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.openindu.com/en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.openindu.com/"/>
   </url>
   <url>
     <loc>https://www.openindu.com/resources</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-08-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.openindu.com/resources"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.openindu.com/en/resources"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.openindu.com/resources"/>
+  </url>
+  <url>
+    <loc>https://www.openindu.com/en/resources</loc>
+    <lastmod>2026-08-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.openindu.com/resources"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.openindu.com/en/resources"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.openindu.com/resources"/>
   </url>
   <url>
     <loc>https://www.openindu.com/resources/documents</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-08-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.openindu.com/resources/documents"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.openindu.com/en/resources/documents"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.openindu.com/resources/documents"/>
+  </url>
+  <url>
+    <loc>https://www.openindu.com/en/resources/documents</loc>
+    <lastmod>2026-08-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.openindu.com/resources/documents"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.openindu.com/en/resources/documents"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.openindu.com/resources/documents"/>
   </url>
   <url>
     <loc>https://www.openindu.com/resources/software</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-08-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.openindu.com/resources/software"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.openindu.com/en/resources/software"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.openindu.com/resources/software"/>
+  </url>
+  <url>
+    <loc>https://www.openindu.com/en/resources/software</loc>
+    <lastmod>2026-08-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.openindu.com/resources/software"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.openindu.com/en/resources/software"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.openindu.com/resources/software"/>
   </url>
   <url>
     <loc>https://www.openindu.com/motion-control</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-08-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.openindu.com/motion-control"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.openindu.com/en/motion-control"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.openindu.com/motion-control"/>
+  </url>
+  <url>
+    <loc>https://www.openindu.com/en/motion-control</loc>
+    <lastmod>2026-08-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.openindu.com/motion-control"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.openindu.com/en/motion-control"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.openindu.com/motion-control"/>
   </url>
   <url>
     <loc>https://www.openindu.com/motion-control/studio</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-08-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.openindu.com/motion-control/studio"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.openindu.com/en/motion-control/studio"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.openindu.com/motion-control/studio"/>
+  </url>
+  <url>
+    <loc>https://www.openindu.com/en/motion-control/studio</loc>
+    <lastmod>2026-08-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.openindu.com/motion-control/studio"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.openindu.com/en/motion-control/studio"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.openindu.com/motion-control/studio"/>
   </url>
   <url>
     <loc>https://www.openindu.com/vision</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-08-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.openindu.com/vision"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.openindu.com/en/vision"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.openindu.com/vision"/>
+  </url>
+  <url>
+    <loc>https://www.openindu.com/en/vision</loc>
+    <lastmod>2026-08-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.openindu.com/vision"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.openindu.com/en/vision"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.openindu.com/vision"/>
   </url>
   <url>
     <loc>https://www.openindu.com/iiot-platform</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-08-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.openindu.com/iiot-platform"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.openindu.com/en/iiot-platform"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.openindu.com/iiot-platform"/>
+  </url>
+  <url>
+    <loc>https://www.openindu.com/en/iiot-platform</loc>
+    <lastmod>2026-08-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.openindu.com/iiot-platform"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.openindu.com/en/iiot-platform"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.openindu.com/iiot-platform"/>
   </url>
   <url>
     <loc>https://www.openindu.com/infrastructure</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-08-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.openindu.com/infrastructure"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.openindu.com/en/infrastructure"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.openindu.com/infrastructure"/>
+  </url>
+  <url>
+    <loc>https://www.openindu.com/en/infrastructure</loc>
+    <lastmod>2026-08-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.openindu.com/infrastructure"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.openindu.com/en/infrastructure"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.openindu.com/infrastructure"/>
   </url>
   <url>
     <loc>https://www.openindu.com/privacy</loc>

@@ -1,11 +1,12 @@
 # openIndu Community 社区官网 — https://www.openindu.com
 User-agent: *
 Allow: /
-
-# 私有/认证页面无 SEO 价值，禁止收录
 Disallow: /login
 Disallow: /register
 Disallow: /account
+Disallow: /en/login
+Disallow: /en/register
+Disallow: /en/account
 
 # Baidu spider — explicit section so Baidu's crawler-specific rules win when
 # they diverge from the generic *. Same allow/disallow set; kept explicit to
@@ -15,6 +16,9 @@ Allow: /
 Disallow: /login
 Disallow: /register
 Disallow: /account
+Disallow: /en/login
+Disallow: /en/register
+Disallow: /en/account
 
 # AI crawlers — explicitly allowed so that LLM providers can index the site
 # for AI-powered search and retrieval (ChatGPT, Claude, Perplexity, etc.).
@@ -23,42 +27,63 @@ Allow: /
 Disallow: /login
 Disallow: /register
 Disallow: /account
+Disallow: /en/login
+Disallow: /en/register
+Disallow: /en/account
 
 User-agent: Claude-Web
 Allow: /
 Disallow: /login
 Disallow: /register
 Disallow: /account
+Disallow: /en/login
+Disallow: /en/register
+Disallow: /en/account
 
 User-agent: anthropic-ai
 Allow: /
 Disallow: /login
 Disallow: /register
 Disallow: /account
+Disallow: /en/login
+Disallow: /en/register
+Disallow: /en/account
 
 User-agent: PerplexityBot
 Allow: /
 Disallow: /login
 Disallow: /register
 Disallow: /account
+Disallow: /en/login
+Disallow: /en/register
+Disallow: /en/account
 
 User-agent: Applebot
 Allow: /
 Disallow: /login
 Disallow: /register
 Disallow: /account
+Disallow: /en/login
+Disallow: /en/register
+Disallow: /en/account
 
 User-agent: Bytespider
 Allow: /
 Disallow: /login
 Disallow: /register
 Disallow: /account
+Disallow: /en/login
+Disallow: /en/register
+Disallow: /en/account
 
 User-agent: Bingbot
 Allow: /
 Disallow: /login
 Disallow: /register
 Disallow: /account
+Disallow: /en/login
+Disallow: /en/register
+Disallow: /en/account
 
 Sitemap: https://www.openindu.com/sitemap.xml
 LLMs.txt: https://www.openindu.com/llms.txt

@@ -2,6 +2,10 @@ import { defineConfig, devices } from "@playwright/test";
 
 export default defineConfig({
   testDir: "./e2e",
+  // prerender.spec.ts targets the production build via a separate config
+  // (playwright.prerender.config.ts) -- it asserts on prerendered titles/
+  // canonicals that don't exist on this dev-server-backed run.
+  testIgnore: "prerender.spec.ts",
   timeout: 30_000,
   expect: {
     timeout: 10_000,

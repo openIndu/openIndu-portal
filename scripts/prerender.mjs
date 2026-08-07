@@ -27,19 +27,33 @@ const ROOT = resolve(__dirname, "..");
 const DIST = resolve(ROOT, "dist");
 const PORT = 4173; // vite preview default
 
-/** Routes to prerender — aligned with sitemap.xml. */
-const ROUTES = [
-  "/",
+/**
+ * Routes to prerender — 18 total (see design/architecture/adr-i18n-en-routing.md D4).
+ * This is a DIFFERENT list from sitemap.xml (22 URLs): the 4 legal pages are
+ * ZH-only and their /en/* counterparts 302 to the ZH version instead of being
+ * prerendered separately.
+ *
+ * "/" MUST stay last: saveHtml("/") overwrites dist/index.html, which is also
+ * the SPA-fallback source every other route's `vite preview` request resolves
+ * through. Rendering it first would pollute EN routes with whatever <head>
+ * state (lang, hreflang) `/` last left behind — see ADR C2.
+ */
+const SHARED = [
   "/motion-control",
   "/motion-control/studio",
   "/vision",
   "/iiot-platform",
   "/infrastructure",
   "/resources",
-  "/privacy",
-  "/legal",
-  "/cookies",
-  "/legal-center",
+];
+const ZH_ONLY = ["/privacy", "/legal", "/cookies", "/legal-center"];
+
+const ROUTES = [
+  ...SHARED,
+  ...ZH_ONLY,
+  ...SHARED.map((p) => `/en${p}`),
+  "/en",
+  "/",
 ];
 
 // ── helpers ──────────────────────────────────────────────────────────
