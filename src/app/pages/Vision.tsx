@@ -10,6 +10,13 @@ const featureKeys = [
 
 const useCaseKeys = ["surfaceDefect", "dimension", "ocr", "assembly", "color", "robotGuide"] as const;
 
+const caseStudyImages = [
+  { key: "overview", src: "/assets/vision/station-overview.png" },
+  { key: "vision", src: "/assets/vision/station-vision.png" },
+] as const;
+
+const caseStudyCapabilityKeys = ["calibration", "matching", "dualCamera"] as const;
+
 const techStackKeys = [
   { key: "capture", color: "bg-green-600" },
   { key: "preprocess", color: "bg-teal-600" },
@@ -88,6 +95,48 @@ export function Vision() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Community Case Study */}
+      <section className="py-16 bg-white">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="max-w-5xl mx-auto rounded-2xl border-2 border-green-200 bg-gradient-to-br from-green-50 to-teal-50 p-6 sm:p-10">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-white text-green-700 rounded-full text-xs font-medium mb-4 border border-green-200">
+              {t("caseStudy.badge")}
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">{t("caseStudy.heading")}</h2>
+            <p className="text-gray-600 mb-8 max-w-3xl">{t("caseStudy.intro")}</p>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+              {caseStudyImages.map((image) => (
+                <div key={image.key}>
+                  <div className="rounded-xl overflow-hidden shadow-lg border border-gray-200 bg-white">
+                    <img
+                      src={image.src}
+                      alt={t(`caseStudy.${image.key}Alt`)}
+                      className="w-full h-auto"
+                      loading="lazy"
+                    />
+                  </div>
+                  <p className="text-sm text-gray-500 mt-2 text-center">{t(`caseStudy.${image.key}Caption`)}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {caseStudyCapabilityKeys.map((key) => (
+                <div key={key} className="bg-white p-4 rounded-lg border border-gray-100">
+                  <h4 className="font-semibold text-gray-900 text-sm mb-1">
+                    {t(`caseStudy.capabilities.${key}.title`)}
+                  </h4>
+                  <p className="text-xs text-gray-600">{t(`caseStudy.capabilities.${key}.description`)}</p>
+                </div>
+              ))}
+            </div>
+
+            <p className="text-xs text-gray-500 mt-6">{t("caseStudy.status")}</p>
           </div>
         </div>
       </section>
