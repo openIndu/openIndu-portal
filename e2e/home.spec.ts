@@ -108,11 +108,13 @@ for (const { locale, prefix, label } of LOCALES) {
       await page.goto(prefix + "/");
       await expect(page.getByText(gv("productsHeading", locale))).toBeVisible();
       // Repo names are invariant proper nouns -- same spelling in both locales.
-      // exact:true to avoid matching the header's "openIndu-studio 平台" / "... Platform"
-      // submenu link, which is hidden until the mobile menu is opened.
-      await expect(page.getByText("openIndu-studio", { exact: true }).first()).toBeVisible();
-      await expect(page.getByText("openIndu-platform", { exact: true }).first()).toBeVisible();
-      await expect(page.getByText("openindu-station", { exact: true }).first()).toBeVisible();
+      // Scoped to <main>: the header nav dropdown and footer "core services" link
+      // both also read exactly "openIndu-studio" now, so an unscoped getByText
+      // could resolve .first() to a hidden nav element instead of this section.
+      const main = page.locator("main");
+      await expect(main.getByText("openIndu-studio", { exact: true }).first()).toBeVisible();
+      await expect(main.getByText("openIndu-platform", { exact: true }).first()).toBeVisible();
+      await expect(main.getByText("openindu-station", { exact: true }).first()).toBeVisible();
     });
 
     test("displays the five-stage closed loop", async ({ page }) => {

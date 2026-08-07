@@ -4,7 +4,7 @@
     "downloads": "Downloads",
     "motionControl": "AI + Motion Control",
     "overview": "Overview",
-    "studioPlatform": "openIndu-studio Platform",
+    "studioPlatform": "openIndu-studio",
     "vision": "AI + Machine Vision",
     "iiotPlatform": "AI + Industrial IoT Platform",
     "infrastructure": "AI + Infrastructure",
@@ -31,7 +31,7 @@
     "iiotPlatform": "AI + Industrial IoT Platform",
     "infrastructure": "AI + Infrastructure",
     "coreServices": "Core Services",
-    "studioPlatform": "openIndu-studio Platform",
+    "studioPlatform": "openIndu-studio",
     "aiAssistantBot": "AI Assistant Bot",
     "relatedPlatforms": "Related Platforms",
     "serviceStatus": "Service Status",
@@ -46,7 +46,10 @@
   "language": {
     "label": "Language",
     "zh": "简体中文",
-    "en": "English"
+    "en": "English",
+    "zhShort": "中文",
+    "enShort": "EN",
+    "switchTo": "Switch to {{language}}"
   },
   "a11y": {
     "mobileMenuOpen": "Open navigation menu",

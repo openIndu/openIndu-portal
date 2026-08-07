@@ -6,7 +6,7 @@ import { useAuth } from "@/store/auth";
 import { visitsApi } from "@/api";
 import { getDisplayName, maskPhone } from "../utils/user";
 import { StructuredData } from "./StructuredData";
-import { LanguageSwitcher, LanguageSwitcherMobile } from "./LanguageSwitcher";
+import { LanguageSwitcher, LanguageSwitcherCompact, LanguageSwitcherMobile } from "./LanguageSwitcher";
 import logo from "/assets/logo.png";
 
 export function Layout() {
@@ -83,15 +83,6 @@ export function Layout() {
     <div className="min-h-screen bg-white">
       <StructuredData pagePath={location.pathname === "/" ? "/" : location.pathname} />
 
-      {/* Language utility bar (desktop only, above sticky header) */}
-      <div className="hidden lg:block border-b border-gray-200 bg-gray-50">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex h-8 items-center justify-end">
-            <LanguageSwitcher />
-          </div>
-        </div>
-      </div>
-
       {/* Header */}
       <header className="sticky top-0 z-50 border-b border-gray-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80">
         <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -162,6 +153,7 @@ export function Layout() {
 
             {/* Desktop Auth */}
             <div className="hidden lg:flex lg:items-center lg:gap-3">
+              <LanguageSwitcherCompact />
               {isAuthenticated ? (
                 <>
                   <Link to="/account" className="flex max-w-[240px] items-center gap-2 rounded-full bg-blue-50 px-3 py-1.5 text-sm text-blue-700 hover:bg-blue-100">
@@ -409,7 +401,7 @@ export function Layout() {
             {/* Language (footer column) */}
             <div className="flex flex-col items-start">
               <h3 className="font-semibold text-white mb-4">{t("language.label")}</h3>
-              <LanguageSwitcher />
+              <LanguageSwitcher variant="dark" />
             </div>
 
           </div>
