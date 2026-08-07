@@ -98,7 +98,7 @@ export function Layout() {
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden min-w-0 flex-1 items-center justify-center gap-x-4 xl:gap-x-6 lg:flex">
+            <div className="hidden min-w-0 flex-1 items-center justify-center gap-x-6 xl:flex">
               {navigation.map((item) =>
                 item.children ? (
                   <div key={item.name} className="group relative">
@@ -152,7 +152,7 @@ export function Layout() {
             </div>
 
             {/* Desktop Auth */}
-            <div className="hidden lg:flex lg:items-center lg:gap-3">
+            <div className="hidden xl:flex xl:items-center xl:gap-3">
               <LanguageSwitcherCompact />
               {isAuthenticated ? (
                 <>
@@ -180,7 +180,7 @@ export function Layout() {
             {/* Mobile menu button */}
             <button
               type="button"
-              className="lg:hidden p-2 text-gray-700"
+              className="xl:hidden p-2 text-gray-700"
               onClick={() => {
                 setMobileMenuOpen(!mobileMenuOpen);
                 if (!mobileMenuOpen) window.scrollTo({ top: 0, behavior: "smooth" });
@@ -199,7 +199,7 @@ export function Layout() {
 
       {/* Mobile Navigation */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-t border-gray-200 bg-white">
+        <div className="xl:hidden border-t border-gray-200 bg-white">
           <div className="space-y-1 px-4 pb-3 pt-2">
             {navigation.map((item) => (
               <div key={item.name}>
