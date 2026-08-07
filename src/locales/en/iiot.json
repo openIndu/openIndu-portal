@@ -1,0 +1,128 @@
+{
+  "seo": {
+    "title": "Industrial IoT Platform | openIndu",
+    "description": "openIndu Industrial IoT Platform: an enterprise-grade IIoT for 3C electronics manufacturing, unifying device management, data acquisition, visualization dashboards, and traceability.",
+    "keywords": "industrial IoT,IIoT,device management,data acquisition,3C manufacturing,openIndu"
+  },
+  "hero": {
+    "title1": "An Enterprise-Grade Industrial IoT Platform",
+    "title2": "Built for 3C Electronics Manufacturing",
+    "subtitle": "Let industrial data speak -- making smart manufacturing simpler",
+    "ctaPrimary": "Try the Platform",
+    "ctaSecondary": "View Architecture",
+    "demoLabel": "Demo URL",
+    "usernameLabel": "Username",
+    "passwordLabel": "Password"
+  },
+  "intro": {
+    "heading": "Platform Overview",
+    "p1Prefix": "openIndu is a community-grade Industrial IoT platform focused on 3C electronics manufacturing, covering the complete chain from",
+    "p1Chain": ["edge data acquisition", "real-time monitoring", "process management", "product traceability", "data dashboards"],
+    "p1Suffix": ".",
+    "p2Prefix": "The platform consists of two parts: the ",
+    "p2Strong1": "web app",
+    "p2Mid1": "is a modern Vue 3 application that gives each role a personalized workbench and data dashboard; the ",
+    "p2Strong2": "device side",
+    "p2Mid2": "connects PLC equipment through multi-protocol edge gateways, enabling real-time acquisition and reporting of shop-floor data."
+  },
+  "features": {
+    "heading": "Core Features",
+    "subheading": "Six core feature modules, covering every smart-manufacturing scenario",
+    "smartLogin": {
+      "title": "Smart Login · Secure & Convenient",
+      "description": "Phone-number verification-code sign-in/sign-up, secured by JWT token authentication.",
+      "screenshotAlt": "Smart login screen",
+      "details": [
+        "Phone-code sign-in/sign-up; an unregistered phone number auto-creates an account",
+        "JWT dual-token authentication (Access + Refresh)",
+        "Fast entry into the workspace, one click to core functions",
+        "Fine-grained permission control -- different roles see different views"
+      ]
+    },
+    "workbench": {
+      "title": "Workbench · Global Overview at a Glance",
+      "description": "Multi-dimensional data aggregation -- device status, line operation, and alerts, all at a glance.",
+      "screenshotAlt": "Workbench overview",
+      "details": [
+        "Device overview: totals, online/offline counts",
+        "Line status: real-time operating status and utilization",
+        "Device-type distribution: loaders, AOI inspection, curing ovens, and more",
+        "Latest alerts: unresolved alerts shown in real time",
+        "Recent activity: audit-log traceability",
+        "Quick links: user management, role management, device list, data dashboard"
+      ]
+    },
+    "dashboard": {
+      "title": "Data Dashboard · Production Status on One Screen",
+      "description": "A dark, tech-styled data dashboard suited to shop-floor boards and command centers.",
+      "screenshotAlt": "Data dashboard",
+      "details": [
+        "Key-metric cards: online devices, daily output, pass rate, equipment efficiency, alert count",
+        "Per-line device statistics: real-time display by production line",
+        "Production data overview: output trend, efficiency, quality, line status",
+        "Real-time alert log: instant push of anomaly events",
+        "Station defect-rate statistics: quality comparison across stations",
+        "Raw-material consumption monitoring: real-time material-usage tracking"
+      ]
+    },
+    "deviceManagement": {
+      "title": "Equipment Management · Full Lifecycle Control",
+      "description": "Full-lifecycle management from device registration to decommissioning, with real-time monitoring and alerting.",
+      "screenshotAlt": "Equipment management",
+      "details": [
+        "Device search: filter by name, UUID, type, or production line",
+        "Device status monitoring: real-time operating-status tracking",
+        "Device alerts: closed-loop query and handling",
+        "Key parameters: real-time parameter monitoring and history tracking",
+        "Device maintenance: maintenance plans and record management",
+        "Device-type management: custom device-type configuration"
+      ]
+    },
+    "traceability": {
+      "title": "Product Traceability · From Raw Material to Finished Product",
+      "description": "A complete product-traceability chain, fully traceable from raw material to finished product.",
+      "screenshotAlt": "Product traceability",
+      "details": [
+        "Traceability lookup: query by trace number, product ID, or batch number",
+        "End-to-end traceability: complete records for every station, raw material, and process parameter",
+        "Process records: station in/out times, operator, equipment, and parameter snapshots",
+        "Material traceability: trace affected products by batch"
+      ]
+    },
+    "miniProgram": {
+      "title": "WeChat Mini Program Support",
+      "description": "Convenient mobile operation -- stay on top of production anytime, anywhere.",
+      "screenshotAlt": "WeChat Mini Program",
+      "details": ["View device status and production data from the WeChat Mini Program", "Mobile alert push and handling", "Real-time sync with the web app"]
+    }
+  },
+  "architecture": {
+    "heading": "Technical Architecture",
+    "subheading": "An 8-layer microservices architecture, full-stack coverage from edge devices to the user interface",
+    "diagramAlt": "openIndu platform architecture diagram",
+    "layers": {
+      "webFrontend": { "name": "Web Frontend", "tech": "Vue 3.5 + Element Plus + ECharts + Pinia", "desc": "Modern SPA, RBAC permissions, data visualization, multi-role adaptation" },
+      "backend": { "name": "Backend Services", "tech": "Spring Boot 3.5 + Java 21 + Spring Security", "desc": "RESTful API, JWT dual-token auth, microservices architecture" },
+      "edgeGateway": { "name": "Edge Gateway", "tech": "S7 / Modbus / FINS / MC Protocols", "desc": "Siemens / Mitsubishi / Keyence / Omron / Inovance PLC connectivity" },
+      "dataAcquisition": { "name": "Data Acquisition", "tech": "FastAPI + Kafka + MQTT", "desc": "High-throughput acquisition, UUID authentication, time-series database" },
+      "businessDb": { "name": "Business Database", "tech": "PostgreSQL 15.7", "desc": "User, permission, process, and traceability business data" },
+      "timeseriesDb": { "name": "Time-Series Database", "tech": "TDengine 3.0", "desc": "Time-series storage for equipment status and process history" },
+      "cache": { "name": "Cache Layer", "tech": "Redis 7.2", "desc": "Session management, permission cache, real-time data" },
+      "messageBroker": { "name": "Message Broker", "tech": "Mosquitto MQTT 5.0", "desc": "IoT device message routing and distribution" }
+    }
+  },
+  "dataFlow": {
+    "heading": "Data Flow",
+    "chain": ["PLC Devices", "Edge Gateway", "Message Queue", "Data Acquisition", "Persistence Layer", "Backend Services", "Frontend Application"]
+  },
+  "advantages": {
+    "heading": "Core Advantages",
+    "subheading": "Why choose the openIndu platform",
+    "industryFocus": { "title": "Industry Focus", "description": "Focused on 3C electronics manufacturing, with a deep understanding of industry pain points and needs" },
+    "traceability": { "title": "Complete Traceability Chain", "description": "End-to-end product traceability from raw material to finished product, keeping quality under control" },
+    "frontend": { "title": "Excellent Frontend Experience", "description": "A modern web application built with Vue 3 + Element Plus" },
+    "deviceCompat": { "title": "Broad Device Compatibility", "description": "Supports mainstream PLC protocols from Siemens, Mitsubishi, Omron, Keyence, Inovance, and more" },
+    "cloudEdge": { "title": "Cloud-Edge Collaboration", "description": "A collaborative edge-gateway + cloud-platform architecture, flexible to deploy" },
+    "community": { "title": "Community-Driven", "description": "Built together by the open-source community, continuously iterated, code fully transparent" }
+  }
+}

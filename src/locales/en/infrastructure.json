@@ -1,0 +1,70 @@
+{
+  "seo": {
+    "title": "AI + Infrastructure | openIndu",
+    "description": "openIndu Infrastructure: compute and credential services for industrial AI, providing the foundation for LLM inference, vector retrieval, and MCP tool integration.",
+    "keywords": "AI infrastructure,compute,MCP,RAG,credential service,openIndu"
+  },
+  "hero": {
+    "title": "AI + Infrastructure",
+    "description": "The Unified LLM API Gateway. Better pricing, more stable, no subscription required -- just swap the BASE URL to get started. Supports 30+ LLM providers, delivering secure, stable, and efficient API forwarding and management.",
+    "statusLabel": "Status:",
+    "statusValue": "Live"
+  },
+  "quickAccess": {
+    "heading": "Get Started",
+    "description": "Better pricing, more stable, no subscription required -- just swap the BASE URL to get started.",
+    "cta": "Visit the Model Platform"
+  },
+  "features": {
+    "heading": "Core Features",
+    "subheading": "A complete LLM API relay service",
+    "unifiedAccess": {
+      "title": "Unified Access",
+      "description": "The Unified LLM API Gateway -- better pricing, more stable, no subscription required",
+      "items": ["Supports 30+ LLM providers", "Unified interface standard", "Seamless model switching", "Ready to use"]
+    },
+    "chatCompletion": {
+      "title": "Chat & Completion",
+      "description": "Supports a range of chat and text-completion API endpoints",
+      "items": ["/v1/chat/completions", "/v1/responses", "/v1/messages", "/v1beta/models"]
+    },
+    "imageEmbedding": {
+      "title": "Image & Embeddings",
+      "description": "Provides image generation, editing, and vector-embedding services",
+      "items": ["/v1/embeddings", "/v1/rerank", "/v1/images/generations", "/v1/images/edits"]
+    },
+    "voiceService": {
+      "title": "Voice Services",
+      "description": "Supports speech synthesis, transcription, and translation",
+      "items": ["/v1/audio/speech", "/v1/audio/transcriptions", "/v1/audio/translations", "Multi-language support"]
+    }
+  },
+  "useCases": {
+    "heading": "Use Cases",
+    "subheading": "Infrastructure support for a wide range of AI applications",
+    "exampleLabel": "Example Use",
+    "motionControl": { "name": "AI + Motion Control", "description": "Provides LLM inference for motion-control algorithms, optimizing trajectory planning", "example": "Real-time path planning, adaptive parameter tuning" },
+    "visionInspection": { "name": "AI + Vision Inspection", "description": "Provides inference services for vision models, enabling intelligent defect detection and classification", "example": "Product quality inspection, anomaly recognition" },
+    "dataAnalysis": { "name": "AI + Data Analysis", "description": "Provides intelligent data analysis and prediction services for the Industrial IoT platform", "example": "Equipment failure prediction, production-optimization recommendations" }
+  },
+  "architecture": {
+    "heading": "Service Architecture",
+    "subheading": "A layered design, easy to extend and maintain",
+    "application": { "title": "Application Layer", "subtitle": "Business applications & clients", "description": "Receives client requests and performs authentication, authorization, and traffic control" },
+    "gateway": { "title": "API Gateway Layer", "subtitle": "Request routing & authorization", "description": "Intelligent routing and load balancing, forwarding requests to the appropriate LLM service" },
+    "forwarding": { "title": "Forwarding Service Layer", "subtitle": "Core business logic", "description": "Request handling, response transformation, error handling" },
+    "llmService": { "title": "LLM Service Layer", "subtitle": "LLM API integration", "description": "Integrates multiple LLM APIs (OpenAI, Claude, domestic Chinese LLMs, and more)" },
+    "monitoring": { "title": "Monitoring & Logging", "subtitle": "Security & audit", "description": "Real-time monitoring of API call status, with detailed access logs and usage statistics" }
+  },
+  "integration": {
+    "heading": "Quick Integration",
+    "subheading": "Simple API calls, fast onboarding",
+    "codeComment": "# Usage example - Python",
+    "codeMessage": "Analyze this batch of product quality data",
+    "endpointsHeading": "💡 Supported API Endpoints",
+    "chatLabel": "Chat & Completion",
+    "embedLabel": "Embeddings & Reranking",
+    "imageLabel": "Image Services",
+    "voiceLabel": "Voice Services"
+  }
+}

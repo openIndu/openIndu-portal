@@ -1,0 +1,128 @@
+{
+  "seo": {
+    "title": "工业互联网平台 IIoT｜openIndu",
+    "description": "openIndu 工业互联网平台：面向 3C 电子制造的企业级 IIoT，设备管理、数据采集、可视化看板与追溯一体化。",
+    "keywords": "工业互联网,IIoT,设备管理,数据采集,3C 制造,openIndu"
+  },
+  "hero": {
+    "title1": "面向 3C 电子制造行业的",
+    "title2": "企业级工业互联网平台",
+    "subtitle": "让工业数据说话，让智能制造更简单",
+    "ctaPrimary": "体验平台",
+    "ctaSecondary": "了解架构",
+    "demoLabel": "演示地址",
+    "usernameLabel": "用户名",
+    "passwordLabel": "密码"
+  },
+  "intro": {
+    "heading": "平台简介",
+    "p1Prefix": "openIndu 是一个社区级工业互联网平台，专注于 3C 电子制造行业，覆盖从",
+    "p1Chain": ["边缘数据采集", "实时监控", "工艺管理", "产品追溯", "数据大屏"],
+    "p1Suffix": "的完整链路。",
+    "p2Prefix": "平台由两部分组成：",
+    "p2Strong1": "页面端",
+    "p2Mid1": "基于 Vue 3 的现代化 Web 应用，为不同角色提供个性化工作台与数据看板；",
+    "p2Strong2": "设备端",
+    "p2Mid2": "通过多协议边缘网关连接 PLC 设备，实现工业现场数据的实时采集与上报。"
+  },
+  "features": {
+    "heading": "核心功能",
+    "subheading": "六大核心功能模块，覆盖智能制造全场景",
+    "smartLogin": {
+      "title": "智能登录 · 安全便捷",
+      "description": "支持手机号验证码登录/注册，JWT Token 认证机制保障安全。",
+      "screenshotAlt": "智能登录界面",
+      "details": [
+        "手机号验证码登录/注册，未注册手机号自动创建账号",
+        "JWT Token 双令牌认证（Access + Refresh）",
+        "快速进入工作空间，一键直达核心功能",
+        "细粒度权限控制，不同角色看到不同界面"
+      ]
+    },
+    "workbench": {
+      "title": "工作台 · 全局一目了然",
+      "description": "多维度数据聚合，设备状态、产线运行、告警信息一目了然。",
+      "screenshotAlt": "工作台总览",
+      "details": [
+        "设备总览：总数、在线/离线统计",
+        "产线状态：实时运行状态与利用率",
+        "设备类型分布：上料机、AOI 检测、固化炉等",
+        "最新告警：未恢复告警实时展示",
+        "最近操作：审计日志追溯",
+        "快捷入口：用户管理、角色管理、设备列表、数据大屏"
+      ]
+    },
+    "dashboard": {
+      "title": "数据大屏 · 生产态势一屏掌控",
+      "description": "暗色科技风格数据大屏，适合车间看板与管理指挥中心。",
+      "screenshotAlt": "数据大屏",
+      "details": [
+        "关键指标卡片：在线设备、日产量、合格率、设备效率、告警数量",
+        "产线设备统计：按产线维度实时展示",
+        "生产数据概览：产量趋势、效率、品质、产线状态",
+        "实时告警日志：异常事件即时推送",
+        "工位不良率统计：各工位质量数据对比",
+        "原料消耗监控：实时物料使用跟踪"
+      ]
+    },
+    "deviceManagement": {
+      "title": "设备管理 · 全生命周期管控",
+      "description": "从设备注册到报废的全生命周期管理，实时监控与预警。",
+      "screenshotAlt": "设备管理",
+      "details": [
+        "设备搜索：按名称、UUID、类型、产线筛选",
+        "设备状态监控：实时运行状态追踪",
+        "设备告警：查询与处理闭环管理",
+        "关键参数：实时参数监控与历史追踪",
+        "设备维护：维护计划与记录管理",
+        "设备类型管理：自定义设备类型配置"
+      ]
+    },
+    "traceability": {
+      "title": "产品追溯 · 从原料到成品全链路",
+      "description": "完整的产品追溯链条，从原材料到成品全程可追溯。",
+      "screenshotAlt": "产品追溯",
+      "details": [
+        "追溯查询：支持追溯号、产品编号、批次号查询",
+        "全链路追溯：所有工位、原材料、工艺参数完整记录",
+        "工艺记录：进出站时间、操作员、设备、参数快照",
+        "原料追溯：按批次追溯受影响的产品"
+      ]
+    },
+    "miniProgram": {
+      "title": "支持微信小程序",
+      "description": "移动端便捷操作，随时随地掌握生产动态。",
+      "screenshotAlt": "微信小程序",
+      "details": ["微信小程序端查看设备状态与生产数据", "移动端告警推送与处理", "与 Web 端数据实时同步"]
+    }
+  },
+  "architecture": {
+    "heading": "技术架构",
+    "subheading": "8 层微服务架构，从边缘设备到用户界面全栈覆盖",
+    "diagramAlt": "openIndu 平台架构图",
+    "layers": {
+      "webFrontend": { "name": "Web 前端", "tech": "Vue 3.5 + Element Plus + ECharts + Pinia", "desc": "现代化 SPA，RBAC 权限，数据可视化，多角色适配" },
+      "backend": { "name": "后端服务", "tech": "Spring Boot 3.5 + Java 21 + Spring Security", "desc": "RESTful API，JWT 双令牌，微服务架构" },
+      "edgeGateway": { "name": "边缘网关", "tech": "S7 / Modbus / FINS / MC 协议", "desc": "西门子 / 三菱 / 基恩士 / 欧姆龙 / 汇川 PLC 接入" },
+      "dataAcquisition": { "name": "数据采集", "tech": "FastAPI + Kafka + MQTT", "desc": "高吞吐量采集，UUID 认证，时序数据库" },
+      "businessDb": { "name": "业务数据库", "tech": "PostgreSQL 15.7", "desc": "用户、权限、工艺、追溯等业务数据" },
+      "timeseriesDb": { "name": "时序数据库", "tech": "TDengine 3.0", "desc": "设备状态与工艺历史时序数据存储" },
+      "cache": { "name": "缓存层", "tech": "Redis 7.2", "desc": "会话管理、权限缓存、实时数据" },
+      "messageBroker": { "name": "消息代理", "tech": "Mosquitto MQTT 5.0", "desc": "IoT 设备消息路由与分发" }
+    }
+  },
+  "dataFlow": {
+    "heading": "数据流向",
+    "chain": ["PLC设备", "边缘网关", "消息队列", "数据采集", "持久层", "后端服务", "前端应用"]
+  },
+  "advantages": {
+    "heading": "核心优势",
+    "subheading": "为什么选择 openIndu 平台",
+    "industryFocus": { "title": "行业聚焦", "description": "专注 3C 电子制造行业，深度理解行业痛点与需求" },
+    "traceability": { "title": "完整追溯链", "description": "从原材料到成品的全链路产品追溯，确保品质可控" },
+    "frontend": { "title": "优秀前端体验", "description": "Vue 3 + Element Plus 构建的现代化 Web 应用" },
+    "deviceCompat": { "title": "设备兼容广泛", "description": "支持西门子、三菱、欧姆龙、基恩士、汇川等主流 PLC 协议" },
+    "cloudEdge": { "title": "云边协同", "description": "边缘网关 + 云端平台的协同架构，灵活部署" },
+    "community": { "title": "社区驱动", "description": "开源社区共建，持续迭代优化，代码公开透明" }
+  }
+}

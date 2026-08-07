@@ -1,13 +1,31 @@
 import { test, expect } from "@playwright/test";
 
-// Motion Control is translated (PR-3); Vision/IIoT/Infrastructure below are
-// still ZH-only pending PR-4, so only this block is locale-parameterized.
-const MOTION_CONTROL_GOLDEN = {
-  h1: { zh: "AI+运动控制", en: "AI + Motion Control" },
-  launchedBadge: { zh: "正式推出", en: "Generally Available" },
+// Golden values -- curated manually against src/locales/{zh,en}/*.json and
+// docs/i18n-glossary.md. NOT read from locale JSON (see i18n-test-rework-plan.md 1.1).
+const GOLDEN = {
+  motionControl: {
+    h1: { zh: "AI+运动控制", en: "AI + Motion Control" },
+    launchedBadge: { zh: "正式推出", en: "Generally Available" },
+    mitsubishi: { zh: "三菱PLC", en: "Mitsubishi PLC" },
+    siemens: { zh: "西门子PLC", en: "Siemens PLC" },
+  },
+  vision: {
+    h1: { zh: "AI+视觉", en: "AI + Machine Vision" },
+  },
+  iiot: {
+    h1: { zh: "工业互联网平台", en: "Industrial IoT Platform" },
+    architectureHeading: { zh: "技术架构", en: "Technical Architecture" },
+    wechatFollowAbsent: { zh: "关注微信公众号", en: "Follow us on WeChat" },
+  },
+  infrastructure: {
+    h1: { zh: "AI+基础设施", en: "AI + Infrastructure" },
+    // Composite "label: value" phrase, not bare "Live" -- bare "Live" is a
+    // substring of "deLIVEring" in the hero paragraph (Playwright getByText
+    // is case-insensitive substring match), causing a strict-mode collision.
+    statusLine: { zh: "状态: 已上线", en: "Status: Live" },
+    modelPlatformLink: { zh: "访问模型平台", en: "Visit the Model Platform" },
+  },
   comingSoonBadge: { zh: "敬请期待", en: "Coming soon" },
-  mitsubishi: { zh: "三菱PLC", en: "Mitsubishi PLC" },
-  siemens: { zh: "西门子PLC", en: "Siemens PLC" },
 } as const;
 
 const LOCALES = [
@@ -19,66 +37,66 @@ for (const { locale, prefix, label } of LOCALES) {
   test.describe(`Motion Control Page (${label})`, () => {
     test("should load the motion control page", async ({ page }) => {
       await page.goto(prefix + "/motion-control");
-      await expect(page.locator("h1")).toContainText(MOTION_CONTROL_GOLDEN.h1[locale]);
+      await expect(page.locator("h1")).toContainText(GOLDEN.motionControl.h1[locale]);
     });
 
     test("should display launched badge", async ({ page }) => {
       await page.goto(prefix + "/motion-control");
-      await expect(page.getByText(MOTION_CONTROL_GOLDEN.launchedBadge[locale], { exact: true }).first()).toBeVisible();
-      await expect(page.getByText(MOTION_CONTROL_GOLDEN.comingSoonBadge[locale], { exact: true })).toHaveCount(0);
+      await expect(page.getByText(GOLDEN.motionControl.launchedBadge[locale], { exact: true }).first()).toBeVisible();
+      await expect(page.getByText(GOLDEN.comingSoonBadge[locale], { exact: true })).toHaveCount(0);
     });
 
     test("should display PLC brand cards", async ({ page }) => {
       await page.goto(prefix + "/motion-control");
-      await expect(page.getByText(MOTION_CONTROL_GOLDEN.mitsubishi[locale])).toBeVisible();
-      await expect(page.getByText(MOTION_CONTROL_GOLDEN.siemens[locale])).toBeVisible();
+      await expect(page.getByText(GOLDEN.motionControl.mitsubishi[locale])).toBeVisible();
+      await expect(page.getByText(GOLDEN.motionControl.siemens[locale])).toBeVisible();
+    });
+  });
+
+  test.describe(`Vision Page (${label})`, () => {
+    test("should load the vision page", async ({ page }) => {
+      await page.goto(prefix + "/vision");
+      await expect(page.locator("h1")).toContainText(GOLDEN.vision.h1[locale]);
+    });
+
+    test("should display 'coming soon' badge", async ({ page }) => {
+      await page.goto(prefix + "/vision");
+      await expect(page.getByText(GOLDEN.comingSoonBadge[locale], { exact: true }).first()).toBeVisible();
+    });
+  });
+
+  test.describe(`IIoT Platform Page (${label})`, () => {
+    test("should load the iiot platform page", async ({ page }) => {
+      await page.goto(prefix + "/iiot-platform");
+      await expect(page.locator("h1")).toContainText(GOLDEN.iiot.h1[locale]);
+    });
+
+    test("should display architecture section", async ({ page }) => {
+      await page.goto(prefix + "/iiot-platform");
+      await expect(page.getByText(GOLDEN.iiot.architectureHeading[locale])).toBeVisible();
+    });
+
+    test("should not display WeChat QR block (moved to home)", async ({ page }) => {
+      await page.goto(prefix + "/iiot-platform");
+      await expect(page.getByText(GOLDEN.iiot.wechatFollowAbsent[locale])).toHaveCount(0);
+    });
+  });
+
+  test.describe(`Infrastructure Page (${label})`, () => {
+    test("should load the infrastructure page", async ({ page }) => {
+      await page.goto(prefix + "/infrastructure");
+      await expect(page.locator("h1")).toContainText(GOLDEN.infrastructure.h1[locale]);
+    });
+
+    test("should display status badge", async ({ page }) => {
+      await page.goto(prefix + "/infrastructure");
+      await expect(page.getByText(GOLDEN.infrastructure.statusLine[locale])).toBeVisible();
+    });
+
+    test("should have access link to model platform", async ({ page }) => {
+      await page.goto(prefix + "/infrastructure");
+      const link = page.getByRole("link", { name: GOLDEN.infrastructure.modelPlatformLink[locale] });
+      await expect(link).toBeVisible();
     });
   });
 }
-
-test.describe("Vision Page", () => {
-  test("should load the vision page", async ({ page }) => {
-    await page.goto("/vision");
-    await expect(page.locator("h1")).toContainText("AI+视觉");
-  });
-
-  test("should display 'coming soon' badge", async ({ page }) => {
-    await page.goto("/vision");
-    await expect(page.getByText("敬请期待", { exact: true }).first()).toBeVisible();
-  });
-});
-
-test.describe("IIoT Platform Page", () => {
-  test("should load the iiot platform page", async ({ page }) => {
-    await page.goto("/iiot-platform");
-    await expect(page.locator("h1")).toContainText("工业互联网平台");
-  });
-
-  test("should display architecture section", async ({ page }) => {
-    await page.goto("/iiot-platform");
-    await expect(page.getByText("技术架构")).toBeVisible();
-  });
-
-  test("should not display WeChat QR block (moved to home)", async ({ page }) => {
-    await page.goto("/iiot-platform");
-    await expect(page.getByText("关注微信公众号")).toHaveCount(0);
-  });
-});
-
-test.describe("Infrastructure Page", () => {
-  test("should load the infrastructure page", async ({ page }) => {
-    await page.goto("/infrastructure");
-    await expect(page.locator("h1")).toContainText("AI+基础设施");
-  });
-
-  test("should display status badge", async ({ page }) => {
-    await page.goto("/infrastructure");
-    await expect(page.getByText("已上线")).toBeVisible();
-  });
-
-  test("should have access link to model platform", async ({ page }) => {
-    await page.goto("/infrastructure");
-    const link = page.getByRole("link", { name: "访问模型平台" });
-    await expect(link).toBeVisible();
-  });
-});
