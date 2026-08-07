@@ -1,4 +1,5 @@
 import { useEffect, useState, type FormEvent } from "react";
+import { useTranslation } from "react-i18next";
 import { Link, useLocation, useNavigate } from "react-router";
 import { Loader2 } from "lucide-react";
 import { authApi, getApiErrorMessage } from "@/api";
@@ -11,6 +12,7 @@ const phonePattern = /^1\d{10}$/;
 const codePattern = /^\d{6}$/;
 
 export function Login() {
+  const { t } = useTranslation("login");
   const navigate = useNavigate();
   const location = useLocation();
   const { login, isAuthenticated } = useAuth();
@@ -45,19 +47,21 @@ export function Login() {
     setError("");
     setMessage("");
     if (!phonePattern.test(phone)) {
-      setError("请输入 11 位中国大陆手机号");
+      setError(t("errors.invalidPhone"));
       return;
     }
     setSending(true);
     try {
       await authApi.sendCode(phone);
       setCooldown(60);
-      setMessage("验证码已发送，请在 5 分钟内完成登录/注册");
+      setMessage(t("errors.codeSent"));
     } catch (err) {
-      const msg = getApiErrorMessage(err, "验证码发送失败");
+      const msg = getApiErrorMessage(err, t("errors.sendFailed"));
+      // Backend rate-limit message is Chinese-only (backend not yet i18n'd);
+      // detection substring stays Chinese, only our appended guidance is localized.
       if (msg.includes("过于频繁")) {
         setCooldown(60);
-        setError(`${msg}，请等待 60 秒后再试`);
+        setError(`${msg}${t("errors.rateLimitedSuffix")}`);
       } else {
         setError(msg);
       }
@@ -71,11 +75,11 @@ export function Login() {
     setError("");
     setMessage("");
     if (!privacyAccepted) {
-      setError("请先阅读并同意隐私声明");
+      setError(t("errors.privacyRequired"));
       return;
     }
     if (!canSubmit) {
-      setError("请输入正确手机号和 6 位验证码");
+      setError(t("errors.invalidInput"));
       return;
     }
     setSubmitting(true);
@@ -83,12 +87,12 @@ export function Login() {
       const result = await authApi.signIn(phone, code);
       await login(result);
       if (result.is_new_user) {
-        setMessage("首次登录，已为你创建 openIndu 社区账号");
+        setMessage(t("errors.newUserCreated"));
       }
       // 登录会更新 AuthProvider 状态；等待 isAuthenticated 变为 true 后由上方 effect 跳转，
       // 避免在同一个事件周期内直接进入受保护路由导致 AuthGuard 读到旧状态并回跳登录页。
     } catch (err) {
-      setError(getApiErrorMessage(err, "登录/注册失败，请检查验证码"));
+      setError(getApiErrorMessage(err, t("errors.signInFailed")));
     } finally {
       setSubmitting(false);
     }
@@ -98,27 +102,27 @@ export function Login() {
     <section className="bg-gradient-to-br from-blue-50 via-white to-cyan-50 px-4 py-16 sm:py-24">
       <Card className="mx-auto max-w-md border-blue-100 shadow-xl">
         <CardHeader className="text-center">
-          <CardTitle>手机号登录 / 注册</CardTitle>
+          <CardTitle>{t("title")}</CardTitle>
           <CardDescription className="space-y-1">
-            <span className="block">使用手机号和短信验证码登录</span>
-            <span className="block">未注册手机号验证通过后，将自动创建 openIndu 社区账号</span>
+            <span className="block">{t("descriptionLine1")}</span>
+            <span className="block">{t("descriptionLine2")}</span>
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form className="space-y-5" onSubmit={handleSubmit}>
             <div className="space-y-2">
-              <label htmlFor="login-phone" className="text-sm font-medium text-gray-700">手机号</label>
+              <label htmlFor="login-phone" className="text-sm font-medium text-gray-700">{t("phoneLabel")}</label>
               <Input
                 id="login-phone"
                 value={phone}
                 onChange={(event) => setPhone(event.target.value.replace(/\D/g, "").slice(0, 11))}
                 inputMode="numeric"
                 autoComplete="tel"
-                placeholder="请输入 11 位手机号"
+                placeholder={t("phonePlaceholder")}
               />
             </div>
             <div className="space-y-2">
-              <label htmlFor="login-code" className="text-sm font-medium text-gray-700">验证码</label>
+              <label htmlFor="login-code" className="text-sm font-medium text-gray-700">{t("codeLabel")}</label>
               <div className="flex gap-2">
                 <Input
                   id="login-code"
@@ -126,10 +130,10 @@ export function Login() {
                   onChange={(event) => setCode(event.target.value.replace(/\D/g, "").slice(0, 6))}
                   inputMode="numeric"
                   autoComplete="one-time-code"
-                  placeholder="6 位验证码"
+                  placeholder={t("codePlaceholder")}
                 />
                 <Button type="button" variant="outline" onClick={handleSendCode} disabled={!canSendCode} className="min-w-28">
-                  {sending ? <Loader2 className="animate-spin" /> : cooldown > 0 ? `${cooldown}s` : "发送验证码"}
+                  {sending ? <Loader2 className="animate-spin" /> : cooldown > 0 ? `${cooldown}s` : t("sendCode")}
                 </Button>
               </div>
             </div>
@@ -141,13 +145,13 @@ export function Login() {
                 className="mt-1"
               />
               <span>
-                我已阅读并同意 <Link to="/privacy" className="font-medium text-blue-600 hover:text-blue-700">openIndu社区隐私声明</Link>，了解平台对个人信息的处理方式。
+                {t("privacyPrefix")}<Link to="/privacy" className="font-medium text-blue-600 hover:text-blue-700">{t("privacyLinkText")}</Link>{t("privacySuffix")}
               </span>
             </label>
             {message && <p className="rounded-lg bg-green-50 px-3 py-2 text-sm text-green-700">{message}</p>}
             {error && <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{error}</p>}
             <Button type="submit" disabled={!canSubmit} className="w-full bg-blue-600 hover:bg-blue-700">
-              {submitting ? <Loader2 className="animate-spin" /> : "登录 / 注册"}
+              {submitting ? <Loader2 className="animate-spin" /> : t("submit")}
             </Button>
           </form>
         </CardContent>

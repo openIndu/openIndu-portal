@@ -1,0 +1,24 @@
+{
+  "title": "Sign in / Sign up with Phone",
+  "descriptionLine1": "Sign in with your phone number and an SMS verification code",
+  "descriptionLine2": "If your number isn't registered yet, verifying it will automatically create your openIndu Community account",
+  "phoneLabel": "Phone Number",
+  "phonePlaceholder": "Enter your 11-digit phone number",
+  "codeLabel": "Verification Code",
+  "codePlaceholder": "6-digit code",
+  "sendCode": "Send Code",
+  "privacyPrefix": "I have read and agree to the ",
+  "privacyLinkText": "openIndu Community Privacy Statement",
+  "privacySuffix": ", and understand how the platform handles personal information.",
+  "submit": "Sign in / Sign up",
+  "errors": {
+    "invalidPhone": "Enter an 11-digit mainland China phone number",
+    "codeSent": "Code sent -- please complete sign-in/sign-up within 5 minutes",
+    "sendFailed": "Failed to send verification code",
+    "rateLimitedSuffix": " -- please wait 60 seconds and try again",
+    "newUserCreated": "First sign-in -- your openIndu Community account has been created",
+    "signInFailed": "Sign-in/sign-up failed -- please check your verification code",
+    "privacyRequired": "Please read and agree to the Privacy Statement first",
+    "invalidInput": "Enter a valid phone number and 6-digit code"
+  }
+}

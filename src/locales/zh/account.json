@@ -1,0 +1,58 @@
+{
+  "seo": { "title": "账号设置｜openIndu", "description": "管理 openIndu社区账号昵称与个人资料。" },
+  "header": { "badge": "个人中心", "title": "账号设置", "subtitle": "设置你的社区昵称、修改手机号或注销账号。" },
+  "profile": {
+    "cardTitle": "个人资料",
+    "cardDescription": "昵称会显示在登录后的个人中心入口。",
+    "nicknameLabel": "昵称",
+    "nicknamePlaceholder": "请输入昵称",
+    "saveButton": "保存昵称",
+    "errors": { "tooLong": "昵称不能超过 50 个字符", "saveFailed": "保存账号设置失败", "saved": "账号设置已保存" }
+  },
+  "role": {
+    "cardTitle": "账号角色",
+    "cardDescription": "当前账号的权限级别。普通用户可申请升级为会员。",
+    "labels": { "user": "普通用户", "member": "会员", "admin": "管理员" },
+    "pending": "申请已提交，等待管理员审核",
+    "approved": "申请已通过，请重新登录生效",
+    "rejected": "申请已被驳回，可重新提交申请",
+    "reapplyButton": "重新申请",
+    "applyButton": "申请成为会员",
+    "applyFailed": "申请失败，请稍后重试"
+  },
+  "phoneChange": {
+    "cardTitle": "修改手机号",
+    "cardDescription": "修改账号绑定的手机号，需要接收验证码验证。",
+    "currentPhoneLabel": "当前手机号",
+    "changeButton": "修改手机号",
+    "newPhoneLabel": "新手机号",
+    "newPhonePlaceholder": "请输入 11 位新手机号",
+    "codeLabel": "验证码",
+    "codePlaceholder": "6 位验证码",
+    "sendCode": "发送验证码",
+    "cancelButton": "取消",
+    "confirmButton": "确认修改",
+    "errors": {
+      "invalidPhone": "请输入 11 位中国大陆手机号",
+      "codeSent": "验证码已发送，请查收",
+      "sendFailed": "验证码发送失败",
+      "invalidPhoneFormat": "请输入正确的手机号",
+      "invalidCode": "请输入 6 位验证码",
+      "updated": "手机号已成功更新",
+      "changeFailed": "修改手机号失败"
+    }
+  },
+  "deleteAccount": {
+    "cardTitle": "注销账号",
+    "cardDescription": "注销后将永久删除您的账号及所有相关数据，此操作不可恢复。",
+    "triggerButton": "注销账号",
+    "dialogTitle": "确认注销账号",
+    "dialogIntro": "此操作将永久删除您的账号，包括：",
+    "items": ["所有个人资料信息", "登录凭证和访问记录", "与账号关联的所有数据"],
+    "warningPrefix": "⚠️ 重要提示：",
+    "warningText": "此操作不可撤销，删除后无法恢复任何数据。",
+    "cancelButton": "取消",
+    "confirmButton": "确认注销",
+    "deleteFailed": "注销账号失败"
+  }
+}
