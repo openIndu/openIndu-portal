@@ -25,6 +25,21 @@
     "color": { "title": "颜色分类", "description": "精确识别和分类产品颜色，确保产品外观一致性。", "industries": "服装、印刷、化妆品" },
     "robotGuide": { "title": "机器人视觉引导", "description": "为机器人提供视觉定位能力，引导机器人精确抓取和放置工件。", "industries": "智能仓储、自动化产线" }
   },
+  "caseStudy": {
+    "badge": "社区共建 · 尚未开源",
+    "heading": "真实案例：openindu-station",
+    "intro": "openIndu 社区在孵的运动-视觉-扫码通用设备平台，视觉模块已经在驱动两款真实设备——双相机精密点胶机、双平台激光切割机。",
+    "overviewAlt": "openindu-station 机台总览界面，显示实时画面、轴状态与运行日志",
+    "overviewCaption": "机台总览 · 实时画面与轴状态监控",
+    "visionAlt": "openindu-station 视觉工作台界面，显示模板匹配与特征检测工具",
+    "visionCaption": "视觉工作台 · 模板匹配与手眼标定",
+    "capabilities": {
+      "calibration": { "title": "九点手眼标定", "description": "像素坐标到机器坐标的仿射变换，支持眼在手外、眼在手上两种安装方式" },
+      "matching": { "title": "模板匹配 + Blob 双引擎", "description": "轮廓、圆、直线、角点检测，亚像素级精度定位" },
+      "dualCamera": { "title": "双相机协同定位", "description": "预对位 + 精对位两级精度，引导设备完成精密加工" }
+    },
+    "status": "该平台目前在 openIndu 社区孵化中，尚未开源。"
+  },
   "techStack": {
     "heading": "技术体系",
     "capture": { "title": "图像采集", "description": "工业相机、光源系统、镜头组件构成高质量图像采集系统" },

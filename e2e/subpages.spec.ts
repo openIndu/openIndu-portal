@@ -11,6 +11,10 @@ const GOLDEN = {
   },
   vision: {
     h1: { zh: "AI+视觉", en: "AI + Machine Vision" },
+    caseStudyHeading: {
+      zh: "真实案例：openindu-station",
+      en: "Real-World Case: openindu-station",
+    },
   },
   iiot: {
     h1: { zh: "工业互联网平台", en: "Industrial IoT Platform" },
@@ -62,6 +66,25 @@ for (const { locale, prefix, label } of LOCALES) {
     test("should display 'coming soon' badge", async ({ page }) => {
       await page.goto(prefix + "/vision");
       await expect(page.getByText(GOLDEN.comingSoonBadge[locale], { exact: true }).first()).toBeVisible();
+    });
+
+    test("should display the openindu-station case study section", async ({ page }) => {
+      await page.goto(prefix + "/vision");
+      await expect(page.getByText(GOLDEN.vision.caseStudyHeading[locale], { exact: true })).toBeVisible();
+    });
+
+    test("should load both case study screenshots", async ({ page }) => {
+      await page.goto(prefix + "/vision");
+      const images = page.locator('img[src^="/assets/vision/"]');
+      await expect(images).toHaveCount(2);
+      for (let i = 0; i < 2; i++) {
+        const image = images.nth(i);
+        await expect(image).toBeVisible();
+        // naturalWidth is 0 for a broken/404 image even though the element renders.
+        await expect
+          .poll(() => image.evaluate((el: HTMLImageElement) => el.naturalWidth))
+          .toBeGreaterThan(0);
+      }
     });
   });
 
