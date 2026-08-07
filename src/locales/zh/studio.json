@@ -1,0 +1,55 @@
+{
+  "seo": {
+    "title": "openIndu-studio 介绍｜openIndu",
+    "description": "openIndu-studio 将电气模组、电路图、BOM、IO 地址、PLC 编程与 HMI 编程串联为可追溯的 AI Agent 工作流。",
+    "keywords": "openIndu-studio,PLC工作流,电气设计,BOM,IO地址表,PLC编程,HMI编程,AI Agent"
+  },
+  "hero": {
+    "badge": "AI Agent 工作流",
+    "title": "openIndu-studio 介绍",
+    "subtitle": "openIndu-studio 将工业自动化项目从需求梳理到 PLC/HMI 编程拆解为可协作、可追溯的标准流程（PLC 开发六步工作流），并逐步接入 Claude Code 与 MCP 知识检索能力。"
+  },
+  "stepLabel": "步骤",
+  "deliverablesLabel": "阶段产物",
+  "steps": {
+    "electrical": {
+      "title": "电气模组梳理",
+      "description": "根据设备清单与工艺需求拆分电气模组，明确每个模组的功能边界、执行元件和传感器需求。",
+      "deliverables": ["模组边界清单", "动作/信号初表", "安全与互锁约束"]
+    },
+    "circuit": {
+      "title": "电路图设计",
+      "description": "围绕电源、控制、驱动、安全与通信回路生成电路图设计建议，并输出初步 IO 需求。",
+      "deliverables": ["电源/控制回路草图", "驱动与通信拓扑", "DXF/DWG 渲染输入"]
+    },
+    "bom": {
+      "title": "BOM 清单",
+      "description": "依据电路图和品牌选型规则汇总 PLC、HMI、驱动器、低压电器、线缆端子等物料清单。",
+      "deliverables": ["BOM 明细表", "品牌型号映射", "采购备注与替代料"]
+    },
+    "io": {
+      "title": "IO 地址规划",
+      "description": "结合设备动作、信号类型和品牌地址规范生成 IO 地址表，为 PLC 变量定义提供依据。",
+      "deliverables": ["IO 地址表", "变量命名规范", "端子/模块占用校验"]
+    },
+    "plc": {
+      "title": "PLC 编程",
+      "description": "基于 IO 表与工艺流程设计程序结构，生成顺控、报警、手自动、通信等核心逻辑草案。",
+      "deliverables": ["ST 代码草案", "设备注释 CSV", "导入与调试指引"]
+    },
+    "hmi": {
+      "title": "HMI 编程",
+      "description": "围绕设备操作、状态监控、报警诊断和参数维护设计 HMI 画面与变量绑定方案。",
+      "deliverables": ["HMI 标签 CSV", "画面规格说明", "报警/参数交互宏"]
+    }
+  },
+  "artifactChain": {
+    "heading": "端到端产物链路",
+    "description": "工作流输出统一汇聚到结构化 IR，再由 converters 渲染为真实工程文件，支持 BOM、IO 表、电路图、PLC/HMI 中间件与项目报告。",
+    "items": ["结构化 project.json", "BOM / IO Excel", "DXF 电路图", "ST + CSV 程序草案"]
+  },
+  "roadmap": {
+    "heading": "后续规划",
+    "description": "P2 阶段将接入品牌手册 RAG 检索、Agent 编排、文件模板生成与项目级工作流记录，实现从设计输入到代码草案的端到端辅助开发。"
+  }
+}
