@@ -25,21 +25,6 @@
     "color": { "title": "Color Sorting", "description": "Precisely identifies and classifies product color, ensuring appearance consistency.", "industries": "Apparel, printing, cosmetics" },
     "robotGuide": { "title": "Robot Vision Guidance", "description": "Gives robots visual-positioning capability, guiding precise pick-and-place of workpieces.", "industries": "Smart warehousing, automated production lines" }
   },
-  "caseStudy": {
-    "badge": "Community-built · Not yet open source",
-    "heading": "Real-World Case: openindu-station",
-    "intro": "A motion-vision-scan universal equipment platform incubating in the openIndu community. Its vision module already drives two real products — a dual-camera precision dispensing machine and a dual-platform laser cutting machine.",
-    "overviewAlt": "openindu-station main dashboard showing live camera feed, axis status, and run logs",
-    "overviewCaption": "Station Overview · Live Feed & Axis Status",
-    "visionAlt": "openindu-station Vision workbench showing template-matching and feature-detection tools",
-    "visionCaption": "Vision Workbench · Template Matching & Hand-Eye Calibration",
-    "capabilities": {
-      "calibration": { "title": "Nine-Point Hand-Eye Calibration", "description": "Pixel-to-machine-coordinate affine mapping; supports both eye-to-hand and eye-in-hand mounting" },
-      "matching": { "title": "Template Matching + Blob Dual Engine", "description": "Contour, circle, line, and corner detection with sub-pixel precision" },
-      "dualCamera": { "title": "Dual-Camera Coordinated Positioning", "description": "Pre-alignment + fine-alignment two-tier precision guiding precision machining" }
-    },
-    "status": "Currently incubating in the openIndu community; not yet open-sourced."
-  },
   "techStack": {
     "heading": "Technology Stack",
     "capture": { "title": "Image Capture", "description": "Industrial cameras, lighting systems, and lens components form a high-quality image-capture system" },

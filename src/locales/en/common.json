@@ -6,6 +6,7 @@
     "overview": "Overview",
     "studioPlatform": "openIndu-studio",
     "vision": "AI + Machine Vision",
+    "station": "openindu-station",
     "iiotPlatform": "AI + Industrial IoT Platform",
     "infrastructure": "AI + Infrastructure",
     "aiAssistant": "AI Assistant"
@@ -32,6 +33,7 @@
     "infrastructure": "AI + Infrastructure",
     "coreServices": "Core Services",
     "studioPlatform": "openIndu-studio",
+    "station": "openindu-station",
     "aiAssistantBot": "AI Assistant Bot",
     "relatedPlatforms": "Related Platforms",
     "serviceStatus": "Service Status",

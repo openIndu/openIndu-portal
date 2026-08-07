@@ -55,7 +55,15 @@ export function Layout() {
           { name: t("nav.studioPlatform"), href: "/motion-control/studio", testid: "nav-studio" },
         ],
       },
-      { name: t("nav.vision"), href: "/vision", testid: "nav-vision" },
+      {
+        name: t("nav.vision"),
+        href: "/vision",
+        testid: "nav-vision",
+        children: [
+          { name: t("nav.overview"), href: "/vision", testid: "nav-vision-overview" },
+          { name: t("nav.station"), href: "/vision/station", testid: "nav-station" },
+        ],
+      },
       { name: t("nav.iiotPlatform"), href: "/iiot-platform", testid: "nav-iiot-platform" },
       { name: t("nav.infrastructure"), href: "/infrastructure", testid: "nav-infrastructure" },
     ];
@@ -346,6 +354,9 @@ export function Layout() {
               <ul className="space-y-2 text-gray-400">
                 <li>
                   <Link to="/motion-control/studio" className="hover:text-white">{t("footer.studioPlatform")}</Link>
+                </li>
+                <li>
+                  <Link to="/vision/station" className="hover:text-white">{t("footer.station")}</Link>
                 </li>
                 <li>
                   <Link to="/chat" className="hover:text-white">{t("footer.aiAssistantBot")}</Link>
