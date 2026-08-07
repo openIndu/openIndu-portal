@@ -1,0 +1,56 @@
+{
+  "seo": {
+    "title": "openindu-station Overview | openIndu",
+    "description": "openindu-station is a motion-vision-scan universal equipment platform incubating in the openIndu community, already running a dual-camera precision dispensing machine and a dual-platform laser cutting machine.",
+    "keywords": "openindu-station,universal equipment platform,motion control,machine vision,hand-eye calibration,template matching,dispensing machine,laser cutting machine"
+  },
+  "hero": {
+    "badge": "Community-built · Not yet open source",
+    "title": "openindu-station",
+    "subtitle": "A motion-vision-scan universal equipment platform"
+  },
+  "intro": {
+    "heading": "What It Is",
+    "description": "A motion-vision-scan universal equipment platform incubating in the openIndu community. It folds axis motion, machine vision, and barcode scanning into a single station framework, so one platform codebase can carry custom equipment across different processes. Its vision module already drives two real products — a dual-camera precision dispensing machine and a dual-platform laser cutting machine."
+  },
+  "screenshots": {
+    "heading": "Interface Preview",
+    "overviewAlt": "openindu-station main dashboard showing live camera feed, axis status, and run logs",
+    "overviewCaption": "Station Overview · Live Feed & Axis Status",
+    "visionAlt": "openindu-station Vision workbench showing template-matching and feature-detection tools",
+    "visionCaption": "Vision Workbench · Template Matching & Hand-Eye Calibration"
+  },
+  "capabilities": {
+    "heading": "Core Vision Capabilities",
+    "calibration": {
+      "title": "Nine-Point Hand-Eye Calibration",
+      "description": "Pixel-to-machine-coordinate affine mapping; supports both eye-to-hand and eye-in-hand mounting"
+    },
+    "matching": {
+      "title": "Template Matching + Blob Dual Engine",
+      "description": "Contour, circle, line, and corner detection with sub-pixel precision"
+    },
+    "dualCamera": {
+      "title": "Dual-Camera Coordinated Positioning",
+      "description": "Pre-alignment + fine-alignment two-tier precision guiding precision machining"
+    }
+  },
+  "products": {
+    "heading": "Equipment Built On It",
+    "description": "One platform framework, configured by process into two structurally different production machines.",
+    "dispensing": {
+      "title": "Dual-Camera Precision Dispensing Machine",
+      "description": "Load → scan → pre-align → transfer → fine-align → dispense → inspect → unload — fully automated across three workstations"
+    },
+    "laser": {
+      "title": "Dual-Platform Laser Cutting Machine",
+      "description": "Load → scan → pre-align → convey → fine-align → pierce → cut → inspect — two independent platforms"
+    }
+  },
+  "cta": {
+    "status": "Currently incubating in the openIndu community; not yet open-sourced.",
+    "heading": "Want to know more about openindu-station?",
+    "description": "If your line has similar motion-vision-scan equipment needs, come talk to the community.",
+    "contact": "Contact Us"
+  }
+}

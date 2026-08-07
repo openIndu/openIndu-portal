@@ -6,6 +6,7 @@
     "overview": "概览",
     "studioPlatform": "openIndu-studio",
     "vision": "AI+视觉",
+    "station": "openindu-station",
     "iiotPlatform": "AI+工业互联网平台",
     "infrastructure": "AI+基础设施",
     "aiAssistant": "智能咨询"
@@ -32,6 +33,7 @@
     "infrastructure": "AI+基础设施",
     "coreServices": "核心服务",
     "studioPlatform": "openIndu-studio",
+    "station": "openindu-station",
     "aiAssistantBot": "智能咨询机器人",
     "relatedPlatforms": "相关平台",
     "serviceStatus": "社区服务状态",

@@ -1,0 +1,56 @@
+{
+  "seo": {
+    "title": "openindu-station 介绍｜openIndu",
+    "description": "openindu-station 是 openIndu 社区在孵的运动-视觉-扫码通用设备平台，已用于双相机精密点胶机与双平台激光切割机两款设备。",
+    "keywords": "openindu-station,通用设备平台,运动控制,机器视觉,手眼标定,模板匹配,点胶机,激光切割机"
+  },
+  "hero": {
+    "badge": "社区共建 · 尚未开源",
+    "title": "openindu-station",
+    "subtitle": "运动-视觉-扫码通用设备平台"
+  },
+  "intro": {
+    "heading": "平台定位",
+    "description": "openIndu 社区在孵的运动-视觉-扫码通用设备平台，把轴运动、机器视觉、条码扫描三类能力收敛到一套统一的机台框架里，让同一份平台代码可以支撑不同工艺的非标设备。视觉模块已经在驱动两款真实设备——双相机精密点胶机、双平台激光切割机。"
+  },
+  "screenshots": {
+    "heading": "界面预览",
+    "overviewAlt": "openindu-station 机台总览界面，显示实时画面、轴状态与运行日志",
+    "overviewCaption": "机台总览 · 实时画面与轴状态监控",
+    "visionAlt": "openindu-station 视觉工作台界面，显示模板匹配与特征检测工具",
+    "visionCaption": "视觉工作台 · 模板匹配与手眼标定"
+  },
+  "capabilities": {
+    "heading": "视觉核心能力",
+    "calibration": {
+      "title": "九点手眼标定",
+      "description": "像素坐标到机器坐标的仿射变换，支持眼在手外、眼在手上两种安装方式"
+    },
+    "matching": {
+      "title": "模板匹配 + Blob 双引擎",
+      "description": "轮廓、圆、直线、角点检测，亚像素级精度定位"
+    },
+    "dualCamera": {
+      "title": "双相机协同定位",
+      "description": "预对位 + 精对位两级精度，引导设备完成精密加工"
+    }
+  },
+  "products": {
+    "heading": "已落地设备",
+    "description": "同一套平台框架，通过工艺配置衍生出两款结构不同的产线设备。",
+    "dispensing": {
+      "title": "双相机精密点胶机",
+      "description": "上料 → 扫码 → 预对位 → 搬运 → 精对位 → 点胶 → 检测 → 下料，三工站全流程自动化"
+    },
+    "laser": {
+      "title": "双平台激光切割机",
+      "description": "上料 → 扫码 → 预对位 → 传送 → 精对位 → 穿孔 → 切割 → 检测，双平台独立运行"
+    }
+  },
+  "cta": {
+    "status": "该平台目前在 openIndu 社区孵化中，尚未开源。",
+    "heading": "想了解 openindu-station？",
+    "description": "如果你的产线有类似的运动-视觉-扫码设备需求，欢迎和社区聊聊。",
+    "contact": "联系我们"
+  }
+}

@@ -10,6 +10,7 @@ import { TokenService } from "./pages/TokenService";
 import { Login } from "./pages/Login";
 import { Resources } from "./pages/Resources";
 import { Workflow } from "./pages/Workflow";
+import { Station } from "./pages/Station";
 import ChatPage from "./pages/ChatPage";
 import { AccountSettings } from "./pages/AccountSettings";
 import { CookiesPolicy, LegalIndex, LegalNotice, PrivacyPolicy } from "./pages/LegalPages";
@@ -50,6 +51,8 @@ export const router = createBrowserRouter(
         { path: "motion-control/studio", Component: Workflow },
         { path: "chat", Component: ChatPage },
         { path: "vision", Component: Vision },
+        // openindu-station: sub-page of AI+Vision, publicly visible
+        { path: "vision/station", Component: Station },
         { path: "iiot-platform", Component: IIoTPlatform },
         { path: "infrastructure", Component: TokenService },
         { path: "resources", Component: Resources },
