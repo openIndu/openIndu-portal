@@ -4,7 +4,7 @@
     "downloads": "下载中心",
     "motionControl": "AI+运动控制",
     "overview": "概览",
-    "studioPlatform": "openIndu-studio 平台",
+    "studioPlatform": "openIndu-studio",
     "vision": "AI+视觉",
     "iiotPlatform": "AI+工业互联网平台",
     "infrastructure": "AI+基础设施",
@@ -31,7 +31,7 @@
     "iiotPlatform": "AI+工业互联网平台",
     "infrastructure": "AI+基础设施",
     "coreServices": "核心服务",
-    "studioPlatform": "openIndu-studio 平台",
+    "studioPlatform": "openIndu-studio",
     "aiAssistantBot": "智能咨询机器人",
     "relatedPlatforms": "相关平台",
     "serviceStatus": "社区服务状态",
@@ -46,7 +46,10 @@
   "language": {
     "label": "语言 Language",
     "zh": "简体中文",
-    "en": "English"
+    "en": "English",
+    "zhShort": "中文",
+    "enShort": "EN",
+    "switchTo": "切换到{{language}}"
   },
   "a11y": {
     "mobileMenuOpen": "打开导航菜单",

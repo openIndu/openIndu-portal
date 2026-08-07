@@ -11,20 +11,8 @@ function isLegalPage(pathname: string): boolean {
   return ZH_ONLY.some((p) => stripped === p || stripped.startsWith(p));
 }
 
-/**
- * Language switcher for the header utility bar (desktop) and
- * hamburger menu (mobile). Uses real `<a href>` navigation to
- * cross the basename boundary cleanly.
- */
-export function LanguageSwitcher({
-  className,
-  onNavigate,
-}: {
-  className?: string;
-  /** Called after the user clicks a language link — parent can close the mobile menu. */
-  onNavigate?: () => void;
-}) {
-  const { t } = useTranslation("common");
+/** Shared locale/link resolution used by every switcher variant below. */
+function useLocaleSwitch() {
   const currentLocale = detectLocale();
   const pathname = window.location.pathname;
   const legal = isLegalPage(pathname);
@@ -37,6 +25,45 @@ export function LanguageSwitcher({
       : stripLocalePrefix(pathname)
     : alternatePath(pathname, targetLocale, true);
 
+  return { currentLocale, targetLocale, targetPath };
+}
+
+/** Color tokens for the two backgrounds this switcher gets dropped onto. */
+const VARIANT_STYLES = {
+  light: {
+    icon: "text-gray-500",
+    active: "text-gray-900",
+    link: "text-gray-600 hover:text-blue-600",
+    sep: "text-gray-300",
+  },
+  dark: {
+    icon: "text-gray-400",
+    active: "text-white",
+    link: "text-gray-400 hover:text-white",
+    sep: "text-gray-600",
+  },
+} as const;
+
+/**
+ * Full language switcher — shows both locale labels side by side.
+ * Used in the footer (dark) and the mobile hamburger menu's non-segmented spots.
+ * Uses real `<a href>` navigation to cross the basename boundary cleanly.
+ */
+export function LanguageSwitcher({
+  className,
+  onNavigate,
+  variant = "light",
+}: {
+  className?: string;
+  /** Called after the user clicks a language link — parent can close the mobile menu. */
+  onNavigate?: () => void;
+  /** "light" for white/light backgrounds (default), "dark" for the dark footer. */
+  variant?: "light" | "dark";
+}) {
+  const { t } = useTranslation("common");
+  const { currentLocale, targetPath } = useLocaleSwitch();
+  const style = VARIANT_STYLES[variant];
+
   const labels: Record<Locale, string> = {
     zh: t("language.zh"),
     en: t("language.en"),
@@ -47,20 +74,17 @@ export function LanguageSwitcher({
       className={`flex items-center gap-2 ${className ?? ""}`}
       aria-label={t("language.label")}
     >
-      <Globe className="h-4 w-4 text-gray-500 shrink-0" aria-hidden="true" />
+      <Globe className={`h-4 w-4 shrink-0 ${style.icon}`} aria-hidden="true" />
       {currentLocale === "zh" ? (
         <>
-          <span
-            className="text-sm font-medium text-gray-900"
-            aria-current="true"
-          >
+          <span className={`text-sm font-medium ${style.active}`} aria-current="true">
             {labels.zh}
           </span>
-          <span className="text-gray-300 select-none">|</span>
+          <span className={`select-none ${style.sep}`}>|</span>
           <a
             href={targetPath}
             lang="en"
-            className="text-sm text-gray-600 hover:text-blue-600 transition-colors"
+            className={`text-sm transition-colors ${style.link}`}
             onClick={onNavigate}
           >
             {labels.en}
@@ -71,21 +95,42 @@ export function LanguageSwitcher({
           <a
             href={targetPath}
             lang="zh-Hans"
-            className="text-sm text-gray-600 hover:text-blue-600 transition-colors"
+            className={`text-sm transition-colors ${style.link}`}
             onClick={onNavigate}
           >
             {labels.zh}
           </a>
-          <span className="text-gray-300 select-none">|</span>
-          <span
-            className="text-sm font-medium text-gray-900"
-            aria-current="true"
-          >
+          <span className={`select-none ${style.sep}`}>|</span>
+          <span className={`text-sm font-medium ${style.active}`} aria-current="true">
             {labels.en}
           </span>
         </>
       )}
     </nav>
+  );
+}
+
+/**
+ * Compact single-button toggle for the desktop header's auth row.
+ * Shows only the *target* locale (what clicking it switches to) so it
+ * stays narrow next to the nav links and the sign-in button.
+ */
+export function LanguageSwitcherCompact({ className }: { className?: string }) {
+  const { t } = useTranslation("common");
+  const { targetLocale, targetPath } = useLocaleSwitch();
+
+  const targetLabelShort = t(`language.${targetLocale}Short`);
+
+  return (
+    <a
+      href={targetPath}
+      lang={targetLocale === "en" ? "en" : "zh-Hans"}
+      aria-label={t("language.switchTo", { language: t(`language.${targetLocale}`) })}
+      className={`inline-flex items-center gap-1 rounded-full border border-gray-200 px-2.5 py-1 text-xs font-medium text-gray-600 transition-colors hover:border-blue-200 hover:text-blue-600 ${className ?? ""}`}
+    >
+      <Globe className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+      {targetLabelShort}
+    </a>
   );
 }
 
@@ -99,16 +144,7 @@ export function LanguageSwitcherMobile({
   onNavigate?: () => void;
 }) {
   const { t } = useTranslation("common");
-  const currentLocale = detectLocale();
-  const pathname = window.location.pathname;
-  const legal = isLegalPage(pathname);
-  const targetLocale: Locale = currentLocale === "en" ? "zh" : "en";
-
-  const targetPath = legal
-    ? targetLocale === "en"
-      ? "/"
-      : stripLocalePrefix(pathname)
-    : alternatePath(pathname, targetLocale, true);
+  const { currentLocale, targetPath } = useLocaleSwitch();
 
   return (
     <nav
