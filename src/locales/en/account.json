@@ -1,0 +1,58 @@
+{
+  "seo": { "title": "Account Settings | openIndu", "description": "Manage your openIndu Community account nickname and profile." },
+  "header": { "badge": "Account Center", "title": "Account Settings", "subtitle": "Set your community nickname, change your phone number, or delete your account." },
+  "profile": {
+    "cardTitle": "Profile",
+    "cardDescription": "Your nickname appears at the account-center entry point once signed in.",
+    "nicknameLabel": "Nickname",
+    "nicknamePlaceholder": "Enter a nickname",
+    "saveButton": "Save Nickname",
+    "errors": { "tooLong": "Nickname cannot exceed 50 characters", "saveFailed": "Failed to save account settings", "saved": "Account settings saved" }
+  },
+  "role": {
+    "cardTitle": "Account Role",
+    "cardDescription": "The current permission level of your account. Regular users can apply to upgrade to Member.",
+    "labels": { "user": "User", "member": "Member", "admin": "Admin" },
+    "pending": "Application submitted -- awaiting admin review",
+    "approved": "Application approved -- sign in again for it to take effect",
+    "rejected": "Application was rejected -- you may re-submit",
+    "reapplyButton": "Re-apply",
+    "applyButton": "Apply for Membership",
+    "applyFailed": "Application failed -- please try again later"
+  },
+  "phoneChange": {
+    "cardTitle": "Change Phone Number",
+    "cardDescription": "Changing the phone number tied to your account requires verification by code.",
+    "currentPhoneLabel": "Current Phone Number",
+    "changeButton": "Change Phone Number",
+    "newPhoneLabel": "New Phone Number",
+    "newPhonePlaceholder": "Enter your new 11-digit phone number",
+    "codeLabel": "Verification Code",
+    "codePlaceholder": "6-digit code",
+    "sendCode": "Send Code",
+    "cancelButton": "Cancel",
+    "confirmButton": "Confirm Change",
+    "errors": {
+      "invalidPhone": "Enter an 11-digit mainland China phone number",
+      "codeSent": "Code sent -- please check your messages",
+      "sendFailed": "Failed to send verification code",
+      "invalidPhoneFormat": "Enter a valid phone number",
+      "invalidCode": "Enter a 6-digit code",
+      "updated": "Phone number updated successfully",
+      "changeFailed": "Failed to change phone number"
+    }
+  },
+  "deleteAccount": {
+    "cardTitle": "Delete Account",
+    "cardDescription": "Deleting your account permanently removes it and all related data -- this cannot be undone.",
+    "triggerButton": "Delete Account",
+    "dialogTitle": "Confirm Account Deletion",
+    "dialogIntro": "This will permanently delete your account, including:",
+    "items": ["All profile information", "Sign-in credentials and access records", "All data associated with the account"],
+    "warningPrefix": "⚠️ Important: ",
+    "warningText": "This action cannot be undone -- no data can be recovered after deletion.",
+    "cancelButton": "Cancel",
+    "confirmButton": "Confirm Deletion",
+    "deleteFailed": "Failed to delete account"
+  }
+}

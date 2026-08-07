@@ -1,0 +1,24 @@
+{
+  "title": "手机号登录 / 注册",
+  "descriptionLine1": "使用手机号和短信验证码登录",
+  "descriptionLine2": "未注册手机号验证通过后，将自动创建 openIndu 社区账号",
+  "phoneLabel": "手机号",
+  "phonePlaceholder": "请输入 11 位手机号",
+  "codeLabel": "验证码",
+  "codePlaceholder": "6 位验证码",
+  "sendCode": "发送验证码",
+  "privacyPrefix": "我已阅读并同意 ",
+  "privacyLinkText": "openIndu社区隐私声明",
+  "privacySuffix": "，了解平台对个人信息的处理方式。",
+  "submit": "登录 / 注册",
+  "errors": {
+    "invalidPhone": "请输入 11 位中国大陆手机号",
+    "codeSent": "验证码已发送，请在 5 分钟内完成登录/注册",
+    "sendFailed": "验证码发送失败",
+    "rateLimitedSuffix": "，请等待 60 秒后再试",
+    "newUserCreated": "首次登录，已为你创建 openIndu 社区账号",
+    "signInFailed": "登录/注册失败，请检查验证码",
+    "privacyRequired": "请先阅读并同意隐私声明",
+    "invalidInput": "请输入正确手机号和 6 位验证码"
+  }
+}

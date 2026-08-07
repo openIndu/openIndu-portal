@@ -5,6 +5,8 @@ test.describe("Portal login regression", () => {
     await page.goto("/login");
     await page.fill("#login-phone", "13800000000");
     await page.fill("#login-code", "888888");
+    // Submit requires privacy-consent (added after this test was written).
+    await page.locator('input[type="checkbox"]').check();
     await page.click('button[type="submit"]');
 
     await expect(page).toHaveURL(/\/resources/);

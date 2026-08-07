@@ -1,0 +1,59 @@
+{
+  "seo": {
+    "title": "Downloads | openIndu",
+    "description": "The openIndu Downloads center offers PLC/HMI development docs, brand manuals, software tools, and best-practice downloads.",
+    "keywords": "PLC manual,HMI manual,industrial software,brand documentation,openIndu downloads"
+  },
+  "header": {
+    "title": "Downloads",
+    "subtitle": "Quickly find PLC/HMI development docs and tools by brand, category, and keyword."
+  },
+  "authBanner": {
+    "guest": "The resource list is browsable without signing in; online preview and download require sign-in.",
+    "nonMember": "Your account can browse the list; online preview and download require Member role or above."
+  },
+  "tabs": { "documents": "Documents", "software": "Software" },
+  "labels": { "brand": "Brand:", "category": "Category:", "series": "Series:", "size": "Size:", "version": "Version:" },
+  "filters": {
+    "allOption": "All",
+    "allBrands": "All Brands",
+    "allCategories": "All Categories",
+    "allSeries": "All Series",
+    "searchPlaceholder": "Search resources by keyword",
+    "searchButton": "Search",
+    "clearButton": "Clear Filters"
+  },
+  "copyright": "Copyright notice: all technical documents and software remain the property of their original authors or manufacturers; this platform only provides search and distribution services. For infringement concerns, contact us at contact@openindu.com for prompt handling.",
+  "list": {
+    "loading": "Loading resources...",
+    "empty": "No matching resources -- try adjusting your filters.",
+    "noDescription": "No description available",
+    "itemFallbackTitle": "Resource #{{id}}",
+    "unknownSize": "Unknown size",
+    "uncategorized": "Uncategorized",
+    "latestBadge": "(Latest)",
+    "downloadCount": "{{count}} downloads",
+    "previewButton": "Preview",
+    "downloadButton": "Download"
+  },
+  "pagination": {
+    "pageOf": "Page {{page}} of {{total}}",
+    "totalItems": "{{count}} resources total",
+    "perPage": "{{n}} / page",
+    "perPageAriaLabel": "Items per page",
+    "prev": "Previous",
+    "next": "Next"
+  },
+  "errors": {
+    "loadFailed": "Failed to load resources",
+    "filtersLoadFailed": "Failed to load filters",
+    "seriesLoadFailed": "Failed to load series filter",
+    "memberOnly": "Online preview and download require Member role or above -- contact an admin to upgrade your account",
+    "downloadRateLimited": "You've reached today's download limit -- please try again tomorrow",
+    "downloadLinkFailed": "Failed to get download link",
+    "noDownloadUrl": "The server did not return a download link",
+    "previewRateLimited": "You've reached today's document preview limit -- please try again tomorrow",
+    "previewLinkFailed": "Failed to get preview link",
+    "noPreviewUrl": "The server did not return a preview link"
+  }
+}

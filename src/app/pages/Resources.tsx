@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router";
 import { Download, Eye, FileText, Loader2, Package, Search } from "lucide-react";
 import { documentsApi, getApiErrorMessage, isTooManyRequests, softwareApi, tagsApi, type PaginatedResponse, type ResourceItem, type ResourceTag } from "@/api";
@@ -44,6 +45,7 @@ function normalizeList(data: PaginatedResponse<ResourceItem> | ResourceItem[] | 
 const PAGE_SIZE_OPTIONS = [10, 20, 50];
 
 function ChipBar({ label, options, selected, onSelect, disabled }: { label: string; options: FilterOption[]; selected: string; onSelect: (v: string) => void; disabled?: boolean }) {
+  const { t } = useTranslation("resources");
   return (
     <div className="flex flex-wrap items-center gap-2 text-sm">
       <span className="shrink-0 font-medium text-gray-500">{label}</span>
@@ -59,19 +61,19 @@ function ChipBar({ label, options, selected, onSelect, disabled }: { label: stri
               : "border-gray-300 bg-white text-gray-700 hover:border-blue-400 hover:bg-blue-50"
           }`}
         >
-          {option.value === "" ? "全部" : option.label}
+          {option.value === "" ? t("filters.allOption") : option.label}
         </button>
       ))}
     </div>
   );
 }
 
-function getTitle(item: ResourceItem) {
-  return item.title || item.name || item.original_name || item.filename || `资源 #${item.id}`;
+function getTitle(item: ResourceItem, fallback: string) {
+  return item.title || item.name || item.original_name || item.filename || fallback;
 }
 
-function formatFileSize(size?: number) {
-  if (!size) return "未知大小";
+function formatFileSize(size: number | undefined, unknownLabel: string) {
+  if (!size) return unknownLabel;
   if (size < 1024 * 1024) return `${(size / 1024).toFixed(1)} KB`;
   if (size < 1024 * 1024 * 1024) return `${(size / 1024 / 1024).toFixed(1)} MB`;
   return `${(size / 1024 / 1024 / 1024).toFixed(1)} GB`;
@@ -82,6 +84,7 @@ function getDownloadUrl(payload: { download_url?: string; url?: string }) {
 }
 
 export function Resources() {
+  const { t } = useTranslation("resources");
   const { isMember, isAuthenticated } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
@@ -93,10 +96,10 @@ export function Resources() {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
   const [data, setData] = useState<PaginatedResponse<ResourceItem>>({ items: [], total: 0, page: 1, page_size: 10 });
-  const [brandOptions, setBrandOptions] = useState<FilterOption[]>([{ value: "", label: "全部品牌" }]);
-  const [categoryOptions, setCategoryOptions] = useState<FilterOption[]>([{ value: "", label: "全部类型" }]);
-  const [seriesOptions, setSeriesOptions] = useState<FilterOption[]>([{ value: "", label: "全部系列" }]);
-  const [allSeriesOptions, setAllSeriesOptions] = useState<FilterOption[]>([{ value: "", label: "全部系列" }]);
+  const [brandOptions, setBrandOptions] = useState<FilterOption[]>([{ value: "", label: t("filters.allBrands") }]);
+  const [categoryOptions, setCategoryOptions] = useState<FilterOption[]>([{ value: "", label: t("filters.allCategories") }]);
+  const [seriesOptions, setSeriesOptions] = useState<FilterOption[]>([{ value: "", label: t("filters.allSeries") }]);
+  const [allSeriesOptions, setAllSeriesOptions] = useState<FilterOption[]>([{ value: "", label: t("filters.allSeries") }]);
   const [filtersLoading, setFiltersLoading] = useState(false);
   const [loading, setLoading] = useState(false);
   const [downloadingId, setDownloadingId] = useState<string | number | null>(null);
@@ -132,12 +135,12 @@ export function Resources() {
       setData(normalizeList(result, page, pageSize));
     } catch (err) {
       if (requestedTab !== activeTabRef.current) return;
-      setError(getApiErrorMessage(err, "资源加载失败"));
+      setError(getApiErrorMessage(err, t("errors.loadFailed")));
       setData({ items: [], total: 0, page, page_size: pageSize });
     } finally {
       if (requestedTab === activeTabRef.current) setLoading(false);
     }
-  }, [activeTab, brand, category, series, keyword, page, pageSize]);
+  }, [activeTab, brand, category, series, keyword, page, pageSize, t]);
 
   useEffect(() => {
     const routeTab = location.pathname.endsWith("/software") ? "software" : "documents";
@@ -161,42 +164,42 @@ export function Resources() {
           tagsApi.list(`${tagPrefix}_category`),
           activeTab === "documents" ? tagsApi.list("doc_series") : Promise.resolve([]),
         ]);
-        setBrandOptions(tagOptions(nextBrands, "全部品牌"));
-        setCategoryOptions(tagOptions(nextCategories, "全部类型"));
-        setAllSeriesOptions(tagOptions(nextSeries, "全部系列"));
+        setBrandOptions(tagOptions(nextBrands, t("filters.allBrands")));
+        setCategoryOptions(tagOptions(nextCategories, t("filters.allCategories")));
+        setAllSeriesOptions(tagOptions(nextSeries, t("filters.allSeries")));
       } catch (err) {
-        setError(getApiErrorMessage(err, "筛选项加载失败"));
-        setBrandOptions([{ value: "", label: "全部品牌" }]);
-        setCategoryOptions([{ value: "", label: "全部类型" }]);
-        setAllSeriesOptions([{ value: "", label: "全部系列" }]);
+        setError(getApiErrorMessage(err, t("errors.filtersLoadFailed")));
+        setBrandOptions([{ value: "", label: t("filters.allBrands") }]);
+        setCategoryOptions([{ value: "", label: t("filters.allCategories") }]);
+        setAllSeriesOptions([{ value: "", label: t("filters.allSeries") }]);
       } finally {
         setFiltersLoading(false);
       }
     };
     void loadFilters();
-  }, [activeTab]);
+  }, [activeTab, t]);
 
   useEffect(() => {
     const loadSeries = async () => {
       // Software has no "series" concept — skip the cascading series fetch entirely.
       if (activeTab !== "documents" || !category) {
-        setSeriesOptions([{ value: "", label: "全部系列" }]);
+        setSeriesOptions([{ value: "", label: t("filters.allSeries") }]);
         setSeries("");
         return;
       }
       setFiltersLoading(true);
       try {
         const nextSeries = await tagsApi.list("doc_series", category, brand || undefined);
-        setSeriesOptions(tagOptions(nextSeries, "全部系列"));
+        setSeriesOptions(tagOptions(nextSeries, t("filters.allSeries")));
       } catch (err) {
-        setError(getApiErrorMessage(err, "系列筛选项加载失败"));
-        setSeriesOptions([{ value: "", label: "全部系列" }]);
+        setError(getApiErrorMessage(err, t("errors.seriesLoadFailed")));
+        setSeriesOptions([{ value: "", label: t("filters.allSeries") }]);
       } finally {
         setFiltersLoading(false);
       }
     };
     void loadSeries();
-  }, [activeTab, brand, category]);
+  }, [activeTab, brand, category, t]);
 
   useEffect(() => {
     void loadResources();
@@ -223,7 +226,7 @@ export function Resources() {
       return null;
     }
     if (!isMember) {
-      setError("在线预览和下载功能仅会员及以上角色可用，请联系管理员升级账号");
+      setError(t("errors.memberOnly"));
       return null;
     }
     setError("");
@@ -237,14 +240,14 @@ export function Resources() {
             ? await softwareApi.downloadVersionLink(item.id, item.version_id)
             : await softwareApi.downloadLink(item.id));
       const url = getDownloadUrl(result);
-      if (!url) throw new Error("后端未返回下载链接");
+      if (!url) throw new Error(t("errors.noDownloadUrl"));
       void loadResources();
       return url;
     } catch (err) {
       if (isTooManyRequests(err)) {
-        setRateLimitError("今日下载次数已用完，请明天再试");
+        setRateLimitError(t("errors.downloadRateLimited"));
       } else {
-        setError(getApiErrorMessage(err, "下载链接获取失败"));
+        setError(getApiErrorMessage(err, t("errors.downloadLinkFailed")));
       }
       return null;
     }
@@ -256,7 +259,7 @@ export function Resources() {
       return null;
     }
     if (!isMember) {
-      setError("在线预览和下载功能仅会员及以上角色可用，请联系管理员升级账号");
+      setError(t("errors.memberOnly"));
       return null;
     }
     setError("");
@@ -264,14 +267,14 @@ export function Resources() {
     try {
       const result = await documentsApi.previewLink(item.id);
       const url = result.preview_url || result.url || "";
-      if (!url) throw new Error("后端未返回预览链接");
+      if (!url) throw new Error(t("errors.noPreviewUrl"));
       void loadResources();
       return url;
     } catch (err) {
       if (isTooManyRequests(err)) {
-        setRateLimitError("今日文档预览次数已用完，请明天再试");
+        setRateLimitError(t("errors.previewRateLimited"));
       } else {
-        setError(getApiErrorMessage(err, "预览链接获取失败"));
+        setError(getApiErrorMessage(err, t("errors.previewLinkFailed")));
       }
       return null;
     }
@@ -289,7 +292,7 @@ export function Resources() {
     const url = await getLink(item);
     setDownloadingId(null);
     if (!url) return;
-    const filename = getTitle(item);
+    const filename = getTitle(item, t("list.itemFallbackTitle", { id: item.id }));
     const a = document.createElement("a");
     a.href = url;
     a.download = filename;
@@ -302,24 +305,24 @@ export function Resources() {
   return (
     <section className="bg-gray-50 px-4 py-10 sm:px-6 lg:px-8">
       <SEO
-        title="下载中心｜openIndu"
-        description="openIndu 下载中心提供 PLC/HMI 开发资料、品牌手册、软件工具与最佳实践下载。"
-        keywords="PLC手册,HMI手册,工业软件,品牌资料,openIndu下载中心"
+        title={t("seo.title")}
+        description={t("seo.description")}
+        keywords={t("seo.keywords")}
         canonicalPath="/resources"
       />
       <div className="mx-auto max-w-7xl">
         <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-blue-600">下载中心</h1>
-            <p className="mt-2 text-gray-600">按品牌、分类和关键词快速查找 PLC/HMI 开发资料与工具软件。</p>
+            <h1 className="text-3xl font-bold text-blue-600">{t("header.title")}</h1>
+            <p className="mt-2 text-gray-600">{t("header.subtitle")}</p>
           </div>
           {!isAuthenticated ? (
             <div className="rounded-lg border border-blue-200 bg-blue-50 px-4 py-3 text-sm text-blue-800">
-              资源列表可直接浏览，在线预览和下载需要先登录。
+              {t("authBanner.guest")}
             </div>
           ) : !isMember ? (
             <div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
-              当前账号可浏览列表，在线预览和下载仅会员及以上角色可用。
+              {t("authBanner.nonMember")}
             </div>
           ) : null}
         </div>
@@ -329,26 +332,26 @@ export function Resources() {
             <div className="mb-5">
               <Tabs>
                 <TabsList>
-                  <TabsTrigger active={activeTab === "documents"} onClick={() => handleTabChange("documents")}>文档</TabsTrigger>
-                  <TabsTrigger active={activeTab === "software"} onClick={() => handleTabChange("software")}>软件</TabsTrigger>
+                  <TabsTrigger active={activeTab === "documents"} onClick={() => handleTabChange("documents")}>{t("tabs.documents")}</TabsTrigger>
+                  <TabsTrigger active={activeTab === "software"} onClick={() => handleTabChange("software")}>{t("tabs.software")}</TabsTrigger>
                 </TabsList>
               </Tabs>
             </div>
 
             <div className="space-y-3">
-              <ChipBar label="品牌：" options={brandOptions} selected={brand} disabled={filtersLoading} onSelect={(value) => { setBrand(value); setSeries(""); setPage(1); }} />
-              <ChipBar label="类型：" options={categoryOptions} selected={category} disabled={filtersLoading} onSelect={(value) => { setCategory(value); setSeries(""); setPage(1); }} />
+              <ChipBar label={t("labels.brand")} options={brandOptions} selected={brand} disabled={filtersLoading} onSelect={(value) => { setBrand(value); setSeries(""); setPage(1); }} />
+              <ChipBar label={t("labels.category")} options={categoryOptions} selected={category} disabled={filtersLoading} onSelect={(value) => { setCategory(value); setSeries(""); setPage(1); }} />
               {activeTab === "documents" && category && seriesOptions.length > 1 ? (
-                <ChipBar label="系列：" options={seriesOptions} selected={series} disabled={filtersLoading} onSelect={(value) => { setSeries(value); setPage(1); }} />
+                <ChipBar label={t("labels.series")} options={seriesOptions} selected={series} disabled={filtersLoading} onSelect={(value) => { setSeries(value); setPage(1); }} />
               ) : null}
               <div className="flex flex-wrap items-center gap-2">
                 <div className="relative min-w-[220px] flex-1 sm:max-w-md">
                   <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
-                  <Input className="pl-9" value={keyword} onChange={(event) => setKeyword(event.target.value)} onKeyDown={(event) => { if (event.key === "Enter") handleSearch(); }} placeholder="输入关键词搜索资源" />
+                  <Input className="pl-9" value={keyword} onChange={(event) => setKeyword(event.target.value)} onKeyDown={(event) => { if (event.key === "Enter") handleSearch(); }} placeholder={t("filters.searchPlaceholder")} />
                 </div>
-                <Button type="button" onClick={handleSearch} className="bg-blue-600 hover:bg-blue-700">搜索</Button>
+                <Button type="button" onClick={handleSearch} className="bg-blue-600 hover:bg-blue-700">{t("filters.searchButton")}</Button>
                 {(brand || category || series || keyword) ? (
-                  <Button type="button" variant="outline" onClick={() => { setBrand(""); setCategory(""); setSeries(""); setKeyword(""); setPage(1); }}>清空筛选</Button>
+                  <Button type="button" variant="outline" onClick={() => { setBrand(""); setCategory(""); setSeries(""); setKeyword(""); setPage(1); }}>{t("filters.clearButton")}</Button>
                 ) : null}
               </div>
             </div>
@@ -359,14 +362,14 @@ export function Resources() {
         {rateLimitError && <div className="mb-4 rounded-lg bg-amber-50 px-4 py-3 text-sm text-amber-800">{rateLimitError}</div>}
 
         <div className="mb-4 rounded-lg border border-gray-200 bg-white px-4 py-3 text-xs text-gray-500">
-          版权说明：所有技术文档和软件的版权归原作者或原厂商所有，本平台仅提供检索与分发服务。如有侵权，请通过 contact@openindu.com 联系我们立即处理。
+          {t("copyright")}
         </div>
 
         <div className="space-y-4">
           {loading ? (
-            <Card><CardContent className="flex items-center justify-center gap-2 p-10 text-gray-600"><Loader2 className="animate-spin" /> 正在加载资源...</CardContent></Card>
+            <Card><CardContent className="flex items-center justify-center gap-2 p-10 text-gray-600"><Loader2 className="animate-spin" /> {t("list.loading")}</CardContent></Card>
           ) : data.items.length === 0 ? (
-            <Card><CardContent className="p-10 text-center text-gray-500">暂无匹配资源，请调整筛选条件后重试。</CardContent></Card>
+            <Card><CardContent className="p-10 text-center text-gray-500">{t("list.empty")}</CardContent></Card>
           ) : (
             data.items.map((item) => (
               <Card key={`${item.id}-${item.version_id ?? 'none'}`} className="hover:border-blue-200 hover:shadow-md">
@@ -376,20 +379,20 @@ export function Resources() {
                       {activeTab === "documents" ? <FileText /> : <Package />}
                     </div>
                     <div>
-                      <h2 className="text-lg font-semibold text-gray-900">{getTitle(item)}</h2>
-                      <p className="mt-1 line-clamp-2 text-sm text-gray-600">{item.description || "暂无资源简介"}</p>
+                      <h2 className="text-lg font-semibold text-gray-900">{getTitle(item, t("list.itemFallbackTitle", { id: item.id }))}</h2>
+                      <p className="mt-1 line-clamp-2 text-sm text-gray-600">{item.description || t("list.noDescription")}</p>
                       <div className="mt-3 flex flex-wrap gap-2 text-xs text-gray-500">
-                        <span className="rounded-full bg-gray-100 px-2 py-1">品牌：{item.brand ? (brandMap[item.brand] ?? item.brand) : "未分类"}</span>
-                        <span className="rounded-full bg-gray-100 px-2 py-1">类型：{item.category ? (categoryMap[item.category] ?? item.category) : "未分类"}</span>
-                        {activeTab === "documents" && item.series ? <span className="rounded-full bg-gray-100 px-2 py-1">系列：{seriesMap[item.series] ?? item.series}</span> : null}
-                        <span className="rounded-full bg-gray-100 px-2 py-1">大小：{formatFileSize(item.file_size ?? item.latest_version_size)}</span>
+                        <span className="rounded-full bg-gray-100 px-2 py-1">{t("labels.brand")}{item.brand ? (brandMap[item.brand] ?? item.brand) : t("list.uncategorized")}</span>
+                        <span className="rounded-full bg-gray-100 px-2 py-1">{t("labels.category")}{item.category ? (categoryMap[item.category] ?? item.category) : t("list.uncategorized")}</span>
+                        {activeTab === "documents" && item.series ? <span className="rounded-full bg-gray-100 px-2 py-1">{t("labels.series")}{seriesMap[item.series] ?? item.series}</span> : null}
+                        <span className="rounded-full bg-gray-100 px-2 py-1">{t("labels.size")}{formatFileSize(item.file_size ?? item.latest_version_size, t("list.unknownSize"))}</span>
                         {activeTab === "software" && (item.version || item.latest_version) && (
                           <span className="rounded-full bg-gray-100 px-2 py-1">
-                            版本：{item.version || item.latest_version}
-                            {item.is_latest_version && <span className="ml-1 text-blue-600">(最新)</span>}
+                            {t("labels.version")}{item.version || item.latest_version}
+                            {item.is_latest_version && <span className="ml-1 text-blue-600">{t("list.latestBadge")}</span>}
                           </span>
                         )}
-                        <span className="rounded-full bg-blue-50 px-2 py-1 text-blue-700">下载 {item.download_count ?? 0} 次</span>
+                        <span className="rounded-full bg-blue-50 px-2 py-1 text-blue-700">{t("list.downloadCount", { count: item.download_count ?? 0 })}</span>
                       </div>
                     </div>
                   </div>
@@ -397,12 +400,12 @@ export function Resources() {
                     {activeTab === "documents" && (
                       <Button type="button" variant="outline" onClick={() => void handlePreview(item)} disabled={previewingId === item.id || downloadingId === item.id}>
                         {previewingId === item.id ? <Loader2 className="animate-spin" /> : <Eye />}
-                        在线预览
+                        {t("list.previewButton")}
                       </Button>
                     )}
                     <Button type="button" variant="outline" onClick={() => void handleDownload(item)} disabled={downloadingId === item.id || previewingId === item.id}>
                       {downloadingId === item.id ? <Loader2 className="animate-spin" /> : <Download />}
-                      下载
+                      {t("list.downloadButton")}
                     </Button>
                   </div>
                 </CardContent>
@@ -412,15 +415,15 @@ export function Resources() {
         </div>
 
         <div className="mt-6 flex flex-col items-center justify-between gap-3 sm:flex-row">
-          <p className="text-sm text-gray-500">第 {page} / {totalPages} 页</p>
+          <p className="text-sm text-gray-500">{t("pagination.pageOf", { page, total: totalPages })}</p>
           <div className="flex items-center gap-3">
-            <span className="text-sm text-gray-500">共 {data.total} 条资源</span>
-            <Select className="h-9 w-24" value={String(pageSize)} onChange={(event) => { setPageSize(Number(event.target.value)); setPage(1); }} aria-label="每页数量">
-              {PAGE_SIZE_OPTIONS.map((n) => <option key={n} value={n}>{n} 条/页</option>)}
+            <span className="text-sm text-gray-500">{t("pagination.totalItems", { count: data.total })}</span>
+            <Select className="h-9 w-24" value={String(pageSize)} onChange={(event) => { setPageSize(Number(event.target.value)); setPage(1); }} aria-label={t("pagination.perPageAriaLabel")}>
+              {PAGE_SIZE_OPTIONS.map((n) => <option key={n} value={n}>{t("pagination.perPage", { n })}</option>)}
             </Select>
             <div className="flex gap-2">
-              <Button type="button" variant="outline" disabled={page <= 1 || loading} onClick={() => setPage((value) => Math.max(value - 1, 1))}>上一页</Button>
-              <Button type="button" variant="outline" disabled={page >= totalPages || loading} onClick={() => setPage((value) => value + 1)}>下一页</Button>
+              <Button type="button" variant="outline" disabled={page <= 1 || loading} onClick={() => setPage((value) => Math.max(value - 1, 1))}>{t("pagination.prev")}</Button>
+              <Button type="button" variant="outline" disabled={page >= totalPages || loading} onClick={() => setPage((value) => value + 1)}>{t("pagination.next")}</Button>
             </div>
           </div>
         </div>

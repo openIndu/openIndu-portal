@@ -1,47 +1,20 @@
 import { test, expect } from "@playwright/test";
 
-test.describe("Register Page", () => {
-  test("should load the register page", async ({ page }) => {
-    await page.goto("/register");
-    await expect(page).toHaveTitle(/openIndu/);
-    await expect(page.getByRole("heading", { name: "注册 openIndu 社区账号" })).toBeVisible();
+// Register is no longer a standalone page -- routes.tsx redirects /register
+// to /login (the login page handles first-time sign-up automatically).
+// This file previously asserted a #register-phone form and a "注册并登录"
+// button that have not existed for some time; replaced with a redirect check.
+
+const LOCALES = [
+  { locale: "zh" as const, prefix: "", label: "Chinese" },
+  { locale: "en" as const, prefix: "/en", label: "English" },
+] as const;
+
+for (const { prefix, label } of LOCALES) {
+  test.describe(`Register redirect (${label})`, () => {
+    test("should redirect /register to /login", async ({ page }) => {
+      await page.goto(prefix + "/register");
+      await expect(page).toHaveURL(prefix + "/login");
+    });
   });
-
-  test("should display phone input field", async ({ page }) => {
-    await page.goto("/register");
-    const phoneInput = page.locator("#register-phone");
-    await expect(phoneInput).toBeVisible();
-    await expect(phoneInput).toHaveAttribute("placeholder", "请输入 11 位手机号");
-  });
-
-  test("should display code input and send button", async ({ page }) => {
-    await page.goto("/register");
-    const codeInput = page.locator("#register-code");
-    await expect(codeInput).toBeVisible();
-
-    const sendButton = page.getByRole("button", { name: "发送验证码" });
-    await expect(sendButton).toBeVisible();
-  });
-
-  test("should have submit button disabled when inputs are empty", async ({ page }) => {
-    await page.goto("/register");
-    const submitButton = page.getByRole("button", { name: "注册并登录" });
-    await expect(submitButton).toBeDisabled();
-  });
-
-  test("should enable submit when valid phone and code are entered", async ({ page }) => {
-    await page.goto("/register");
-    await page.fill("#register-phone", "13800138000");
-    await page.fill("#register-code", "123456");
-
-    const submitButton = page.getByRole("button", { name: "注册并登录" });
-    await expect(submitButton).toBeEnabled();
-  });
-
-  test("should have link to login page", async ({ page }) => {
-    await page.goto("/register");
-    const loginLink = page.getByRole("link", { name: "返回登录" });
-    await expect(loginLink).toBeVisible();
-    await expect(loginLink).toHaveAttribute("href", "/login");
-  });
-});
+}

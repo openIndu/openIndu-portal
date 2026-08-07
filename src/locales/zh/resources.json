@@ -1,0 +1,59 @@
+{
+  "seo": {
+    "title": "下载中心｜openIndu",
+    "description": "openIndu 下载中心提供 PLC/HMI 开发资料、品牌手册、软件工具与最佳实践下载。",
+    "keywords": "PLC手册,HMI手册,工业软件,品牌资料,openIndu下载中心"
+  },
+  "header": {
+    "title": "下载中心",
+    "subtitle": "按品牌、分类和关键词快速查找 PLC/HMI 开发资料与工具软件。"
+  },
+  "authBanner": {
+    "guest": "资源列表可直接浏览，在线预览和下载需要先登录。",
+    "nonMember": "当前账号可浏览列表，在线预览和下载仅会员及以上角色可用。"
+  },
+  "tabs": { "documents": "文档", "software": "软件" },
+  "labels": { "brand": "品牌：", "category": "类型：", "series": "系列：", "size": "大小：", "version": "版本：" },
+  "filters": {
+    "allOption": "全部",
+    "allBrands": "全部品牌",
+    "allCategories": "全部类型",
+    "allSeries": "全部系列",
+    "searchPlaceholder": "输入关键词搜索资源",
+    "searchButton": "搜索",
+    "clearButton": "清空筛选"
+  },
+  "copyright": "版权说明：所有技术文档和软件的版权归原作者或原厂商所有，本平台仅提供检索与分发服务。如有侵权，请通过 contact@openindu.com 联系我们立即处理。",
+  "list": {
+    "loading": "正在加载资源...",
+    "empty": "暂无匹配资源，请调整筛选条件后重试。",
+    "noDescription": "暂无资源简介",
+    "itemFallbackTitle": "资源 #{{id}}",
+    "unknownSize": "未知大小",
+    "uncategorized": "未分类",
+    "latestBadge": "(最新)",
+    "downloadCount": "下载 {{count}} 次",
+    "previewButton": "在线预览",
+    "downloadButton": "下载"
+  },
+  "pagination": {
+    "pageOf": "第 {{page}} / {{total}} 页",
+    "totalItems": "共 {{count}} 条资源",
+    "perPage": "{{n}} 条/页",
+    "perPageAriaLabel": "每页数量",
+    "prev": "上一页",
+    "next": "下一页"
+  },
+  "errors": {
+    "loadFailed": "资源加载失败",
+    "filtersLoadFailed": "筛选项加载失败",
+    "seriesLoadFailed": "系列筛选项加载失败",
+    "memberOnly": "在线预览和下载功能仅会员及以上角色可用，请联系管理员升级账号",
+    "downloadRateLimited": "今日下载次数已用完，请明天再试",
+    "downloadLinkFailed": "下载链接获取失败",
+    "noDownloadUrl": "后端未返回下载链接",
+    "previewRateLimited": "今日文档预览次数已用完，请明天再试",
+    "previewLinkFailed": "预览链接获取失败",
+    "noPreviewUrl": "后端未返回预览链接"
+  }
+}
