@@ -5,6 +5,7 @@ import remarkGfm from "remark-gfm";
 import type { Components } from "react-markdown";
 import { AlertTriangle, Check, CheckCircle2, Copy, FileText, Loader2, MessageCircle, Plus, Send, ThumbsDown, ThumbsUp, Trash2 } from "lucide-react";
 import { useAuth } from "@/store/auth";
+import { SEO } from "../components/SEO";
 import {
   chatApi,
   chatSessionApi,
@@ -259,6 +260,12 @@ export default function ChatPage() {
 
   return (
     <div className="mx-auto flex h-[calc(100vh-6rem)] sm:h-[calc(100vh-8rem)] max-w-7xl flex-col px-3 sm:px-6 lg:px-8 py-4 sm:py-6">
+      <SEO
+        title="智能咨询｜openIndu"
+        description="基于 openIndu 知识库的工业自动化智能助手，面向会员开放，支持 PLC、变频器等工控问题问答。"
+        canonicalPath="/chat"
+        localized={false}
+      />
       {/* Header */}
       <div className="mb-4 shrink-0">
         <h1 className="text-2xl font-bold text-gray-900">智能咨询</h1>

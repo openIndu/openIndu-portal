@@ -1,4 +1,9 @@
 {
+  "seo": {
+    "title": "Sign In / Sign Up | openIndu",
+    "description": "Sign in to openIndu Community with your phone number and an SMS code to download resources, use the AI Assistant, and access workflows.",
+    "keywords": "openIndu,sign in,sign up,phone login"
+  },
   "title": "Sign in / Sign up with Phone",
   "descriptionLine1": "Sign in with your phone number and an SMS verification code",
   "descriptionLine2": "If your number isn't registered yet, verifying it will automatically create your openIndu Community account",
