@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router";
 import { Loader2 } from "lucide-react";
 import { authApi, getApiErrorMessage } from "@/api";
 import { useAuth } from "@/store/auth";
+import { stripLocalePrefix } from "@/i18n/locale";
 import { SEO } from "../components/SEO";
 import { Button } from "../components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card";
@@ -26,9 +27,17 @@ export function Login() {
   const [error, setError] = useState("");
   const [privacyAccepted, setPrivacyAccepted] = useState(false);
 
+  // `state.from` (set by AuthGuard's <Navigate>) is already basename-relative --
+  // React Router's own location object never carries the /en prefix. The
+  // `?redirect=` query param, by contrast, is built by the axios interceptor
+  // from the raw `window.location.pathname` (outside the router, no basename
+  // awareness), so it still has /en on it when present. `navigate()` re-adds
+  // the basename itself, so an already-prefixed path here would double up
+  // (e.g. /en/en/...) -- strip it unconditionally; a no-op when there was
+  // never a prefix to begin with.
   const redirectTo = typeof location.state === "object" && location.state && "from" in location.state
     ? (location.state.from as { pathname?: string }).pathname ?? "/resources"
-    : new URLSearchParams(location.search).get("redirect") ?? "/resources";
+    : stripLocalePrefix(new URLSearchParams(location.search).get("redirect") ?? "/resources");
 
   useEffect(() => {
     if (isAuthenticated) navigate(redirectTo, { replace: true });
