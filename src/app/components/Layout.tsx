@@ -123,7 +123,7 @@ export function Layout() {
                       <ChevronDown className="h-3.5 w-3.5 transition-transform group-hover:rotate-180" />
                     </Link>
                     {/* pt-2 bridges the hover gap between parent item and dropdown */}
-                    <div className="absolute left-0 top-full z-50 hidden min-w-[180px] pt-2 group-hover:block">
+                    <div className="absolute left-0 top-full z-50 hidden min-w-[180px] pt-2 group-hover:block group-focus-within:block">
                       <div className="rounded-lg border border-gray-100 bg-white py-1 shadow-lg">
                         {item.children.map((child) => (
                           <Link

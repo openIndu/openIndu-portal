@@ -149,7 +149,7 @@ export function Login() {
                 type="checkbox"
                 checked={privacyAccepted}
                 onChange={(event) => setPrivacyAccepted(event.target.checked)}
-                className="mt-1"
+                className="mt-1 h-5 w-5 shrink-0"
               />
               <span>
                 {t("privacyPrefix")}<Link to="/privacy" className="font-medium text-blue-600 hover:text-blue-700">{t("privacyLinkText")}</Link>{t("privacySuffix")}
