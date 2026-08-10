@@ -7,8 +7,8 @@ const GOLDEN = {
   navParent: { zh: "AI+视觉", en: "AI + Machine Vision" },
   navChild: { zh: "openindu-station", en: "openindu-station" },
   badge: {
-    zh: "社区共建 · 尚未开源",
-    en: "Community-built · Not yet open source",
+    zh: "社区共建 · 即将开源",
+    en: "Community-built · Open-sourcing soon",
   },
   capabilityTitles: {
     zh: ["九点手眼标定", "模板匹配 + Blob 双引擎", "双相机协同定位"],
@@ -23,8 +23,8 @@ const GOLDEN = {
     en: ["Dual-Camera Precision Dispensing Machine", "Dual-Platform Laser Cutting Machine"],
   },
   status: {
-    zh: "该平台目前在 openIndu 社区孵化中，尚未开源。",
-    en: "Currently incubating in the openIndu community; not yet open-sourced.",
+    zh: "该平台目前在 openIndu 社区孵化中，即将开源。",
+    en: "Currently incubating in the openIndu community; open-sourcing soon.",
   },
 } as const;
 
@@ -42,7 +42,7 @@ for (const { locale, prefix, label } of LOCALES) {
       await expect(page.locator("h1")).toContainText(GOLDEN.h1[locale]);
     });
 
-    test("should display the not-yet-open-source badge", async ({ page }) => {
+    test("should display the open-sourcing-soon badge", async ({ page }) => {
       await page.goto(prefix + "/vision/station");
       await expect(page.getByText(GOLDEN.badge[locale], { exact: true })).toBeVisible();
     });

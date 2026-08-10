@@ -5,7 +5,7 @@
     "keywords": "openindu-station,通用设备平台,运动控制,机器视觉,手眼标定,模板匹配,点胶机,激光切割机"
   },
   "hero": {
-    "badge": "社区共建 · 尚未开源",
+    "badge": "社区共建 · 即将开源",
     "title": "openindu-station",
     "subtitle": "运动-视觉-扫码通用设备平台"
   },
@@ -48,7 +48,7 @@
     }
   },
   "cta": {
-    "status": "该平台目前在 openIndu 社区孵化中，尚未开源。",
+    "status": "该平台目前在 openIndu 社区孵化中，即将开源。",
     "heading": "想了解 openindu-station？",
     "description": "如果你的产线有类似的运动-视觉-扫码设备需求，欢迎和社区聊聊。",
     "contact": "联系我们"
