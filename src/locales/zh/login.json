@@ -1,4 +1,9 @@
 {
+  "seo": {
+    "title": "登录 / 注册｜openIndu",
+    "description": "使用手机号和短信验证码登录 openIndu 社区，下载资料、使用智能咨询与工作流。",
+    "keywords": "openIndu,登录,注册,手机号登录"
+  },
   "title": "手机号登录 / 注册",
   "descriptionLine1": "使用手机号和短信验证码登录",
   "descriptionLine2": "未注册手机号验证通过后，将自动创建 openIndu 社区账号",

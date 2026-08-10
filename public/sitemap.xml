@@ -37,42 +37,6 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.openindu.com/resources"/>
   </url>
   <url>
-    <loc>https://www.openindu.com/resources/documents</loc>
-    <lastmod>2026-08-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.openindu.com/resources/documents"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.openindu.com/en/resources/documents"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.openindu.com/resources/documents"/>
-  </url>
-  <url>
-    <loc>https://www.openindu.com/en/resources/documents</loc>
-    <lastmod>2026-08-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.openindu.com/resources/documents"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.openindu.com/en/resources/documents"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.openindu.com/resources/documents"/>
-  </url>
-  <url>
-    <loc>https://www.openindu.com/resources/software</loc>
-    <lastmod>2026-08-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.openindu.com/resources/software"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.openindu.com/en/resources/software"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.openindu.com/resources/software"/>
-  </url>
-  <url>
-    <loc>https://www.openindu.com/en/resources/software</loc>
-    <lastmod>2026-08-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.openindu.com/resources/software"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.openindu.com/en/resources/software"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.openindu.com/resources/software"/>
-  </url>
-  <url>
     <loc>https://www.openindu.com/motion-control</loc>
     <lastmod>2026-08-07</lastmod>
     <changefreq>weekly</changefreq>

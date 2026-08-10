@@ -4,9 +4,11 @@ Allow: /
 Disallow: /login
 Disallow: /register
 Disallow: /account
+Disallow: /chat
 Disallow: /en/login
 Disallow: /en/register
 Disallow: /en/account
+Disallow: /en/chat
 
 # Baidu spider — explicit section so Baidu's crawler-specific rules win when
 # they diverge from the generic *. Same allow/disallow set; kept explicit to
@@ -16,9 +18,11 @@ Allow: /
 Disallow: /login
 Disallow: /register
 Disallow: /account
+Disallow: /chat
 Disallow: /en/login
 Disallow: /en/register
 Disallow: /en/account
+Disallow: /en/chat
 
 # AI crawlers — explicitly allowed so that LLM providers can index the site
 # for AI-powered search and retrieval (ChatGPT, Claude, Perplexity, etc.).
@@ -27,63 +31,77 @@ Allow: /
 Disallow: /login
 Disallow: /register
 Disallow: /account
+Disallow: /chat
 Disallow: /en/login
 Disallow: /en/register
 Disallow: /en/account
+Disallow: /en/chat
 
 User-agent: Claude-Web
 Allow: /
 Disallow: /login
 Disallow: /register
 Disallow: /account
+Disallow: /chat
 Disallow: /en/login
 Disallow: /en/register
 Disallow: /en/account
+Disallow: /en/chat
 
 User-agent: anthropic-ai
 Allow: /
 Disallow: /login
 Disallow: /register
 Disallow: /account
+Disallow: /chat
 Disallow: /en/login
 Disallow: /en/register
 Disallow: /en/account
+Disallow: /en/chat
 
 User-agent: PerplexityBot
 Allow: /
 Disallow: /login
 Disallow: /register
 Disallow: /account
+Disallow: /chat
 Disallow: /en/login
 Disallow: /en/register
 Disallow: /en/account
+Disallow: /en/chat
 
 User-agent: Applebot
 Allow: /
 Disallow: /login
 Disallow: /register
 Disallow: /account
+Disallow: /chat
 Disallow: /en/login
 Disallow: /en/register
 Disallow: /en/account
+Disallow: /en/chat
 
 User-agent: Bytespider
 Allow: /
 Disallow: /login
 Disallow: /register
 Disallow: /account
+Disallow: /chat
 Disallow: /en/login
 Disallow: /en/register
 Disallow: /en/account
+Disallow: /en/chat
 
 User-agent: Bingbot
 Allow: /
 Disallow: /login
 Disallow: /register
 Disallow: /account
+Disallow: /chat
 Disallow: /en/login
 Disallow: /en/register
 Disallow: /en/account
+Disallow: /en/chat
 
 Sitemap: https://www.openindu.com/sitemap.xml
 LLMs.txt: https://www.openindu.com/llms.txt

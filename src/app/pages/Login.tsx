@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router";
 import { Loader2 } from "lucide-react";
 import { authApi, getApiErrorMessage } from "@/api";
 import { useAuth } from "@/store/auth";
+import { SEO } from "../components/SEO";
 import { Button } from "../components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card";
 import { Input } from "../components/ui/input";
@@ -100,6 +101,12 @@ export function Login() {
 
   return (
     <section className="bg-gradient-to-br from-blue-50 via-white to-cyan-50 px-4 py-16 sm:py-24">
+      <SEO
+        title={t("seo.title")}
+        description={t("seo.description")}
+        keywords={t("seo.keywords")}
+        canonicalPath="/login"
+      />
       <Card className="mx-auto max-w-md border-blue-100 shadow-xl">
         <CardHeader className="text-center">
           <CardTitle>{t("title")}</CardTitle>
