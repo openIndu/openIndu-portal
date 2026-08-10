@@ -1,5 +1,6 @@
 import axios, { AxiosError, type AxiosResponse, type InternalAxiosRequestConfig } from "axios";
 import { getClientId } from "@/lib/clientIdentity";
+import { loginPath } from "@/i18n/locale";
 
 export type UserRole = "user" | "member" | "admin";
 
@@ -284,8 +285,9 @@ apiClient.interceptors.response.use(
     if (error.response?.status === 401 && requestPath === "/auth/refresh") {
       clearAuthStorage();
       isRefreshing = false;
-      if (window.location.pathname !== "/login") {
-        window.location.assign(`/login?redirect=${encodeURIComponent(window.location.pathname + window.location.search)}`);
+      const target = loginPath();
+      if (window.location.pathname !== target) {
+        window.location.assign(`${target}?redirect=${encodeURIComponent(window.location.pathname + window.location.search)}`);
       }
       return Promise.reject(error);
     }
@@ -313,8 +315,9 @@ apiClient.interceptors.response.use(
       if (!refreshToken) {
         clearAuthStorage();
         isRefreshing = false;
-        if (window.location.pathname !== "/login" && shouldRedirectToLogin(originalRequest.method, originalRequest.url)) {
-          window.location.assign(`/login?redirect=${encodeURIComponent(window.location.pathname + window.location.search)}`);
+        const target = loginPath();
+        if (window.location.pathname !== target && shouldRedirectToLogin(originalRequest.method, originalRequest.url)) {
+          window.location.assign(`${target}?redirect=${encodeURIComponent(window.location.pathname + window.location.search)}`);
         }
         return Promise.reject(error);
       }
@@ -333,8 +336,9 @@ apiClient.interceptors.response.use(
         clearAuthStorage();
         processQueue(refreshError, null);
         // Force redirect to login on refresh token failure - token is definitely invalid
-        if (window.location.pathname !== "/login") {
-          window.location.assign(`/login?redirect=${encodeURIComponent(window.location.pathname + window.location.search)}`);
+        const target = loginPath();
+        if (window.location.pathname !== target) {
+          window.location.assign(`${target}?redirect=${encodeURIComponent(window.location.pathname + window.location.search)}`);
         }
         return Promise.reject(refreshError);
       } finally {
@@ -345,8 +349,9 @@ apiClient.interceptors.response.use(
     // For other 401 errors (not during token refresh), clear storage and redirect
     if (error.response?.status === 401) {
       clearAuthStorage();
-      if (window.location.pathname !== "/login" && shouldRedirectToLogin(originalRequest.method, originalRequest.url)) {
-        window.location.assign(`/login?redirect=${encodeURIComponent(window.location.pathname + window.location.search)}`);
+      const target = loginPath();
+      if (window.location.pathname !== target && shouldRedirectToLogin(originalRequest.method, originalRequest.url)) {
+        window.location.assign(`${target}?redirect=${encodeURIComponent(window.location.pathname + window.location.search)}`);
       }
     }
 

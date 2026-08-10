@@ -20,6 +20,15 @@ export function basenameFor(locale: Locale): string {
 }
 
 /**
+ * Locale-aware /login path for hard `window.location` redirects (the axios
+ * 401 interceptor runs outside the router and can't rely on its basename).
+ * "en" → "/en/login", "zh" → "/login".
+ */
+export function loginPath(): string {
+  return detectLocale() === "en" ? "/en/login" : "/login";
+}
+
+/**
  * Strip the locale prefix from a pathname.
  *   "/en/vision" → "/vision"
  *   "/en"       → "/"
