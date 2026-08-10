@@ -49,7 +49,8 @@ export const router = createBrowserRouter(
         { path: "motion-control", Component: MotionControl },
         // openIndu-studio (formerly "workflow"): sub-page of AI+Motion Control, publicly visible
         { path: "motion-control/studio", Component: Workflow },
-        { path: "chat", Component: ChatPage },
+        // Chat's RAG knowledge base is Chinese-only — same ZH-only treatment as legal pages.
+        { path: "chat", element: <ZhOnlyGuard><ChatPage /></ZhOnlyGuard> },
         { path: "vision", Component: Vision },
         // openindu-station: sub-page of AI+Vision, publicly visible
         { path: "vision/station", Component: Station },
