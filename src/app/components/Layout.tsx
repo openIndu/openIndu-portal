@@ -340,9 +340,6 @@ export function Layout() {
                   <Link to="/vision" className="hover:text-white">{t("footer.vision")}</Link>
                 </li>
                 <li>
-                  <Link to="/iiot-platform" className="hover:text-white">{t("footer.iiotPlatform")}</Link>
-                </li>
-                <li>
                   <Link to="/infrastructure" className="hover:text-white">{t("footer.infrastructure")}</Link>
                 </li>
               </ul>
@@ -352,6 +349,9 @@ export function Layout() {
             <div className="flex flex-col items-start">
               <h3 className="font-semibold text-white mb-4">{t("footer.coreServices")}</h3>
               <ul className="space-y-2 text-gray-400">
+                <li>
+                  <Link to="/iiot-platform" className="hover:text-white">{t("footer.iiotPlatform")}</Link>
+                </li>
                 <li>
                   <Link to="/motion-control/studio" className="hover:text-white">{t("footer.studioPlatform")}</Link>
                 </li>
