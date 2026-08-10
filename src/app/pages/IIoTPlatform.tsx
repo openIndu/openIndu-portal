@@ -28,12 +28,14 @@ const advantageKeys = [
 
 const techLayerKeys = [
   { key: "webFrontend", layer: 8, badgeBg: "bg-blue-100", badgeText: "text-blue-700", iconBg: "bg-blue-600" },
-  { key: "backend", layer: 7, badgeBg: "bg-cyan-100", badgeText: "text-cyan-700", iconBg: "bg-cyan-600" },
-  { key: "edgeGateway", layer: 6, badgeBg: "bg-green-100", badgeText: "text-green-700", iconBg: "bg-green-600" },
+  // cyan/green/orange/yellow-600 fail WCAG AA for white text (2.9-3.6:1) --
+  // bumped one shade to -700; blue/purple/red/indigo-600 already pass.
+  { key: "backend", layer: 7, badgeBg: "bg-cyan-100", badgeText: "text-cyan-700", iconBg: "bg-cyan-700" },
+  { key: "edgeGateway", layer: 6, badgeBg: "bg-green-100", badgeText: "text-green-700", iconBg: "bg-green-700" },
   { key: "dataAcquisition", layer: 5, badgeBg: "bg-purple-100", badgeText: "text-purple-700", iconBg: "bg-purple-600" },
-  { key: "businessDb", layer: 4, badgeBg: "bg-orange-100", badgeText: "text-orange-700", iconBg: "bg-orange-600" },
+  { key: "businessDb", layer: 4, badgeBg: "bg-orange-100", badgeText: "text-orange-700", iconBg: "bg-orange-700" },
   { key: "timeseriesDb", layer: 3, badgeBg: "bg-red-100", badgeText: "text-red-700", iconBg: "bg-red-600" },
-  { key: "cache", layer: 2, badgeBg: "bg-yellow-100", badgeText: "text-yellow-700", iconBg: "bg-yellow-600" },
+  { key: "cache", layer: 2, badgeBg: "bg-yellow-100", badgeText: "text-yellow-700", iconBg: "bg-yellow-700" },
   { key: "messageBroker", layer: 1, badgeBg: "bg-indigo-100", badgeText: "text-indigo-700", iconBg: "bg-indigo-600" },
 ] as const;
 
