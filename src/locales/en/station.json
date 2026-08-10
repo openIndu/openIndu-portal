@@ -5,7 +5,7 @@
     "keywords": "openindu-station,universal equipment platform,motion control,machine vision,hand-eye calibration,template matching,dispensing machine,laser cutting machine"
   },
   "hero": {
-    "badge": "Community-built · Not yet open source",
+    "badge": "Community-built · Open-sourcing soon",
     "title": "openindu-station",
     "subtitle": "A motion-vision-scan universal equipment platform"
   },
@@ -48,7 +48,7 @@
     }
   },
   "cta": {
-    "status": "Currently incubating in the openIndu community; not yet open-sourced.",
+    "status": "Currently incubating in the openIndu community; open-sourcing soon.",
     "heading": "Want to know more about openindu-station?",
     "description": "If your line has similar motion-vision-scan equipment needs, come talk to the community.",
     "contact": "Contact Us"
