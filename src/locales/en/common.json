@@ -7,7 +7,7 @@
     "studioPlatform": "openIndu-studio",
     "vision": "AI + Machine Vision",
     "station": "openindu-station",
-    "iiotPlatform": "AI + Industrial IoT Platform",
+    "iiotPlatform": "AI + Industrial IoT",
     "infrastructure": "AI + Infrastructure",
     "aiAssistant": "AI Assistant"
   },
@@ -29,7 +29,7 @@
     "downloads": "Downloads",
     "motionControl": "AI + Motion Control — Overview",
     "vision": "AI + Machine Vision",
-    "iiotPlatform": "AI + Industrial IoT Platform",
+    "iiotPlatform": "AI + Industrial IoT",
     "infrastructure": "AI + Infrastructure",
     "coreServices": "Core Services",
     "studioPlatform": "openIndu-studio",

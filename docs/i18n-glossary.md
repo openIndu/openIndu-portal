@@ -43,9 +43,9 @@ This glossary is the single source of truth for all translation work (PR-1b thro
 | 下载中心 | Downloads | URL stays `/resources` |
 | AI+运动控制 | AI + Motion Control | Space each side of "+" |
 | 概览 | Overview | Sub-menu |
-| openIndu-studio 平台 | openIndu-studio Platform | |
+| openIndu-studio | openIndu-studio | No "Platform"/"平台" suffix — matches home CTA and the studio landing page |
 | AI+视觉 | AI + Machine Vision | "Vision" alone is ambiguous in English |
-| AI+工业互联网平台 | AI + Industrial IoT Platform | Body text may shorten to IIoT |
+| AI+工业互联网平台 | AI + Industrial IoT | Nav/footer dropped "Platform" — EN ran too wide at 1280px and crowded the header; ZH is unaffected and unchanged |
 | AI+基础设施 | AI + Infrastructure | Page is actually LLM API gateway |
 | 智能咨询 | AI Assistant | Or: Ask openIndu |
 | 登录 / 注册 | Sign in / Sign up | |
