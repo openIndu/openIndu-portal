@@ -13,7 +13,7 @@ const featureKeys = [
   { key: "workbench", icon: LayoutDashboard, iconColor: "text-cyan-600", iconBg: "bg-cyan-100", screenshotSrc: "/assets/iiot/workbench.png", subtitle: "Workbench · Global Overview at a Glance" },
   { key: "dashboard", icon: Monitor, iconColor: "text-purple-600", iconBg: "bg-purple-100", screenshotSrc: "/assets/iiot/dashboard.png", subtitle: "Data Dashboard · Production Status on One Screen" },
   { key: "deviceManagement", icon: Database, iconColor: "text-green-600", iconBg: "bg-green-100", screenshotSrc: "/assets/iiot/device-mgmt.png", subtitle: "Equipment Management · Full Lifecycle Control" },
-  { key: "traceability", icon: BarChart3, iconColor: "text-orange-600", iconBg: "bg-orange-100", screenshotSrc: "/assets/iiot/traceability.png", subtitle: "Product Traceability · From Raw Material to Finished Product" },
+  { key: "traceability", icon: BarChart3, iconColor: "text-orange-600", iconBg: "bg-orange-100", screenshotSrc: "/assets/iiot/traceability.png", subtitle: "Product Traceability · Material to Finished Goods" },
   { key: "miniProgram", icon: Smartphone, iconColor: "text-pink-600", iconBg: "bg-pink-100", screenshotSrc: "/assets/iiot/mini-program.png", isTall: true, subtitle: "WeChat Mini Program Support" },
 ] as const;
 
