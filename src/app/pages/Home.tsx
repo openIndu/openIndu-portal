@@ -183,7 +183,7 @@ export function Home() {
             <p className="text-base sm:text-lg text-gray-600 mb-8">{t("openSource.ctaSubheading")}</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-5xl mx-auto">
               <a
-                href="https://github.com/openindu/"
+                href="https://github.com/openIndu/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-between gap-4 bg-[#24292f] rounded-2xl p-8 lg:p-10 hover:bg-[#1b1f24] hover:shadow-xl transition-all group"
