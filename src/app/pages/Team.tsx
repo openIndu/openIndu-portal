@@ -118,7 +118,7 @@ export function Team() {
           </div>
           <div className="mt-12 text-center">
             <p className="text-gray-600 mb-4">Want to join the team?</p>
-            <a href="https://github.com/openIndu" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+            <a href="https://github.com/openIndu" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-[#1a3a6d] transition-colors">
               <Github className="w-5 h-5" />
               Contribute on GitHub
             </a>

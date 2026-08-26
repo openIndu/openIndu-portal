@@ -17,7 +17,7 @@ export function Home() {
       />
 
       {/* ── 1. Hero: Full-Stack Architecture Visualization ── */}
-      <section className="relative bg-blue-900 text-white py-16 sm:py-24 overflow-hidden">
+      <section className="relative bg-[#002FA7] text-white py-16 sm:py-24 overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0 bg-grid-pattern"></div>
         </div>
@@ -113,7 +113,7 @@ export function Home() {
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center flex-wrap">
             <Link
               to="/architecture"
-              className="inline-flex items-center justify-center px-8 py-3 bg-white text-blue-900 rounded-lg hover:bg-blue-50 transition-colors font-medium"
+              className="inline-flex items-center justify-center px-8 py-3 bg-white text-[#002FA7] rounded-lg hover:bg-blue-50 transition-colors font-medium"
             >
               理解全栈架构
               <ArrowRight className="ml-2 h-5 w-5" />
@@ -151,15 +151,15 @@ export function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-12">
             {/* Step 1: Understand Architecture */}
             <Link to="/architecture" className="group">
-              <div className="h-full bg-white rounded-lg p-6 sm:p-8 border border-gray-200 hover:border-blue-900 hover:shadow-md transition-all">
-                <div className="w-12 h-12 rounded-md bg-blue-900 text-white flex items-center justify-center mb-5 font-bold text-lg">
+              <div className="h-full bg-white rounded-lg p-6 sm:p-8 border border-gray-200 hover:border-[#002FA7] hover:shadow-md transition-all">
+                <div className="w-12 h-12 rounded-md bg-[#002FA7] text-white flex items-center justify-center mb-5 font-bold text-lg">
                   1️⃣
                 </div>
                 <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3">理解全栈架构</h3>
                 <p className="text-sm text-gray-600 leading-relaxed mb-4">
                   4层从硬件到工艺知识，掌握 openIndu 如何打通工业自动化全流程
                 </p>
-                <div className="inline-flex items-center gap-2 text-blue-900 font-medium group-hover:gap-3 transition-all">
+                <div className="inline-flex items-center gap-2 text-[#002FA7] font-medium group-hover:gap-3 transition-all">
                   深入了解
                   <ArrowRight className="w-4 h-4" />
                 </div>
@@ -168,15 +168,15 @@ export function Home() {
 
             {/* Step 2: Explore Use Cases */}
             <Link to="/use-cases" className="group">
-              <div className="h-full bg-white rounded-lg p-6 sm:p-8 border border-gray-200 hover:border-blue-900 hover:shadow-md transition-all">
-                <div className="w-12 h-12 rounded-md bg-blue-900 text-white flex items-center justify-center mb-5 font-bold text-lg">
+              <div className="h-full bg-white rounded-lg p-6 sm:p-8 border border-gray-200 hover:border-[#002FA7] hover:shadow-md transition-all">
+                <div className="w-12 h-12 rounded-md bg-[#002FA7] text-white flex items-center justify-center mb-5 font-bold text-lg">
                   2️⃣
                 </div>
                 <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3">选择行业场景</h3>
                 <p className="text-sm text-gray-600 leading-relaxed mb-4">
                   电池、PCB、芯片、汽车等行业的完整解决方案和工程实践
                 </p>
-                <div className="inline-flex items-center gap-2 text-blue-900 font-medium group-hover:gap-3 transition-all">
+                <div className="inline-flex items-center gap-2 text-[#002FA7] font-medium group-hover:gap-3 transition-all">
                   查看场景
                   <ArrowRight className="w-4 h-4" />
                 </div>
@@ -186,7 +186,7 @@ export function Home() {
             {/* Step 3: Choose Product */}
             <div className="group">
               <div className="h-full bg-gray-50 rounded-lg p-6 sm:p-8 border border-gray-200">
-                <div className="w-12 h-12 rounded-md bg-blue-900 text-white flex items-center justify-center mb-5 font-bold text-lg">
+                <div className="w-12 h-12 rounded-md bg-[#002FA7] text-white flex items-center justify-center mb-5 font-bold text-lg">
                   3️⃣
                 </div>
                 <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3">选择产品工具</h3>
@@ -194,13 +194,13 @@ export function Home() {
                   根据场景选择运动控制、工业视觉或 IIoT 平台
                 </p>
                 <div className="grid grid-cols-1 gap-2">
-                  <Link to="/motion-control" className="inline-flex items-center justify-center px-3 py-2 bg-white text-blue-900 rounded border border-gray-200 hover:bg-gray-100 transition-colors text-sm font-medium">
+                  <Link to="/motion-control" className="inline-flex items-center justify-center px-3 py-2 bg-white text-[#002FA7] rounded border border-gray-200 hover:bg-gray-100 transition-colors text-sm font-medium">
                     运动控制
                   </Link>
-                  <Link to="/vision" className="inline-flex items-center justify-center px-3 py-2 bg-white text-blue-900 rounded border border-gray-200 hover:bg-gray-100 transition-colors text-sm font-medium">
+                  <Link to="/vision" className="inline-flex items-center justify-center px-3 py-2 bg-white text-[#002FA7] rounded border border-gray-200 hover:bg-gray-100 transition-colors text-sm font-medium">
                     工业视觉
                   </Link>
-                  <Link to="/iiot-platform" className="inline-flex items-center justify-center px-3 py-2 bg-white text-blue-900 rounded border border-gray-200 hover:bg-gray-100 transition-colors text-sm font-medium">
+                  <Link to="/iiot-platform" className="inline-flex items-center justify-center px-3 py-2 bg-white text-[#002FA7] rounded border border-gray-200 hover:bg-gray-100 transition-colors text-sm font-medium">
                     工业互联网
                   </Link>
                 </div>
@@ -250,7 +250,7 @@ export function Home() {
               </div>
               <Link
                 to="/craftsmanship"
-                className="inline-flex items-center gap-2 px-8 py-3 bg-blue-900 text-white rounded-lg hover:bg-blue-800 transition-colors font-medium"
+                className="inline-flex items-center gap-2 px-8 py-3 bg-[#002FA7] text-white rounded-lg hover:bg-[#1a3a6d] transition-colors font-medium"
               >
                 了解工艺知识库
                 <ArrowRight className="w-5 h-5" />
@@ -317,7 +317,7 @@ export function Home() {
       </section>
 
       {/* ── 5. CTA ── */}
-      <section className="py-16 sm:py-20 bg-blue-900 text-white">
+      <section className="py-16 sm:py-20 bg-[#002FA7] text-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row items-center justify-center gap-10 lg:gap-20">
             {/* CTA copy */}

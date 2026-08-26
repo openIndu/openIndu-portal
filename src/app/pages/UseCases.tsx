@@ -153,7 +153,7 @@ export function UseCases() {
                   <h3 className="font-semibold text-lg text-gray-900 mb-3">📊 工程指标</h3>
                   <div className="flex flex-wrap gap-3">
                     {useCase.metrics.map((metric) => (
-                      <div key={metric} className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 text-blue-900 rounded-full text-sm font-medium">
+                      <div key={metric} className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 text-[#002FA7] rounded-full text-sm font-medium">
                         <CheckCircle className="w-4 h-4" />
                         {metric}
                       </div>
@@ -200,7 +200,7 @@ export function UseCases() {
           <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">下一步</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-900 text-white font-bold text-lg mb-4">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-[#002FA7] text-white font-bold text-lg mb-4">
                 1
               </div>
               <h3 className="font-semibold text-gray-900 mb-2">了解你的行业</h3>
@@ -225,14 +225,14 @@ export function UseCases() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center flex-wrap">
             <Link
               to="/architecture"
-              className="inline-flex items-center justify-center px-8 py-4 bg-blue-900 text-white rounded-lg hover:bg-blue-800 transition-colors font-medium"
+              className="inline-flex items-center justify-center px-8 py-4 bg-[#002FA7] text-white rounded-lg hover:bg-[#1a3a6d] transition-colors font-medium"
             >
               理解全栈架构
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
             <Link
               to="/craftsmanship"
-              className="inline-flex items-center justify-center px-8 py-4 border-2 border-blue-900 text-blue-900 rounded-lg hover:bg-blue-50 transition-colors font-medium"
+              className="inline-flex items-center justify-center px-8 py-4 border-2 border-blue-900 text-[#002FA7] rounded-lg hover:bg-blue-50 transition-colors font-medium"
             >
               查看工艺知识库
               <ArrowRight className="ml-2 h-5 w-5" />

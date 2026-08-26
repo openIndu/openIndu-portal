@@ -115,7 +115,7 @@ export function About() {
                 <p className="text-sm text-gray-600 mb-4">{item.description}</p>
                 <div className="bg-blue-50 p-3 rounded border border-blue-200">
                   <p className="text-xs font-semibold text-blue-700 uppercase tracking-wide">Product</p>
-                  <p className="text-sm font-medium text-blue-900 mt-1">{item.product}</p>
+                  <p className="text-sm font-medium text-[#002FA7] mt-1">{item.product}</p>
                 </div>
               </div>
             ))}

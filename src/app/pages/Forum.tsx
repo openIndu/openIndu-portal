@@ -54,7 +54,7 @@ export function Forum() {
                 href="https://forum.openindu.com/c/process/7"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-8 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+                className="inline-flex items-center justify-center px-8 py-4 bg-blue-600 text-white rounded-lg hover:bg-[#1a3a6d] transition-colors font-medium"
               >
                 进入论坛
                 <ArrowRight className="ml-2 h-5 w-5" />

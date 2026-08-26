@@ -349,7 +349,7 @@ export function Resources() {
                   <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
                   <Input className="pl-9" value={keyword} onChange={(event) => setKeyword(event.target.value)} onKeyDown={(event) => { if (event.key === "Enter") handleSearch(); }} placeholder={t("filters.searchPlaceholder")} />
                 </div>
-                <Button type="button" onClick={handleSearch} className="bg-blue-600 hover:bg-blue-700">{t("filters.searchButton")}</Button>
+                <Button type="button" onClick={handleSearch} className="bg-blue-600 hover:bg-[#1a3a6d]">{t("filters.searchButton")}</Button>
                 {(brand || category || series || keyword) ? (
                   <Button type="button" variant="outline" onClick={() => { setBrand(""); setCategory(""); setSeries(""); setKeyword(""); setPage(1); }}>{t("filters.clearButton")}</Button>
                 ) : null}

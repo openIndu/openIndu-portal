@@ -166,7 +166,7 @@ export function Login() {
             </label>
             {message && <p className="rounded-lg bg-green-50 px-3 py-2 text-sm text-green-700">{message}</p>}
             {error && <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{error}</p>}
-            <Button type="submit" disabled={!canSubmit} className="w-full bg-blue-600 hover:bg-blue-700">
+            <Button type="submit" disabled={!canSubmit} className="w-full bg-blue-600 hover:bg-[#1a3a6d]">
               {submitting ? <Loader2 className="animate-spin" /> : t("submit")}
             </Button>
           </form>

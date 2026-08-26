@@ -60,7 +60,7 @@ export function Pricing() {
                 </li>
               </ul>
               <p className="text-sm font-semibold text-gray-900 mb-4">起价：免费（开源）+ 部署咨询</p>
-              <a href="mailto:info@openindu.com" className="block w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-center transition-colors">
+              <a href="mailto:info@openindu.com" className="block w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-[#1a3a6d] text-center transition-colors">
                 咨询部署
               </a>
             </div>
@@ -96,7 +96,7 @@ export function Pricing() {
                 </li>
               </ul>
               <p className="text-sm font-semibold text-gray-900 mb-4">价格：8-15万元（设备 + 软件）</p>
-              <button className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-center transition-colors">
+              <button className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-[#1a3a6d] text-center transition-colors">
                 获取报价
               </button>
             </div>
@@ -129,7 +129,7 @@ export function Pricing() {
                 </li>
               </ul>
               <p className="text-sm font-semibold text-gray-900 mb-4">起价：按使用量计费</p>
-              <a href="mailto:info@openindu.com" className="block w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-center transition-colors">
+              <a href="mailto:info@openindu.com" className="block w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-[#1a3a6d] text-center transition-colors">
                 了解详情
               </a>
             </div>
