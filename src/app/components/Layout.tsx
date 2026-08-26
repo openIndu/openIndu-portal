@@ -77,7 +77,7 @@ export function Layout() {
     ];
     // Hide AI Assistant on EN — the RAG knowledge base is Chinese-only
     if (locale === "zh") {
-      items.push({ name: t("nav.aiAssistant"), href: "/chat", testid: "nav-ai-assistant" });
+      items.push({ name: `${t("nav.aiAssistant")} 🇨🇳`, href: "/chat", testid: "nav-ai-assistant" });
     }
     return items;
   }, [t, locale]);
@@ -394,7 +394,10 @@ export function Layout() {
                   <a href="https://github.com/openIndu/openIndu-cim" target="_blank" rel="noopener noreferrer" className="hover:text-white">{t("footer.edgeComputing")}</a>
                 </li>
                 <li>
-                  <Link to="/chat" className="hover:text-white">{t("footer.aiAssistantBot")}</Link>
+                  <Link to="/chat" className="hover:text-white inline-flex items-center gap-2">
+                    {t("footer.aiAssistantBot")}
+                    <span className="text-xs bg-blue-600 px-2 py-1 rounded">🇨🇳 ZH</span>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -422,21 +425,30 @@ export function Layout() {
               <ul className="space-y-2 text-gray-400">
                 <li>
                   {locale === "en" ? (
-                    <a href="/privacy" className="hover:text-white">{t("footer.privacyStatement")}</a>
+                    <a href="/privacy" className="hover:text-white inline-flex items-center gap-2">
+                      {t("footer.privacyStatement")}
+                      <span className="text-xs bg-blue-600 px-2 py-1 rounded">🇨🇳 ZH</span>
+                    </a>
                   ) : (
                     <Link to="/privacy" className="hover:text-white">{t("footer.privacyStatement")}</Link>
                   )}
                 </li>
                 <li>
                   {locale === "en" ? (
-                    <a href="/legal" className="hover:text-white">{t("footer.legalNotice")}</a>
+                    <a href="/legal" className="hover:text-white inline-flex items-center gap-2">
+                      {t("footer.legalNotice")}
+                      <span className="text-xs bg-blue-600 px-2 py-1 rounded">🇨🇳 ZH</span>
+                    </a>
                   ) : (
                     <Link to="/legal" className="hover:text-white">{t("footer.legalNotice")}</Link>
                   )}
                 </li>
                 <li>
                   {locale === "en" ? (
-                    <a href="/cookies" className="hover:text-white">{t("footer.aboutCookies")}</a>
+                    <a href="/cookies" className="hover:text-white inline-flex items-center gap-2">
+                      {t("footer.aboutCookies")}
+                      <span className="text-xs bg-blue-600 px-2 py-1 rounded">🇨🇳 ZH</span>
+                    </a>
                   ) : (
                     <Link to="/cookies" className="hover:text-white">{t("footer.aboutCookies")}</Link>
                   )}
