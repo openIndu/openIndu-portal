@@ -6,6 +6,7 @@ import { Home } from "./pages/Home";
 import { About } from "./pages/About";
 import { Developers } from "./pages/Developers";
 import { Team } from "./pages/Team";
+import { EdgeComputing } from "./pages/EdgeComputing";
 import { MotionControl } from "./pages/MotionControl";
 import { Vision } from "./pages/Vision";
 import { IIoTPlatform } from "./pages/IIoTPlatform";
@@ -46,6 +47,7 @@ export const router = createBrowserRouter(
         { path: "about", Component: About },
         { path: "developers", Component: Developers },
         { path: "team", Component: Team },
+        { path: "edge-computing", Component: EdgeComputing },
         { path: "login", Component: Login },
         { path: "register", element: <Navigate to="/login" replace /> },
         { path: "account", Component: AccountSettings },

@@ -11,7 +11,7 @@
     "vision": "Industrial Vision",
     "station": "openindu-station",
     "iiotPlatform": "Industrial IoT",
-    "edgeComputing": "Edge Computing openIndu-cim",
+    "edgeComputing": "openIndu-cim",
     "forum": "Forum",
     "aiAssistant": "AI Assistant"
   },
@@ -38,7 +38,7 @@
     "coreServices": "Core Services",
     "studioPlatform": "openIndu-studio",
     "station": "openindu-station",
-    "edgeComputing": "Edge Computing openIndu-cim",
+    "edgeComputing": "openIndu-cim",
     "aiAssistantBot": "AI Assistant Bot",
     "relatedPlatforms": "Related Platforms",
     "serviceStatus": "Service Status",

@@ -42,6 +42,7 @@ const SHARED = [
   "/about",
   "/developers",
   "/team",
+  "/edge-computing",
   "/forum",
   "/motion-control",
   "/motion-control/studio",

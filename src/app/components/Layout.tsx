@@ -71,7 +71,7 @@ export function Layout() {
         testid: "nav-iiot-platform",
         children: [
           { name: t("nav.overview"), href: "/iiot-platform", testid: "nav-iiot-overview" },
-          { name: t("nav.edgeComputing"), href: "https://github.com/openIndu/openIndu-cim", testid: "nav-edge-computing", external: true },
+          { name: t("nav.edgeComputing"), href: "/edge-computing", testid: "nav-edge-computing" },
         ],
       },
       { name: t("nav.forum"), href: "https://forum.openindu.com/", testid: "nav-forum", external: true },
