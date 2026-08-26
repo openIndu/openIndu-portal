@@ -53,8 +53,8 @@ const MARKDOWN_COMPONENTS: Partial<Components> = {
   p: ({ children }) => <p className="my-1.5 text-sm leading-relaxed first:mt-0 last:mb-0">{children}</p>,
   strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
   em: ({ children }) => <em className="italic">{children}</em>,
-  code: ({ className, children, ...props }) => {
-    const isBlock = (props as any).node?.tagName === "pre" || (className ?? "").startsWith("language-");
+  code: ({ className, children, ...props }: any) => {
+    const isBlock = props.node?.tagName === "pre" || (className ?? "").startsWith("language-");
     if (isBlock) return <code className={className}>{children}</code>;
     return <code className="rounded bg-gray-200 px-1 py-0.5 text-xs text-red-700">{children}</code>;
   },
