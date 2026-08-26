@@ -11,6 +11,7 @@ import { Login } from "./pages/Login";
 import { Resources } from "./pages/Resources";
 import { Workflow } from "./pages/Workflow";
 import { Station } from "./pages/Station";
+import { Forum } from "./pages/Forum";
 import ChatPage from "./pages/ChatPage";
 import { AccountSettings } from "./pages/AccountSettings";
 import { CookiesPolicy, LegalIndex, LegalNotice, PrivacyPolicy } from "./pages/LegalPages";
@@ -55,6 +56,8 @@ export const router = createBrowserRouter(
         // openindu-station: sub-page of AI+Vision, publicly visible
         { path: "vision/station", Component: Station },
         { path: "iiot-platform", Component: IIoTPlatform },
+        // Community forum — may redirect to external platform (Discourse/GitHub Discussions) in future
+        { path: "forum", Component: Forum },
         { path: "infrastructure", Component: TokenService },
         { path: "resources", Component: Resources },
         { path: "resources/documents", Component: Resources },

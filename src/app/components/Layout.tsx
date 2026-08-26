@@ -65,7 +65,7 @@ export function Layout() {
         ],
       },
       { name: t("nav.iiotPlatform"), href: "/iiot-platform", testid: "nav-iiot-platform" },
-      { name: t("nav.infrastructure"), href: "/infrastructure", testid: "nav-infrastructure" },
+      { name: t("nav.forum"), href: "/forum", testid: "nav-forum" },
     ];
     // Hide AI Assistant on EN — the RAG knowledge base is Chinese-only
     if (locale === "zh") {
@@ -340,7 +340,7 @@ export function Layout() {
                   <Link to="/vision" className="hover:text-white">{t("footer.vision")}</Link>
                 </li>
                 <li>
-                  <Link to="/infrastructure" className="hover:text-white">{t("footer.infrastructure")}</Link>
+                  <Link to="/forum" className="hover:text-white">{t("footer.forum")}</Link>
                 </li>
               </ul>
             </div>
