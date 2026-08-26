@@ -1,30 +1,28 @@
 import { useTranslation } from "react-i18next";
-import { ArrowRight, MessageCircle, Users, Lightbulb, Code } from "lucide-react";
+import { ArrowRight, MessageCircle, Code, Cpu, Lightbulb } from "lucide-react";
 import { SEO } from "../components/SEO";
 
 export function Forum() {
   const { t } = useTranslation("common");
 
-  const features = [
+  const categories = [
     {
-      icon: MessageCircle,
-      title: "技术讨论",
-      description: "分享工业自动化技术问题、经验和最佳实践"
+      icon: Code,
+      title: "工控",
+      description: "讨论 PLC 硬件、软件、通信总线（EtherCAT、CANopen 等）和工控系统架构。分享多品牌 PLC 的选型、集成和工业控制网络方案。",
+      topics: ["PLC 硬件/软件", "EtherCAT 总线", "通信协议", "系统架构"]
     },
     {
-      icon: Users,
-      title: "社区协作",
-      description: "与全球开发者协作，共同构建开源生态"
+      icon: Cpu,
+      title: "自动化",
+      description: "分享 PLC 编程、HMI 编程、工业视觉、运动控制等自动化应用。讨论各类自动化设备集成、工程规范和最佳实践。",
+      topics: ["PLC 编程", "HMI 编程", "工业视觉", "运动控制"]
     },
     {
       icon: Lightbulb,
-      title: "想法交流",
-      description: "提出新想法、功能建议和改进方案"
-    },
-    {
-      icon: Code,
-      title: "代码分享",
-      description: "分享代码片段、项目经验和技术方案"
+      title: "工艺",
+      description: "分享工业工艺流程优化、工艺参数设定、缺陷分析和良率提升经验。讨论工艺知识库建设和工程方法论。",
+      topics: ["工艺流程", "参数优化", "良率分析", "知识库"]
     }
   ];
 
@@ -75,33 +73,39 @@ export function Forum() {
         </div>
       </section>
 
-      {/* Features Section */}
+      {/* Categories Section */}
       <section className="py-16 sm:py-20 bg-gray-50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 sm:mb-16">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              论坛特色
+              论坛主要板块
             </h2>
             <p className="text-base sm:text-lg text-gray-600">
-              在论坛中交流、学习、协作
+              三大核心主题，汇聚全球工业自动化经验
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-            {features.map((feature) => (
-              <div key={feature.title} className="bg-white rounded-xl p-6 sm:p-8 shadow-sm border border-gray-100 hover:shadow-lg transition-shadow">
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0">
-                    <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-blue-100 text-blue-600">
-                      <feature.icon className="h-6 w-6" />
-                    </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+            {categories.map((category) => (
+              <div key={category.title} className="bg-white rounded-xl p-6 sm:p-8 shadow-sm border border-gray-100 hover:shadow-lg transition-shadow">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-blue-100 text-blue-600">
+                    <category.icon className="h-6 w-6" />
                   </div>
-                  <div>
-                    <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2">
-                      {feature.title}
-                    </h3>
-                    <p className="text-gray-600">
-                      {feature.description}
-                    </p>
+                  <h3 className="text-lg sm:text-xl font-semibold text-gray-900">
+                    {category.title}
+                  </h3>
+                </div>
+                <p className="text-gray-600 mb-4 leading-relaxed">
+                  {category.description}
+                </p>
+                <div className="border-t border-gray-100 pt-4">
+                  <p className="text-xs font-semibold text-gray-500 uppercase mb-3">热门话题</p>
+                  <div className="flex flex-wrap gap-2">
+                    {category.topics.map((topic) => (
+                      <span key={topic} className="inline-block px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm">
+                        {topic}
+                      </span>
+                    ))}
                   </div>
                 </div>
               </div>
