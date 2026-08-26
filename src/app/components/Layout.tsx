@@ -46,7 +46,9 @@ export function Layout() {
   const navigation: NavItem[] = useMemo(() => {
     const items: NavItem[] = [
       { name: t("nav.home"), href: "/", testid: "nav-home" },
-      { name: t("nav.downloads"), href: "/resources", testid: "nav-downloads" },
+      { name: t("nav.architecture"), href: "/architecture", testid: "nav-architecture" },
+      { name: t("nav.useCases"), href: "/use-cases", testid: "nav-use-cases" },
+      { name: t("nav.craftsmanship"), href: "/craftsmanship", testid: "nav-craftsmanship" },
       {
         name: t("nav.motionControl"),
         href: "/motion-control",
@@ -74,7 +76,7 @@ export function Layout() {
           { name: t("nav.edgeComputing"), href: "/edge-computing", testid: "nav-edge-computing" },
         ],
       },
-      { name: t("nav.forum"), href: "https://forum.openindu.com/", testid: "nav-forum", external: true },
+      { name: t("nav.downloads"), href: "/resources", testid: "nav-downloads" },
     ];
     // Hide AI Assistant on EN — the RAG knowledge base is Chinese-only
     if (locale === "zh") {

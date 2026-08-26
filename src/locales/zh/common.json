@@ -1,6 +1,9 @@
 {
   "nav": {
     "home": "首页",
+    "architecture": "全栈架构",
+    "useCases": "行业场景",
+    "craftsmanship": "工艺知识",
     "about": "关于",
     "developers": "开发者",
     "team": "团队",

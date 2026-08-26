@@ -8,6 +8,18 @@ interface BreadcrumbItem {
 }
 
 const routeBreadcrumbs: Record<string, BreadcrumbItem[]> = {
+  "/architecture": [
+    { label: "Home", href: "/" },
+    { label: "Architecture", current: true }
+  ],
+  "/craftsmanship": [
+    { label: "Home", href: "/" },
+    { label: "Craftsmanship", current: true }
+  ],
+  "/use-cases": [
+    { label: "Home", href: "/" },
+    { label: "Use Cases", current: true }
+  ],
   "/about": [
     { label: "Home", href: "/" },
     { label: "About openIndu", current: true }

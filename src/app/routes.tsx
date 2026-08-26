@@ -6,6 +6,9 @@ import { Home } from "./pages/Home";
 import { About } from "./pages/About";
 import { Developers } from "./pages/Developers";
 import { Team } from "./pages/Team";
+import { Architecture } from "./pages/Architecture";
+import { Craftsmanship } from "./pages/Craftsmanship";
+import { UseCases } from "./pages/UseCases";
 import { EdgeComputing } from "./pages/EdgeComputing";
 import { MotionControl } from "./pages/MotionControl";
 import { Vision } from "./pages/Vision";
@@ -44,6 +47,9 @@ export const router = createBrowserRouter(
       Component: Layout,
       children: [
         { index: true, Component: Home },
+        { path: "architecture", Component: Architecture },
+        { path: "craftsmanship", Component: Craftsmanship },
+        { path: "use-cases", Component: UseCases },
         { path: "about", Component: About },
         { path: "developers", Component: Developers },
         { path: "team", Component: Team },

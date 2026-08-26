@@ -1,6 +1,9 @@
 {
   "nav": {
     "home": "Home",
+    "architecture": "Architecture",
+    "useCases": "Use Cases",
+    "craftsmanship": "Craftsmanship",
     "about": "About",
     "developers": "Developers",
     "team": "Team",
