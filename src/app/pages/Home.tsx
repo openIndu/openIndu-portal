@@ -44,39 +44,124 @@ export function Home() {
         canonicalPath="/"
       />
 
-      {/* ── 1. Hero ── */}
-      <section className="relative bg-gradient-to-br from-blue-50 via-white to-cyan-50 py-14 sm:py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
-          <div className="text-center">
-            <span className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-blue-100 text-blue-700 rounded-full text-xs sm:text-sm font-semibold mb-5">
+      {/* ── 1. Hero: Full-Stack Architecture Visualization ── */}
+      <section className="relative bg-gradient-to-b from-slate-900 via-blue-900 to-slate-900 text-white py-16 sm:py-24 overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0 bg-grid-pattern"></div>
+        </div>
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 relative">
+          <div className="text-center mb-12">
+            <span className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-blue-500/30 text-blue-200 rounded-full text-xs sm:text-sm font-semibold mb-5">
               <Github className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               {t("hero.badge")}
             </span>
-            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight tracking-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 sm:mb-6 leading-tight">
               {t("hero.titleLine1")}
-              <span className="block text-blue-600 text-2xl sm:text-3xl md:text-5xl mt-4 sm:mt-6">
-                {t("hero.titleLine2")}
-              </span>
+              <span className="block text-blue-300 mt-2">从工控芯片 → 全链路开源</span>
             </h1>
-            <p className="text-lg sm:text-xl text-gray-600 mb-8 sm:mb-10 max-w-3xl mx-auto leading-relaxed">
-              {t("hero.subtitle")}
+            <p className="text-lg sm:text-xl text-blue-100 mb-12 max-w-3xl mx-auto leading-relaxed">
+              RK3588 + openEuler → openindu-studio → 工业视觉/边缘/IIoT → 工艺知识
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-              <Link
-                to="/motion-control/studio"
-                className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
-              >
-                {t("hero.ctaStudio")}
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-              <Link
-                to="/iiot-platform"
-                className="inline-flex items-center justify-center px-6 py-3 bg-white text-gray-900 border-2 border-gray-200 rounded-lg hover:border-blue-600 hover:text-blue-600 transition-colors font-medium"
-              >
-                {t("hero.ctaSolutions")}
-              </Link>
+          </div>
+
+          {/* 4-Layer Stack Visualization */}
+          <div className="space-y-3 mb-12 max-w-4xl mx-auto">
+            {/* Layer 4: Craftsmanship */}
+            <div className="bg-gradient-to-r from-amber-500/20 to-orange-500/20 border border-amber-400/40 rounded-lg p-4 sm:p-5 backdrop-blur-sm">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-amber-500/30 flex items-center justify-center flex-shrink-0">
+                  <span className="text-lg font-bold">④</span>
+                </div>
+                <div className="flex-grow">
+                  <h3 className="font-semibold text-amber-100">工艺知识库 (Craftsmanship)</h3>
+                  <p className="text-sm text-amber-100/70">论坛工艺专栏：电池、面板、芯片、汽车</p>
+                </div>
+                <Link to="/craftsmanship" className="text-blue-300 hover:text-blue-100 text-sm font-medium">
+                  查看 →
+                </Link>
+              </div>
             </div>
+
+            {/* Layer 3: Applications */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="bg-gradient-to-r from-green-500/20 to-emerald-500/20 border border-green-400/40 rounded-lg p-4 backdrop-blur-sm">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-lg font-bold">③</span>
+                  <h4 className="font-semibold text-green-100">工业视觉</h4>
+                </div>
+                <p className="text-xs text-green-100/70">OpenCV 检测/定位</p>
+              </div>
+              <div className="bg-gradient-to-r from-blue-500/20 to-cyan-500/20 border border-blue-400/40 rounded-lg p-4 backdrop-blur-sm">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-lg font-bold">③</span>
+                  <h4 className="font-semibold text-blue-100">编程组态</h4>
+                </div>
+                <p className="text-xs text-blue-100/70">openindu-studio</p>
+              </div>
+              <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-400/40 rounded-lg p-4 backdrop-blur-sm">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-lg font-bold">③</span>
+                  <h4 className="font-semibold text-purple-100">数据采集</h4>
+                </div>
+                <p className="text-xs text-purple-100/70">CIM + Platform</p>
+              </div>
+            </div>
+
+            {/* Layer 2: Programming */}
+            <div className="bg-gradient-to-r from-blue-500/20 to-cyan-500/20 border border-blue-400/40 rounded-lg p-4 sm:p-5 backdrop-blur-sm">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-blue-500/30 flex items-center justify-center flex-shrink-0">
+                  <span className="text-lg font-bold">②</span>
+                </div>
+                <div className="flex-grow">
+                  <h3 className="font-semibold text-blue-100">编程与组态层 (Programming)</h3>
+                  <p className="text-sm text-blue-100/70">PLC编程、HMI、选型、BOM、电路图、跨品牌代码生成</p>
+                </div>
+                <Link to="/architecture" className="text-blue-300 hover:text-blue-100 text-sm font-medium">
+                  了解 →
+                </Link>
+              </div>
+            </div>
+
+            {/* Layer 1: Hardware */}
+            <div className="bg-gradient-to-r from-purple-500/20 to-indigo-500/20 border border-purple-400/40 rounded-lg p-4 sm:p-5 backdrop-blur-sm">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-purple-500/30 flex items-center justify-center flex-shrink-0">
+                  <span className="text-lg font-bold">①</span>
+                </div>
+                <div className="flex-grow">
+                  <h3 className="font-semibold text-purple-100">硬件与OS层 (Foundation)</h3>
+                  <p className="text-sm text-purple-100/70">RK3588（国产工控芯片）+ openEuler（国产操作系统）</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* CTAs */}
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center flex-wrap">
+            <Link
+              to="/architecture"
+              className="inline-flex items-center justify-center px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+            >
+              理解全栈架构
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Link>
+            <Link
+              to="/use-cases"
+              className="inline-flex items-center justify-center px-8 py-3 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors font-medium"
+            >
+              查看行业场景
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Link>
+            <a
+              href="https://github.com/openIndu"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center px-8 py-3 border-2 border-white text-white rounded-lg hover:bg-white/10 transition-colors font-medium"
+            >
+              GitHub
+              <ExternalLink className="ml-2 h-5 w-5" />
+            </a>
           </div>
         </div>
       </section>
