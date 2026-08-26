@@ -7,6 +7,7 @@ import { visitsApi } from "@/api";
 import { getDisplayName, maskPhone } from "../utils/user";
 import { StructuredData } from "./StructuredData";
 import { LanguageSwitcher, LanguageSwitcherCompact, LanguageSwitcherMobile } from "./LanguageSwitcher";
+import { Breadcrumb } from "./Breadcrumb";
 import logo from "/assets/logo.png";
 
 export function Layout() {
@@ -98,6 +99,14 @@ export function Layout() {
   return (
     <div className="min-h-screen bg-white">
       <StructuredData pagePath={location.pathname === "/" ? "/" : location.pathname} />
+
+      {/* Skip to content link for accessibility */}
+      <a
+        href="#main-content"
+        className="absolute left-[-9999px] focus:left-0 focus:top-0 focus:z-50 focus:p-4 focus:bg-blue-600 focus:text-white focus:block"
+      >
+        Skip to main content
+      </a>
 
       {/* Header */}
       <header className="sticky top-0 z-50 border-b border-gray-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80">
@@ -332,7 +341,8 @@ export function Layout() {
       )}
 
       {/* Main Content */}
-      <main>
+      <main id="main-content">
+        <Breadcrumb />
         <Outlet />
       </main>
 

@@ -1,6 +1,9 @@
 {
   "nav": {
     "home": "首页",
+    "about": "关于",
+    "developers": "开发者",
+    "team": "团队",
     "downloads": "下载中心",
     "motionControl": "运动控制",
     "overview": "概览",

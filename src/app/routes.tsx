@@ -3,6 +3,9 @@ import { createBrowserRouter, Navigate } from "react-router";
 import { Layout } from "./components/Layout";
 import { NotFound } from "./components/NotFound";
 import { Home } from "./pages/Home";
+import { About } from "./pages/About";
+import { Developers } from "./pages/Developers";
+import { Team } from "./pages/Team";
 import { MotionControl } from "./pages/MotionControl";
 import { Vision } from "./pages/Vision";
 import { IIoTPlatform } from "./pages/IIoTPlatform";
@@ -40,6 +43,9 @@ export const router = createBrowserRouter(
       Component: Layout,
       children: [
         { index: true, Component: Home },
+        { path: "about", Component: About },
+        { path: "developers", Component: Developers },
+        { path: "team", Component: Team },
         { path: "login", Component: Login },
         { path: "register", element: <Navigate to="/login" replace /> },
         { path: "account", Component: AccountSettings },

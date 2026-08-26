@@ -1,6 +1,9 @@
 {
   "nav": {
     "home": "Home",
+    "about": "About",
+    "developers": "Developers",
+    "team": "Team",
     "downloads": "Downloads",
     "motionControl": "Motion Control",
     "overview": "Overview",
