@@ -96,7 +96,7 @@ export function Layout() {
 
       {/* Header */}
       <header className="sticky top-0 z-50 border-b border-gray-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80">
-        <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" aria-label="Main navigation">
           <div className="flex h-16 items-center justify-between gap-4">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2">
@@ -116,6 +116,7 @@ export function Layout() {
                     <Link
                       to={item.href}
                       data-testid={item.testid}
+                      aria-current={isActive(item.href) ? "page" : undefined}
                       className={`flex items-center gap-1 text-sm transition-colors whitespace-nowrap ${
                         isActive(item.href)
                           ? "text-blue-600 font-medium"
@@ -123,7 +124,7 @@ export function Layout() {
                       }`}
                     >
                       {item.name}
-                      <ChevronDown className="h-3.5 w-3.5 transition-transform group-hover:rotate-180" />
+                      <ChevronDown className="h-3.5 w-3.5 transition-transform group-hover:rotate-180" aria-hidden="true" />
                     </Link>
                     {/* pt-2 bridges the hover gap between parent item and dropdown */}
                     <div className="absolute left-0 top-full z-50 hidden min-w-[180px] pt-2 group-hover:block group-focus-within:block">
@@ -221,6 +222,8 @@ export function Layout() {
                 if (!mobileMenuOpen) window.scrollTo({ top: 0, behavior: "smooth" });
               }}
               aria-label={mobileMenuOpen ? t("a11y.mobileMenuClose") : t("a11y.mobileMenuOpen")}
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-menu"
             >
               {mobileMenuOpen ? (
                 <X className="h-6 w-6" />
@@ -234,7 +237,7 @@ export function Layout() {
 
       {/* Mobile Navigation */}
       {mobileMenuOpen && (
-        <div className="xl:hidden border-t border-gray-200 bg-white">
+        <div id="mobile-menu" className="xl:hidden border-t border-gray-200 bg-white" role="navigation" aria-label="Mobile navigation">
           <div className="space-y-1 px-4 pb-3 pt-2">
             {navigation.map((item) => (
               <div key={item.name}>
@@ -327,14 +330,14 @@ export function Layout() {
       )}
 
       {/* Main Content */}
-      <main id="main-content">
+      <main id="main-content" role="main">
         <Outlet />
       </main>
 
       {/* Footer */}
-      <footer className="bg-blue-900 text-white mt-20">
+      <footer className="bg-blue-900 text-white mt-20" role="contentinfo">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-6">
+          <nav aria-label="Footer navigation" className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-6">
             {/* Logo and Description */}
             <div className="flex flex-col items-start">
               <div className="flex items-center gap-2 mb-4">
@@ -473,7 +476,7 @@ export function Layout() {
               <LanguageSwitcher variant="dark" />
             </div>
 
-          </div>
+          </nav>
 
           {/* Copyright */}
           <div className="border-t border-blue-800 mt-8 pt-8">
