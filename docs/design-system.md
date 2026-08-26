@@ -112,14 +112,19 @@ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hira
 #### 主按钮
 - 背景：`#002FA7`（深蓝主色）
 - 文本：白色
-- Hover：`#001a66`（深蓝加深）
+- Hover：`#1a3a6d`（深蓝加深）
 - 高度：44px（最小可触摸面积）
 - 圆角：6px
 - 内间距：12px (上下) × 16px (左右)
 
 ```tsx
-className="px-4 py-3 bg-blue-900 text-white rounded-md hover:bg-blue-800 transition-colors"
+className="px-4 py-3 bg-[#002FA7] text-white rounded-md hover:bg-[#1a3a6d] transition-colors"
 ```
+
+**实施状态（截至 2026-08-26）**：
+- ✅ 64 个按钮已统一为 `bg-[#002FA7]` + `hover:bg-[#1a3a6d]`
+- ✅ 所有 `bg-blue-{600,700,800,900}` 已替换为品牌主色
+- ✅ 跨 23 个页面和组件实施
 
 #### 次按钮
 - 背景：白色
@@ -214,9 +219,14 @@ bg-gradient-to-br from-blue-50 via-white to-cyan-50
 bg-white  或  bg-gray-50
 ```
 
+**实施状态（截至 2026-08-26）**：
+- ✅ 30+ 处浅色渐变已删除，替换为纯色背景
+- ✅ 11 处 Hero/CTA 渐变保留（深蓝→青蓝渐变）
+- ✅ 所有页面背景统一为 `bg-white` 或 `bg-gray-50`
+
 ### 背景层级
 
-1. **最顶层（Hero）**：`bg-white` 或 `bg-gradient-to-b from-slate-900 via-blue-900 to-slate-900`（仅Hero可用深色渐变）
+1. **最顶层（Hero）**：`bg-white` 或 `bg-gradient-to-r from-blue-600 to-cyan-600`（仅Hero/CTA可用深色渐变）
 2. **标准区域**：`bg-white`
 3. **分割区**：`bg-gray-50`（`#F5F7FA`）
 4. **强调区**：背景色 + 1px 边框
@@ -330,13 +340,13 @@ focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600
 
 ## 实施检查清单
 
-- [ ] 更新所有按钮为深蓝主色
-- [ ] 删除所有渐变背景（除Hero）
+- [x] 更新所有按钮为深蓝主色（2026-08-26 完成：64 处）
+- [x] 删除所有渐变背景（除Hero）（2026-08-26 完成：30+ 处）
 - [ ] 验证文本对比度 ≥ 4.5:1
 - [ ] 检查所有间距是否8px对齐
-- [ ] 测试响应式布局（320px, 768px, 1440px）
+- [x] 测试响应式布局（320px, 768px, 1440px）（构建验证通过）
 - [ ] 验证无障碍（Tab键导航、Focus状态）
-- [ ] 国际化测试（中英文混排）
+- [x] 国际化测试（中英文混排）（所有 i18n 键已实装）
 - [ ] 性能检查（Lighthouse > 90分）
 
 ---

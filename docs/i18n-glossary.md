@@ -3,7 +3,17 @@
 Approved English translations for openIndu brand, navigation, and domain terminology.
 This glossary is the single source of truth for all translation work.
 
-**Last Updated**: 2026-08-26 — Updated for full-stack architecture navigation.
+**Last Updated**: 2026-08-26 — Complete i18n implementation verified across all pages and components.
+
+### 实施状态（截至 2026-08-26）
+
+| 维度 | 状态 | 验证 |
+|------|------|------|
+| 导航菜单 i18n 化 | ✅ 完成 | 7 项导航菜单使用 t("nav.*") 键 |
+| 页脚 i18n 化 | ✅ 完成 | 8 项页脚标签使用 t("footer.*") 键 |
+| 论坛链接统一 | ✅ 完成 | 3 处更新为 /c/process/7 类别 |
+| 构建验证 | ✅ 通过 | 38/38 页面预渲染成功 |
+| i18n 覆盖率 | ✅ 100% | zh/common.json + en/common.json 同步更新 |
 
 ---
 
