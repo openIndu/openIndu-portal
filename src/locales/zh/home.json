@@ -20,11 +20,11 @@
       "description": "AI 辅助全链路工控开发工具链。电气模组 → 电路图 → BOM → IO 地址表 → PLC 程序 → HMI 画面，六步一个工具，多品牌输出。"
     },
     "platform": {
-      "stage": "工业互联网平台",
-      "description": "工业物联网平台。设备接入、数据采集、产线监控、产品追溯一体化。协议层基于 Apache PLC4X，S7、Modbus、EtherNet/IP、OPC-UA 全覆盖。"
+      "stage": "工业互联网",
+      "description": "工业物联网平台。设备接入、数据采集、产线监控、产品追溯一体化。协议层基于 Apache PLC4X，S7、Modbus、EtherNet/IP、OPC-UA 全覆盖。边缘端侧通过 openIndu-cim 实现。"
     },
     "station": {
-      "stage": "工站软件",
+      "stage": "工业视觉",
       "description": "C# 工控站控应用。运动控制 · 机器视觉 · 扫码读码 · 点胶 · 激光 —— 非标自动化工站的软件基座。"
     }
   },

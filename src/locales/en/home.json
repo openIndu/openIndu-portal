@@ -20,11 +20,11 @@
       "description": "An AI-assisted, full-chain industrial control development toolchain. Electrical modules → circuit diagrams → BOM → I/O address tables → PLC programs → HMI screens — one tool per step, multi-brand output."
     },
     "platform": {
-      "stage": "Industrial IoT Platform",
-      "description": "An industrial IoT platform unifying device connectivity, data acquisition, line monitoring, and product traceability. Protocol layer built on Apache PLC4X, covering S7, Modbus, EtherNet/IP, and OPC-UA."
+      "stage": "Industrial IoT",
+      "description": "An industrial IoT platform unifying device connectivity, data acquisition, line monitoring, and product traceability. Protocol layer built on Apache PLC4X, covering S7, Modbus, EtherNet/IP, and OPC-UA. Edge computing enabled via openIndu-cim."
     },
     "station": {
-      "stage": "Station Software",
+      "stage": "Industrial Vision",
       "description": "A C# industrial station-control application. Motion control · machine vision · barcode scanning · dispensing · laser — the software foundation for custom automation stations."
     }
   },
