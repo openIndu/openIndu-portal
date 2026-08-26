@@ -51,7 +51,7 @@ export function Forum() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="https://forum.openindu.com/"
+                href="https://forum.openindu.com/c/process/7"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center px-8 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
@@ -124,7 +124,7 @@ export function Forum() {
             无论你是提问者、解答者还是贡献者，论坛都欢迎你的参与。一起打造开源工业自动化生态。
           </p>
           <a
-            href="https://forum.openindu.com/"
+            href="https://forum.openindu.com/c/process/7"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center px-8 py-4 bg-white text-blue-600 rounded-lg hover:bg-blue-50 transition-colors font-medium"

@@ -28,25 +28,6 @@
       "description": "A C# industrial station-control application. Motion control · machine vision · barcode scanning · dispensing · laser — the software foundation for custom automation stations."
     }
   },
-  "nodes": {
-    "heading": "The Five-Stage Closed Loop",
-    "subheading": "Process constraints → Generation → Execution → Data → Insight → back to process constraints",
-    "processKnowledge": { "title": "Process Knowledge", "duty": "Process window · Defect taxonomy · Takt-time model", "owner": "openIndu-studio" },
-    "engineering": { "title": "Engineering Generation", "duty": "Electrical → BOM → I/O → PLC/HMI", "owner": "openIndu-studio" },
-    "crossBrand": { "title": "Cross-Brand Execution", "duty": "Siemens / Mitsubishi / Omron / Keyence / Inovance", "owner": "Studio output" },
-    "dataAcquisition": { "title": "Acquisition & Data", "duty": "Apache PLC4X protocol layer · Time-series database", "owner": "openIndu-platform" },
-    "insight": { "title": "Analytics & Insight", "duty": "BI · OEE · Yield attribution", "owner": "openIndu-admin" }
-  },
-  "openSource": {
-    "heading": "Open Source, Open Standards, Open Collaboration",
-    "subheading": "The smallest valid contribution is a single data entry — not a PR full of code",
-    "openSourceEndToEnd": { "title": "Open Source End to End", "description": "Every step from electrical → BOM → I/O → PLC/HMI is visible and verifiable, under the Apache-2.0 license." },
-    "protocols": { "title": "Protocol Support, Out of the Box", "description": "Mainstream industrial protocols — S7, Modbus, EtherNet/IP, OPC-UA — connect and start collecting data." },
-    "contribute": { "title": "Contributing Doesn't Require Code", "description": "A brand mapping entry, an I/O table, a process window — each is a real contribution." },
-    "collaborate": { "title": "Open Collaboration", "description": "Issues and PRs welcome — let's build the industrial-automation open-source ecosystem together." },
-    "ctaHeading": "View the Code, Contribute",
-    "ctaSubheading": "All repositories public, Apache-2.0 licensed"
-  },
   "cta": {
     "heading": "Join the openIndu Community",
     "description": "From process parameters to line data — one stack, end to end. Build the open-source industrial-automation ecosystem together with developers worldwide.",

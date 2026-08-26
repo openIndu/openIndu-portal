@@ -7,7 +7,6 @@ import { visitsApi } from "@/api";
 import { getDisplayName, maskPhone } from "../utils/user";
 import { StructuredData } from "./StructuredData";
 import { LanguageSwitcher, LanguageSwitcherCompact, LanguageSwitcherMobile } from "./LanguageSwitcher";
-import { Breadcrumb } from "./Breadcrumb";
 import logo from "/assets/logo.png";
 
 export function Layout() {
@@ -50,32 +49,17 @@ export function Layout() {
       { name: t("nav.useCases"), href: "/use-cases", testid: "nav-use-cases" },
       { name: t("nav.craftsmanship"), href: "/craftsmanship", testid: "nav-craftsmanship" },
       {
-        name: t("nav.motionControl"),
+        name: t("nav.products"),
         href: "/motion-control",
-        testid: "nav-motion-control",
+        testid: "nav-products",
         children: [
-          { name: t("nav.overview"), href: "/motion-control", testid: "nav-motion-control-overview" },
-          { name: t("nav.studioPlatform"), href: "/motion-control/studio", testid: "nav-studio" },
+          { name: t("nav.studio"), href: "/motion-control/studio", testid: "nav-studio" },
+          { name: t("nav.vision"), href: "/vision/station", testid: "nav-station" },
+          { name: t("nav.cim"), href: "/edge-computing", testid: "nav-edge-computing" },
+          { name: t("nav.platform"), href: "/iiot-platform", testid: "nav-iiot-platform" },
         ],
       },
-      {
-        name: t("nav.vision"),
-        href: "/vision",
-        testid: "nav-vision",
-        children: [
-          { name: t("nav.overview"), href: "/vision", testid: "nav-vision-overview" },
-          { name: t("nav.station"), href: "/vision/station", testid: "nav-station" },
-        ],
-      },
-      {
-        name: t("nav.iiotPlatform"),
-        href: "/iiot-platform",
-        testid: "nav-iiot-platform",
-        children: [
-          { name: t("nav.overview"), href: "/iiot-platform", testid: "nav-iiot-overview" },
-          { name: t("nav.edgeComputing"), href: "/edge-computing", testid: "nav-edge-computing" },
-        ],
-      },
+      { name: t("nav.forum"), href: "/forum", testid: "nav-forum" },
       { name: t("nav.downloads"), href: "/resources", testid: "nav-downloads" },
     ];
     // Hide AI Assistant on EN — the RAG knowledge base is Chinese-only
@@ -344,12 +328,11 @@ export function Layout() {
 
       {/* Main Content */}
       <main id="main-content">
-        <Breadcrumb />
         <Outlet />
       </main>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white mt-20">
+      <footer className="bg-blue-900 text-white mt-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-6">
             {/* Logo and Description */}
@@ -362,7 +345,7 @@ export function Layout() {
                 />
                 <span className="text-xl font-semibold text-white">openIndu Community</span>
               </div>
-              <p className="text-gray-400 max-w-md">
+              <p className="text-blue-100 max-w-md">
                 {t("footer.description")}
               </p>
             </div>
@@ -370,7 +353,7 @@ export function Layout() {
             {/* Quick Links */}
             <div className="flex flex-col items-start">
               <h3 className="font-semibold text-white mb-4">{t("footer.quickLinks")}</h3>
-              <ul className="space-y-2 text-gray-400">
+              <ul className="space-y-2 text-blue-100">
                 <li>
                   <Link to="/" className="hover:text-white">{t("footer.home")}</Link>
                 </li>
@@ -384,7 +367,7 @@ export function Layout() {
                   <Link to="/vision" className="hover:text-white">{t("footer.vision")}</Link>
                 </li>
                 <li>
-                  <a href="https://forum.openindu.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white">{t("footer.forum")}</a>
+                  <a href="https://forum.openindu.com/c/process/7" target="_blank" rel="noopener noreferrer" className="hover:text-white">{t("footer.forum")}</a>
                 </li>
               </ul>
             </div>
@@ -392,7 +375,7 @@ export function Layout() {
             {/* Core Services */}
             <div className="flex flex-col items-start">
               <h3 className="font-semibold text-white mb-4">{t("footer.coreServices")}</h3>
-              <ul className="space-y-2 text-gray-400">
+              <ul className="space-y-2 text-blue-100">
                 <li>
                   <Link to="/iiot-platform" className="hover:text-white">{t("footer.iiotPlatform")}</Link>
                 </li>
@@ -414,10 +397,26 @@ export function Layout() {
               </ul>
             </div>
 
+            {/* Community & Developers */}
+            <div className="flex flex-col items-start">
+              <h3 className="font-semibold text-white mb-4">{t("footer.communityDevelopers")}</h3>
+              <ul className="space-y-2 text-blue-100">
+                <li>
+                  <Link to="/developers" className="hover:text-white">{t("footer.developers")}</Link>
+                </li>
+                <li>
+                  <a href="https://github.com/openIndu" target="_blank" rel="noopener noreferrer" className="hover:text-white">{t("footer.github")}</a>
+                </li>
+                <li>
+                  <a href="https://gitee.com/openIndu" target="_blank" rel="noopener noreferrer" className="hover:text-white">{t("footer.gitee")}</a>
+                </li>
+              </ul>
+            </div>
+
             {/* Related platforms */}
             <div className="flex flex-col items-start">
               <h3 className="font-semibold text-white mb-4">{t("footer.relatedPlatforms")}</h3>
-              <ul className="space-y-2 text-gray-400">
+              <ul className="space-y-2 text-blue-100">
                 <li>
                   <a href="https://monitor.openindu.com/status/service" target="_blank" rel="noopener noreferrer" className="hover:text-white">
                     {t("footer.serviceStatus")}
@@ -434,7 +433,7 @@ export function Layout() {
             {/* Legal */}
             <div className="flex flex-col items-start">
               <h3 className="font-semibold text-white mb-4">{t("footer.legalAndPrivacy")}</h3>
-              <ul className="space-y-2 text-gray-400">
+              <ul className="space-y-2 text-blue-100">
                 <li>
                   {locale === "en" ? (
                     <a href="/privacy" className="hover:text-white inline-flex items-center gap-2">
@@ -477,9 +476,9 @@ export function Layout() {
           </div>
 
           {/* Copyright */}
-          <div className="border-t border-gray-800 mt-8 pt-8">
-            <p className="text-center text-gray-400 text-sm">{t("footer.copyright")}</p>
-            <p className="text-center text-gray-400 text-sm mt-2">
+          <div className="border-t border-blue-800 mt-8 pt-8">
+            <p className="text-center text-blue-100 text-sm">{t("footer.copyright")}</p>
+            <p className="text-center text-blue-100 text-sm mt-2">
               {`${t("footer.icpFiling")}: `}
               <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">蜀ICP备2025160760号-1</a>
             </p>

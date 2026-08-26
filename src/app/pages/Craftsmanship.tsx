@@ -8,28 +8,28 @@ export function Craftsmanship() {
       name: "电池制造工艺",
       description: "锂电池卷绕、焊接、性能测试",
       topics: ["卷绕工艺", "焊接强度", "容量测试", "安全检测", "良率提升"],
-      href: "https://forum.openindu.com/c/craftsmanship/battery"
+      href: "https://forum.openindu.com/c/process/7/battery"
     },
     {
       icon: BookOpen,
       name: "电子面板工艺",
       description: "PCB贴片、回流焊接、功能测试",
       topics: ["贴片精度", "焊接温度", "缺陷检测", "功能测试", "可靠性"],
-      href: "https://forum.openindu.com/c/craftsmanship/pcb"
+      href: "https://forum.openindu.com/c/process/7/pcb"
     },
     {
       icon: Users,
       name: "芯片封装工艺",
       description: "晶圆键合、塑封、可靠性测试",
       topics: ["键合工艺", "塑封质量", "应力分析", "良率优化", "成本控制"],
-      href: "https://forum.openindu.com/c/craftsmanship/chip"
+      href: "https://forum.openindu.com/c/process/7/chip"
     },
     {
       icon: TrendingUp,
       name: "汽车部件工艺",
       description: "冲压、焊接、装配、质检",
       topics: ["冲压工艺", "焊接可靠性", "装配精度", "质量溯源", "成本优化"],
-      href: "https://forum.openindu.com/c/craftsmanship/automotive"
+      href: "https://forum.openindu.com/c/process/7/automotive"
     }
   ];
 
@@ -205,7 +205,7 @@ export function Craftsmanship() {
           </div>
           <div className="mt-8 text-center">
             <a
-              href="https://forum.openindu.com/c/craftsmanship"
+              href="https://forum.openindu.com/c/process/7"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-8 py-4 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors font-medium"
@@ -248,7 +248,7 @@ export function Craftsmanship() {
             分享你的工艺实践，学习行业最佳方案，与全球工程师一起推动工业进步
           </p>
           <a
-            href="https://forum.openindu.com/c/craftsmanship"
+            href="https://forum.openindu.com/c/process/7"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center px-8 py-4 bg-white text-orange-600 rounded-lg hover:bg-orange-50 transition-colors font-medium"

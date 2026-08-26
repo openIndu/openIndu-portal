@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { ArrowRight, CheckCircle, Zap } from "lucide-react";
+import { ArrowRight, CheckCircle } from "lucide-react";
 import { SEO } from "../components/SEO";
 
 export function UseCases() {
@@ -13,8 +13,8 @@ export function UseCases() {
         data: "openindu-cim + platform采集工艺参数、检测数据、良率指标",
         craftsmanship: "论坛电池工艺专栏分享最佳卷绕速度、焊接温度曲线、测试方案"
       },
-      benefits: ["良率提升15-20%", "焊接一致性>98%", "成本降低12%"],
-      roi: "投入10万，年收益50万"
+      metrics: ["良率提升15-20%", "焊接一致性>98%", "参数调试周期缩短70%"],
+      whyWorks: "一套程序跨品牌生成，无需重复开发；视觉+PLC一体化集成；参数改动实时生效"
     },
     {
       industry: "电子面板(PCB)",
@@ -25,8 +25,8 @@ export function UseCases() {
         data: "openindu-platform汇总不良品数据、追踪失败根因",
         craftsmanship: "论坛面板工艺专栏共享最优温度曲线、贴片参数、不良对策"
       },
-      benefits: ["贴片精度±0.1mm", "焊接合格率99.5%", "检测效率提升5倍"],
-      roi: "投入15万，年收益80万"
+      metrics: ["贴片精度±0.1mm", "焊接合格率99.5%", "检测效率提升5倍"],
+      whyWorks: "温度曲线参数化管理；缺陷数据自动追踪；参数库快速复用"
     },
     {
       industry: "芯片封装",
@@ -37,8 +37,8 @@ export function UseCases() {
         data: "openindu-cim边缘计算快速判决失败，platform汇总分析",
         craftsmanship: "论坛芯片工艺专栏分享键合最优参数、应力分析、可靠性指标"
       },
-      benefits: ["键合成功率99.8%", "塑封缺陷<0.5%", "良率提升8-12%"],
-      roi: "投入20万，年收益120万"
+      metrics: ["键合成功率99.8%", "塑封缺陷<0.5%", "设计验证周期快60%"],
+      whyWorks: "工艺参数标准化：复用行业最佳实践；边缘计算秒级决策；完整的参数库"
     },
     {
       industry: "汽车部件",
@@ -49,8 +49,35 @@ export function UseCases() {
         data: "openindu-platform全流程质量数据、缺陷溯源、客户可视化",
         craftsmanship: "论坛汽车工艺专栏分享冲压、焊接、装配的行业标准做法"
       },
-      benefits: ["冲压精度±0.2mm", "焊接强度一致性>95%", "质量溯源100%覆盖"],
-      roi: "投入25万，年收益150万"
+      metrics: ["冲压精度±0.2mm", "焊接强度一致性>95%", "质量溯源100%覆盖"],
+      whyWorks: "多品牌设备统一管理；完整的数据链路溯源；工艺知识共享加速标准化"
+    }
+  ];
+
+  const whyEffective = [
+    {
+      title: "一套代码，跨品牌生成",
+      description: "用openindu-studio设计一次，自动生成Siemens/三菱/汇川等多PLC厂商的代码。减少重复开发，降低维护成本。"
+    },
+    {
+      title: "视觉+控制原生一体化",
+      description: "openindu-vision直接集成在studio中，无需手工集成多个系统。检测结果实时反馈给PLC闭环控制。"
+    },
+    {
+      title: "参数改动实时生效",
+      description: "改变工艺参数无需重新编译、无需下载固件。通过platform直观修改，秒级生效到生产线。"
+    },
+    {
+      title: "全栈数据驱动优化",
+      description: "硬件→视觉→参数→工艺的完整数据链路。问题诊断从'现场调试'变为'远程数据分析'。"
+    },
+    {
+      title: "工艺参数众包库",
+      description: "论坛工艺库汇聚行业最佳实践。新项目可直接复用验证过的参数，而不是从零开始探索。"
+    },
+    {
+      title: "工程师友好的平台",
+      description: "没有商业SaaS的复杂定价。完全开源，企业可在本地部署、完全掌控、自由扩展。"
     }
   ];
 
@@ -63,15 +90,14 @@ export function UseCases() {
       />
 
       {/* Hero */}
-      <section className="relative bg-gradient-to-br from-blue-50 via-white to-cyan-50 py-16 sm:py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 relative">
+      <section className="bg-white py-16 sm:py-20">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-              行业应用案例
+            <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+              工业场景应用
             </h1>
             <p className="text-lg sm:text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-              openIndu全链路在不同行业的实际应用：从工艺问题到完整解决方案
+              电池、PCB、芯片、汽车等行业的完整解决方案：从工艺问题到工程实践
             </p>
           </div>
         </div>
@@ -84,63 +110,62 @@ export function UseCases() {
             {useCases.map((useCase, idx) => (
               <div
                 key={useCase.industry}
-                className="border-l-4 border-blue-600 p-6 sm:p-8 bg-gradient-to-br from-slate-50 to-blue-50 rounded-lg"
+                className="bg-white border-l-4 border-blue-600 rounded-lg p-6 sm:p-8 shadow-sm hover:shadow-md transition-shadow"
               >
-                <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
-                  {idx + 1}. {useCase.industry}
-                </h2>
+                <div className="mb-8">
+                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
+                    {idx + 1}. {useCase.industry}
+                  </h2>
+                  <p className="text-gray-600">场景化解决方案</p>
+                </div>
 
                 {/* Problem */}
                 <div className="mb-8">
-                  <h3 className="font-semibold text-lg text-gray-900 mb-3">❌ 核心问题</h3>
+                  <h3 className="font-semibold text-lg text-gray-900 mb-3">❌ 核心挑战</h3>
                   <p className="text-gray-700 leading-relaxed">{useCase.problem}</p>
                 </div>
 
                 {/* Solution */}
                 <div className="mb-8">
-                  <h3 className="font-semibold text-lg text-gray-900 mb-4">✅ openIndu全栈解决方案</h3>
+                  <h3 className="font-semibold text-lg text-gray-900 mb-4">✅ openIndu 全栈解决方案</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="bg-white p-4 rounded border-l-4 border-purple-500">
+                    <div className="bg-blue-50 border-l-4 border-blue-600 p-4 rounded">
                       <p className="font-medium text-gray-900 mb-2">🖥️ 硬件执行层</p>
                       <p className="text-gray-700 text-sm">{useCase.solution.hardware}</p>
                     </div>
-                    <div className="bg-white p-4 rounded border-l-4 border-green-500">
+                    <div className="bg-green-50 border-l-4 border-green-600 p-4 rounded">
                       <p className="font-medium text-gray-900 mb-2">👁️ 工业视觉检测</p>
                       <p className="text-gray-700 text-sm">{useCase.solution.vision}</p>
                     </div>
-                    <div className="bg-white p-4 rounded border-l-4 border-blue-500">
+                    <div className="bg-cyan-50 border-l-4 border-cyan-600 p-4 rounded">
                       <p className="font-medium text-gray-900 mb-2">📊 数据采集分析</p>
                       <p className="text-gray-700 text-sm">{useCase.solution.data}</p>
                     </div>
-                    <div className="bg-white p-4 rounded border-l-4 border-orange-500">
+                    <div className="bg-amber-50 border-l-4 border-amber-600 p-4 rounded">
                       <p className="font-medium text-gray-900 mb-2">📚 工艺知识库</p>
                       <p className="text-gray-700 text-sm">{useCase.solution.craftsmanship}</p>
                     </div>
                   </div>
                 </div>
 
-                {/* Benefits */}
+                {/* Metrics */}
                 <div className="mb-8">
-                  <h3 className="font-semibold text-lg text-gray-900 mb-3">📈 预期收益</h3>
+                  <h3 className="font-semibold text-lg text-gray-900 mb-3">📊 工程指标</h3>
                   <div className="flex flex-wrap gap-3">
-                    {useCase.benefits.map((benefit) => (
-                      <div key={benefit} className="inline-flex items-center gap-2 px-4 py-2 bg-green-100 text-green-800 rounded-full font-medium">
+                    {useCase.metrics.map((metric) => (
+                      <div key={metric} className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 text-blue-900 rounded-full text-sm font-medium">
                         <CheckCircle className="w-4 h-4" />
-                        {benefit}
+                        {metric}
                       </div>
                     ))}
                   </div>
                 </div>
 
-                {/* ROI */}
-                <div className="bg-white p-4 rounded border-2 border-blue-300">
-                  <div className="flex items-start gap-3">
-                    <Zap className="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" />
-                    <div>
-                      <p className="font-semibold text-gray-900">💰 ROI估算</p>
-                      <p className="text-blue-600 font-bold text-lg mt-1">{useCase.roi}</p>
-                    </div>
-                  </div>
+                {/* Why It Works */}
+                <div className="pt-4 border-t border-gray-200">
+                  <p className="text-sm text-gray-600">
+                    <strong>为什么有效：</strong> {useCase.whyWorks}
+                  </p>
                 </div>
               </div>
             ))}
@@ -148,50 +173,23 @@ export function UseCases() {
         </div>
       </section>
 
-      {/* Why This Works */}
+      {/* Why Effective */}
       <section className="py-16 sm:py-20 bg-gray-50">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">为什么openIndu全栈最有效</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-white p-6 rounded-lg border border-gray-200">
-              <h3 className="font-semibold text-lg text-gray-900 mb-3">🔗 端到端连接</h3>
-              <p className="text-gray-700">
-                传统方案：视觉系统单独、PLC单独、数据系统单独 → 信息孤岛
-              </p>
-              <p className="text-blue-600 font-medium mt-3">
-                openIndu：一个栈连接从硬件到工艺的所有环节 → 数据驱动优化
-              </p>
-            </div>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">为什么 openIndu 全栈最有效</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              传统方案的问题是碎片化：视觉系统独立、PLC独立、数据系统独立。openIndu 用四层一体化设计解决这个问题。
+            </p>
+          </div>
 
-            <div className="bg-white p-6 rounded-lg border border-gray-200">
-              <h3 className="font-semibold text-lg text-gray-900 mb-3">⚡ 工程效率</h3>
-              <p className="text-gray-700">
-                传统方案：每个PLC品牌一套代码 → 重复工作、风险高
-              </p>
-              <p className="text-blue-600 font-medium mt-3">
-                openIndu：设计一次、跨品牌生成 → 成本低50%、实施快3倍
-              </p>
-            </div>
-
-            <div className="bg-white p-6 rounded-lg border border-gray-200">
-              <h3 className="font-semibold text-lg text-gray-900 mb-3">🎓 工艺赋能</h3>
-              <p className="text-gray-700">
-                传统方案：工艺知识各企业各自积累 → 重复探索、低效
-              </p>
-              <p className="text-blue-600 font-medium mt-3">
-                openIndu：论坛工艺库众包共享 → 行业共同进步、加速创新
-              </p>
-            </div>
-
-            <div className="bg-white p-6 rounded-lg border border-gray-200">
-              <h3 className="font-semibold text-lg text-gray-900 mb-3">📊 数据驱动</h3>
-              <p className="text-gray-700">
-                传统方案：数据散落在各个系统 → 难以追踪、难以优化
-              </p>
-              <p className="text-blue-600 font-medium mt-3">
-                openIndu：全流程数据汇聚 → 快速发现问题、持续改进
-              </p>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {whyEffective.map((item) => (
+              <div key={item.title} className="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                <h3 className="font-semibold text-lg text-gray-900 mb-3">{item.title}</h3>
+                <p className="text-gray-700 text-sm leading-relaxed">{item.description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -200,45 +198,52 @@ export function UseCases() {
       <section className="py-16 sm:py-20 bg-white">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">下一步</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-blue-600 font-bold text-lg mb-4">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-900 text-white font-bold text-lg mb-4">
                 1
               </div>
               <h3 className="font-semibold text-gray-900 mb-2">了解你的行业</h3>
               <p className="text-gray-600 text-sm">从上面的案例找到最接近的行业场景</p>
             </div>
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-blue-600 font-bold text-lg mb-4">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-600 text-white font-bold text-lg mb-4">
                 2
               </div>
               <h3 className="font-semibold text-gray-900 mb-2">探索架构</h3>
-              <p className="text-gray-600 text-sm">深入了解openIndu四层全栈如何解决问题</p>
+              <p className="text-gray-600 text-sm">深入了解 openIndu 四层全栈如何解决问题</p>
             </div>
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-blue-600 font-bold text-lg mb-4">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-600 text-white font-bold text-lg mb-4">
                 3
               </div>
               <h3 className="font-semibold text-gray-900 mb-2">开始开发</h3>
-              <p className="text-gray-600 text-sm">下载Studio，设计你的第一个PLC程序</p>
+              <p className="text-gray-600 text-sm">下载 Studio，设计你的第一个 PLC 程序</p>
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center flex-wrap">
             <Link
               to="/architecture"
-              className="inline-flex items-center justify-center px-8 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+              className="inline-flex items-center justify-center px-8 py-4 bg-blue-900 text-white rounded-lg hover:bg-blue-800 transition-colors font-medium"
             >
               理解全栈架构
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Link>
+            <Link
+              to="/craftsmanship"
+              className="inline-flex items-center justify-center px-8 py-4 border-2 border-blue-900 text-blue-900 rounded-lg hover:bg-blue-50 transition-colors font-medium"
+            >
+              查看工艺知识库
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
             <a
               href="https://github.com/openIndu/openIndu-studio"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-8 py-4 border-2 border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors font-medium"
+              className="inline-flex items-center justify-center px-8 py-4 border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium"
             >
-              开始使用Studio
+              开始使用 Studio
               <ArrowRight className="ml-2 h-5 w-5" />
             </a>
           </div>

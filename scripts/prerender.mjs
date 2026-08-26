@@ -28,7 +28,7 @@ const DIST = resolve(ROOT, "dist");
 const PORT = 4173; // vite preview default
 
 /**
- * Routes to prerender — 34 total (see design/architecture/adr-i18n-en-routing.md D4).
+ * Routes to prerender — 35 total (pricing added).
  * This is a DIFFERENT list from sitemap.xml: the 4 legal pages are
  * ZH-only and their /en/* counterparts 302 to the ZH version instead of being
  * prerendered separately.
@@ -42,6 +42,7 @@ const SHARED = [
   "/architecture",
   "/craftsmanship",
   "/use-cases",
+  "/pricing",
   "/about",
   "/developers",
   "/team",

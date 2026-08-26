@@ -9,6 +9,7 @@ import { Team } from "./pages/Team";
 import { Architecture } from "./pages/Architecture";
 import { Craftsmanship } from "./pages/Craftsmanship";
 import { UseCases } from "./pages/UseCases";
+import { Pricing } from "./pages/Pricing";
 import { EdgeComputing } from "./pages/EdgeComputing";
 import { MotionControl } from "./pages/MotionControl";
 import { Vision } from "./pages/Vision";
@@ -50,6 +51,7 @@ export const router = createBrowserRouter(
         { path: "architecture", Component: Architecture },
         { path: "craftsmanship", Component: Craftsmanship },
         { path: "use-cases", Component: UseCases },
+        { path: "pricing", Component: Pricing },
         { path: "about", Component: About },
         { path: "developers", Component: Developers },
         { path: "team", Component: Team },
