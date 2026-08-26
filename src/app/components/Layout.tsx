@@ -41,7 +41,7 @@ export function Layout() {
     [t],
   );
 
-  type NavItem = { name: string; href: string; testid?: string; children?: NavItem[] };
+  type NavItem = { name: string; href: string; testid?: string; children?: NavItem[]; external?: boolean };
   const navigation: NavItem[] = useMemo(() => {
     const items: NavItem[] = [
       { name: t("nav.home"), href: "/", testid: "nav-home" },
@@ -64,8 +64,16 @@ export function Layout() {
           { name: t("nav.station"), href: "/vision/station", testid: "nav-station" },
         ],
       },
-      { name: t("nav.iiotPlatform"), href: "/iiot-platform", testid: "nav-iiot-platform" },
-      { name: t("nav.forum"), href: "/forum", testid: "nav-forum" },
+      {
+        name: t("nav.iiotPlatform"),
+        href: "/iiot-platform",
+        testid: "nav-iiot-platform",
+        children: [
+          { name: t("nav.overview"), href: "/iiot-platform", testid: "nav-iiot-overview" },
+          { name: t("nav.edgeComputing"), href: "https://github.com/openIndu/openIndu-cim", testid: "nav-edge-computing", external: true },
+        ],
+      },
+      { name: t("nav.forum"), href: "https://forum.openindu.com/", testid: "nav-forum", external: true },
     ];
     // Hide AI Assistant on EN — the RAG knowledge base is Chinese-only
     if (locale === "zh") {
@@ -125,23 +133,47 @@ export function Layout() {
                     {/* pt-2 bridges the hover gap between parent item and dropdown */}
                     <div className="absolute left-0 top-full z-50 hidden min-w-[180px] pt-2 group-hover:block group-focus-within:block">
                       <div className="rounded-lg border border-gray-100 bg-white py-1 shadow-lg">
-                        {item.children.map((child) => (
-                          <Link
-                            key={child.name}
-                            to={child.href}
-                            data-testid={child.testid}
-                            className={`block px-4 py-2 text-sm transition-colors ${
-                              location.pathname === child.href
-                                ? "bg-blue-50 font-medium text-blue-600"
-                                : "text-gray-700 hover:bg-gray-50 hover:text-blue-600"
-                            }`}
-                          >
-                            {child.name}
-                          </Link>
-                        ))}
+                        {item.children.map((child) =>
+                          child.external ? (
+                            <a
+                              key={child.name}
+                              href={child.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              data-testid={child.testid}
+                              className="block px-4 py-2 text-sm transition-colors text-gray-700 hover:bg-gray-50 hover:text-blue-600"
+                            >
+                              {child.name}
+                            </a>
+                          ) : (
+                            <Link
+                              key={child.name}
+                              to={child.href}
+                              data-testid={child.testid}
+                              className={`block px-4 py-2 text-sm transition-colors ${
+                                location.pathname === child.href
+                                  ? "bg-blue-50 font-medium text-blue-600"
+                                  : "text-gray-700 hover:bg-gray-50 hover:text-blue-600"
+                              }`}
+                            >
+                              {child.name}
+                            </Link>
+                          )
+                        )}
                       </div>
                     </div>
                   </div>
+                ) : item.external ? (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-testid={item.testid}
+                    className="text-sm transition-colors whitespace-nowrap text-gray-700 hover:text-blue-600"
+                  >
+                    {item.name}
+                  </a>
                 ) : (
                   <Link
                     key={item.name}
@@ -340,7 +372,7 @@ export function Layout() {
                   <Link to="/vision" className="hover:text-white">{t("footer.vision")}</Link>
                 </li>
                 <li>
-                  <Link to="/forum" className="hover:text-white">{t("footer.forum")}</Link>
+                  <a href="https://forum.openindu.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white">{t("footer.forum")}</a>
                 </li>
               </ul>
             </div>
@@ -357,6 +389,9 @@ export function Layout() {
                 </li>
                 <li>
                   <Link to="/vision/station" className="hover:text-white">{t("footer.station")}</Link>
+                </li>
+                <li>
+                  <a href="https://github.com/openIndu/openIndu-cim" target="_blank" rel="noopener noreferrer" className="hover:text-white">{t("footer.edgeComputing")}</a>
                 </li>
                 <li>
                   <Link to="/chat" className="hover:text-white">{t("footer.aiAssistantBot")}</Link>
