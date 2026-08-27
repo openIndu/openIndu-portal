@@ -8,7 +8,7 @@ export function Architecture() {
       icon: TrendingUp,
       title: "工艺知识层",
       titleEn: "Craftsmanship Layer",
-      description: "论坛工艺专栏：面板、电池、芯片、汽车等行业的工艺实践、良率优化、流程改进",
+      description: "论坛工艺专栏：面板、芯片、新能源等行业的工艺主链、现场做法与缺陷逆推",
       benefits: ["行业最佳实践", "众包知识库", "工艺参数共享"],
       color: "from-orange-50 to-amber-50",
       border: "border-orange-200"
@@ -146,7 +146,7 @@ export function Architecture() {
             <div className="bg-white p-6 sm:p-8 rounded-lg border border-gray-200">
               <h3 className="font-semibold text-lg text-gray-900 mb-4">👁️ 应用协同</h3>
               <div className="text-gray-700 space-y-2">
-                <p><strong>左翼 - openindu-vision</strong>（工业视觉）：基于OpenCV的检测定位，反馈给PLC</p>
+                <p><strong>左翼 - openIndu-vision</strong>（工业视觉）：基于OpenCV的检测定位，反馈给PLC</p>
                 <p><strong>核心 - openindu-studio</strong>（编程控制）：PLC逻辑执行，接收视觉信息，驱动执行机构</p>
                 <p><strong>右翼 - openindu-cim + platform</strong>（数据采集）：采集所有数据上报到IIoT平台进行分析</p>
               </div>

@@ -1,35 +1,32 @@
-import { ArrowRight, BookOpen, Users, Lightbulb, TrendingUp } from "lucide-react";
+import { ArrowRight, BookOpen, Users, Lightbulb } from "lucide-react";
 import { SEO } from "../components/SEO";
 
 export function Craftsmanship() {
+  // Industries and process-chain wording follow the community research
+  // baseline (panel / semiconductor / new energy). Stage names below are
+  // public industry vocabulary; the detailed internal guides are not linked
+  // because docs/ in the community repo is marked "内部资产，不对外发布".
   const industries = [
     {
-      icon: Lightbulb,
-      name: "电池制造工艺",
-      description: "锂电池卷绕、焊接、性能测试",
-      topics: ["卷绕工艺", "焊接强度", "容量测试", "安全检测", "良率提升"],
-      href: "https://forum.openindu.com/c/process/7/battery"
-    },
-    {
       icon: BookOpen,
-      name: "电子面板工艺",
-      description: "PCB贴片、回流焊接、功能测试",
-      topics: ["贴片精度", "焊接温度", "缺陷检测", "功能测试", "可靠性"],
-      href: "https://forum.openindu.com/c/process/7/pcb"
+      name: "面板显示工艺",
+      description: "TFT-LCD 与 OLED：基板 → Array → CF → Cell → Module",
+      topics: ["基板清洗", "对位曝光", "彩膜 BM/RGB", "Cell 贴合", "点灯与外观检测"],
+      href: "https://forum.openindu.com/t/topic/53"
     },
     {
       icon: Users,
-      name: "芯片封装工艺",
-      description: "晶圆键合、塑封、可靠性测试",
-      topics: ["键合工艺", "塑封质量", "应力分析", "良率优化", "成本控制"],
-      href: "https://forum.openindu.com/c/process/7/chip"
+      name: "半导体工艺",
+      description: "晶圆制造 → 晶圆测试 → 封装组装 → 成品测试与追溯",
+      topics: ["薄膜与图形化", "量测与 SPC", "缺陷地图", "键合与塑封", "可靠性与出货"],
+      href: "https://forum.openindu.com/t/topic/56"
     },
     {
-      icon: TrendingUp,
-      name: "汽车部件工艺",
-      description: "冲压、焊接、装配、质检",
-      topics: ["冲压工艺", "焊接可靠性", "装配精度", "质量溯源", "成本优化"],
-      href: "https://forum.openindu.com/c/process/7/automotive"
+      icon: Lightbulb,
+      name: "新能源工艺",
+      description: "锂电极片 → 电芯装配 → 化成分容 → 模组/PACK；光伏电池片 → 组件",
+      topics: ["制浆与涂布", "电芯装配", "化成老化分容", "模组 PACK", "EL/IV 检测"],
+      href: "https://forum.openindu.com/t/topic/57"
     }
   ];
 
@@ -68,32 +65,24 @@ export function Craftsmanship() {
 
   const discussions = [
     {
-      title: "电池卷绕速度vs品质的平衡",
-      author: "张工程师",
-      industry: "锂电池",
-      views: "1.2k",
-      replies: "48"
+      title: "面板工艺流程｜TFT-LCD：从玻璃基板到显示模组",
+      industry: "面板显示",
+      href: "https://forum.openindu.com/t/topic/53"
     },
     {
-      title: "PCB回流焊接温度曲线最优方案",
-      author: "李技术员",
-      industry: "电子面板",
-      views: "856",
-      replies: "32"
+      title: "面板工艺流程｜OLED：从背板到封装、切割与显示模组",
+      industry: "面板显示",
+      href: "https://forum.openindu.com/t/topic/55"
     },
     {
-      title: "芯片键合不良的根本原因分析",
-      author: "王工艺师",
-      industry: "芯片封装",
-      views: "2.1k",
-      replies: "67"
+      title: "半导体工艺流程｜从硅晶圆到封装测试成品",
+      industry: "半导体",
+      href: "https://forum.openindu.com/t/topic/56"
     },
     {
-      title: "汽车焊接缺陷检测的开源方案",
-      author: "陈视觉工程师",
-      industry: "汽车部件",
-      views: "945",
-      replies: "41"
+      title: "电池工艺流程｜锂离子电芯到模组与 PACK",
+      industry: "新能源",
+      href: "https://forum.openindu.com/t/topic/57"
     }
   ];
 
@@ -101,7 +90,7 @@ export function Craftsmanship() {
     <div>
       <SEO
         title="Craftsmanship Knowledge | openIndu Community Forum"
-        description="Industrial craftsmanship knowledge base: battery, PCB, chip packaging, and automotive manufacturing best practices. Share and learn from industry experts."
+        description="Industrial craftsmanship knowledge base covering display panels, semiconductors and new energy: end-to-end process chains, shop-floor practice and defect reasoning, shared on the openIndu forum."
         canonicalPath="/craftsmanship"
       />
 
@@ -114,7 +103,7 @@ export function Craftsmanship() {
               工艺知识库
             </h1>
             <p className="text-lg sm:text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-              众包工业工艺：面板、电池、芯片、汽车等行业的工艺实践、最佳方案、参数共享
+              众包工业工艺：面板、芯片、新能源等行业的工艺主链、现场做法与参数共享
             </p>
             <p className="text-gray-500 mb-8">
               一线工程师分享真实经验 → 行业共同进步 → 良率提升、成本优化
@@ -186,21 +175,20 @@ export function Craftsmanship() {
           <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">热议话题</h2>
           <div className="space-y-4">
             {discussions.map((discussion) => (
-              <div key={discussion.title} className="p-6 border border-gray-200 rounded-lg hover:border-orange-300 transition-colors">
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                  <div className="flex-grow">
-                    <h3 className="font-semibold text-gray-900 mb-2">{discussion.title}</h3>
-                    <div className="flex gap-4 text-sm text-gray-600">
-                      <span>👤 {discussion.author}</span>
-                      <span>🏭 {discussion.industry}</span>
-                    </div>
-                  </div>
-                  <div className="flex gap-6 text-sm text-gray-600">
-                    <span>👁️ {discussion.views} 浏览</span>
-                    <span>💬 {discussion.replies} 回复</span>
-                  </div>
+              <a
+                key={discussion.title}
+                href={discussion.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block p-6 border border-gray-200 rounded-lg hover:border-orange-300 transition-colors"
+              >
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                  <h3 className="font-semibold text-gray-900">{discussion.title}</h3>
+                  <span className="shrink-0 inline-flex items-center rounded-full bg-orange-50 px-3 py-1 text-sm text-orange-700">
+                    {discussion.industry}
+                  </span>
                 </div>
-              </div>
+              </a>
             ))}
           </div>
           <div className="mt-8 text-center">

@@ -174,7 +174,7 @@ export function Home() {
                 </div>
                 <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3">选择行业场景</h3>
                 <p className="text-sm text-gray-600 leading-relaxed mb-4">
-                  电池、PCB、芯片、汽车等行业的完整解决方案和工程实践
+                  面板、芯片、新能源三条工艺主链的完整解决方案与工程实践
                 </p>
                 <div className="inline-flex items-center gap-2 text-[#0B72B5] font-medium group-hover:gap-3 transition-all">
                   查看场景

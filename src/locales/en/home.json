@@ -11,7 +11,7 @@
     "subtitle": "Domestic industrial SoCs + the openEuler operating system + a fully open-source toolchain. Four layers, silicon to craftsmanship knowledge, without a single closed-source link.",
     "ctaStudio": "Learn about openIndu-studio",
     "ctaSolutions": "View Solutions",
-    "accent": "From domestic silicon → a fully open chain",
+    "accent": "Domestic silicon → a fully open chain",
     "chain": "Domestic industrial SoC + openEuler → openindu-studio → Industrial Vision/Edge/IIoT → Craftsmanship Knowledge"
   },
   "products": {
@@ -42,7 +42,7 @@
     "view": "View →",
     "learn": "Learn →",
     "l4Title": "Craftsmanship Knowledge Base",
-    "l4Desc": "Forum process columns: batteries, panels, chips, automotive",
+    "l4Desc": "Forum process columns: display panels, semiconductors, new energy",
     "l3Vision": "Industrial Vision",
     "l3VisionDesc": "OpenCV inspection / positioning",
     "l3Studio": "Programming & Configuration",

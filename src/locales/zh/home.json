@@ -11,7 +11,7 @@
     "subtitle": "国产工控芯片 + openEuler 国产操作系统 + 全栈开源工具链。从硅到工艺知识，四层一贯到底，没有一个闭源环节。",
     "ctaStudio": "了解 openIndu-studio",
     "ctaSolutions": "查看解决方案",
-    "accent": "从国产工控芯片 → 全链路开源",
+    "accent": "国产工控芯片 → 全链路开源",
     "chain": "国产工控芯片 + openEuler → openindu-studio → 工业视觉/边缘/IIoT → 工艺知识"
   },
   "products": {
@@ -42,7 +42,7 @@
     "view": "查看 →",
     "learn": "了解 →",
     "l4Title": "工艺知识库 (Craftsmanship)",
-    "l4Desc": "论坛工艺专栏：电池、面板、芯片、汽车",
+    "l4Desc": "论坛工艺专栏：面板、芯片、新能源",
     "l3Vision": "工业视觉",
     "l3VisionDesc": "OpenCV 检测/定位",
     "l3Studio": "编程组态",

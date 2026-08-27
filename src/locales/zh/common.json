@@ -4,7 +4,7 @@
     "architecture": "全栈架构",
     "useCases": "行业场景",
     "craftsmanship": "工艺知识",
-    "products": "产品",
+    "products": "项目",
     "about": "关于",
     "developers": "开发者",
     "team": "团队",
@@ -13,7 +13,7 @@
     "overview": "概览",
     "studio": "openindu-studio",
     "studioPlatform": "openIndu-studio",
-    "vision": "openindu-vision",
+    "vision": "openIndu-vision",
     "cim": "openindu-cim",
     "platform": "openindu-platform",
     "station": "openindu-station",
@@ -58,7 +58,7 @@
     "privacyStatement": "隐私声明",
     "legalNotice": "法律声明",
     "aboutCookies": "关于 Cookies",
-    "copyright": "© 2026 openIndu Community. 最后更新: 2026-07-04",
+    "copyright": "© 2026 openIndu Community. 最后更新: {{date}}",
     "icpFiling": "备案号"
   },
   "language": {

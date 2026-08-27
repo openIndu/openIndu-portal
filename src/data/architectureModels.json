@@ -21,7 +21,7 @@
           "number": 3,
           "name": "Application Layer",
           "chinese": "应用层",
-          "components": ["openindu-vision (工业视觉)", "openindu-cim (边缘计算)", "openIndu-platform (IIoT平台)"],
+          "components": ["openIndu-vision (工业视觉)", "openIndu-cim (边缘计算)", "openIndu-platform (IIoT平台)"],
           "value": "工业视觉定位检测、边缘实时决策、数据驱动洞察"
         },
         {

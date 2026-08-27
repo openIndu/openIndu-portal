@@ -337,7 +337,7 @@ export function Layout() {
       {/* Footer */}
       <footer className="bg-sky-900 text-white mt-20" role="contentinfo">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-          <nav aria-label="Footer navigation" className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-7">
+          <nav aria-label="Footer navigation" className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-6">
             {/* Logo and Description */}
             <div className="flex flex-col items-start md:col-span-2 lg:col-span-2">
               <div className="flex items-center gap-2 mb-4">
@@ -398,7 +398,7 @@ export function Layout() {
                   <Link to="/chat" className="hover:text-white inline-flex flex-wrap items-center gap-x-2 gap-y-1 py-1.5 pr-3 min-h-[44px]">
                     <span>{t("footer.aiAssistantBot")}</span>
                     {locale === "en" && (
-                      <span className="shrink-0 rounded bg-sky-700 px-2 py-0.5 text-xs leading-normal">ZH</span>
+                      <sup className="shrink-0 text-[10px] font-semibold tracking-wide text-sky-300" aria-label="Chinese only">ZH</sup>
                     )}
                   </Link>
                 </li>
@@ -438,7 +438,7 @@ export function Layout() {
                   {locale === "en" ? (
                     <a href="/privacy" className="hover:text-white inline-flex flex-wrap items-center gap-x-2 gap-y-1 py-1.5 pr-3 min-h-[44px]">
                       {t("footer.privacyStatement")}
-                      <span className="shrink-0 rounded bg-sky-700 px-2 py-0.5 text-xs leading-normal">ZH</span>
+                      <sup className="shrink-0 text-[10px] font-semibold tracking-wide text-sky-300" aria-label="Chinese only">ZH</sup>
                     </a>
                   ) : (
                     <Link to="/privacy" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">{t("footer.privacyStatement")}</Link>
@@ -448,7 +448,7 @@ export function Layout() {
                   {locale === "en" ? (
                     <a href="/legal" className="hover:text-white inline-flex flex-wrap items-center gap-x-2 gap-y-1 py-1.5 pr-3 min-h-[44px]">
                       {t("footer.legalNotice")}
-                      <span className="shrink-0 rounded bg-sky-700 px-2 py-0.5 text-xs leading-normal">ZH</span>
+                      <sup className="shrink-0 text-[10px] font-semibold tracking-wide text-sky-300" aria-label="Chinese only">ZH</sup>
                     </a>
                   ) : (
                     <Link to="/legal" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">{t("footer.legalNotice")}</Link>
@@ -458,7 +458,7 @@ export function Layout() {
                   {locale === "en" ? (
                     <a href="/cookies" className="hover:text-white inline-flex flex-wrap items-center gap-x-2 gap-y-1 py-1.5 pr-3 min-h-[44px]">
                       {t("footer.aboutCookies")}
-                      <span className="shrink-0 rounded bg-sky-700 px-2 py-0.5 text-xs leading-normal">ZH</span>
+                      <sup className="shrink-0 text-[10px] font-semibold tracking-wide text-sky-300" aria-label="Chinese only">ZH</sup>
                     </a>
                   ) : (
                     <Link to="/cookies" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">{t("footer.aboutCookies")}</Link>
@@ -467,21 +467,26 @@ export function Layout() {
               </ul>
             </div>
 
-            {/* Language (footer column) */}
-            <div className="flex flex-col items-start">
-              <h3 className="font-semibold text-white mb-4">{t("language.label")}</h3>
-              <LanguageSwitcher variant="dark" />
-            </div>
-
           </nav>
 
-          {/* Copyright */}
+          {/* Copyright + language.
+              The switcher used to be a seventh grid column, which squeezed every
+              link column to 146px — narrow enough that "Privacy Statement" and
+              its ZH marker wrapped, and "Community Admin" cleared it by 1px.
+              Moving it here leaves six tracks and 176px per column. */}
           <div className="border-t border-sky-800 mt-8 pt-8">
-            <p className="text-center text-sky-100 text-sm">{t("footer.copyright")}</p>
-            <p className="text-center text-sky-100 text-sm mt-2">
-              {`${t("footer.icpFiling")}: `}
-              <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors inline-flex items-center py-1.5 px-2 min-h-[44px]">蜀ICP备2025160760号-1</a>
-            </p>
+            <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
+              <div className="order-2 text-center sm:order-1 sm:text-left">
+                <p className="text-sky-100 text-sm">{t("footer.copyright", { date: __BUILD_DATE__ })}</p>
+                <p className="text-sky-100 text-sm mt-1">
+                  {`${t("footer.icpFiling")}: `}
+                  <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors inline-flex items-center py-1.5 pr-2 min-h-[44px]">蜀ICP备2025160760号-1</a>
+                </p>
+              </div>
+              <div className="order-1 sm:order-2">
+                <LanguageSwitcher variant="dark" />
+              </div>
+            </div>
           </div>
         </div>
       </footer>

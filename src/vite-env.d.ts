@@ -34,3 +34,6 @@ declare module '*.webp' {
   const content: string
   export default content
 }
+
+/** ISO date (YYYY-MM-DD) stamped at build time; see vite.config.ts. */
+declare const __BUILD_DATE__: string;

@@ -3,65 +3,59 @@ import { ArrowRight, CheckCircle } from "lucide-react";
 import { SEO } from "../components/SEO";
 
 export function UseCases() {
+  // Industries and stage names follow the community research baseline
+  // (panel / semiconductor / new energy). The former "工程指标" figures
+  // ("良率提升 15-20%", "键合成功率 99.8%" …) were not sourced from anything
+  // and the research material is explicitly marked "公开资料整理；非量产配方",
+  // so each case now states which stage of the chain openIndu touches
+  // instead of quoting invented numbers.
   const useCases = [
     {
-      industry: "电池制造",
-      problem: "卷绕精度不稳定、焊接强度波动大、良率目标难达成",
+      industry: "面板显示",
+      problem: "基板身份与载具绑定易断链、对位曝光与彩膜图形缺陷靠人工复判、Cell/Module 段异常难以逆推到具体工序",
       solution: {
-        hardware: "国产芯片软PLC控制卷绕马达和焊接参数",
-        vision: "openindu-vision基于OpenCV检测极片对齐度、焊接焊点",
-        data: "openindu-cim + platform采集工艺参数、检测数据、良率指标",
-        craftsmanship: "论坛电池工艺专栏分享最佳卷绕速度、焊接温度曲线、测试方案"
+        hardware: "国产工控芯片软 PLC 驱动上片搬送、清洗与贴合节拍，机械手防碰撞互锁",
+        vision: "openIndu-vision 基于 OpenCV 做表面颗粒/划伤、图形断裂与针孔、点灯外观判定",
+        data: "openIndu-cim + platform 绑定 Glass ID、载具 ID 与工艺路线，留存清洗与曝光程序版本",
+        craftsmanship: "论坛面板专栏沉淀 TFT-LCD / OLED 主链的现场做法与缺陷逆推经验"
       },
-      metrics: ["良率提升15-20%", "焊接一致性>98%", "参数调试周期缩短70%"],
-      whyWorks: "一套程序跨品牌生成，无需重复开发；视觉+PLC一体化集成；参数改动实时生效"
+      stages: ["基板来料与清洗", "Array TFT 阵列", "CF 彩膜", "Cell 贴合", "Module 与检测"],
+      whyWorks: "一次设计跨品牌生成 PLC 程序；视觉判定直接回灌 PLC 闭环；工序身份贯穿全链路可追溯"
     },
     {
-      industry: "电子面板(PCB)",
-      problem: "贴片精度不够、回流焊接温度控制困难、缺陷检测低效",
+      industry: "半导体",
+      problem: "wafer 身份与 route 准入判定分散在各设备、recipe 版本与 SPC 规则难统一、缺陷地图无法有效驱动后段分选",
       solution: {
-        hardware: "国产工控芯片控制贴片机、回流炉温度曲线",
-        vision: "openindu-vision实时检测贴片位置偏差、焊接缺陷(冷焊/过焊/无焊)",
-        data: "openindu-platform汇总不良品数据、追踪失败根因",
-        craftsmanship: "论坛面板工艺专栏共享最优温度曲线、贴片参数、不良对策"
+        hardware: "国产工控芯片承担搬送与设备联动，按前置条件与 SPC 规则做准入互锁",
+        vision: "openIndu-vision 参与外观与缺陷复判，输出坐标与层次信息",
+        data: "openIndu-cim 在边缘完成快速判定，platform 汇总 wafer ID / FOUP / recipe 版本与量测值",
+        craftsmanship: "论坛半导体专栏沉淀晶圆到封装主链的接口口径与追溯字段"
       },
-      metrics: ["贴片精度±0.1mm", "焊接合格率99.5%", "检测效率提升5倍"],
-      whyWorks: "温度曲线参数化管理；缺陷数据自动追踪；参数库快速复用"
+      stages: ["晶圆与材料来料", "Fab 薄膜与图形化", "晶圆测试 CP", "后道封装组装", "成品测试与出货"],
+      whyWorks: "放行/返工/报废处置有统一数据依据；边缘侧判定不依赖云端往返；量测与缺陷可回溯到具体腔体与批次"
     },
     {
-      industry: "芯片封装",
-      problem: "键合工艺参数复杂、塑封质量难控、可靠性测试耗时",
+      industry: "新能源",
+      problem: "材料批次身份先于混合难保证、电芯身份与化成分容曲线容易脱钩、模组 PACK 段的 EOL 数据不完整",
       solution: {
-        hardware: "国产工控芯片实时控制键合机、塑封炉温度和压力",
-        vision: "openindu-vision检测键合线、塑封外观、裂纹缺陷",
-        data: "openindu-cim边缘计算快速判决失败，platform汇总分析",
-        craftsmanship: "论坛芯片工艺专栏分享键合最优参数、应力分析、可靠性指标"
+        hardware: "国产工控芯片控制涂布、装配与化成柜节拍，多品牌设备协同",
+        vision: "openIndu-vision 检测极片对齐、焊点与组件外观（含光伏 EL 图像）",
+        data: "openIndu-cim + platform 绑定材料批次—电芯身份—测试曲线，贯通到 PACK 与 EOL",
+        craftsmanship: "论坛新能源专栏沉淀锂电与光伏组件主链的工艺参数与异常处置"
       },
-      metrics: ["键合成功率99.8%", "塑封缺陷<0.5%", "设计验证周期快60%"],
-      whyWorks: "工艺参数标准化：复用行业最佳实践；边缘计算秒级决策；完整的参数库"
-    },
-    {
-      industry: "汽车部件",
-      problem: "冲压精度变异、焊接强度不稳定、质量溯源困难",
-      solution: {
-        hardware: "国产工控芯片控制冲床、焊接机参数，支持多品牌设备协同",
-        vision: "openindu-vision检测冲件尺寸、焊缝质量、装配对位",
-        data: "openindu-platform全流程质量数据、缺陷溯源、客户可视化",
-        craftsmanship: "论坛汽车工艺专栏分享冲压、焊接、装配的行业标准做法"
-      },
-      metrics: ["冲压精度±0.2mm", "焊接强度一致性>95%", "质量溯源100%覆盖"],
-      whyWorks: "多品牌设备统一管理；完整的数据链路溯源；工艺知识共享加速标准化"
+      stages: ["来料与制浆", "极片制造", "电芯装配", "化成老化分容", "模组 PACK / 组件封装"],
+      whyWorks: "材料到成品的身份链不断裂；曲线数据与电芯一一对应；同一套栈覆盖锂电与光伏两条链路"
     }
   ];
 
   const whyEffective = [
     {
       title: "一套代码，跨品牌生成",
-      description: "用openindu-studio设计一次，自动生成Siemens/三菱/汇川等多PLC厂商的代码。减少重复开发，降低维护成本。"
+      description: "用openIndu-studio设计一次，自动生成Siemens/三菱/汇川等多PLC厂商的代码。减少重复开发，降低维护成本。"
     },
     {
       title: "视觉+控制原生一体化",
-      description: "openindu-vision直接集成在studio中，无需手工集成多个系统。检测结果实时反馈给PLC闭环控制。"
+      description: "openIndu-vision直接集成在studio中，无需手工集成多个系统。检测结果实时反馈给PLC闭环控制。"
     },
     {
       title: "参数改动实时生效",
@@ -85,7 +79,7 @@ export function UseCases() {
     <div>
       <SEO
         title="Industry Solutions | openIndu Full-Stack Platform"
-        description="Battery, PCB, chip packaging, automotive: how openIndu's full stack solves manufacturing challenges with PLC, vision, edge computing, and craftsmanship knowledge."
+        description="Display panels, semiconductors and new energy: where openIndu's full stack plugs into each end-to-end process chain — PLC control, machine vision, edge computing and craftsmanship knowledge."
         canonicalPath="/use-cases"
       />
 
@@ -97,7 +91,7 @@ export function UseCases() {
               工业场景应用
             </h1>
             <p className="text-lg sm:text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-              电池、PCB、芯片、汽车等行业的完整解决方案：从工艺问题到工程实践
+              面板、芯片、新能源三条工艺主链：openIndu 全栈在每个环节接入哪里
             </p>
           </div>
         </div>
@@ -150,9 +144,9 @@ export function UseCases() {
 
                 {/* Metrics */}
                 <div className="mb-8">
-                  <h3 className="font-semibold text-lg text-gray-900 mb-3">📊 工程指标</h3>
+                  <h3 className="font-semibold text-lg text-gray-900 mb-3">🔗 端到端主链</h3>
                   <div className="flex flex-wrap gap-3">
-                    {useCase.metrics.map((metric) => (
+                    {useCase.stages.map((metric) => (
                       <div key={metric} className="inline-flex items-center gap-2 px-4 py-2 bg-sky-100 text-[#0B72B5] rounded-full text-sm font-medium">
                         <CheckCircle className="w-4 h-4" />
                         {metric}
