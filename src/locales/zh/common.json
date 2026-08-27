@@ -34,7 +34,7 @@
     "admin": "管理员"
   },
   "footer": {
-    "description": "从硬件到工艺的垂直整合平台。RK3588 + openEuler → openindu-studio → 工业视觉/边缘/IIoT → 工艺知识库。国产芯片、全链路开源、跨品牌支持、数据驱动闭环。",
+    "description": "从硬件到工艺的垂直整合平台。国产工控芯片 + openEuler → openindu-studio → 工业视觉/边缘/IIoT → 工艺知识库。国产芯片、全链路开源、跨品牌支持、数据驱动闭环。",
     "communityDevelopers": "社区与开发者",
     "developers": "开发者",
     "github": "GitHub",
@@ -62,7 +62,7 @@
     "icpFiling": "备案号"
   },
   "language": {
-    "label": "语言 Language",
+    "label": "语言",
     "zh": "简体中文",
     "en": "English",
     "zhShort": "中文",
@@ -72,5 +72,34 @@
   "a11y": {
     "mobileMenuOpen": "打开导航菜单",
     "mobileMenuClose": "关闭导航菜单"
+  },
+  "edgeComputing": {
+    "description": "工业边缘计算平台",
+    "subtitle": "工业边缘计算平台，用于实时控制、数据处理和分布式自动化",
+    "github": "在 GitHub 上查看",
+    "iotPlatform": "工业物联网平台",
+    "realtimeTitle": "实时控制",
+    "realtimeDesc": "即时响应设备信号，无云延迟",
+    "securityTitle": "数据安全",
+    "securityDesc": "本地化数据处理，敏感制造数据存储本地",
+    "connectTitle": "协议支持",
+    "connectDesc": "多协议支持：Modbus、EtherCAT、OPC-UA、CANopen",
+    "perfTitle": "性能",
+    "perfDesc": "低延迟边缘计算，适合关键自动化应用",
+    "capabilities": "核心能力",
+    "capabilitiesDesc": "边缘自动化所需的一切",
+    "useCases": "使用场景",
+    "useCase1": "分布式 PLC 网络",
+    "useCase1Desc": "跨生产设施连接多个边缘节点，集中管理",
+    "useCase2": "实时数据处理",
+    "useCase2Desc": "在边缘处理传感器数据，汇总到云进行分析和历史数据分析",
+    "useCase3": "工业协议网关",
+    "useCase3Desc": "多协议设备统一接口：Modbus、EtherCAT、CANopen、OPC-UA",
+    "useCase4": "离线优先弹性",
+    "useCase4Desc": "连接中断时继续运行，恢复后同步数据",
+    "cta": "立即部署 openIndu-cim",
+    "ctaDesc": "开始构建边缘驱动的自动化。开源、Apache 2.0、无厂商锁定。",
+    "getStarted": "在 GitHub 上开始",
+    "learnMore": "了解 openIndu"
   }
 }

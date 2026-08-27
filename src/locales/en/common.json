@@ -34,7 +34,7 @@
     "admin": "Admin"
   },
   "footer": {
-    "description": "Vertical integration from hardware to craftsmanship knowledge. RK3588 + openEuler → openindu-studio → Industrial Vision/Edge/IIoT → Craftsmanship Knowledge Base. Domestic chip, full-stack open source, cross-brand support, data-driven closed loop.",
+    "description": "Vertical integration from hardware to craftsmanship knowledge. Domestic industrial SoC + openEuler → openindu-studio → Industrial Vision/Edge/IIoT → Craftsmanship Knowledge Base. Domestic chip, full-stack open source, cross-brand support, data-driven closed loop.",
     "communityDevelopers": "Community & Developers",
     "developers": "Developers",
     "github": "GitHub",
@@ -55,9 +55,9 @@
     "serviceStatus": "Service Status",
     "communityAdmin": "Community Admin",
     "legalAndPrivacy": "Legal & Privacy",
-    "privacyStatement": "Privacy Statement (中文)",
-    "legalNotice": "Legal Notice (中文)",
-    "aboutCookies": "About Cookies (中文)",
+    "privacyStatement": "Privacy Statement",
+    "legalNotice": "Legal Notice",
+    "aboutCookies": "About Cookies",
     "copyright": "© 2026 openIndu Community. Last updated: 2026-07-04",
     "icpFiling": "ICP Filing No."
   },
@@ -72,5 +72,34 @@
   "a11y": {
     "mobileMenuOpen": "Open navigation menu",
     "mobileMenuClose": "Close navigation menu"
+  },
+  "edgeComputing": {
+    "description": "Edge computing platform for industrial automation",
+    "subtitle": "Industrial edge computing platform for real-time control, data processing, and distributed automation",
+    "github": "View on GitHub",
+    "iotPlatform": "Industrial IoT Platform",
+    "realtimeTitle": "Real-time Control",
+    "realtimeDesc": "Instant response to equipment signals without cloud latency",
+    "securityTitle": "Data Security",
+    "securityDesc": "On-premise data processing keeps sensitive manufacturing data local",
+    "connectTitle": "Connectivity",
+    "connectDesc": "Multi-protocol support: Modbus, EtherCAT, OPC-UA, CANopen",
+    "perfTitle": "Performance",
+    "perfDesc": "Low-latency edge computation for mission-critical automation",
+    "capabilities": "Core Capabilities",
+    "capabilitiesDesc": "Everything you need for edge-based industrial automation",
+    "useCases": "Use Cases",
+    "useCase1": "Distributed PLC Networks",
+    "useCase1Desc": "Connect multiple edge nodes across production facilities with centralized management",
+    "useCase2": "Real-time Data Processing",
+    "useCase2Desc": "Process sensor data at the edge, aggregate to cloud for analytics and historical analysis",
+    "useCase3": "Industrial Protocol Gateway",
+    "useCase3Desc": "Unified interface for multi-protocol devices: Modbus, EtherCAT, CANopen, OPC-UA",
+    "useCase4": "Offline-First Resilience",
+    "useCase4Desc": "Continue operating during connectivity loss, sync data when connection restored",
+    "cta": "Deploy openIndu-cim Today",
+    "ctaDesc": "Start building edge-powered automation. Open source, Apache 2.0, no vendor lock-in.",
+    "getStarted": "Get Started on GitHub",
+    "learnMore": "Learn About openIndu"
   }
 }

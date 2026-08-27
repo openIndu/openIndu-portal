@@ -5,12 +5,14 @@
     "keywords": "openIndu,industrial automation,open source,PLC,HMI,cross-brand,electrical design,BOM,I/O address table,industrial IoT,PLC4X,OEE,yield analysis,custom automation"
   },
   "hero": {
-    "badge": "Apache-2.0 · Open Source · Open · Collaborative",
+    "badge": "Apache-2.0 · Domestic silicon + domestic OS · Self-reliant",
     "titleLine1": "One Stack, End to End — Open Manufacturing",
     "titleLine2": "The End-to-End Open-Source OS for Industrial Automation",
-    "subtitle": "From process parameters to line data — one stack, end to end. Any brand PLC, fully open source.",
+    "subtitle": "Domestic industrial SoCs + the openEuler operating system + a fully open-source toolchain. Four layers, silicon to craftsmanship knowledge, without a single closed-source link.",
     "ctaStudio": "Learn about openIndu-studio",
-    "ctaSolutions": "View Solutions"
+    "ctaSolutions": "View Solutions",
+    "accent": "From domestic silicon → a fully open chain",
+    "chain": "Domestic industrial SoC + openEuler → openindu-studio → Industrial Vision/Edge/IIoT → Craftsmanship Knowledge"
   },
   "products": {
     "heading": "Three Core Projects",
@@ -35,5 +37,21 @@
     "learnPlatform": "Learn about the Platform",
     "wechatHeading": "Follow us on WeChat",
     "wechatAlt": "openIndu WeChat QR code"
+  },
+  "stack": {
+    "view": "View →",
+    "learn": "Learn →",
+    "l4Title": "Craftsmanship Knowledge Base",
+    "l4Desc": "Forum process columns: batteries, panels, chips, automotive",
+    "l3Vision": "Industrial Vision",
+    "l3VisionDesc": "OpenCV inspection / positioning",
+    "l3Studio": "Programming & Configuration",
+    "l3StudioDesc": "openindu-studio",
+    "l3Data": "Data Acquisition",
+    "l3DataDesc": "CIM + Platform",
+    "l2Title": "Programming Layer",
+    "l2Desc": "PLC programming, HMI, selection, BOM, circuit diagrams, cross-brand codegen",
+    "l1Title": "Hardware & OS Layer (Foundation)",
+    "l1Desc": "Domestic industrial SoC + openEuler (domestic operating system)"
   }
 }

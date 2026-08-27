@@ -5,12 +5,14 @@
     "keywords": "openIndu,工业自动化,开源,PLC,HMI,跨品牌,电气设计,BOM,IO地址表,工业互联网,PLC4X,OEE,良率分析,非标自动化"
   },
   "hero": {
-    "badge": "Apache-2.0 · 开源 · 开放 · 协作",
+    "badge": "Apache-2.0 开源 · 国产芯片 + 国产 OS · 自主可控",
     "titleLine1": "一栈贯通，开放智造",
     "titleLine2": "工业自动化的端到端开源操作系统",
-    "subtitle": "从工艺参数到产线数据，一个栈打通。任意品牌 PLC，全部开源。",
+    "subtitle": "国产工控芯片 + openEuler 国产操作系统 + 全栈开源工具链。从硅到工艺知识，四层一贯到底，没有一个闭源环节。",
     "ctaStudio": "了解 openIndu-studio",
-    "ctaSolutions": "查看解决方案"
+    "ctaSolutions": "查看解决方案",
+    "accent": "从国产工控芯片 → 全链路开源",
+    "chain": "国产工控芯片 + openEuler → openindu-studio → 工业视觉/边缘/IIoT → 工艺知识"
   },
   "products": {
     "heading": "三大核心产品",
@@ -35,5 +37,21 @@
     "learnPlatform": "了解平台",
     "wechatHeading": "微信扫码关注公众号",
     "wechatAlt": "openIndu 微信公众号二维码"
+  },
+  "stack": {
+    "view": "查看 →",
+    "learn": "了解 →",
+    "l4Title": "工艺知识库 (Craftsmanship)",
+    "l4Desc": "论坛工艺专栏：电池、面板、芯片、汽车",
+    "l3Vision": "工业视觉",
+    "l3VisionDesc": "OpenCV 检测/定位",
+    "l3Studio": "编程组态",
+    "l3StudioDesc": "openindu-studio",
+    "l3Data": "数据采集",
+    "l3DataDesc": "CIM + Platform",
+    "l2Title": "编程与组态层 (Programming)",
+    "l2Desc": "PLC编程、HMI、选型、BOM、电路图、跨品牌代码生成",
+    "l1Title": "硬件与 OS 层 (Foundation)",
+    "l1Desc": "国产工控芯片 + openEuler（国产操作系统）"
   }
 }

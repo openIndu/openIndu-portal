@@ -33,7 +33,7 @@ const VARIANT_STYLES = {
   light: {
     icon: "text-gray-500",
     active: "text-gray-900",
-    link: "text-gray-600 hover:text-blue-600",
+    link: "text-gray-600 hover:text-sky-700",
     sep: "text-gray-300",
   },
   dark: {
@@ -77,14 +77,14 @@ export function LanguageSwitcher({
       <Globe className={`h-4 w-4 shrink-0 ${style.icon}`} aria-hidden="true" />
       {currentLocale === "zh" ? (
         <>
-          <span className={`text-sm font-medium ${style.active}`} aria-current="true">
+          <span className={`text-sm font-medium ${style.active} inline-flex items-center py-2 px-1 min-h-[44px] whitespace-nowrap`} aria-current="true">
             {labels.zh}
           </span>
           <span className={`select-none ${style.sep}`}>|</span>
           <a
             href={targetPath}
             lang="en"
-            className={`text-sm transition-colors ${style.link}`}
+            className={`text-sm transition-colors ${style.link} inline-flex items-center py-2 px-1 min-h-[44px] whitespace-nowrap`}
             onClick={onNavigate}
           >
             {labels.en}
@@ -95,13 +95,13 @@ export function LanguageSwitcher({
           <a
             href={targetPath}
             lang="zh-Hans"
-            className={`text-sm transition-colors ${style.link}`}
+            className={`text-sm transition-colors ${style.link} inline-flex items-center py-2 px-1 min-h-[44px] whitespace-nowrap`}
             onClick={onNavigate}
           >
             {labels.zh}
           </a>
           <span className={`select-none ${style.sep}`}>|</span>
-          <span className={`text-sm font-medium ${style.active}`} aria-current="true">
+          <span className={`text-sm font-medium ${style.active} inline-flex items-center py-2 px-1 min-h-[44px] whitespace-nowrap`} aria-current="true">
             {labels.en}
           </span>
         </>
@@ -126,7 +126,7 @@ export function LanguageSwitcherCompact({ className }: { className?: string }) {
       href={targetPath}
       lang={targetLocale === "en" ? "en" : "zh-Hans"}
       aria-label={t("language.switchTo", { language: t(`language.${targetLocale}`) })}
-      className={`inline-flex items-center gap-1 rounded-full border border-gray-200 px-2.5 py-1 text-xs font-medium text-gray-600 transition-colors hover:border-blue-200 hover:text-blue-600 ${className ?? ""}`}
+      className={`inline-flex items-center justify-center gap-1 rounded-full border border-gray-200 px-4 py-2.5 text-sm font-medium text-gray-600 transition-colors hover:border-sky-200 hover:text-sky-700 min-w-[44px] min-h-[44px] ${className ?? ""}`}
     >
       <Globe className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
       {targetLabelShort}

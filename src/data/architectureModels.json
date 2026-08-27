@@ -7,7 +7,7 @@
           "number": 1,
           "name": "Hardware & OS Layer",
           "chinese": "硬件与OS层",
-          "components": ["RK3588 (ARM工控芯片)", "openEuler (国产操作系统)", "Software PLC"],
+          "components": ["国产 ARM 工控芯片", "openEuler (国产操作系统)", "Software PLC"],
           "value": "国产可控、成本优势、实时可靠"
         },
         {
