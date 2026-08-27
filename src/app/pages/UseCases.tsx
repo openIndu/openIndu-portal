@@ -8,7 +8,7 @@ export function UseCases() {
       industry: "电池制造",
       problem: "卷绕精度不稳定、焊接强度波动大、良率目标难达成",
       solution: {
-        hardware: "RK3588软PLC控制卷绕马达和焊接参数",
+        hardware: "国产芯片软PLC控制卷绕马达和焊接参数",
         vision: "openindu-vision基于OpenCV检测极片对齐度、焊接焊点",
         data: "openindu-cim + platform采集工艺参数、检测数据、良率指标",
         craftsmanship: "论坛电池工艺专栏分享最佳卷绕速度、焊接温度曲线、测试方案"
@@ -20,7 +20,7 @@ export function UseCases() {
       industry: "电子面板(PCB)",
       problem: "贴片精度不够、回流焊接温度控制困难、缺陷检测低效",
       solution: {
-        hardware: "RK3588控制贴片机、回流炉温度曲线",
+        hardware: "国产工控芯片控制贴片机、回流炉温度曲线",
         vision: "openindu-vision实时检测贴片位置偏差、焊接缺陷(冷焊/过焊/无焊)",
         data: "openindu-platform汇总不良品数据、追踪失败根因",
         craftsmanship: "论坛面板工艺专栏共享最优温度曲线、贴片参数、不良对策"
@@ -32,7 +32,7 @@ export function UseCases() {
       industry: "芯片封装",
       problem: "键合工艺参数复杂、塑封质量难控、可靠性测试耗时",
       solution: {
-        hardware: "RK3588实时控制键合机、塑封炉温度和压力",
+        hardware: "国产工控芯片实时控制键合机、塑封炉温度和压力",
         vision: "openindu-vision检测键合线、塑封外观、裂纹缺陷",
         data: "openindu-cim边缘计算快速判决失败，platform汇总分析",
         craftsmanship: "论坛芯片工艺专栏分享键合最优参数、应力分析、可靠性指标"
@@ -44,7 +44,7 @@ export function UseCases() {
       industry: "汽车部件",
       problem: "冲压精度变异、焊接强度不稳定、质量溯源困难",
       solution: {
-        hardware: "RK3588控制冲床、焊接机参数，支持多品牌设备协同",
+        hardware: "国产工控芯片控制冲床、焊接机参数，支持多品牌设备协同",
         vision: "openindu-vision检测冲件尺寸、焊缝质量、装配对位",
         data: "openindu-platform全流程质量数据、缺陷溯源、客户可视化",
         craftsmanship: "论坛汽车工艺专栏分享冲压、焊接、装配的行业标准做法"
@@ -110,7 +110,7 @@ export function UseCases() {
             {useCases.map((useCase, idx) => (
               <div
                 key={useCase.industry}
-                className="bg-white border-l-4 border-blue-600 rounded-lg p-6 sm:p-8 shadow-sm hover:shadow-md transition-shadow"
+                className="bg-white border-l-4 border-sky-700 rounded-lg p-6 sm:p-8 shadow-sm hover:shadow-md transition-shadow"
               >
                 <div className="mb-8">
                   <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
@@ -129,7 +129,7 @@ export function UseCases() {
                 <div className="mb-8">
                   <h3 className="font-semibold text-lg text-gray-900 mb-4">✅ openIndu 全栈解决方案</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="bg-blue-50 border-l-4 border-blue-600 p-4 rounded">
+                    <div className="bg-sky-50 border-l-4 border-sky-700 p-4 rounded">
                       <p className="font-medium text-gray-900 mb-2">🖥️ 硬件执行层</p>
                       <p className="text-gray-700 text-sm">{useCase.solution.hardware}</p>
                     </div>
@@ -153,7 +153,7 @@ export function UseCases() {
                   <h3 className="font-semibold text-lg text-gray-900 mb-3">📊 工程指标</h3>
                   <div className="flex flex-wrap gap-3">
                     {useCase.metrics.map((metric) => (
-                      <div key={metric} className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 text-[#002FA7] rounded-full text-sm font-medium">
+                      <div key={metric} className="inline-flex items-center gap-2 px-4 py-2 bg-sky-100 text-[#0B72B5] rounded-full text-sm font-medium">
                         <CheckCircle className="w-4 h-4" />
                         {metric}
                       </div>
@@ -200,21 +200,21 @@ export function UseCases() {
           <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">下一步</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-[#002FA7] text-white font-bold text-lg mb-4">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-[#0B72B5] text-white font-bold text-lg mb-4">
                 1
               </div>
               <h3 className="font-semibold text-gray-900 mb-2">了解你的行业</h3>
               <p className="text-gray-600 text-sm">从上面的案例找到最接近的行业场景</p>
             </div>
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-600 text-white font-bold text-lg mb-4">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-sky-700 text-white font-bold text-lg mb-4">
                 2
               </div>
               <h3 className="font-semibold text-gray-900 mb-2">探索架构</h3>
               <p className="text-gray-600 text-sm">深入了解 openIndu 四层全栈如何解决问题</p>
             </div>
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-600 text-white font-bold text-lg mb-4">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-sky-700 text-white font-bold text-lg mb-4">
                 3
               </div>
               <h3 className="font-semibold text-gray-900 mb-2">开始开发</h3>
@@ -225,14 +225,14 @@ export function UseCases() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center flex-wrap">
             <Link
               to="/architecture"
-              className="inline-flex items-center justify-center px-8 py-4 bg-[#002FA7] text-white rounded-lg hover:bg-[#1a3a6d] transition-colors font-medium"
+              className="inline-flex items-center justify-center px-8 py-4 bg-[#0B72B5] text-white rounded-lg hover:bg-[#085A90] transition-colors font-medium"
             >
               理解全栈架构
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
             <Link
               to="/craftsmanship"
-              className="inline-flex items-center justify-center px-8 py-4 border-2 border-blue-900 text-[#002FA7] rounded-lg hover:bg-blue-50 transition-colors font-medium"
+              className="inline-flex items-center justify-center px-8 py-4 border-2 border-blue-900 text-[#0B72B5] rounded-lg hover:bg-sky-50 transition-colors font-medium"
             >
               查看工艺知识库
               <ArrowRight className="ml-2 h-5 w-5" />

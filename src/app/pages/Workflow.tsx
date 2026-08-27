@@ -40,7 +40,7 @@ export function Workflow() {
       />
       <div className="mx-auto max-w-7xl">
         <div className="mb-12 text-center">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-blue-100 px-4 py-2 text-sm font-semibold text-blue-700">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-sky-100 px-4 py-2 text-sm font-semibold text-sky-800">
             <Bot className="h-4 w-4" />
             {t("hero.badge")}
           </div>
@@ -56,7 +56,7 @@ export function Workflow() {
             return (
               <Card
                 key={step.key}
-                className="cursor-pointer border-blue-100 bg-white/90 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg"
+                className="cursor-pointer border-sky-100 bg-white/90 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg"
                 onClick={() => toggleStep(index)}
               >
                 <CardContent className="p-6">
@@ -66,11 +66,11 @@ export function Workflow() {
                     </div>
                     <div className="min-w-0 flex-1">
                       <div className="mb-2 flex items-center gap-3">
-                        <span className="rounded-full bg-blue-50 px-3 py-1 text-sm font-semibold text-blue-700">{t("stepLabel")} {index + 1}</span>
+                        <span className="rounded-full bg-sky-50 px-3 py-1 text-sm font-semibold text-sky-800">{t("stepLabel")} {index + 1}</span>
                         {index < steps.length - 1 && <ArrowRight className="hidden h-4 w-4 text-gray-400 sm:block" />}
                         <div className="ml-auto shrink-0">
                           {isExpanded ? (
-                            <ChevronUp className="h-5 w-5 text-blue-600" />
+                            <ChevronUp className="h-5 w-5 text-sky-700" />
                           ) : (
                             <ChevronDown className="h-5 w-5 text-gray-400" />
                           )}
@@ -84,7 +84,7 @@ export function Workflow() {
                             <p className="mb-2 text-sm font-semibold text-gray-900">{t("deliverablesLabel")}</p>
                             <div className="flex flex-wrap gap-2">
                               {step.deliverables.map((item) => (
-                                <span key={item} className="rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700">
+                                <span key={item} className="rounded-full bg-sky-50 px-3 py-1 text-xs font-medium text-sky-800">
                                   {item}
                                 </span>
                               ))}
@@ -105,20 +105,20 @@ export function Workflow() {
         </div>
 
         <div className="mt-10 grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-          <div className="rounded-2xl border border-blue-100 bg-white p-6 shadow-sm">
+          <div className="rounded-2xl border border-sky-100 bg-white p-6 shadow-sm">
             <h2 className="mb-3 text-2xl font-semibold text-gray-900">{t("artifactChain.heading")}</h2>
             <p className="mb-4 text-gray-600">
               {t("artifactChain.description")}
             </p>
             <div className="grid gap-3 sm:grid-cols-2">
               {artifactItems.map((item) => (
-                <div key={item} className="rounded-xl bg-blue-50 px-4 py-3 text-sm font-medium text-blue-800">
+                <div key={item} className="rounded-xl bg-sky-50 px-4 py-3 text-sm font-medium text-sky-800">
                   {item}
                 </div>
               ))}
             </div>
           </div>
-          <div className="rounded-2xl border border-blue-100 bg-white p-6 shadow-sm">
+          <div className="rounded-2xl border border-sky-100 bg-white p-6 shadow-sm">
             <h2 className="mb-3 text-2xl font-semibold text-gray-900">{t("roadmap.heading")}</h2>
             <p className="text-gray-600">
               {t("roadmap.description")}

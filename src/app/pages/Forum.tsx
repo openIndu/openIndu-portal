@@ -39,7 +39,7 @@ export function Forum() {
         <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center">
-            <span className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-blue-100 text-blue-700 rounded-full text-xs sm:text-sm font-semibold mb-5">
+            <span className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-sky-100 text-sky-800 rounded-full text-xs sm:text-sm font-semibold mb-5">
               <MessageCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               openIndu 社区论坛
             </span>
@@ -54,7 +54,7 @@ export function Forum() {
                 href="https://forum.openindu.com/c/process/7"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-8 py-4 bg-blue-600 text-white rounded-lg hover:bg-[#1a3a6d] transition-colors font-medium"
+                className="inline-flex items-center justify-center px-8 py-4 bg-sky-700 text-white rounded-lg hover:bg-[#085A90] transition-colors font-medium"
               >
                 进入论坛
                 <ArrowRight className="ml-2 h-5 w-5" />
@@ -63,7 +63,7 @@ export function Forum() {
                 href="https://github.com/openIndu/openIndu-portal/discussions"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-8 py-4 bg-white text-gray-900 border-2 border-gray-200 rounded-lg hover:border-blue-600 hover:text-blue-600 transition-colors font-medium"
+                className="inline-flex items-center justify-center px-8 py-4 bg-white text-gray-900 border-2 border-gray-200 rounded-lg hover:border-sky-700 hover:text-sky-700 transition-colors font-medium"
               >
                 GitHub 讨论
                 <ArrowRight className="ml-2 h-5 w-5" />
@@ -88,7 +88,7 @@ export function Forum() {
             {categories.map((category) => (
               <div key={category.title} className="bg-white rounded-xl p-6 sm:p-8 shadow-sm border border-gray-100 hover:shadow-lg transition-shadow">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-blue-100 text-blue-600">
+                  <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-sky-100 text-sky-700">
                     <category.icon className="h-6 w-6" />
                   </div>
                   <h3 className="text-lg sm:text-xl font-semibold text-gray-900">
@@ -102,7 +102,7 @@ export function Forum() {
                   <p className="text-xs font-semibold text-gray-500 uppercase mb-3">热门话题</p>
                   <div className="flex flex-wrap gap-2">
                     {category.topics.map((topic) => (
-                      <span key={topic} className="inline-block px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm">
+                      <span key={topic} className="inline-block px-3 py-1 bg-sky-50 text-sky-800 rounded-full text-sm">
                         {topic}
                       </span>
                     ))}
@@ -115,19 +115,19 @@ export function Forum() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 sm:py-20 bg-gradient-to-r from-blue-600 to-cyan-600 text-white">
+      <section className="py-16 sm:py-20 bg-gradient-to-r from-blue-700 to-cyan-700 text-white">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold mb-6">
             准备好加入社区了吗？
           </h2>
-          <p className="text-lg sm:text-xl mb-8 text-blue-100 max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl mb-8 text-white/90 max-w-2xl mx-auto">
             无论你是提问者、解答者还是贡献者，论坛都欢迎你的参与。一起打造开源工业自动化生态。
           </p>
           <a
             href="https://forum.openindu.com/c/process/7"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center px-8 py-4 bg-white text-blue-600 rounded-lg hover:bg-blue-50 transition-colors font-medium"
+            className="inline-flex items-center justify-center px-8 py-4 bg-white text-sky-700 rounded-lg hover:bg-sky-50 transition-colors font-medium"
           >
             前往论坛 →
           </a>

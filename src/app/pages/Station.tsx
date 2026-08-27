@@ -22,7 +22,7 @@ export function Station() {
   const { t } = useTranslation("station");
 
   return (
-    <div className="py-12">
+    <div>
       <SEO
         title={t("seo.title")}
         description={t("seo.description")}
@@ -122,15 +122,15 @@ export function Station() {
       </section>
 
       {/* Status + CTA */}
-      <section className="py-16 bg-gradient-to-r from-indigo-600 to-blue-600 text-white">
+      <section className="py-16 bg-gradient-to-r from-indigo-700 to-blue-700 text-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold mb-4">{t("cta.heading")}</h2>
-          <p className="text-xl mb-4 text-indigo-100">{t("cta.description")}</p>
-          <p className="text-sm mb-8 text-indigo-200">{t("cta.status")}</p>
+          <p className="text-xl mb-4 text-white/90">{t("cta.description")}</p>
+          <p className="text-sm mb-8 text-white/90">{t("cta.status")}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="mailto:contact@openindu.com"
-              className="inline-flex items-center justify-center px-8 py-4 bg-white text-indigo-600 rounded-lg hover:bg-indigo-50 transition-colors font-medium"
+              className="inline-flex items-center justify-center px-8 py-4 bg-white text-indigo-700 rounded-lg hover:bg-indigo-50 transition-colors font-medium"
             >
               {t("cta.contact")}
             </a>

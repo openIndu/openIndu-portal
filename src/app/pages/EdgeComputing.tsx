@@ -53,14 +53,14 @@ export function EdgeComputing() {
                 href="https://github.com/openIndu/openIndu-cim"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-8 py-4 bg-[#002FA7] text-white rounded-lg hover:bg-[#1a3a6d] transition-colors font-medium"
+                className="inline-flex items-center justify-center px-8 py-4 bg-[#0B72B5] text-white rounded-lg hover:bg-[#085A90] transition-colors font-medium"
               >
                 {t("edgeComputing.github") || "View on GitHub"}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </a>
               <Link
                 to="/iiot-platform"
-                className="inline-flex items-center justify-center px-8 py-4 border-2 border-gray-300 rounded-lg hover:border-blue-600 hover:text-blue-600 transition-colors font-medium"
+                className="inline-flex items-center justify-center px-8 py-4 border-2 border-gray-300 rounded-lg hover:border-sky-700 hover:text-sky-700 transition-colors font-medium"
               >
                 {t("edgeComputing.iotPlatform") || "Industrial IoT Platform"}
               </Link>
@@ -80,7 +80,7 @@ export function EdgeComputing() {
             {features.map((feature) => (
               <div key={feature.title} className="flex gap-4">
                 <div className="flex-shrink-0">
-                  <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-blue-100 text-[#002FA7]">
+                  <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-sky-100 text-[#0B72B5]">
                     <feature.icon className="h-6 w-6" />
                   </div>
                 </div>
@@ -120,10 +120,10 @@ export function EdgeComputing() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 sm:py-20 bg-blue-600 text-white">
+      <section className="py-16 sm:py-20 bg-sky-700 text-white">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold mb-6">{t("edgeComputing.cta") || "Deploy openIndu-cim Today"}</h2>
-          <p className="text-lg text-blue-100 mb-8 max-w-2xl mx-auto">
+          <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
             {t("edgeComputing.ctaDesc") || "Start building edge-powered automation. Open source, Apache 2.0, no vendor lock-in."}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -131,7 +131,7 @@ export function EdgeComputing() {
               href="https://github.com/openIndu/openIndu-cim"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-8 py-4 bg-white text-blue-600 rounded-lg hover:bg-blue-50 transition-colors font-medium"
+              className="inline-flex items-center justify-center px-8 py-4 bg-white text-sky-700 rounded-lg hover:bg-sky-50 transition-colors font-medium"
             >
               {t("edgeComputing.getStarted") || "Get Started on GitHub"}
               <ArrowRight className="ml-2 h-5 w-5" />

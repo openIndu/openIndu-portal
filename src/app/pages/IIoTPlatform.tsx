@@ -9,7 +9,7 @@ import { SEO } from "../components/SEO";
 const featureKeys = [
   // `subtitle` is a fixed bilingual design caption, already English in the
   // original ZH page -- locale-invariant, not sourced from i18n.
-  { key: "smartLogin", icon: Shield, iconColor: "text-blue-600", iconBg: "bg-blue-100", screenshotSrc: "/assets/iiot/login.png", subtitle: "Phone Code Sign-in · Secure & Convenient" },
+  { key: "smartLogin", icon: Shield, iconColor: "text-sky-700", iconBg: "bg-sky-100", screenshotSrc: "/assets/iiot/login.png", subtitle: "Phone Code Sign-in · Secure & Convenient" },
   { key: "workbench", icon: LayoutDashboard, iconColor: "text-cyan-600", iconBg: "bg-cyan-100", screenshotSrc: "/assets/iiot/workbench.png", subtitle: "Workbench · Global Overview at a Glance" },
   { key: "dashboard", icon: Monitor, iconColor: "text-purple-600", iconBg: "bg-purple-100", screenshotSrc: "/assets/iiot/dashboard.png", subtitle: "Data Dashboard · Production Status on One Screen" },
   { key: "deviceManagement", icon: Database, iconColor: "text-green-600", iconBg: "bg-green-100", screenshotSrc: "/assets/iiot/device-mgmt.png", subtitle: "Equipment Management · Full Lifecycle Control" },
@@ -27,11 +27,11 @@ const advantageKeys = [
 ] as const;
 
 const techLayerKeys = [
-  { key: "webFrontend", layer: 8, badgeBg: "bg-blue-100", badgeText: "text-blue-700", iconBg: "bg-blue-600" },
+  { key: "webFrontend", layer: 8, badgeBg: "bg-sky-100", badgeText: "text-sky-800", iconBg: "bg-sky-700" },
   // cyan/green/orange/yellow-600 fail WCAG AA for white text (2.9-3.6:1) --
   // bumped one shade to -700; blue/purple/red/indigo-600 already pass.
   { key: "backend", layer: 7, badgeBg: "bg-cyan-100", badgeText: "text-cyan-700", iconBg: "bg-cyan-700" },
-  { key: "edgeGateway", layer: 6, badgeBg: "bg-green-100", badgeText: "text-green-700", iconBg: "bg-green-700" },
+  { key: "edgeGateway", layer: 6, badgeBg: "bg-green-100", badgeText: "text-green-800", iconBg: "bg-green-700" },
   { key: "dataAcquisition", layer: 5, badgeBg: "bg-purple-100", badgeText: "text-purple-700", iconBg: "bg-purple-600" },
   { key: "businessDb", layer: 4, badgeBg: "bg-orange-100", badgeText: "text-orange-700", iconBg: "bg-orange-700" },
   { key: "timeseriesDb", layer: 3, badgeBg: "bg-red-100", badgeText: "text-red-700", iconBg: "bg-red-600" },
@@ -39,7 +39,7 @@ const techLayerKeys = [
   { key: "messageBroker", layer: 1, badgeBg: "bg-indigo-100", badgeText: "text-indigo-700", iconBg: "bg-indigo-600" },
 ] as const;
 
-const dataFlowColors = ["bg-orange-100 text-orange-700", "bg-red-100 text-red-700", "bg-purple-100 text-purple-700", "bg-indigo-100 text-indigo-700", "bg-green-100 text-green-700", "bg-cyan-100 text-cyan-700", "bg-blue-100 text-blue-700"];
+const dataFlowColors = ["bg-orange-100 text-orange-700", "bg-red-100 text-red-700", "bg-purple-100 text-purple-700", "bg-indigo-100 text-indigo-700", "bg-green-100 text-green-800", "bg-cyan-100 text-cyan-700", "bg-sky-100 text-sky-800"];
 
 type Feature = {
   key: string;
@@ -108,16 +108,16 @@ export function IIoTPlatform() {
         canonicalPath="/iiot-platform"
       />
       {/* ===== Hero Section ===== */}
-      <section className="bg-gradient-to-br from-blue-600 via-blue-700 to-cyan-600 text-white py-12 sm:py-16 lg:py-20">
+      <section className="bg-gradient-to-b from-sky-50 via-white to-white py-12 sm:py-16 lg:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur rounded-full text-sm mb-4 sm:mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-sky-50 border border-sky-200 text-[#0B72B5] rounded-full text-sm font-semibold mb-4 sm:mb-6">
             <Zap className="w-4 h-4" />
             openIndu Platform
           </div>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 leading-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 leading-tight text-gray-900 [word-break:keep-all]">
             {t("hero.title1")}<br />{t("hero.title2")}
           </h1>
-          <p className="text-lg sm:text-xl md:text-2xl text-blue-100 mb-6 sm:mb-8 font-light">
+          <p className="text-lg sm:text-xl md:text-2xl text-gray-600 mb-6 sm:mb-8 font-light">
             {t("hero.subtitle")}
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-8 sm:mb-10">
@@ -125,42 +125,42 @@ export function IIoTPlatform() {
               href="https://website.openindu.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-6 py-3 sm:px-8 sm:py-4 bg-white text-blue-600 rounded-lg hover:bg-blue-50 transition-colors font-medium text-base sm:text-lg"
+              className="inline-flex min-h-[48px] items-center justify-center px-6 sm:px-8 bg-[#0B72B5] text-white rounded-lg hover:bg-[#085A90] transition-colors font-semibold text-base sm:text-lg"
             >
               {t("hero.ctaPrimary")}
               <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
             </a>
             <a
               href="#architecture"
-              className="inline-flex items-center justify-center px-6 py-3 sm:px-8 sm:py-4 border-2 border-white/60 text-white rounded-lg hover:bg-white/10 transition-colors font-medium text-base sm:text-lg"
+              className="inline-flex min-h-[48px] items-center justify-center px-6 sm:px-8 bg-white border border-gray-300 text-gray-800 rounded-lg hover:border-[#0B72B5] hover:text-[#0B72B5] transition-colors font-semibold text-base sm:text-lg"
             >
               {t("hero.ctaSecondary")}
             </a>
           </div>
-          <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 sm:inline-flex bg-white/10 backdrop-blur rounded-xl px-4 py-4 sm:px-6 sm:py-4 w-full sm:w-auto">
+          <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 sm:inline-flex border border-sky-200 bg-sky-50 rounded-xl px-4 py-4 sm:px-6 sm:py-4 w-full sm:w-auto">
             <div className="text-center">
-              <p className="text-xs text-blue-200 mb-1">{t("hero.demoLabel")}</p>
-              <p className="text-sm font-mono">website.openindu.com</p>
+              <p className="text-xs text-gray-600 mb-1">{t("hero.demoLabel")}</p>
+              <p className="text-sm font-mono text-gray-900">website.openindu.com</p>
             </div>
-            <div className="hidden sm:block w-px h-8 bg-white/30" />
+            <div className="hidden sm:block w-px h-8 bg-sky-200" />
             <div className="flex gap-6 sm:hidden">
               <div className="text-center">
-                <p className="text-xs text-blue-200 mb-1">{t("hero.usernameLabel")}</p>
-                <p className="text-sm font-mono">admin</p>
+                <p className="text-xs text-gray-600 mb-1">{t("hero.usernameLabel")}</p>
+                <p className="text-sm font-mono text-gray-900">admin</p>
               </div>
               <div className="text-center">
-                <p className="text-xs text-blue-200 mb-1">{t("hero.passwordLabel")}</p>
-                <p className="text-sm font-mono">abc@123456</p>
+                <p className="text-xs text-gray-600 mb-1">{t("hero.passwordLabel")}</p>
+                <p className="text-sm font-mono text-gray-900">abc@123456</p>
               </div>
             </div>
             <div className="hidden sm:block text-center">
-              <p className="text-xs text-blue-200 mb-1">{t("hero.usernameLabel")}</p>
-              <p className="text-sm font-mono">admin</p>
+              <p className="text-xs text-gray-600 mb-1">{t("hero.usernameLabel")}</p>
+              <p className="text-sm font-mono text-gray-900">admin</p>
             </div>
-            <div className="hidden sm:block w-px h-8 bg-white/30" />
+            <div className="hidden sm:block w-px h-8 bg-sky-200" />
             <div className="hidden sm:block text-center">
-              <p className="text-xs text-blue-200 mb-1">{t("hero.passwordLabel")}</p>
-              <p className="text-sm font-mono">abc@123456</p>
+              <p className="text-xs text-gray-600 mb-1">{t("hero.passwordLabel")}</p>
+              <p className="text-sm font-mono text-gray-900">abc@123456</p>
             </div>
           </div>
         </div>
@@ -176,7 +176,7 @@ export function IIoTPlatform() {
               {introChain.map((step, i) => (
                 <span key={step}>
                   {i > 0 && "→"}
-                  <span className="font-semibold text-blue-600">{step}</span>
+                  <span className="font-semibold text-sky-700">{step}</span>
                 </span>
               ))}
               {t("intro.p1Suffix")}

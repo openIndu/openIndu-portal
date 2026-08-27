@@ -43,7 +43,7 @@ const STREAMING_HINTS = [
 
 const MARKDOWN_COMPONENTS: Partial<Components> = {
   a: ({ href, children }) => (
-    <a href={href} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline hover:text-blue-800">
+    <a href={href} target="_blank" rel="noopener noreferrer" className="text-sky-700 underline hover:text-sky-800">
       {children}
     </a>
   ),
@@ -292,19 +292,19 @@ export default function ChatPage() {
                 </div>
                 <button type="button" disabled={applying}
                   onClick={async () => { setApplying(true); try { setApplication(await memberApplicationApi.apply()); } catch (err) { alert(getApiErrorMessage(err, "申请失败")); } finally { setApplying(false); } }}
-                  className="flex items-center gap-1.5 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-[#1a3a6d] disabled:opacity-50">
+                  className="flex items-center gap-1.5 rounded-lg bg-sky-700 px-4 py-2 text-sm font-medium text-white hover:bg-[#085A90] disabled:opacity-50">
                   {applying ? <Loader2 className="h-4 w-4 animate-spin" /> : null} 重新申请
                 </button>
               </div>
             ) : (
               <button type="button" disabled={applying}
                 onClick={async () => { setApplying(true); try { setApplication(await memberApplicationApi.apply()); } catch (err) { alert(getApiErrorMessage(err, "申请失败")); } finally { setApplying(false); } }}
-                className="flex items-center gap-1.5 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-[#1a3a6d] disabled:opacity-50">
+                className="flex items-center gap-1.5 rounded-lg bg-sky-700 px-4 py-2 text-sm font-medium text-white hover:bg-[#085A90] disabled:opacity-50">
                 {applying ? <Loader2 className="h-4 w-4 animate-spin" /> : null} 申请成为会员
               </button>
             )
           ) : (
-            <Link to="/login?redirect=/chat" className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-[#1a3a6d]">
+            <Link to="/login?redirect=/chat" className="rounded-lg bg-sky-700 px-4 py-2 text-sm font-medium text-white hover:bg-[#085A90]">
               登录 / 注册
             </Link>
           )}
@@ -312,10 +312,10 @@ export default function ChatPage() {
       ) : (
         <div className="flex flex-1 flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
           {/* Session bar + filters */}
-          <div className="shrink-0 border-b border-gray-100 bg-blue-600 px-3 sm:px-4 py-2.5 sm:py-3 text-white rounded-t-2xl">
+          <div className="shrink-0 border-b border-gray-100 bg-sky-700 px-3 sm:px-4 py-2.5 sm:py-3 text-white rounded-t-2xl">
             <div className="flex items-center gap-1.5 flex-wrap">
               <select
-                className="min-w-0 flex-1 truncate rounded-lg bg-blue-700 px-2 py-1.5 text-sm text-white focus:outline-none disabled:opacity-50"
+                className="min-w-0 flex-1 truncate rounded-lg bg-sky-800 px-2 py-1.5 text-sm text-white focus:outline-none disabled:opacity-50"
                 value={activeSessionId ?? ""}
                 disabled={streaming || sessionsLoading}
                 onChange={(e) => void switchSession(Number(e.target.value))}
@@ -324,23 +324,23 @@ export default function ChatPage() {
               </select>
               <button type="button" title="新建会话" disabled={streaming}
                 onClick={() => void handleNewSession()}
-                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-700 text-white hover:bg-[#1a3a6d] disabled:opacity-50">
+                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-sky-800 text-white hover:bg-[#085A90] disabled:opacity-50">
                 <Plus className="h-4 w-4" />
               </button>
               <button type="button" title="删除当前会话" disabled={streaming || !activeSessionId}
                 onClick={() => void handleDeleteSession()}
-                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-700 text-white hover:bg-red-600 disabled:opacity-50">
+                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-sky-800 text-white hover:bg-red-600 disabled:opacity-50">
                 <Trash2 className="h-4 w-4" />
               </button>
             </div>
             {brandOpts.length > 0 && (
               <div className="mt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-1.5 sm:gap-2">
-                <select className="min-w-0 flex-1 truncate rounded-lg bg-blue-700 px-2 py-1.5 text-sm text-white focus:outline-none disabled:opacity-50"
+                <select className="min-w-0 flex-1 truncate rounded-lg bg-sky-800 px-2 py-1.5 text-sm text-white focus:outline-none disabled:opacity-50"
                   value={filterBrand} disabled={streaming} onChange={(e) => setFilterBrand(e.target.value)}>
                   <option value="">全部品牌</option>
                   {brandOpts.map((b) => (<option key={b.value} value={b.value}>{b.label_zh}</option>))}
                 </select>
-                <select className="min-w-0 flex-1 truncate rounded-lg bg-blue-700 px-2 py-1.5 text-sm text-white focus:outline-none disabled:opacity-50"
+                <select className="min-w-0 flex-1 truncate rounded-lg bg-sky-800 px-2 py-1.5 text-sm text-white focus:outline-none disabled:opacity-50"
                   value={filterCategory} disabled={streaming} onChange={(e) => setFilterCategory(e.target.value)}>
                   <option value="">全部分类</option>
                   {categoryOpts.map((c) => (<option key={c.value} value={c.value}>{c.label_zh}</option>))}
@@ -360,7 +360,7 @@ export default function ChatPage() {
                 {EXAMPLE_PROMPTS.map((prompt) => (
                   <button key={prompt} type="button"
                     onClick={() => void sendPrompt(prompt)}
-                    className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-left text-sm text-gray-600 transition-colors hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700">
+                    className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-left text-sm text-gray-600 transition-colors hover:border-blue-300 hover:bg-sky-50 hover:text-sky-800">
                     {prompt}
                   </button>
                 ))}
@@ -381,7 +381,7 @@ export default function ChatPage() {
                   )}
                   <div className={`group inline-flex max-w-[92%] sm:max-w-[85%] items-start gap-1 ${m.role === "user" ? "flex-row-reverse" : "flex-row"}`}>
                     <div className={`break-words rounded-2xl px-3 py-2 text-left text-sm ${
-                      m.role === "user" ? "bg-blue-600 text-white whitespace-pre-wrap"
+                      m.role === "user" ? "bg-sky-700 text-white whitespace-pre-wrap"
                         : m.error ? "bg-red-50 text-red-600"
                         : m.mode === "fallback" ? "bg-amber-50 text-gray-800 ring-1 ring-amber-200"
                         : "bg-gray-100 text-gray-800"}`}>
@@ -441,9 +441,9 @@ export default function ChatPage() {
                 onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); void handleSend(); } }}
                 rows={2}
                 placeholder="输入你的工业问题，可粘贴报错日志 / 程序段… (Enter 发送，Shift+Enter 换行)"
-                className="max-h-60 flex-1 resize-none overflow-y-auto break-words rounded-lg border border-gray-200 px-3 py-2 text-sm leading-relaxed focus:border-blue-500 focus:outline-none" />
+                className="max-h-60 flex-1 resize-none overflow-y-auto break-words rounded-lg border border-gray-200 px-3 py-2 text-sm leading-relaxed focus:border-sky-600 focus:outline-none" />
               <button type="button" onClick={() => void handleSend()} disabled={streaming || !input.trim()} aria-label="发送"
-                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-blue-600 text-white transition hover:bg-[#1a3a6d] disabled:opacity-40">
+                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-sky-700 text-white transition hover:bg-[#085A90] disabled:opacity-40">
                 {streaming ? <Loader2 className="h-5 w-5 animate-spin" /> : <Send className="h-5 w-5" />}
               </button>
             </div>

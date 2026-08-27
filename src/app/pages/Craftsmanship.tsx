@@ -208,7 +208,7 @@ export function Craftsmanship() {
               href="https://forum.openindu.com/c/process/7"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-8 py-4 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors font-medium"
+              className="inline-flex items-center justify-center px-8 py-4 bg-orange-700 text-white rounded-lg hover:bg-orange-800 transition-colors font-medium"
             >
               进入完整工艺知识库
               <ArrowRight className="ml-2 h-5 w-5" />
@@ -241,17 +241,17 @@ export function Craftsmanship() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 sm:py-20 bg-gradient-to-r from-orange-600 to-amber-600 text-white">
+      <section className="py-16 sm:py-20 bg-gradient-to-r from-orange-700 to-amber-700 text-white">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold mb-6">加入工艺知识库社区</h2>
-          <p className="text-lg text-orange-100 mb-8 max-w-2xl mx-auto">
+          <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
             分享你的工艺实践，学习行业最佳方案，与全球工程师一起推动工业进步
           </p>
           <a
             href="https://forum.openindu.com/c/process/7"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center px-8 py-4 bg-white text-orange-600 rounded-lg hover:bg-orange-50 transition-colors font-medium"
+            className="inline-flex items-center justify-center px-8 py-4 bg-white text-orange-700 rounded-lg hover:bg-orange-50 transition-colors font-medium"
           >
             进入论坛
             <ArrowRight className="ml-2 h-5 w-5" />

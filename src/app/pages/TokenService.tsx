@@ -16,7 +16,7 @@ export function TokenService() {
   const { t } = useTranslation("infrastructure");
 
   return (
-    <div className="py-12">
+    <div>
       <SEO
         title={t("seo.title")}
         description={t("seo.description")}
@@ -46,10 +46,10 @@ export function TokenService() {
       {/* Quick Access */}
       <section className="py-16 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-to-br from-purple-600 to-blue-600 rounded-2xl p-6 sm:p-12 text-center">
+          <div className="bg-gradient-to-br from-purple-700 to-blue-700 rounded-2xl p-6 sm:p-12 text-center">
             <Server className="w-16 h-16 mx-auto mb-6 opacity-80" />
             <h2 className="text-4xl font-bold mb-4 text-white">{t("quickAccess.heading")}</h2>
-            <p className="text-xl mb-8 text-purple-100">
+            <p className="text-xl mb-8 text-white/90">
               {t("quickAccess.description")}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

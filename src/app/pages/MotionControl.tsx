@@ -38,7 +38,7 @@ export function MotionControl() {
   const cppItems = t("hostDevSection.cpp.items", { returnObjects: true }) as string[];
 
   return (
-    <div className="py-12">
+    <div>
       <SEO
         title={t("seo.title")}
         description={t("seo.description")}
@@ -150,9 +150,9 @@ export function MotionControl() {
 
           <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">{t("hostDevSection.heading")}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <div className="bg-gradient-to-br from-blue-50 to-cyan-50 p-8 rounded-xl border border-blue-200">
+            <div className="bg-gradient-to-br from-blue-50 to-cyan-50 p-8 rounded-xl border border-sky-200">
               <div className="flex items-center gap-3 mb-6">
-                <div className="flex items-center justify-center w-12 h-12 bg-blue-600 text-white rounded-lg">
+                <div className="flex items-center justify-center w-12 h-12 bg-sky-700 text-white rounded-lg">
                   <Code2 className="w-6 h-6" />
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900">{t("hostDevSection.csharp.title")}</h3>
@@ -160,7 +160,7 @@ export function MotionControl() {
               <ul className="space-y-3 text-gray-700">
                 {csharpItems.map((item) => (
                   <li key={item} className="flex items-start gap-2">
-                    <span className="text-blue-600 mt-1">✓</span>
+                    <span className="text-sky-700 mt-1">✓</span>
                     <span>{item}</span>
                   </li>
                 ))}
@@ -187,13 +187,13 @@ export function MotionControl() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 bg-gradient-to-r from-orange-600 to-red-600 text-white">
+      <section className="py-16 bg-gradient-to-r from-orange-700 to-red-700 text-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <div className="flex items-center justify-center gap-3 mb-4">
             <CheckCircle className="w-12 h-12" />
           </div>
           <h2 className="text-3xl font-bold mb-4">{t("cta.heading")}</h2>
-          <p className="text-xl mb-8 text-orange-100">{t("cta.description")}</p>
+          <p className="text-xl mb-8 text-white/90">{t("cta.description")}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="mailto:contact@openindu.com"

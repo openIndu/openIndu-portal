@@ -57,8 +57,8 @@ function ChipBar({ label, options, selected, onSelect, disabled }: { label: stri
           onClick={() => onSelect(option.value)}
           className={`rounded-full border px-3 py-1 text-xs transition-colors disabled:opacity-50 ${
             selected === option.value
-              ? "border-blue-600 bg-blue-600 text-white"
-              : "border-gray-300 bg-white text-gray-700 hover:border-blue-400 hover:bg-blue-50"
+              ? "border-sky-700 bg-sky-700 text-white"
+              : "border-gray-300 bg-white text-gray-700 hover:border-blue-400 hover:bg-sky-50"
           }`}
         >
           {option.value === "" ? t("filters.allOption") : option.label}
@@ -313,11 +313,11 @@ export function Resources() {
       <div className="mx-auto max-w-7xl">
         <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-blue-600">{t("header.title")}</h1>
+            <h1 className="text-3xl font-bold text-sky-700">{t("header.title")}</h1>
             <p className="mt-2 text-gray-600">{t("header.subtitle")}</p>
           </div>
           {!isAuthenticated ? (
-            <div className="rounded-lg border border-blue-200 bg-blue-50 px-4 py-3 text-sm text-blue-800">
+            <div className="rounded-lg border border-sky-200 bg-sky-50 px-4 py-3 text-sm text-sky-800">
               {t("authBanner.guest")}
             </div>
           ) : !isMember ? (
@@ -349,7 +349,7 @@ export function Resources() {
                   <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
                   <Input className="pl-9" value={keyword} onChange={(event) => setKeyword(event.target.value)} onKeyDown={(event) => { if (event.key === "Enter") handleSearch(); }} placeholder={t("filters.searchPlaceholder")} />
                 </div>
-                <Button type="button" onClick={handleSearch} className="bg-blue-600 hover:bg-[#1a3a6d]">{t("filters.searchButton")}</Button>
+                <Button type="button" onClick={handleSearch} className="bg-sky-700 hover:bg-[#085A90]">{t("filters.searchButton")}</Button>
                 {(brand || category || series || keyword) ? (
                   <Button type="button" variant="outline" onClick={() => { setBrand(""); setCategory(""); setSeries(""); setKeyword(""); setPage(1); }}>{t("filters.clearButton")}</Button>
                 ) : null}
@@ -372,10 +372,10 @@ export function Resources() {
             <Card><CardContent className="p-10 text-center text-gray-500">{t("list.empty")}</CardContent></Card>
           ) : (
             data.items.map((item) => (
-              <Card key={`${item.id}-${item.version_id ?? 'none'}`} className="hover:border-blue-200 hover:shadow-md">
+              <Card key={`${item.id}-${item.version_id ?? 'none'}`} className="hover:border-sky-200 hover:shadow-md">
                 <CardContent className="flex flex-col gap-4 p-5 md:flex-row md:items-center md:justify-between">
                   <div className="flex gap-4">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-sky-50 text-sky-700">
                       {activeTab === "documents" ? <FileText /> : <Package />}
                     </div>
                     <div>
@@ -389,10 +389,10 @@ export function Resources() {
                         {activeTab === "software" && (item.version || item.latest_version) && (
                           <span className="rounded-full bg-gray-100 px-2 py-1">
                             {t("labels.version")}{item.version || item.latest_version}
-                            {item.is_latest_version && <span className="ml-1 text-blue-600">{t("list.latestBadge")}</span>}
+                            {item.is_latest_version && <span className="ml-1 text-sky-700">{t("list.latestBadge")}</span>}
                           </span>
                         )}
-                        <span className="rounded-full bg-blue-50 px-2 py-1 text-blue-700">{t("list.downloadCount", { count: item.download_count ?? 0 })}</span>
+                        <span className="rounded-full bg-sky-50 px-2 py-1 text-sky-800">{t("list.downloadCount", { count: item.download_count ?? 0 })}</span>
                       </div>
                     </div>
                   </div>

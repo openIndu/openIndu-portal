@@ -76,7 +76,7 @@ export function Team() {
                 <div className="mb-4">
                   <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-400 to-cyan-500 mb-4"></div>
                   <h3 className="text-xl font-semibold text-gray-900">{member.name}</h3>
-                  <p className="text-sm text-blue-600 font-medium mt-1">{member.role}</p>
+                  <p className="text-sm text-sky-700 font-medium mt-1">{member.role}</p>
                 </div>
                 <p className="text-gray-600 text-sm leading-relaxed mb-6">{member.bio}</p>
                 <div className="flex gap-3">
@@ -118,7 +118,7 @@ export function Team() {
           </div>
           <div className="mt-12 text-center">
             <p className="text-gray-600 mb-4">Want to join the team?</p>
-            <a href="https://github.com/openIndu" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-[#1a3a6d] transition-colors">
+            <a href="https://github.com/openIndu" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-3 bg-sky-700 text-white rounded-lg hover:bg-[#085A90] transition-colors">
               <Github className="w-5 h-5" />
               Contribute on GitHub
             </a>
@@ -134,13 +134,13 @@ export function Team() {
             Have questions or want to collaborate? Reach out to the community through any of these channels.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <a href="https://forum.openindu.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-3 border-2 border-gray-200 rounded-lg hover:border-blue-600 hover:text-blue-600 transition-colors">
+            <a href="https://forum.openindu.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-3 border-2 border-gray-200 rounded-lg hover:border-sky-700 hover:text-sky-700 transition-colors">
               论坛
             </a>
-            <a href="https://github.com/openIndu/openIndu-portal/discussions" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-3 border-2 border-gray-200 rounded-lg hover:border-blue-600 hover:text-blue-600 transition-colors">
+            <a href="https://github.com/openIndu/openIndu-portal/discussions" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-3 border-2 border-gray-200 rounded-lg hover:border-sky-700 hover:text-sky-700 transition-colors">
               GitHub Discussions
             </a>
-            <a href="mailto:contact@openindu.com" className="inline-flex items-center gap-2 px-6 py-3 border-2 border-gray-200 rounded-lg hover:border-blue-600 hover:text-blue-600 transition-colors">
+            <a href="mailto:contact@openindu.com" className="inline-flex items-center gap-2 px-6 py-3 border-2 border-gray-200 rounded-lg hover:border-sky-700 hover:text-sky-700 transition-colors">
               <Mail className="w-5 h-5" />
               Email
             </a>

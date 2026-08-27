@@ -20,7 +20,7 @@ export function Architecture() {
       description: "三个方向协同：工业视觉检测、数据采集边缘计算、IIoT平台分析",
       benefits: ["工业视觉定位检测", "边缘实时决策", "数据驱动洞察"],
       color: "from-blue-50 to-cyan-50",
-      border: "border-blue-200"
+      border: "border-sky-200"
     },
     {
       icon: Code,
@@ -35,7 +35,7 @@ export function Architecture() {
       icon: Cpu,
       title: "硬件与OS层",
       titleEn: "Hardware & OS Layer",
-      description: "RK3588国产工控芯片 + openEuler国产操作系统：实时控制、工业协议、边缘本地决策",
+      description: "国产工控芯片 + openEuler国产操作系统：实时控制、工业协议、边缘本地决策",
       benefits: ["国产可控", "成本优势", "实时可靠"],
       color: "from-purple-50 to-pink-50",
       border: "border-purple-200"
@@ -46,7 +46,7 @@ export function Architecture() {
     {
       aspect: "硬件成本",
       traditional: "昂贵的工业PC + 专有系统",
-      openindu: "RK3588经济芯片 + 开源openEuler"
+      openindu: "国产工控芯片 + 开源openEuler"
     },
     {
       aspect: "编程周期",
@@ -74,25 +74,25 @@ export function Architecture() {
     <div>
       <SEO
         title="Architecture | openIndu Full-Stack Platform"
-        description="Understand openIndu's complete industrial automation stack: from RK3588 chip to craftsmanship knowledge. End-to-end solution for manufacturing."
+        description="Understand openIndu's complete industrial automation stack: from domestic industrial SoCs to craftsmanship knowledge. End-to-end solution for manufacturing."
         canonicalPath="/architecture"
       />
 
       {/* Hero */}
-      <section className="relative bg-gradient-to-br from-slate-900 to-slate-800 text-white py-16 sm:py-24 overflow-hidden">
+      <section className="relative bg-gradient-to-b from-sky-50 via-white to-white py-16 sm:py-24 overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0 bg-grid-pattern"></div>
         </div>
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight text-gray-900 [word-break:keep-all]">
               openIndu 全链路架构
             </h1>
-            <p className="text-lg sm:text-xl text-slate-300 mb-8 max-w-3xl mx-auto">
+            <p className="text-lg sm:text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
               从工控芯片到工艺知识，打通工业制造全流程
             </p>
-            <p className="text-slate-400 mb-8">
-              RK3588 + openEuler + openindu-studio + 三层应用 + 工艺知识 = 完整工业自动化操作系统
+            <p className="text-gray-500 mb-8">
+              国产工控芯片 + openEuler + openindu-studio + 三层应用 + 工艺知识 = 完整工业自动化操作系统
             </p>
           </div>
         </div>
@@ -139,7 +139,7 @@ export function Architecture() {
               <div className="text-gray-700 space-y-2">
                 <p>1️⃣ <strong>设计阶段</strong>：在openindu-studio中一次性设计PLC逻辑、HMI界面、选择PLC型号</p>
                 <p>2️⃣ <strong>生成阶段</strong>：自动生成Siemens S7、三菱、欧姆龙等跨品牌代码 + BOM清单 + 电路图</p>
-                <p>3️⃣ <strong>部署阶段</strong>：代码部署到RK3588软PLC或目标硬件PLC</p>
+                <p>3️⃣ <strong>部署阶段</strong>：代码部署到国产芯片软PLC或目标硬件PLC</p>
               </div>
             </div>
 
@@ -172,7 +172,7 @@ export function Architecture() {
                 <tr className="bg-gray-100 border-b-2 border-gray-300">
                   <th className="px-4 py-3 text-left font-semibold text-gray-900 min-w-[150px]">维度</th>
                   <th className="px-4 py-3 text-left font-semibold text-gray-700 min-w-[250px]">传统方案</th>
-                  <th className="px-4 py-3 text-left font-semibold text-blue-700 min-w-[250px]">openIndu全栈</th>
+                  <th className="px-4 py-3 text-left font-semibold text-sky-800 min-w-[250px]">openIndu全栈</th>
                 </tr>
               </thead>
               <tbody>
@@ -180,7 +180,7 @@ export function Architecture() {
                   <tr key={row.aspect} className={idx % 2 === 0 ? "bg-white" : "bg-gray-50"}>
                     <td className="px-4 py-4 font-semibold text-gray-900 border-b border-gray-200">{row.aspect}</td>
                     <td className="px-4 py-4 text-gray-600 border-b border-gray-200">{row.traditional}</td>
-                    <td className="px-4 py-4 text-blue-600 border-b border-gray-200 font-medium">{row.openindu}</td>
+                    <td className="px-4 py-4 text-sky-700 border-b border-gray-200 font-medium">{row.openindu}</td>
                   </tr>
                 ))}
               </tbody>
@@ -190,13 +190,13 @@ export function Architecture() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 sm:py-20 bg-gradient-to-r from-blue-600 to-cyan-600 text-white">
+      <section className="py-16 sm:py-20 bg-gradient-to-r from-blue-700 to-cyan-700 text-white">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold mb-6">准备好探索全链路了吗？</h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               to="/use-cases"
-              className="inline-flex items-center justify-center px-8 py-4 bg-white text-blue-600 rounded-lg hover:bg-blue-50 transition-colors font-medium"
+              className="inline-flex items-center justify-center px-8 py-4 bg-white text-sky-700 rounded-lg hover:bg-sky-50 transition-colors font-medium"
             >
               查看行业场景方案
               <ArrowRight className="ml-2 h-5 w-5" />

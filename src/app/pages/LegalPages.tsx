@@ -52,7 +52,7 @@ function LegalPage({
                 </ul>
               )}
               {section.subSections?.map((sub, i) => (
-                <div key={i} className="mt-3 space-y-2 rounded-lg border-l-2 border-blue-100 pl-4">
+                <div key={i} className="mt-3 space-y-2 rounded-lg border-l-2 border-sky-100 pl-4">
                   {sub.title && (
                     <h3 className="text-base font-semibold text-gray-800">{sub.title}</h3>
                   )}
@@ -71,7 +71,7 @@ function LegalPage({
         </div>
 
         {contactNote !== undefined && (
-          <div className="mt-10 rounded-xl bg-blue-50 p-4 text-sm text-blue-800">
+          <div className="mt-10 rounded-xl bg-sky-50 p-4 text-sm text-sky-800">
             {contactNote || (
               <>
                 如你对本声明有疑问，或希望行使访问、更正、删除个人信息等权利，请通过
@@ -440,15 +440,15 @@ export function LegalIndex() {
         <h1 className="text-3xl font-bold text-gray-900">法律与隐私</h1>
         <p className="mt-3 text-gray-600">openIndu社区承诺保护用户隐私并遵守适用法律。以下文件说明我们如何收集信息、保护权利及规范使用行为。</p>
         <div className="mt-6 grid gap-4 sm:grid-cols-3">
-          <Link to="/privacy" className="rounded-xl border border-gray-100 p-5 hover:border-blue-200 hover:bg-blue-50 transition-colors">
+          <Link to="/privacy" className="rounded-xl border border-gray-100 p-5 hover:border-sky-200 hover:bg-sky-50 transition-colors">
             <div className="font-semibold text-gray-900 mb-1">隐私声明</div>
             <div className="text-sm text-gray-500">个人信息收集、使用与保护说明</div>
           </Link>
-          <Link to="/legal" className="rounded-xl border border-gray-100 p-5 hover:border-blue-200 hover:bg-blue-50 transition-colors">
+          <Link to="/legal" className="rounded-xl border border-gray-100 p-5 hover:border-sky-200 hover:bg-sky-50 transition-colors">
             <div className="font-semibold text-gray-900 mb-1">法律声明</div>
             <div className="text-sm text-gray-500">网站访问条件、知识产权与免责条款</div>
           </Link>
-          <Link to="/cookies" className="rounded-xl border border-gray-100 p-5 hover:border-blue-200 hover:bg-blue-50 transition-colors">
+          <Link to="/cookies" className="rounded-xl border border-gray-100 p-5 hover:border-sky-200 hover:bg-sky-50 transition-colors">
             <div className="font-semibold text-gray-900 mb-1">关于 Cookies</div>
             <div className="text-sm text-gray-500">本地存储与 Cookie 使用说明</div>
           </Link>

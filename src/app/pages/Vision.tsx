@@ -23,7 +23,7 @@ export function Vision() {
   const { t } = useTranslation("vision");
 
   return (
-    <div className="py-12">
+    <div>
       <SEO
         title={t("seo.title")}
         description={t("seo.description")}
@@ -41,7 +41,7 @@ export function Vision() {
           </div>
           <p className="text-xl text-gray-600 max-w-3xl mb-6">{t("hero.description")}</p>
           <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2 px-4 py-2 bg-green-100 text-green-700 rounded-lg">
+            <div className="flex items-center gap-2 px-4 py-2 bg-green-100 text-green-800 rounded-lg">
               <Clock className="w-5 h-5" />
               <span className="font-medium">{t("hero.badge")}</span>
             </div>
@@ -59,7 +59,7 @@ export function Vision() {
                 key={feature.key}
                 className="p-6 border border-gray-200 rounded-xl hover:border-green-600 hover:shadow-lg transition-all"
               >
-                <div className="flex items-center justify-center w-12 h-12 bg-green-100 text-green-600 rounded-lg mb-4">
+                <div className="flex items-center justify-center w-12 h-12 bg-green-100 text-green-800 rounded-lg mb-4">
                   <feature.icon className="w-6 h-6" />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">{t(`features.${feature.key}.title`)}</h3>
@@ -137,13 +137,13 @@ export function Vision() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 bg-gradient-to-r from-green-600 to-teal-600 text-white">
+      <section className="py-16 bg-gradient-to-r from-green-700 to-teal-700 text-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <div className="flex items-center justify-center gap-3 mb-4">
             <Clock className="w-12 h-12" />
           </div>
           <h2 className="text-3xl font-bold mb-4">{t("cta.heading")}</h2>
-          <p className="text-xl mb-8 text-green-100">{t("cta.description")}</p>
+          <p className="text-xl mb-8 text-white/90">{t("cta.description")}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="mailto:contact@openindu.com"
