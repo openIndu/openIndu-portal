@@ -21,6 +21,7 @@ import { spawn } from "node:child_process";
 import { writeFileSync, mkdirSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { SHARED_ROUTES, ZH_ONLY_ROUTES } from "./public-routes.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
@@ -38,30 +39,10 @@ const PORT = 4173; // vite preview default
  * through. Rendering it first would pollute EN routes with whatever <head>
  * state (lang, hreflang) `/` last left behind — see ADR C2.
  */
-const SHARED = [
-  "/architecture",
-  "/craftsmanship",
-  "/use-cases",
-  "/about",
-  "/developers",
-  "/team",
-  "/edge-computing",
-  "/forum",
-  "/motion-control",
-  "/motion-control/studio",
-  "/vision",
-  "/vision/station",
-  "/iiot-platform",
-  "/infrastructure",
-  "/pricing",
-  "/resources",
-];
-const ZH_ONLY = ["/privacy", "/legal", "/cookies", "/legal-center"];
-
 const ROUTES = [
-  ...SHARED,
-  ...ZH_ONLY,
-  ...SHARED.map((p) => `/en${p}`),
+  ...SHARED_ROUTES,
+  ...ZH_ONLY_ROUTES,
+  ...SHARED_ROUTES.map((p) => `/en${p}`),
   "/en",
   "/",
 ];
