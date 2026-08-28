@@ -29,6 +29,14 @@ import { test, expect } from "@playwright/test";
  */
 
 const SHARED = [
+  "/architecture",
+  "/craftsmanship",
+  "/use-cases",
+  "/about",
+  "/developers",
+  "/team",
+  "/edge-computing",
+  "/forum",
   "/motion-control",
   "/motion-control/studio",
   "/vision",
@@ -46,6 +54,22 @@ const ZH_ONLY = ["/privacy", "/legal", "/cookies", "/legal-center"];
 const TITLES: Record<string, string> = {
   "/": "openIndu Community｜开源智能制造工业生态",
   "/en": "openIndu Community | Open Smart Manufacturing Ecosystem",
+  "/architecture": "项目地图｜openIndu 工程工具栈社区",
+  "/en/architecture": "Project Map | openIndu Engineering Tool Stack Community",
+  "/craftsmanship": "工艺知识库｜openIndu 社区论坛",
+  "/en/craftsmanship": "Craftsmanship Knowledge | openIndu Community Forum",
+  "/use-cases": "行业场景｜openIndu 全栈平台",
+  "/en/use-cases": "Industry Solutions | openIndu Full-Stack Platform",
+  "/about": "关于 openIndu｜openIndu 社区",
+  "/en/about": "About openIndu | openIndu Community",
+  "/developers": "开发者｜openIndu 社区",
+  "/en/developers": "Developers | openIndu Community",
+  "/team": "团队｜openIndu 社区",
+  "/en/team": "Team | openIndu Community",
+  "/edge-computing": "openIndu-cim | Edge Computing | openIndu",
+  "/en/edge-computing": "openIndu-cim | Edge Computing | openIndu",
+  "/forum": "论坛 | openIndu Community",
+  "/en/forum": "Forum | openIndu Community",
   "/motion-control": "AI+运动控制｜openIndu 智能制造",
   "/en/motion-control": "AI + Motion Control | openIndu Smart Manufacturing",
   "/motion-control/studio": "openIndu-studio 介绍｜openIndu",
@@ -69,11 +93,21 @@ const TITLES: Record<string, string> = {
 };
 
 const PRERENDERED = [...SHARED, ...ZH_ONLY, ...SHARED.map((p) => `/en${p}`), "/en", "/"];
-expect(PRERENDERED.length).toBe(22);
+expect(PRERENDERED.length).toBe(38);
 
 /** vite preview needs the trailing slash to resolve <path>/index.html; nginx doesn't. */
 function servePath(path: string) {
   return path === "/" ? "/" : `${path}/`;
+}
+
+function webPageJsonLd(html: string) {
+  const marker = 'data-openindu-jsonld="1">';
+  const start = html.indexOf(marker);
+  expect(start).toBeGreaterThanOrEqual(0);
+  const from = start + marker.length;
+  const end = html.indexOf("</script>", from);
+  const payload = JSON.parse(html.slice(from, end)) as Array<Record<string, unknown>>;
+  return payload.find((item) => item["@type"] === "WebPage") as Record<string, unknown>;
 }
 
 test.describe("Prerendered HTML", () => {
@@ -129,6 +163,26 @@ test.describe("Prerendered HTML", () => {
     const response = await page.goto(servePath("/motion-control"));
     const html = await response!.text();
     expect(html).toContain('<link rel="canonical" href="https://www.openindu.com/motion-control"');
+  });
+
+  test("EN structured data matches the visible page metadata and canonical URL", async ({ page }) => {
+    const response = await page.goto(servePath("/en/architecture"));
+    const html = await response!.text();
+    const schema = webPageJsonLd(html);
+    expect(schema.name).toBe(TITLES["/en/architecture"]);
+    expect(schema.url).toBe("https://www.openindu.com/en/architecture");
+    expect(schema.description).toContain("five openIndu collaboration directions");
+    expect((schema.about as Record<string, unknown>).name).toBe("Smart Manufacturing and Industrial Automation");
+  });
+
+  test("sitemap contains every localized public route", async ({ request }) => {
+    const response = await request.get("/sitemap.xml");
+    expect(response.status()).toBe(200);
+    const xml = await response.text();
+    for (const path of SHARED) {
+      expect(xml).toContain(`https://www.openindu.com${path}`);
+      expect(xml).toContain(`https://www.openindu.com/en${path}`);
+    }
   });
 
   test("EN/ZH raw responses carry hreflang alternates pointing back at each other", async ({ page }) => {

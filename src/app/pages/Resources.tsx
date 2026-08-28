@@ -92,7 +92,7 @@ export function Resources() {
   const [brand, setBrand] = useState("");
   const [category, setCategory] = useState("");
   const [series, setSeries] = useState("");
-  const [keyword, setKeyword] = useState("");
+  const [keyword, setKeyword] = useState(() => new URLSearchParams(location.search).get("keyword") ?? "");
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
   const [data, setData] = useState<PaginatedResponse<ResourceItem>>({ items: [], total: 0, page: 1, page_size: 10 });

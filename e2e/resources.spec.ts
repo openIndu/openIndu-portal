@@ -48,5 +48,14 @@ for (const { locale, prefix, label } of LOCALES) {
       const searchButton = page.getByRole("button", { name: GOLDEN.searchButton[locale] });
       await expect(searchButton).toBeVisible();
     });
+
+    test("hydrates the search field from the structured search URL", async ({ page }) => {
+      await page.addInitScript(() => {
+        localStorage.setItem("openindu_portal_token", "test-token");
+        localStorage.setItem("openindu_portal_user", JSON.stringify({ id: 1, phone: "13800138000", role: "member" }));
+      });
+      await page.goto(`${prefix}/resources?keyword=EtherCAT`);
+      await expect(page.getByPlaceholder(GOLDEN.searchPlaceholder[locale])).toHaveValue("EtherCAT");
+    });
   });
 }

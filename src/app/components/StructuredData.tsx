@@ -61,9 +61,14 @@ export function StructuredData({
   pagePath,
 }: StructuredDataProps = {}) {
   useEffect(() => {
+    let script: HTMLScriptElement | undefined;
+    const timer = window.setTimeout(() => {
     const origin = window.location.origin;
-    const pathname = pagePath ?? window.location.pathname;
-    const url = origin + pathname;
+    const canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    const url = canonical?.href || window.location.href;
+    const pathname = new URL(url).pathname;
+    const isEnglish = document.documentElement.lang.startsWith("en");
+    const metaDescription = document.head.querySelector<HTMLMetaElement>('meta[name="description"]')?.content;
 
     // --- Site-level schemas (persistent) ---
     const sitePayload = [
@@ -74,8 +79,9 @@ export function StructuredData({
         alternateName: "openIndu",
         url: origin,
         logo: `${origin}/assets/logo.png`,
-        description:
-          "面向工业自动化与非标设备的开源智能制造工业生态，通过论坛、开源工程工具和可验证项目推动协作。",
+        description: isEnglish
+          ? "An open smart manufacturing ecosystem built through the forum, open engineering tools, and verifiable projects."
+          : "面向工业自动化与非标设备的开源智能制造工业生态，通过论坛、开源工程工具和可验证项目推动协作。",
       },
       {
         "@context": "https://schema.org",
@@ -112,9 +118,9 @@ export function StructuredData({
       "@context": "https://schema.org",
       "@type": "WebPage",
       name: pageTitle || document.title,
-      description:
-        pageDescription ||
-        "openIndu Community — 开源智能制造工业生态",
+      description: pageDescription || metaDescription || (isEnglish
+        ? "openIndu Community — Open Smart Manufacturing Ecosystem"
+        : "openIndu Community — 开源智能制造工业生态"),
       url,
       dateModified: "2026-08-28",
       isPartOf: {
@@ -124,7 +130,7 @@ export function StructuredData({
       },
       about: {
         "@type": "Thing",
-        name: "智能制造与工业自动化",
+        name: isEnglish ? "Smart Manufacturing and Industrial Automation" : "智能制造与工业自动化",
       },
     });
 
@@ -136,15 +142,17 @@ export function StructuredData({
       .querySelectorAll('script[data-openindu-jsonld]')
       .forEach((el) => el.remove());
 
-    const script = document.createElement("script");
+    script = document.createElement("script");
     script.type = "application/ld+json";
     script.setAttribute("data-openindu-jsonld", "1");
     script.textContent = JSON.stringify(allPayload);
     document.head.appendChild(script);
 
+    }, 0);
+
     return () => {
-      // Only clean up page-level on unmount; site-level persists
-      script.parentElement?.removeChild(script);
+      window.clearTimeout(timer);
+      script?.parentElement?.removeChild(script);
     };
   }, [pageTitle, pageDescription, pagePath]);
 
