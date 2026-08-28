@@ -46,9 +46,9 @@ export function Home() {
               <Github className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               {t("hero.badge")}
             </span>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 sm:mb-6 leading-tight text-gray-900 [word-break:keep-all]">
-              {t("hero.titleLine1")}
-              <span className="block text-[#0B72B5] mt-2">{t("hero.titleLine2")}</span>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 sm:mb-6 leading-tight text-gray-900">
+              <span className="block">{t("hero.titleLine1")}</span>
+              <span className="block text-[#0B72B5] mt-2 break-words">{t("hero.titleLine2")}</span>
             </h1>
             <p className="text-lg sm:text-xl text-gray-600 mb-4 max-w-3xl mx-auto leading-relaxed">
               {t("hero.subtitle")}

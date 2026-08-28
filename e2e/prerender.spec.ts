@@ -35,6 +35,7 @@ const SHARED = [
   "/vision/station",
   "/iiot-platform",
   "/infrastructure",
+  "/pricing",
   "/resources",
 ];
 const ZH_ONLY = ["/privacy", "/legal", "/cookies", "/legal-center"];
@@ -57,6 +58,8 @@ const TITLES: Record<string, string> = {
   "/en/iiot-platform": "Industrial IoT Platform | openIndu",
   "/infrastructure": "AI+基础设施｜openIndu",
   "/en/infrastructure": "AI + Infrastructure | openIndu",
+  "/pricing": "部署与许可方案｜openIndu 全栈平台",
+  "/en/pricing": "Deployment Options | openIndu Full-Stack Platform",
   "/resources": "下载中心｜openIndu",
   "/en/resources": "Downloads | openIndu",
   "/privacy": "隐私声明｜openIndu社区",
@@ -66,7 +69,7 @@ const TITLES: Record<string, string> = {
 };
 
 const PRERENDERED = [...SHARED, ...ZH_ONLY, ...SHARED.map((p) => `/en${p}`), "/en", "/"];
-expect(PRERENDERED.length).toBe(20);
+expect(PRERENDERED.length).toBe(22);
 
 /** vite preview needs the trailing slash to resolve <path>/index.html; nginx doesn't. */
 function servePath(path: string) {

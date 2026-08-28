@@ -78,6 +78,18 @@ for (const { locale, prefix, label } of LOCALES) {
       await expect(page.getByText(gv("heroSubtitle", locale))).toBeVisible();
     });
 
+    test("keeps the hero title readable on mobile", async ({ page }) => {
+      await page.setViewportSize({ width: 390, height: 844 });
+      await page.goto(prefix + "/");
+      const secondLine = page.locator("h1 span").nth(1);
+      await expect(secondLine).toBeVisible();
+      const dimensions = await secondLine.evaluate((element) => ({
+        clientWidth: element.clientWidth,
+        scrollWidth: element.scrollWidth,
+      }));
+      expect(dimensions.scrollWidth).toBeLessThanOrEqual(dimensions.clientWidth + 1);
+    });
+
     test("displays the ecosystem stack", async ({ page }) => {
       await page.goto(prefix + "/");
       const main = page.locator("main");

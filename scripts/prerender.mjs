@@ -53,6 +53,7 @@ const SHARED = [
   "/vision/station",
   "/iiot-platform",
   "/infrastructure",
+  "/pricing",
   "/resources",
 ];
 const ZH_ONLY = ["/privacy", "/legal", "/cookies", "/legal-center"];
@@ -224,8 +225,8 @@ async function main() {
   const server = await startPreviewServer();
   console.log("✓ Preview server ready\n");
 
-  // 2. Launch browser (gracefully skip if Chromium is unavailable, e.g. in
-  //    Docker builds from China where apt downloads are unreliable).
+  // 2. Launch browser. Static HTML is a required production artifact, so a
+  //    missing Chromium runtime must fail the build.
   let browser;
   try {
     browser = await puppeteer.launch({
@@ -233,13 +234,12 @@ async function main() {
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
     });
   } catch (err) {
-    console.warn(
-      `⚠ Could not launch browser: ${err.message}\n` +
-        "  Skipping prerender — the SPA fallback will serve client-rendered pages.\n" +
-        "  Install Chromium for static HTML generation: apt install chromium\n"
+    console.error(
+      `Could not launch Chromium for required prerendering: ${err.message}\n` +
+        "Install Chromium before running the production build.\n"
     );
     await stopServer(server);
-    process.exit(0);
+    process.exit(1);
   }
 
   let successCount = 0;

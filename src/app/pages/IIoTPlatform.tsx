@@ -136,30 +136,10 @@ export function IIoTPlatform() {
               {t("hero.ctaSecondary")}
             </a>
           </div>
-          <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 sm:inline-flex border border-sky-200 bg-sky-50 rounded-xl px-4 py-4 sm:px-6 sm:py-4 w-full sm:w-auto">
+          <div className="inline-flex items-center border border-sky-200 bg-sky-50 rounded-xl px-4 py-4 sm:px-6 sm:py-4">
             <div className="text-center">
               <p className="text-xs text-gray-600 mb-1">{t("hero.demoLabel")}</p>
               <p className="text-sm font-mono text-gray-900">website.openindu.com</p>
-            </div>
-            <div className="hidden sm:block w-px h-8 bg-sky-200" />
-            <div className="flex gap-6 sm:hidden">
-              <div className="text-center">
-                <p className="text-xs text-gray-600 mb-1">{t("hero.usernameLabel")}</p>
-                <p className="text-sm font-mono text-gray-900">admin</p>
-              </div>
-              <div className="text-center">
-                <p className="text-xs text-gray-600 mb-1">{t("hero.passwordLabel")}</p>
-                <p className="text-sm font-mono text-gray-900">abc@123456</p>
-              </div>
-            </div>
-            <div className="hidden sm:block text-center">
-              <p className="text-xs text-gray-600 mb-1">{t("hero.usernameLabel")}</p>
-              <p className="text-sm font-mono text-gray-900">admin</p>
-            </div>
-            <div className="hidden sm:block w-px h-8 bg-sky-200" />
-            <div className="hidden sm:block text-center">
-              <p className="text-xs text-gray-600 mb-1">{t("hero.passwordLabel")}</p>
-              <p className="text-sm font-mono text-gray-900">abc@123456</p>
             </div>
           </div>
         </div>
