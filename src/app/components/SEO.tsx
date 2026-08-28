@@ -87,7 +87,7 @@ export function SEO({
       ? image.startsWith("http")
         ? image
         : `${origin}${image}`
-      : `${origin}/assets/logo.png`;
+      : `${origin}/assets/og-image.png`;
 
     // <html lang>
     document.documentElement.lang = pageLocale === "en" ? "en" : "zh-CN";

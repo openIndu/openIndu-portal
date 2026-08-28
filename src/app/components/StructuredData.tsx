@@ -78,7 +78,7 @@ export function StructuredData({
         name: "openIndu Community",
         alternateName: "openIndu",
         url: origin,
-        logo: `${origin}/assets/logo.png`,
+        logo: `${origin}/assets/logo-512.png`,
         description: isEnglish
           ? "An open smart manufacturing ecosystem built through the forum, open engineering tools, and verifiable projects."
           : "面向工业自动化与非标设备的开源智能制造工业生态，通过论坛、开源工程工具和可验证项目推动协作。",
