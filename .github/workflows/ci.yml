@@ -29,7 +29,7 @@ jobs:
       - run: npm run build
 
   test:
-    name: Unit Tests (vitest)
+    name: Unit Tests + Coverage (vitest)
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -39,4 +39,30 @@ jobs:
           node-version: "20"
           cache: npm
       - run: npm ci
-      - run: npm test
+      - run: npm run test:coverage
+
+  lint:
+    name: Lint (eslint)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+
+  audit:
+    name: Dependency audit (prod, high+)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      # Explicit registry: the advisories endpoint isn't served by every mirror.
+      # Dev-only advisories (vitest/puppeteer, semver-major to fix) are out of scope here.
+      - run: npm audit --registry=https://registry.npmjs.org --omit=dev --audit-level=high

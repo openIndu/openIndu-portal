@@ -28,8 +28,6 @@ vi.mock("@/api", () => ({
   clearAuthStorage: vi.fn(),
 }));
 
-// Mock navigate
-const mockNavigate = vi.fn();
 vi.mock("react-router", async () => {
   const actual = await vi.importActual("react-router");
   return {

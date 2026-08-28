@@ -46,7 +46,6 @@ Object.defineProperty(globalThis, "localStorage", {
 });
 
 // Mock window.location
-const originalLocation = window.location;
 Object.defineProperty(window, "location", {
   value: {
     pathname: "/",
@@ -312,7 +311,7 @@ describe("authApi", () => {
   });
 
   it("login should call post and normalize nested response", async () => {
-    const mockPost = vi.spyOn(apiClient, "post").mockResolvedValueOnce({
+    vi.spyOn(apiClient, "post").mockResolvedValueOnce({
       data: {
         code: 200,
         data: {
@@ -329,7 +328,7 @@ describe("authApi", () => {
   });
 
   it("login should handle flat response format", async () => {
-    const mockPost = vi.spyOn(apiClient, "post").mockResolvedValueOnce({
+    vi.spyOn(apiClient, "post").mockResolvedValueOnce({
       data: {
         code: 200,
         data: {
@@ -346,7 +345,7 @@ describe("authApi", () => {
   });
 
   it("register should call post and normalize response", async () => {
-    const mockPost = vi.spyOn(apiClient, "post").mockResolvedValueOnce({
+    vi.spyOn(apiClient, "post").mockResolvedValueOnce({
       data: {
         code: 200,
         data: {
@@ -524,7 +523,7 @@ describe("portalApi", () => {
   });
 
   it("hero should handle direct content format", async () => {
-    const mockGet = vi.spyOn(apiClient, "get").mockResolvedValueOnce({
+    vi.spyOn(apiClient, "get").mockResolvedValueOnce({
       data: { code: 200, data: { title: "Welcome" } },
     });
 
@@ -550,7 +549,7 @@ describe("portalApi", () => {
   });
 
   it("solutions should handle direct array format", async () => {
-    const mockGet = vi.spyOn(apiClient, "get").mockResolvedValueOnce({
+    vi.spyOn(apiClient, "get").mockResolvedValueOnce({
       data: {
         code: 200,
         data: [{ id: 1, title: "PLC", description: "PLC workflow" }],
@@ -579,7 +578,7 @@ describe("portalApi", () => {
   });
 
   it("carousel returns empty array for malformed responses", async () => {
-    const mockGet = vi.spyOn(apiClient, "get").mockResolvedValueOnce({
+    vi.spyOn(apiClient, "get").mockResolvedValueOnce({
       data: { code: 200, data: { items: null } },
     });
 
