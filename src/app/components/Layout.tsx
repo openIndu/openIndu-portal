@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { useAuth } from "@/store/auth";
 import { visitsApi } from "@/api";
 import { getDisplayName, maskPhone } from "../utils/user";
+import { isNavItemActive } from "../utils/nav";
 import { StructuredData } from "./StructuredData";
 import { LanguageSwitcher, LanguageSwitcherCompact, LanguageSwitcherMobile } from "./LanguageSwitcher";
 import logo from "/assets/logo-96.png";
@@ -61,7 +62,15 @@ export function Layout() {
     [t],
   );
 
-  type NavItem = { name: string; href: string; testid?: string; children?: NavItem[]; external?: boolean };
+  type NavItem = {
+    name: string;
+    href: string;
+    testid?: string;
+    children?: NavItem[];
+    external?: boolean;
+    /** Path prefixes that light this item up. Defaults to [href]. */
+    match?: string[];
+  };
   const navigation: NavItem[] = useMemo(() => {
     const items: NavItem[] = [
       { name: t("nav.home"), href: "/", testid: "nav-home" },
@@ -72,6 +81,10 @@ export function Layout() {
         name: t("nav.products"),
         href: "/architecture",
         testid: "nav-products",
+        // "Projects" is a category — it owns its child pages, NOT /architecture
+        // (which belongs to the "全栈架构" item). Without this the two share a
+        // href and both highlight on /architecture.
+        match: ["/motion-control", "/vision", "/iiot-platform", "/edge-computing"],
         children: [
           { name: t("nav.studio"), href: "/motion-control/studio", testid: "nav-studio" },
           { name: t("nav.vision"), href: "/vision", testid: "nav-vision" },
@@ -90,12 +103,7 @@ export function Layout() {
     return items;
   }, [t, locale]);
 
-  const isActive = (path: string) => {
-    if (path === "/") {
-      return location.pathname === "/";
-    }
-    return location.pathname.startsWith(path);
-  };
+  const isActive = (item: NavItem) => isNavItemActive(item, location.pathname);
 
   async function handleLogout() {
     await logout();
@@ -139,9 +147,9 @@ export function Layout() {
                     <Link
                       to={item.href}
                       data-testid={item.testid}
-                      aria-current={isActive(item.href) ? "page" : undefined}
+                      aria-current={isActive(item) ? "page" : undefined}
                       className={`flex items-center justify-center gap-1 text-sm transition-colors whitespace-nowrap py-2 px-2 min-h-[44px] min-w-[60px] ${
-                        isActive(item.href)
+                        isActive(item)
                           ? "text-sky-700 font-medium"
                           : "text-gray-700 hover:text-sky-700"
                       }`}
@@ -198,8 +206,9 @@ export function Layout() {
                     key={item.name}
                     to={item.href}
                     data-testid={item.testid}
+                    aria-current={isActive(item) ? "page" : undefined}
                     className={`text-sm transition-colors whitespace-nowrap py-2 px-2 min-h-[44px] min-w-[60px] inline-flex items-center justify-center ${
-                      isActive(item.href)
+                      isActive(item)
                         ? "text-sky-700 font-medium"
                         : "text-gray-700 hover:text-sky-700"
                     }`}
@@ -269,9 +278,10 @@ export function Layout() {
                   to={item.href}
                   data-testid={item.testid}
                   onClick={() => setMobileMenuOpen(false)}
+                  aria-current={isActive(item) ? "page" : undefined}
                   className={`flex min-h-[44px] items-center rounded-lg px-3 py-2 ${
-                    isActive(item.href)
-                      ? "bg-sky-700 text-white font-medium"
+                    isActive(item)
+                      ? "bg-sky-50 font-medium text-sky-700"
                       : "text-gray-700 hover:bg-gray-50"
                   }`}
                 >

@@ -12,7 +12,7 @@ export default defineConfig({
       // Scoped to the modules that carry real unit tests today. Pages, Layout,
       // SEO, i18n glue and the untested UI wrappers are left out until they get
       // coverage — widen this list as they do.
-      include: ["src/api/**", "src/store/**", "src/app/components/ui/**"],
+      include: ["src/api/**", "src/store/**", "src/app/components/ui/**", "src/app/utils/**"],
       exclude: [
         "src/**/*.test.ts",
         "src/**/*.test.tsx",
