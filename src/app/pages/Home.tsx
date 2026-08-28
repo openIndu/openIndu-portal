@@ -214,9 +214,6 @@ export function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left: Craftsmanship Knowledge */}
             <div>
-              <div className="inline-block px-4 py-2 bg-amber-100 text-amber-800 rounded-full text-sm font-medium mb-4">
-                {t("knowledge.badge")}
-              </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-tight">
                 {t("knowledge.heading")}
               </h2>
@@ -257,9 +254,6 @@ export function Home() {
 
             {/* Right: Open Source & Contribute */}
             <div>
-              <div className="inline-block px-4 py-2 bg-sky-100 text-sky-800 rounded-full text-sm font-medium mb-4">
-                {t("openSource.badge")}
-              </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-tight">
                 {t("openSource.heading")}
               </h2>

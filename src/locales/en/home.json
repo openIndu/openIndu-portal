@@ -44,7 +44,7 @@
     "l4Title": "Craftsmanship Knowledge Base",
     "l4Desc": "Forum process columns: display panels, semiconductors, new energy",
     "l3Vision": "Industrial Vision",
-    "l3VisionDesc": "OpenCV inspection / positioning",
+    "l3VisionDesc": "openIndu-vision",
     "l3Studio": "Programming & Configuration",
     "l3StudioDesc": "openindu-studio",
     "l3Data": "Data Acquisition",
@@ -73,7 +73,6 @@
     "iiot": "Industrial IoT"
   },
   "knowledge": {
-    "badge": "Layer 4: Craftsmanship Knowledge",
     "heading": "A Crowdsourced Process Library",
     "description": "openIndu is more than tooling — it gathers the process knowledge of manufacturing engineers worldwide. Every parameter and every case shared on the forum is hard-won experience from a real production line.",
     "item1Title": "Battery processes",
@@ -85,7 +84,6 @@
     "cta": "Explore the Knowledge Base"
   },
   "openSource": {
-    "badge": "Open source · Open community · Collaborative",
     "heading": "Fully Open Source — Come Build With Us",
     "description": "All openIndu code is open on GitHub and Gitee. Whether you submit code, share process parameters or join a discussion, every contribution moves industrial automation forward.",
     "item1Title": "Code contributions",

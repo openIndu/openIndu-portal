@@ -44,7 +44,7 @@
     "l4Title": "工艺知识库 (Craftsmanship)",
     "l4Desc": "论坛工艺专栏：面板、芯片、新能源",
     "l3Vision": "工业视觉",
-    "l3VisionDesc": "OpenCV 检测/定位",
+    "l3VisionDesc": "openIndu-vision",
     "l3Studio": "编程组态",
     "l3StudioDesc": "openindu-studio",
     "l3Data": "数据采集",
@@ -73,7 +73,6 @@
     "iiot": "工业互联网"
   },
   "knowledge": {
-    "badge": "Layer 4：工艺知识层",
     "heading": "工艺知识众包库",
     "description": "openIndu 不仅提供工具，更重要的是汇聚全球制造工程师的工艺知识。论坛中共享的每一条参数、每一个案例，都是生产线实战经验的积累。",
     "item1Title": "电池工艺",
@@ -85,7 +84,6 @@
     "cta": "了解工艺知识库"
   },
   "openSource": {
-    "badge": "开源 · 开放 · 协作",
     "heading": "完全开源，欢迎参与",
     "description": "openIndu 所有代码都在 GitHub 和 Gitee 开源。无论是提交代码、分享工艺参数，还是参与讨论，每一个贡献都推动工业自动化向前发展。",
     "item1Title": "代码贡献",
