@@ -6,12 +6,11 @@
   },
   "hero": {
     "badge": "开源 · 开放 · 工程协作",
-    "titleLine1": "分享工艺，共建工具",
-    "titleLine2": "连接视觉、控制与工业数据",
-    "subtitle": "面向工业自动化与非标设备的开源智能制造工业生态。以论坛、开源工程工具和可验证项目支撑协作。",
+    "titleLine1": "一栈贯通，开放智造",
+    "titleLine2": "共建工业自动化的端到端开源生态",
+    "subtitle": "分享工艺，共建工具，推动视觉、控制与工业数据协同。",
     "ctaStudio": "了解 openIndu-studio",
     "ctaSolutions": "查看解决方案",
-    "accent": "从现场问题到可复用工程资产",
     "chain": "Forum → Vision / Studio / CIM + Platform / PLC Experiment"
   },
   "products": {

@@ -6,12 +6,11 @@
   },
   "hero": {
     "badge": "Open source · Open engineering · Collaboration",
-    "titleLine1": "Share Process Knowledge. Build Tools Together.",
-    "titleLine2": "Connect Vision, Control, and Industrial Data",
-    "subtitle": "An open smart manufacturing ecosystem for industrial automation and non-standard equipment, supported by the forum, open engineering tools, and verifiable projects.",
+    "titleLine1": "One Stack, Open Manufacturing",
+    "titleLine2": "Build an End-to-End Open Ecosystem for Industrial Automation",
+    "subtitle": "Share process knowledge, build tools together, and advance collaboration across vision, control, and industrial data.",
     "ctaStudio": "Learn about openIndu-studio",
     "ctaSolutions": "View Solutions",
-    "accent": "From field problems to reusable engineering assets",
     "chain": "Forum → Vision / Studio / CIM + Platform / PLC Experiment"
   },
   "products": {

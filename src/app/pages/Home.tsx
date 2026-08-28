@@ -48,9 +48,12 @@ export function Home() {
             </span>
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 sm:mb-6 leading-tight text-gray-900 [word-break:keep-all]">
               {t("hero.titleLine1")}
-              <span className="block text-[#0B72B5] mt-2">{t("hero.accent")}</span>
+              <span className="block text-[#0B72B5] mt-2">{t("hero.titleLine2")}</span>
             </h1>
-            <p className="text-lg sm:text-xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg sm:text-xl text-gray-600 mb-4 max-w-3xl mx-auto leading-relaxed">
+              {t("hero.subtitle")}
+            </p>
+            <p className="text-sm sm:text-base text-gray-500 mb-12 max-w-3xl mx-auto leading-relaxed">
               {t("hero.chain")}
             </p>
           </div>
