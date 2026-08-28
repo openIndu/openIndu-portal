@@ -72,6 +72,8 @@
   "a11y": {
     "mobileMenuOpen": "Open navigation menu",
     "mobileMenuClose": "Close navigation menu",
+    "mainNavigation": "Main navigation",
+    "mobileNavigation": "Mobile navigation",
     "skipToContent": "Skip to main content"
   },
   "edgeComputing": {

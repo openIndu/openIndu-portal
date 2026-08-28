@@ -22,6 +22,7 @@ for (const { locale, prefix, label } of LOCALES) {
       await expect(page).toHaveURL(prefix + "/resources");
       // Scoped to h1 -- the same text also appears in the nav link and footer.
       await expect(page.locator("h1")).toContainText(GOLDEN.heading[locale]);
+      await expect(page.getByRole("link", { name: locale === "zh" ? "登录 / 注册" : "Sign in / Sign up" }).last()).toHaveAttribute("href", prefix + "/login");
     });
 
     test("should have document and software tabs visible when authenticated", async ({ page }) => {

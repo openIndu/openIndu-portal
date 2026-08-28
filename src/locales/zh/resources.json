@@ -10,6 +10,7 @@
   },
   "authBanner": {
     "guest": "资源列表可直接浏览，在线预览和下载需要先登录。",
+    "signIn": "登录 / 注册",
     "nonMember": "当前账号可浏览列表，在线预览和下载仅会员及以上角色可用。"
   },
   "tabs": { "documents": "文档", "software": "软件" },

@@ -90,6 +90,19 @@ for (const { locale, prefix, label } of LOCALES) {
       expect(dimensions.scrollWidth).toBeLessThanOrEqual(dimensions.clientWidth + 1);
     });
 
+    test("mobile navigation locks scrolling and closes with Escape", async ({ page }) => {
+      await page.setViewportSize({ width: 390, height: 844 });
+      await page.goto(prefix + "/");
+      const menuButton = page.getByRole("button", { name: locale === "zh" ? "打开导航菜单" : "Open navigation menu" });
+      await menuButton.click();
+      await expect(page.getByRole("navigation", { name: locale === "zh" ? "移动端导航" : "Mobile navigation" })).toBeVisible();
+      await expect.poll(() => page.evaluate(() => document.body.style.overflow)).toBe("hidden");
+      await page.keyboard.press("Escape");
+      await expect(page.getByRole("navigation", { name: locale === "zh" ? "移动端导航" : "Mobile navigation" })).toBeHidden();
+      await expect(menuButton).toBeFocused();
+      await expect.poll(() => page.evaluate(() => document.body.style.overflow)).toBe("");
+    });
+
     test("displays the ecosystem stack", async ({ page }) => {
       await page.goto(prefix + "/");
       const main = page.locator("main");

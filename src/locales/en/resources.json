@@ -10,6 +10,7 @@
   },
   "authBanner": {
     "guest": "The resource list is browsable without signing in; online preview and download require sign-in.",
+    "signIn": "Sign in / Sign up",
     "nonMember": "Your account can browse the list; online preview and download require Member role or above."
   },
   "tabs": { "documents": "Documents", "software": "Software" },

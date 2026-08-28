@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useLocation, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { Download, Eye, FileText, Loader2, Package, Search } from "lucide-react";
 import { documentsApi, getApiErrorMessage, isTooManyRequests, softwareApi, tagsApi, type PaginatedResponse, type ResourceItem, type ResourceTag } from "@/api";
 import { useAuth } from "@/store/auth";
@@ -55,7 +55,7 @@ function ChipBar({ label, options, selected, onSelect, disabled }: { label: stri
           type="button"
           disabled={disabled}
           onClick={() => onSelect(option.value)}
-          className={`rounded-full border px-3 py-1 text-xs transition-colors disabled:opacity-50 ${
+          className={`inline-flex min-h-[44px] items-center rounded-full border px-3 py-2 text-xs transition-colors disabled:opacity-50 ${
             selected === option.value
               ? "border-sky-700 bg-sky-700 text-white"
               : "border-gray-300 bg-white text-gray-700 hover:border-sky-400 hover:bg-sky-50"
@@ -317,8 +317,11 @@ export function Resources() {
             <p className="mt-2 text-gray-600">{t("header.subtitle")}</p>
           </div>
           {!isAuthenticated ? (
-            <div className="rounded-lg border border-sky-200 bg-sky-50 px-4 py-3 text-sm text-sky-800">
-              {t("authBanner.guest")}
+            <div className="flex flex-col gap-2 rounded-lg border border-sky-200 bg-sky-50 px-4 py-3 text-sm text-sky-800 sm:flex-row sm:items-center">
+              <span>{t("authBanner.guest")}</span>
+              <Link to="/login" state={{ from: { pathname: location.pathname } }} className="inline-flex min-h-[44px] shrink-0 items-center justify-center rounded-lg bg-sky-700 px-4 py-2 font-medium text-white hover:bg-sky-800">
+                {t("authBanner.signIn")}
+              </Link>
             </div>
           ) : !isMember ? (
             <div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">

@@ -72,6 +72,8 @@
   "a11y": {
     "mobileMenuOpen": "打开导航菜单",
     "mobileMenuClose": "关闭导航菜单",
+    "mainNavigation": "主导航",
+    "mobileNavigation": "移动端导航",
     "skipToContent": "跳到主要内容"
   },
   "edgeComputing": {
