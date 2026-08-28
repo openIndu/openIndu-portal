@@ -1,12 +1,12 @@
 {
   "seo": {
     "title": "工业互联网平台 IIoT｜openIndu",
-    "description": "openIndu 工业互联网平台：面向 3C 电子制造的企业级 IIoT，设备管理、数据采集、可视化看板与追溯一体化。",
+    "description": "openIndu-platform：面向 3C 电子制造的社区级 IIoT 项目，探索设备管理、数据采集、可视化与追溯。",
     "keywords": "工业互联网,IIoT,设备管理,数据采集,3C 制造,openIndu"
   },
   "hero": {
     "title1": "面向 3C 电子制造行业的",
-    "title2": "企业级工业互联网平台",
+    "title2": "openIndu-platform 社区项目",
     "subtitle": "让工业数据说话，让智能制造更简单",
     "ctaPrimary": "体验平台",
     "ctaSecondary": "了解架构",
@@ -24,7 +24,7 @@
       "产品追溯",
       "数据大屏"
     ],
-    "p1Suffix": "的完整链路。",
+    "p1Suffix": "等方向；实际能力以仓库、版本和验证环境为准。",
     "p2Prefix": "平台由两部分组成：",
     "p2Strong1": "页面端",
     "p2Mid1": "基于 Vue 3 的现代化 Web 应用，为不同角色提供个性化工作台与数据看板；",
@@ -33,7 +33,7 @@
   },
   "features": {
     "heading": "核心功能",
-    "subheading": "六大核心功能模块，覆盖智能制造全场景",
+    "subheading": "六个功能方向，按仓库版本与环境逐项验证",
     "smartLogin": {
       "title": "智能登录 · 安全便捷",
       "description": "支持手机号验证码登录/注册，JWT Token 认证机制保障安全。",
@@ -179,16 +179,16 @@
       "description": "专注 3C 电子制造行业，深度理解行业痛点与需求"
     },
     "traceability": {
-      "title": "完整追溯链",
-      "description": "从原材料到成品的全链路产品追溯，确保品质可控"
+      "title": "追溯模型",
+      "description": "探索从原材料到成品的身份、过程与质量数据关联"
     },
     "frontend": {
       "title": "优秀前端体验",
       "description": "Vue 3 + Element Plus 构建的现代化 Web 应用"
     },
     "deviceCompat": {
-      "title": "设备兼容广泛",
-      "description": "支持西门子、三菱、欧姆龙、基恩士、汇川等主流 PLC 协议"
+      "title": "设备接入评估",
+      "description": "协议支持取决于已集成驱动、设备型号、版本与验证环境"
     },
     "cloudEdge": {
       "title": "云边协同",

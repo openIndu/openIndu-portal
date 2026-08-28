@@ -1,16 +1,16 @@
 {
   "seo": {
-    "title": "Industry Solutions | openIndu Full-Stack Platform",
-    "description": "Display panels, semiconductors and new energy: where openIndu's full stack plugs into each end-to-end process chain — PLC control, machine vision, edge computing and craftsmanship knowledge."
+    "title": "Industry Scenario References | openIndu Community",
+    "description": "Reference integration points for display panels, semiconductors, and new energy. This content supports discussion and solution assessment; it is not evidence of validated delivery capability."
   },
   "hero": {
     "title": "Industry Scenarios",
-    "subtitle": "Display panels, semiconductors and new energy — where the openIndu stack plugs into each step of the chain"
+    "subtitle": "Use three process chains to explore possible tool integration points, validation tasks, and applicability boundaries"
   },
   "labels": {
     "solutionSubtitle": "Scenario-based solution",
     "challenge": "❌ Core Challenge",
-    "solution": "✅ The openIndu Full-Stack Answer",
+    "solution": "🧭 openIndu Reference Collaboration",
     "hardware": "🖥️ Hardware Execution Layer",
     "vision": "👁️ Machine Vision Inspection",
     "data": "📊 Data Acquisition & Analysis",
@@ -24,42 +24,42 @@
       "problem": "Substrate identity and carrier binding break easily; alignment-exposure and colour-filter pattern defects rely on manual re-inspection; Cell/Module anomalies are hard to trace back to a specific step.",
       "hardware": "A soft PLC on domestic industrial silicon drives loading, cleaning and lamination takt, with anti-collision interlocks on the robot arms.",
       "vision": "openIndu-vision uses OpenCV for surface particles/scratches, pattern breaks and pinholes, and lit-panel appearance judgement.",
-      "data": "openIndu-cim + platform bind Glass ID, carrier ID and process route, retaining cleaning and exposure program versions.",
+      "data": "Assess whether openIndu-cim + openIndu-platform can associate Glass ID, carrier ID, process route, and program versions.",
       "craftsmanship": "The forum's panel column collects field practice and defect back-tracing for the TFT-LCD / OLED chains.",
       "stages": ["Substrate incoming & cleaning", "Array TFT", "Colour filter", "Cell lamination", "Module & inspection"],
-      "whyWorks": "Design once, generate PLC programs across brands; vision verdicts feed straight back into the PLC loop; step identity stays traceable across the whole chain."
+      "whyWorks": "A target architecture can connect engineering assets, inspection results, and step identity. Cross-brand generation, control-loop latency, and end-to-end traceability still require validation in the target environment."
     },
     "semiconductor": {
       "industry": "Semiconductors",
       "problem": "Wafer identity and route-admission checks are scattered across tools; recipe versions and SPC rules are hard to unify; defect maps cannot effectively drive back-end sorting.",
       "hardware": "Domestic industrial silicon handles transport and tool interlocking, gating admission on prerequisites and SPC rules.",
       "vision": "openIndu-vision joins appearance and defect re-inspection, emitting coordinates and layer information.",
-      "data": "openIndu-cim makes fast verdicts at the edge; platform aggregates wafer ID / FOUP / recipe version and metrology values.",
+      "data": "Assess openIndu-cim for edge-side processing and openIndu-platform for associating wafer ID, FOUP, recipe versions, and metrology values.",
       "craftsmanship": "The forum's semiconductor column records interface conventions and traceability fields for the wafer-to-package chain.",
       "stages": ["Wafer & material incoming", "Fab deposition & patterning", "Wafer test (CP)", "Back-end assembly & packaging", "Final test & shipment"],
-      "whyWorks": "Release/rework/scrap decisions share one data basis; edge verdicts need no cloud round trip; metrology and defects trace back to a specific chamber and lot."
+      "whyWorks": "The scenario can verify whether decision data, edge processing, and chamber or lot traceability form a reproducible path."
     },
     "newEnergy": {
       "industry": "New Energy",
       "problem": "Material-lot identity is hard to guarantee before mixing; cell identity easily decouples from formation and grading curves; EOL data in the module/PACK stage is incomplete.",
       "hardware": "Domestic industrial silicon controls coating, assembly and formation-cabinet takt, coordinating multi-brand equipment.",
       "vision": "openIndu-vision inspects electrode alignment, weld spots and module appearance (including PV EL images).",
-      "data": "openIndu-cim + platform bind material lot — cell identity — test curve, carried through to PACK and EOL.",
+      "data": "Assess whether openIndu-cim + openIndu-platform can associate material lots, cell identity, test curves, PACK, and EOL records.",
       "craftsmanship": "The forum's new-energy column records process parameters and anomaly handling for the lithium-battery and PV-module chains.",
       "stages": ["Incoming material & slurry", "Electrode manufacturing", "Cell assembly", "Formation, aging & grading", "Module PACK / module lamination"],
-      "whyWorks": "The identity chain from material to finished goods never breaks; curve data maps one-to-one to each cell; a single stack covers both the lithium-battery and PV chains."
+      "whyWorks": "The scenario helps define validation points for identity continuity and curve association. Lithium-battery and PV workflows must be evaluated separately."
     }
   },
   "whyEffective": {
-    "heading": "Why the openIndu Stack Works",
-    "subheading": "Conventional setups are fragmented: the vision system stands alone, the PLC stands alone, the data system stands alone. openIndu solves that with one integrated four-layer design.",
+    "heading": "How openIndu Directions Support Scenario Assessment",
+    "subheading": "The project map helps identify interfaces among vision, control, engineering assets, and data. Actual capability depends on repository status and reproducible evidence.",
     "items": [
       { "title": "Cross-brand engineering asset exploration", "description": "Mappings and intermediate artifacts can reduce repeated entry; every brand, version, and output format still requires validation in the target IDE and hardware environment." },
-      { "title": "Vision and control, natively integrated", "description": "openIndu-vision is built into studio, so there is no manual system integration. Inspection results feed the PLC control loop in real time." },
-      { "title": "Parameter changes take effect live", "description": "Changing a process parameter needs no recompile and no firmware download. Edit it in platform and it reaches the line in seconds." },
-      { "title": "Full-stack, data-driven optimisation", "description": "A complete data path from hardware → vision → parameters → craftsmanship. Diagnosis shifts from on-site debugging to remote data analysis." },
+      { "title": "Vision-control interface assessment", "description": "Use openIndu-vision and openIndu-studio to explore inspection-result interfaces. Control-loop behaviour and latency require target-system tests." },
+      { "title": "Parameter delivery and audit", "description": "Use openIndu-platform to explore permissions, versions, effective-time mechanisms, and rollback. Delivery latency must be measured in the target environment." },
+      { "title": "Data-path validation", "description": "Map the intended path across equipment, vision, parameters, and process knowledge, then verify each interface. An architecture diagram is not a production data path." },
       { "title": "Process knowledge discussion", "description": "The forum preserves context, constraints, validation steps, and applicability boundaries. Parameters cannot be reused outside their material, equipment, and test conditions." },
-      { "title": "Built for engineers", "description": "No complex commercial SaaS pricing. Fully open source — deploy on-premise, stay in control, extend freely." }
+      { "title": "Built for engineering collaboration", "description": "Review each repository's status, LICENSE, dependencies, deployment notes, and limitations before adoption or extension." }
     ]
   },
   "nextSteps": {
@@ -67,11 +67,11 @@
     "step1Title": "Find your industry",
     "step1Desc": "Pick the scenario above that is closest to your line",
     "step2Title": "Explore the architecture",
-    "step2Desc": "See how openIndu's four layers solve the problem end to end",
+    "step2Desc": "Review the project map, current status, capability boundaries, and available evidence",
     "step3Title": "Start building",
-    "step3Desc": "Download Studio and design your first PLC program",
+    "step3Desc": "Review openIndu-studio repository status, documentation, and reproducible examples",
     "ctaArchitecture": "Explore the Full Stack",
     "ctaCraftsmanship": "Browse the Knowledge Base",
-    "ctaStudio": "Get Started with Studio"
+    "ctaStudio": "Explore openIndu-studio"
   }
 }

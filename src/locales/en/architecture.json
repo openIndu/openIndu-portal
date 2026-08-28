@@ -1,12 +1,12 @@
 {
   "seo": {
     "title": "Project Map | openIndu Engineering Tool Stack Community",
-    "description": "Explore five openIndu collaboration directions: Forum, Vision, Studio, openIndu-cim + openIndu-platform, and PLC Experiment, with explicit capability boundaries."
+    "description": "Explore five openIndu collaboration directions: Forum, openIndu-vision, openIndu-studio, openIndu-cim + openIndu-platform, and PLC Experiment, with explicit capability boundaries."
   },
   "hero": {
     "title": "The openIndu Project Map",
     "subtitle": "The forum preserves knowledge, tools enable engineering reuse, and status plus evidence define today's boundaries",
-    "formula": "Forum + Vision + Studio + openIndu-cim & openIndu-platform + PLC Experiment"
+    "formula": "Forum + openIndu-vision + openIndu-studio + openIndu-cim & openIndu-platform + PLC Experiment"
   },
   "layers": {
     "forum": {
@@ -17,13 +17,13 @@
     },
     "vision": {
       "title": "Industrial Vision",
-      "titleEn": "Vision",
+      "titleEn": "openIndu-vision",
       "description": "Exploration of cross-camera, cross-algorithm inspection and workflow orchestration. Support depends on repositories, versions, and validation records.",
       "benefits": ["Camera abstraction", "Algorithm workflows", "Inspection", "Result integration"]
     },
     "studio": {
       "title": "Engineering Assets",
-      "titleEn": "Studio",
+      "titleEn": "openIndu-studio",
       "description": "Engineering workflows around electrical modules, diagrams, BOM, I/O planning, and PLC/HMI intermediate artifacts.",
       "benefits": ["Engineering assets", "Template reuse", "Traceable process", "Verifiable artifacts"]
     },
@@ -50,9 +50,9 @@
     "flowStep3Label": "Reuse",
     "flowStep3": "Tools reuse those assets only within explicit status and evidence boundaries",
     "appsTitle": "🧭 Tool Collaboration",
-    "appsLeftLabel": "Vision",
+    "appsLeftLabel": "openIndu-vision",
     "appsLeft": "Visual inspection and workflow exploration",
-    "appsCoreLabel": "Studio",
+    "appsCoreLabel": "openIndu-studio",
     "appsCore": "Organises engineering assets and generation workflows",
     "appsRightLabel": "openIndu-cim + openIndu-platform",
     "appsRight": "Connects equipment, manufacturing systems, and industrial data",

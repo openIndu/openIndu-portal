@@ -1,12 +1,12 @@
 {
   "seo": {
     "title": "项目地图｜openIndu 工程工具栈社区",
-    "description": "了解 openIndu 的五个协作方向：Forum、Vision、Studio、openIndu-cim + openIndu-platform 与 PLC Experiment，以及各方向的能力边界。"
+    "description": "了解 openIndu 的五个协作方向：Forum、openIndu-vision、openIndu-studio、openIndu-cim + openIndu-platform 与 PLC Experiment，以及各方向的能力边界。"
   },
   "hero": {
     "title": "openIndu 项目地图",
     "subtitle": "论坛沉淀知识，工具承载工程复用，状态与证据说明当前边界",
-    "formula": "Forum + Vision + Studio + openIndu-cim & openIndu-platform + PLC Experiment"
+    "formula": "Forum + openIndu-vision + openIndu-studio + openIndu-cim & openIndu-platform + PLC Experiment"
   },
   "layers": {
     "forum": {
@@ -17,13 +17,13 @@
     },
     "vision": {
       "title": "工业视觉",
-      "titleEn": "Vision",
+      "titleEn": "openIndu-vision",
       "description": "探索跨相机、跨算法的视觉检测与工作流编排；实际支持范围以仓库、版本和验证记录为准。",
       "benefits": ["相机抽象", "算法编排", "检测定位", "结果集成"]
     },
     "studio": {
       "title": "工程资产",
-      "titleEn": "Studio",
+      "titleEn": "openIndu-studio",
       "description": "围绕电气模组、电路图、BOM、IO 地址规划与 PLC/HMI 中间产物组织工程工作流。",
       "benefits": ["工程资产", "模板复用", "过程可追踪", "产物可核验"]
     },
@@ -50,9 +50,9 @@
     "flowStep3Label": "复用",
     "flowStep3": "工具在明确状态和证据范围内复用这些工程资产",
     "appsTitle": "🧭 工具协同",
-    "appsLeftLabel": "Vision",
+    "appsLeftLabel": "openIndu-vision",
     "appsLeft": "视觉检测与工作流探索",
-    "appsCoreLabel": "Studio",
+    "appsCoreLabel": "openIndu-studio",
     "appsCore": "组织工程资产与生成工作流",
     "appsRightLabel": "openIndu-cim + openIndu-platform",
     "appsRight": "连接设备、制造系统与工业数据",

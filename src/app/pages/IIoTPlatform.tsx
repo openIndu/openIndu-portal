@@ -111,7 +111,7 @@ export function IIoTPlatform() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-sky-50 border border-sky-200 text-[#0B72B5] rounded-full text-sm font-semibold mb-4 sm:mb-6">
             <Zap className="w-4 h-4" />
-            openIndu Platform
+            openIndu-platform
           </div>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 leading-tight text-gray-900 [word-break:keep-all]">
             {t("hero.title1")}<br />{t("hero.title2")}
