@@ -16,23 +16,13 @@ import { defineConfig, devices } from "@playwright/test";
  *
  * Why not chain it (tried first, reverted): `npm run build`'s last step
  * (scripts/prerender.mjs) starts and stops its own internal preview
- * server on port 4173 to do the puppeteer rendering. Its stopServer()
- * fires `taskkill` without awaiting it (see that file's comment), so the
- * port isn't always released before the process tree Playwright is
- * watching reports done. Nesting that whole lifecycle inside the same
- * webServer.command Playwright supervises made the readiness check flake
- * unpredictably in this environment. Running the build first, outside
- * Playwright's process tree, sidesteps it — this webServer then only
- * has to start a plain `vite preview`, which is fast and has never
- * flaked here.
+ * server on port 4173 to do the Puppeteer rendering. Keeping that lifecycle
+ * outside Playwright's process tree makes failures easier to attribute and
+ * leaves this webServer responsible only for serving the completed dist/.
  *
- * URL uses `localhost`, not `127.0.0.1`: on at least one dev machine in
- * this project, `vite preview` (unlike `vite dev`) bound only the IPv6
- * loopback (`[::1]`), so the explicit IPv4 literal never connected. If
- * your shell has HTTP_PROXY/HTTPS_PROXY set, also export
- * NO_PROXY=localhost,127.0.0.1,::1 -- some proxies intercept loopback
- * traffic and return a 502 instead of connection-refused, which reads
- * exactly like "the server never started" while debugging this.
+ * Both the server and readiness probe use an explicit IPv4 loopback address.
+ * This avoids localhost resolution differences and keeps HTTP proxy settings
+ * from intercepting Playwright's local readiness request.
  */
 export default defineConfig({
   testDir: "./e2e",
@@ -42,7 +32,7 @@ export default defineConfig({
     timeout: 10_000,
   },
   use: {
-    baseURL: "http://localhost:4174",
+    baseURL: "http://127.0.0.1:4174",
     trace: "on-first-retry",
     screenshot: "only-on-failure",
   },
@@ -58,7 +48,7 @@ export default defineConfig({
     // prerender.mjs's own internal preview server (4173) to avoid any
     // chance of colliding with a not-yet-released one from the build step.
     command: "npm run preview:prerender-test",
-    url: "http://localhost:4174",
+    url: "http://127.0.0.1:4174",
     reuseExistingServer: !process.env.CI,
     timeout: 30_000,
   },

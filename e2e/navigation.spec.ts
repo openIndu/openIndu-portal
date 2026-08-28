@@ -1,20 +1,18 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Navigation", () => {
-  test("should navigate from home to motion control via header link", async ({ page }) => {
+  test("should navigate from the Projects parent to the project map", async ({ page }) => {
     await page.goto("/");
-
-    const motionLink = page.locator("header").getByText("AI+运动控制", { exact: true }).first();
-    await motionLink.click();
-
-    await expect(page).toHaveURL("/motion-control");
-    await expect(page.locator("h1")).toContainText("AI+运动控制");
+    await page.locator("header").getByTestId("nav-products").click();
+    await expect(page).toHaveURL("/architecture");
+    await expect(page.locator("h1")).toContainText("openIndu 项目地图");
   });
 
   test("should navigate from home to vision via header link", async ({ page }) => {
     await page.goto("/");
 
-    const visionLink = page.locator("header").getByText("AI+视觉", { exact: true }).first();
+    await page.locator("header").getByTestId("nav-products").hover();
+    const visionLink = page.locator("header").getByTestId("nav-vision");
     await visionLink.click();
 
     await expect(page).toHaveURL("/vision");
@@ -24,21 +22,20 @@ test.describe("Navigation", () => {
   test("should navigate from home to iiot platform via header link", async ({ page }) => {
     await page.goto("/");
 
-    const platformLink = page.locator("header").getByText("AI+工业互联网平台", { exact: true }).first();
+    await page.locator("header").getByTestId("nav-products").hover();
+    const platformLink = page.locator("header").getByTestId("nav-iiot-platform");
     await platformLink.click();
 
     await expect(page).toHaveURL("/iiot-platform");
-    await expect(page.locator("h1")).toContainText("工业互联网平台");
+    await expect(page.locator("h1")).toContainText("openIndu-platform 社区项目");
   });
 
-  test("should navigate from home to infrastructure via header link", async ({ page }) => {
+  test("should navigate to openIndu-cim via the projects menu", async ({ page }) => {
     await page.goto("/");
-
-    const infraLink = page.locator("header").getByText("AI+基础设施", { exact: true }).first();
-    await infraLink.click();
-
-    await expect(page).toHaveURL("/infrastructure");
-    await expect(page.locator("h1")).toContainText("AI+基础设施");
+    await page.locator("header").getByTestId("nav-products").hover();
+    await page.locator("header").getByTestId("nav-edge-computing").click();
+    await expect(page).toHaveURL("/edge-computing");
+    await expect(page.locator("h1")).toContainText("openIndu-cim");
   });
 
   test("should navigate to login page from header", async ({ page }) => {

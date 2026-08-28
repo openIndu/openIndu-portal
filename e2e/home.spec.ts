@@ -9,53 +9,27 @@ import { test, expect } from "@playwright/test";
 const GOLDEN = {
   heroTitleLine1: {
     zh: "一栈贯通，开放智造",
-    en: "One Stack, End to End — Open Manufacturing",
+    en: "One Stack, Open Manufacturing",
   },
   heroTitleLine2: {
-    zh: "工业自动化的端到端开源操作系统",
-    en: "The End-to-End Open-Source OS for Industrial Automation",
+    zh: "共建工业自动化的端到端开源生态",
+    en: "Build an End-to-End Open Ecosystem for Industrial Automation",
   },
   heroSubtitle: {
-    zh: "从工艺参数到产线数据，一个栈打通。任意品牌 PLC，全部开源。",
-    en: "From process parameters to line data — one stack, end to end. Any brand PLC, fully open source.",
+    zh: "分享工艺，共建工具，推动视觉、控制与工业数据协同。",
+    en: "Share process knowledge, build tools together, and advance collaboration across vision, control, and industrial data.",
   },
-  productsHeading: { zh: "三大核心产品", en: "Three Core Projects" },
-  nodesHeading: { zh: "五大节点闭环", en: "The Five-Stage Closed Loop" },
-  nodesSubheading: {
-    zh: "工艺约束 → 生成 → 执行 → 数据 → 洞察 → 回到工艺约束",
-    en: "Process constraints → Generation → Execution → Data → Insight → back to process constraints",
+  stackTitles: {
+    zh: ["工艺知识库 (Craftsmanship)", "编程与组态层 (Programming)", "硬件与 OS 层 (Foundation)"],
+    en: ["Craftsmanship Knowledge Base", "Programming Layer", "Hardware & OS Layer (Foundation)"],
   },
-  nodeTitles: {
-    zh: ["工艺知识", "工程生成", "跨品牌执行", "采集与数据", "分析洞察"],
-    en: [
-      "Process Knowledge",
-      "Engineering Generation",
-      "Cross-Brand Execution",
-      "Acquisition & Data",
-      "Analytics & Insight",
-    ],
+  stepsHeading: { zh: "三步掌握 openIndu", en: "Three Steps to openIndu" },
+  stepTitles: {
+    zh: ["理解全栈架构", "选择行业场景", "选择产品工具"],
+    en: ["Understand the full stack", "Pick your industry scenario", "Choose your tools"],
   },
-  nodeCrossBrandDuty: {
-    zh: "西门子 / 三菱 / 欧姆龙 / 基恩士 / 汇川",
-    en: "Siemens / Mitsubishi / Omron / Keyence / Inovance",
-  },
-  nodeDataDuty: {
-    zh: "Apache PLC4X 协议层 · 时序库",
-    en: "Apache PLC4X protocol layer · Time-series database",
-  },
-  openSourceHeading: {
-    zh: "开源、开放标准、开放协作",
-    en: "Open Source, Open Standards, Open Collaboration",
-  },
-  openSourceCtaHeading: { zh: "查看代码，参与贡献", en: "View the Code, Contribute" },
-  openSourceCtaSubheading: {
-    zh: "全部仓库公开，Apache-2.0 授权",
-    en: "All repositories public, Apache-2.0 licensed",
-  },
-  protocolsTitle: {
-    zh: "开箱即用的协议支持",
-    en: "Protocol Support, Out of the Box",
-  },
+  knowledgeHeading: { zh: "工艺知识众包库", en: "A Crowdsourced Process Library" },
+  openSourceHeading: { zh: "开放协作，欢迎参与", en: "Open Collaboration — Come Build With Us" },
   ctaHeading: { zh: "加入 openIndu 社区", en: "Join the openIndu Community" },
   wechatHeading: { zh: "微信扫码关注公众号", en: "Follow us on WeChat" },
   wechatAlt: { zh: "openIndu 微信公众号二维码", en: "openIndu WeChat QR code" },
@@ -94,7 +68,7 @@ for (const { locale, prefix, label } of LOCALES) {
 
     // ─── Tier 1: golden-value copy ───
 
-    test("displays hero OS positioning", async ({ page }) => {
+    test("displays current community positioning", async ({ page }) => {
       await page.goto(prefix + "/");
       // Scoped to <h1> -- the tagline is deliberately echoed in the footer
       // description prose, so an unscoped getByText matches both.
@@ -104,36 +78,53 @@ for (const { locale, prefix, label } of LOCALES) {
       await expect(page.getByText(gv("heroSubtitle", locale))).toBeVisible();
     });
 
-    test("displays three core products section", async ({ page }) => {
+    test("keeps the hero title readable on mobile", async ({ page }) => {
+      await page.setViewportSize({ width: 390, height: 844 });
       await page.goto(prefix + "/");
-      await expect(page.getByText(gv("productsHeading", locale))).toBeVisible();
-      // Repo names are invariant proper nouns -- same spelling in both locales.
-      // Scoped to <main>: the header nav dropdown and footer "core services" link
-      // both also read exactly "openIndu-studio" now, so an unscoped getByText
-      // could resolve .first() to a hidden nav element instead of this section.
-      const main = page.locator("main");
-      await expect(main.getByText("openIndu-studio", { exact: true }).first()).toBeVisible();
-      await expect(main.getByText("openIndu-platform", { exact: true }).first()).toBeVisible();
-      await expect(main.getByText("openIndu-station", { exact: true }).first()).toBeVisible();
+      const secondLine = page.locator("h1 span").nth(1);
+      await expect(secondLine).toBeVisible();
+      const dimensions = await secondLine.evaluate((element) => ({
+        clientWidth: element.clientWidth,
+        scrollWidth: element.scrollWidth,
+      }));
+      expect(dimensions.scrollWidth).toBeLessThanOrEqual(dimensions.clientWidth + 1);
     });
 
-    test("displays the five-stage closed loop", async ({ page }) => {
+    test("mobile navigation locks scrolling and closes with Escape", async ({ page }) => {
+      await page.setViewportSize({ width: 390, height: 844 });
       await page.goto(prefix + "/");
-      await expect(page.getByText(gv("nodesHeading", locale))).toBeVisible();
-      await expect(page.getByText(gv("nodesSubheading", locale))).toBeVisible();
-      for (const title of GOLDEN.nodeTitles[locale]) {
+      const menuButton = page.getByRole("button", { name: locale === "zh" ? "打开导航菜单" : "Open navigation menu" });
+      await menuButton.click();
+      await expect(page.getByRole("navigation", { name: locale === "zh" ? "移动端导航" : "Mobile navigation" })).toBeVisible();
+      await expect.poll(() => page.evaluate(() => document.body.style.overflow)).toBe("hidden");
+      await page.keyboard.press("Escape");
+      await expect(page.getByRole("navigation", { name: locale === "zh" ? "移动端导航" : "Mobile navigation" })).toBeHidden();
+      await expect(menuButton).toBeFocused();
+      await expect.poll(() => page.evaluate(() => document.body.style.overflow)).toBe("");
+    });
+
+    test("displays the ecosystem stack", async ({ page }) => {
+      await page.goto(prefix + "/");
+      const main = page.locator("main");
+      for (const title of GOLDEN.stackTitles[locale]) {
+        await expect(main.getByText(title, { exact: true })).toBeVisible();
+      }
+      await expect(main.getByText("openIndu-studio", { exact: true }).first()).toBeVisible();
+      await expect(main.getByText(/openIndu-cim \/ openIndu-platform/).first()).toBeVisible();
+    });
+
+    test("displays the three-step guide", async ({ page }) => {
+      await page.goto(prefix + "/");
+      await expect(page.getByText(gv("stepsHeading", locale))).toBeVisible();
+      for (const title of GOLDEN.stepTitles[locale]) {
         await expect(page.getByText(title, { exact: true }).first()).toBeVisible();
       }
-      await expect(page.getByText(gv("nodeCrossBrandDuty", locale))).toBeVisible();
-      await expect(page.getByText(gv("nodeDataDuty", locale))).toBeVisible();
     });
 
-    test("displays open-source repos section", async ({ page }) => {
+    test("displays knowledge sharing and open collaboration sections", async ({ page }) => {
       await page.goto(prefix + "/");
+      await expect(page.getByText(gv("knowledgeHeading", locale))).toBeVisible();
       await expect(page.getByText(gv("openSourceHeading", locale))).toBeVisible();
-      await expect(page.getByText(gv("openSourceCtaHeading", locale))).toBeVisible();
-      await expect(page.getByText(gv("openSourceCtaSubheading", locale))).toBeVisible();
-      await expect(page.getByText(gv("protocolsTitle", locale))).toBeVisible();
     });
 
     test("displays WeChat QR block next to CTA", async ({ page }) => {
@@ -152,11 +143,12 @@ for (const { locale, prefix, label } of LOCALES) {
 
       const testids = [
         "nav-home",
+        "nav-architecture",
+        "nav-use-cases",
+        "nav-craftsmanship",
+        "nav-products",
+        "nav-forum",
         "nav-downloads",
-        "nav-motion-control",
-        "nav-vision",
-        "nav-iiot-platform",
-        "nav-infrastructure",
       ];
       for (const testid of testids) {
         await expect(page.locator("header").getByTestId(testid).first()).toBeVisible();
@@ -169,6 +161,20 @@ for (const { locale, prefix, label } of LOCALES) {
       await expect(footer).toBeVisible();
       // Brand name -- invariant across locales.
       await expect(footer).toContainText("openIndu Community");
+      const quickLinks = footer.getByTestId("footer-quick-links");
+      const expectedHrefs = [
+        prefix || "/",
+        `${prefix}/architecture`,
+        `${prefix}/use-cases`,
+        `${prefix}/craftsmanship`,
+        `${prefix}/resources`,
+      ];
+      for (const href of expectedHrefs) {
+        await expect(quickLinks.locator(`a[href="${href}"]`)).toHaveCount(1);
+      }
+      await expect(quickLinks.locator('a[href$="/motion-control"]')).toHaveCount(0);
+      await expect(quickLinks.locator('a[href$="/vision"]')).toHaveCount(0);
+      await expect(quickLinks.locator('a[href$="/developers"]')).toHaveCount(0);
     });
   });
 }

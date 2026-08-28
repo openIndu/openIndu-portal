@@ -1,6 +1,20 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Portal login regression", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.route("**/api/v1/auth/sign-in", (route) => route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify({
+        code: 200,
+        data: {
+          access_token: "test-access-token",
+          refresh_token: "test-refresh-token",
+          user: { id: 1, phone: "13800000000", nickname: "Test", role: "member" },
+        },
+      }),
+    }));
+  });
   test("stores token and redirects after login", async ({ page }) => {
     await page.goto("/login");
     await page.fill("#login-phone", "13800000000");

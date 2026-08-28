@@ -65,6 +65,7 @@ function FeatureRow({ feature, reversed, t }: { feature: Feature; reversed: bool
             alt={t(`features.${feature.key}.screenshotAlt`)}
             className="w-full h-auto"
             loading="lazy"
+            decoding="async"
           />
         </div>
       </div>
@@ -111,7 +112,7 @@ export function IIoTPlatform() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-sky-50 border border-sky-200 text-[#0B72B5] rounded-full text-sm font-semibold mb-4 sm:mb-6">
             <Zap className="w-4 h-4" />
-            openIndu Platform
+            openIndu-platform
           </div>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 leading-tight text-gray-900 [word-break:keep-all]">
             {t("hero.title1")}<br />{t("hero.title2")}
@@ -136,30 +137,10 @@ export function IIoTPlatform() {
               {t("hero.ctaSecondary")}
             </a>
           </div>
-          <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 sm:inline-flex border border-sky-200 bg-sky-50 rounded-xl px-4 py-4 sm:px-6 sm:py-4 w-full sm:w-auto">
+          <div className="inline-flex items-center border border-sky-200 bg-sky-50 rounded-xl px-4 py-4 sm:px-6 sm:py-4">
             <div className="text-center">
               <p className="text-xs text-gray-600 mb-1">{t("hero.demoLabel")}</p>
               <p className="text-sm font-mono text-gray-900">website.openindu.com</p>
-            </div>
-            <div className="hidden sm:block w-px h-8 bg-sky-200" />
-            <div className="flex gap-6 sm:hidden">
-              <div className="text-center">
-                <p className="text-xs text-gray-600 mb-1">{t("hero.usernameLabel")}</p>
-                <p className="text-sm font-mono text-gray-900">admin</p>
-              </div>
-              <div className="text-center">
-                <p className="text-xs text-gray-600 mb-1">{t("hero.passwordLabel")}</p>
-                <p className="text-sm font-mono text-gray-900">abc@123456</p>
-              </div>
-            </div>
-            <div className="hidden sm:block text-center">
-              <p className="text-xs text-gray-600 mb-1">{t("hero.usernameLabel")}</p>
-              <p className="text-sm font-mono text-gray-900">admin</p>
-            </div>
-            <div className="hidden sm:block w-px h-8 bg-sky-200" />
-            <div className="hidden sm:block text-center">
-              <p className="text-xs text-gray-600 mb-1">{t("hero.passwordLabel")}</p>
-              <p className="text-sm font-mono text-gray-900">abc@123456</p>
             </div>
           </div>
         </div>
@@ -225,6 +206,10 @@ export function IIoTPlatform() {
               <img
                 src="/assets/iiot/architecture.svg"
                 alt={t("architecture.diagramAlt")}
+                width="960"
+                height="640"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-auto"
               />
             </div>

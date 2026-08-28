@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build && node scripts/prerender.mjs",
+    "build": "node scripts/generate-sitemap.mjs && tsc -b && vite build && node scripts/prerender.mjs",
     "preview": "vite preview",
-    "preview:prerender-test": "vite preview --port 4174 --strictPort",
+    "preview:prerender-test": "vite preview --host 127.0.0.1 --port 4174 --strictPort",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",

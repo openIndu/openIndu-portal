@@ -1,16 +1,18 @@
 import { Outlet, Link, useLocation, useNavigate } from "react-router";
 import { ArrowRight, ChevronDown, ChevronRight, LogOut, Menu, UserRound, X } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "@/store/auth";
 import { visitsApi } from "@/api";
 import { getDisplayName, maskPhone } from "../utils/user";
 import { StructuredData } from "./StructuredData";
 import { LanguageSwitcher, LanguageSwitcherCompact, LanguageSwitcherMobile } from "./LanguageSwitcher";
-import logo from "/assets/logo.png";
+import logo from "/assets/logo-96.png";
 
 export function Layout() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
   const navigate = useNavigate();
   const { t, i18n } = useTranslation("common");
@@ -20,6 +22,24 @@ export function Layout() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    mobileMenuRef.current?.querySelector<HTMLElement>("a, button")?.focus();
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      setMobileMenuOpen(false);
+      mobileMenuButtonRef.current?.focus();
+    };
+    document.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [mobileMenuOpen]);
 
   // Report every SPA navigation to /visits/track. The shared axios client
   // attaches the Bearer token automatically when one is in localStorage, so
@@ -50,11 +70,12 @@ export function Layout() {
       { name: t("nav.craftsmanship"), href: "/craftsmanship", testid: "nav-craftsmanship" },
       {
         name: t("nav.products"),
-        href: "/motion-control",
+        href: "/architecture",
         testid: "nav-products",
         children: [
           { name: t("nav.studio"), href: "/motion-control/studio", testid: "nav-studio" },
-          { name: t("nav.vision"), href: "/vision/station", testid: "nav-station" },
+          { name: t("nav.vision"), href: "/vision", testid: "nav-vision" },
+          { name: t("nav.station"), href: "/vision/station", testid: "nav-station" },
           { name: t("nav.cim"), href: "/edge-computing", testid: "nav-edge-computing" },
           { name: t("nav.platform"), href: "/iiot-platform", testid: "nav-iiot-platform" },
         ],
@@ -96,13 +117,15 @@ export function Layout() {
 
       {/* Header */}
       <header className="sticky top-0 z-50 border-b border-gray-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80">
-        <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" aria-label="Main navigation">
+        <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" aria-label={t("a11y.mainNavigation")}>
           <div className="flex h-16 items-center justify-between gap-4">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2 py-2 px-1 min-h-[44px]">
               <img
                 src={logo}
                 alt="openIndu Logo"
+                width="96"
+                height="96"
                 className="w-10 h-10 rounded-lg object-contain"
               />
               <span className="text-xl font-semibold text-gray-900">openIndu</span>
@@ -215,6 +238,7 @@ export function Layout() {
 
             {/* Mobile menu button */}
             <button
+              ref={mobileMenuButtonRef}
               type="button"
               className="xl:hidden p-2.5 text-gray-700 min-w-[44px] min-h-[44px] flex items-center justify-center"
               onClick={() => {
@@ -237,7 +261,7 @@ export function Layout() {
 
       {/* Mobile Navigation */}
       {mobileMenuOpen && (
-        <div id="mobile-menu" className="xl:hidden border-t border-gray-200 bg-white" role="navigation" aria-label="Mobile navigation">
+        <div ref={mobileMenuRef} id="mobile-menu" className="fixed inset-x-0 bottom-0 top-16 z-40 overflow-y-auto border-t border-gray-200 bg-white xl:hidden" role="navigation" aria-label={t("a11y.mobileNavigation")}>
           <div className="space-y-1 px-4 pb-3 pt-2">
             {navigation.map((item) => (
               <div key={item.name}>
@@ -245,7 +269,7 @@ export function Layout() {
                   to={item.href}
                   data-testid={item.testid}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`block px-3 py-2 rounded-lg ${
+                  className={`flex min-h-[44px] items-center rounded-lg px-3 py-2 ${
                     isActive(item.href)
                       ? "bg-sky-700 text-white font-medium"
                       : "text-gray-700 hover:bg-gray-50"
@@ -261,7 +285,7 @@ export function Layout() {
                         to={child.href}
                         data-testid={child.testid}
                         onClick={() => setMobileMenuOpen(false)}
-                        className={`block rounded-lg px-3 py-2 text-sm ${
+                        className={`flex min-h-[44px] items-center rounded-lg px-3 py-2 text-sm ${
                           location.pathname === child.href
                             ? "bg-sky-50 font-medium text-sky-700"
                             : "text-gray-600 hover:bg-gray-50"
@@ -344,6 +368,10 @@ export function Layout() {
                 <img
                   src={logo}
                   alt="openIndu Logo"
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
                   className="w-10 h-10 rounded-lg object-contain"
                 />
                 <span className="text-xl font-semibold text-white">openIndu Community</span>
@@ -356,24 +384,24 @@ export function Layout() {
             {/* Quick Links */}
             <div className="flex flex-col items-start">
               <h3 className="font-semibold text-white mb-4">{t("footer.quickLinks")}</h3>
-              <ul className="space-y-1 text-sky-100">
+              <ul data-testid="footer-quick-links" className="space-y-1 text-sky-100">
                 <li>
                   <Link to="/" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">{t("footer.home")}</Link>
+                </li>
+                <li>
+                  <Link to="/architecture" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">{t("nav.architecture")}</Link>
+                </li>
+                <li>
+                  <Link to="/use-cases" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">{t("nav.useCases")}</Link>
+                </li>
+                <li>
+                  <Link to="/craftsmanship" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">{t("nav.craftsmanship")}</Link>
                 </li>
                 <li>
                   <Link to="/resources" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">{t("footer.downloads")}</Link>
                 </li>
                 <li>
-                  <Link to="/motion-control" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">{t("footer.motionControl")}</Link>
-                </li>
-                <li>
-                  <Link to="/vision" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">{t("footer.vision")}</Link>
-                </li>
-                <li>
                   <a href="https://forum.openindu.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">{t("footer.forum")}</a>
-                </li>
-                <li>
-                  <Link to="/developers" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">{t("footer.developers")}</Link>
                 </li>
               </ul>
             </div>

@@ -34,7 +34,7 @@
     "admin": "管理员"
   },
   "footer": {
-    "description": "从硬件到工艺的垂直整合平台。国产工控芯片 + openEuler → openIndu-studio → 工业视觉/边缘/IIoT → 工艺知识库。国产芯片、全链路开源、跨品牌支持、数据驱动闭环。",
+    "description": "面向工业自动化与非标设备的开源智能制造工业生态。分享工艺、共建工具、复用工程经验，连接视觉、控制与数据。",
     "communityDevelopers": "社区与开发者",
     "developers": "开发者",
     "github": "GitHub",
@@ -72,21 +72,23 @@
   "a11y": {
     "mobileMenuOpen": "打开导航菜单",
     "mobileMenuClose": "关闭导航菜单",
+    "mainNavigation": "主导航",
+    "mobileNavigation": "移动端导航",
     "skipToContent": "跳到主要内容"
   },
   "edgeComputing": {
     "description": "工业边缘计算平台",
-    "subtitle": "工业边缘计算平台，用于实时控制、数据处理和分布式自动化",
+    "subtitle": "面向设备互联、边缘数据处理和分布式自动化的项目方向；能力以仓库与验证记录为准",
     "github": "在 GitHub 上查看",
     "iotPlatform": "工业物联网平台",
-    "realtimeTitle": "实时控制",
-    "realtimeDesc": "即时响应设备信号，无云延迟",
+    "realtimeTitle": "边缘数据处理",
+    "realtimeDesc": "在靠近设备的位置处理数据，具体时延以目标环境测试为准",
     "securityTitle": "数据安全",
     "securityDesc": "本地化数据处理，敏感制造数据存储本地",
     "connectTitle": "协议支持",
     "connectDesc": "多协议支持：Modbus、EtherCAT、OPC-UA、CANopen",
     "perfTitle": "性能",
-    "perfDesc": "低延迟边缘计算，适合关键自动化应用",
+    "perfDesc": "提供可测试的边缘计算路径，不承诺未经验证的关键控制能力",
     "capabilities": "核心能力",
     "capabilitiesDesc": "边缘自动化所需的一切",
     "useCases": "使用场景",
@@ -98,19 +100,19 @@
     "useCase3Desc": "多协议设备统一接口：Modbus、EtherCAT、CANopen、OPC-UA",
     "useCase4": "离线优先弹性",
     "useCase4Desc": "连接中断时继续运行，恢复后同步数据",
-    "cta": "立即部署 openIndu-cim",
-    "ctaDesc": "开始构建边缘驱动的自动化。开源、Apache 2.0、无厂商锁定。",
+    "cta": "了解 openIndu-cim",
+    "ctaDesc": "查看当前代码、文档、许可证和已知限制，再判断是否适合你的环境。",
     "getStarted": "在 GitHub 上开始",
     "learnMore": "了解 openIndu"
   },
   "forumPage": {
     "seoDescription": "加入 openIndu 社区论坛，讨论工业自动化、分享经验、协作贡献开源项目。",
     "badge": "openIndu 社区论坛",
-    "subtitle": "加入全球开发者社区，讨论工业自动化技术、分享经验、协作贡献",
+    "subtitle": "带着场景、约束、验证和边界，分享真实工业现场的问题与经验",
     "enterForum": "进入论坛",
-    "githubDiscussions": "GitHub 讨论",
+    "communityRepo": "社区贡献指南",
     "categoriesHeading": "论坛主要板块",
-    "categoriesSubheading": "三大核心主题，汇聚全球工业自动化经验",
+    "categoriesSubheading": "六个板块，围绕真实工业现场持续讨论",
     "hotTopics": "热门话题",
     "industrialControl": {
       "title": "工控",
@@ -142,8 +144,23 @@
         "知识库"
       ]
     },
+    "insights": {
+      "title": "行业洞察",
+      "description": "观察工业自动化企业、产品组合、工业软件与技术演进，讨论它们对工程选型和交付的影响。",
+      "topics": ["企业观察", "产品路线", "工业软件", "技术演进"]
+    },
+    "help": {
+      "title": "交流互助区",
+      "description": "承接暂时无法归类的问题，以及职业发展、学习资料、项目协作和行业交流。",
+      "topics": ["问题求助", "职业交流", "学习资料", "项目协作"]
+    },
+    "feedback": {
+      "title": "社区反馈和建议",
+      "description": "提交论坛功能建议、Bug、板块与标签申请、内容反馈和申诉。",
+      "topics": ["功能建议", "Bug 反馈", "板块标签", "内容申诉"]
+    },
     "ctaHeading": "准备好加入社区了吗？",
-    "ctaDescription": "无论你是提问者、解答者还是贡献者，论坛都欢迎你的参与。一起打造开源工业自动化生态。",
+    "ctaDescription": "从一个描述清楚的现场问题开始：设备与版本、现场现象、已经尝试的方法，以及仍待确认的边界。",
     "ctaButton": "前往论坛 →"
   }
 }

@@ -22,6 +22,7 @@ for (const { locale, prefix, label } of LOCALES) {
       await expect(page).toHaveURL(prefix + "/resources");
       // Scoped to h1 -- the same text also appears in the nav link and footer.
       await expect(page.locator("h1")).toContainText(GOLDEN.heading[locale]);
+      await expect(page.getByRole("link", { name: locale === "zh" ? "登录 / 注册" : "Sign in / Sign up" }).last()).toHaveAttribute("href", prefix + "/login");
     });
 
     test("should have document and software tabs visible when authenticated", async ({ page }) => {
@@ -47,6 +48,15 @@ for (const { locale, prefix, label } of LOCALES) {
 
       const searchButton = page.getByRole("button", { name: GOLDEN.searchButton[locale] });
       await expect(searchButton).toBeVisible();
+    });
+
+    test("hydrates the search field from the structured search URL", async ({ page }) => {
+      await page.addInitScript(() => {
+        localStorage.setItem("openindu_portal_token", "test-token");
+        localStorage.setItem("openindu_portal_user", JSON.stringify({ id: 1, phone: "13800138000", role: "member" }));
+      });
+      await page.goto(`${prefix}/resources?keyword=EtherCAT`);
+      await expect(page.getByPlaceholder(GOLDEN.searchPlaceholder[locale])).toHaveValue("EtherCAT");
     });
   });
 }

@@ -1,12 +1,12 @@
 {
   "seo": {
     "title": "Industrial IoT Platform | openIndu",
-    "description": "openIndu Industrial IoT Platform: an enterprise-grade IIoT for 3C electronics manufacturing, unifying device management, data acquisition, visualization dashboards, and traceability.",
+    "description": "openIndu-platform is a community-grade IIoT project for 3C electronics manufacturing, exploring device management, data acquisition, visualization, and traceability.",
     "keywords": "industrial IoT,IIoT,device management,data acquisition,3C manufacturing,openIndu"
   },
   "hero": {
-    "title1": "An Enterprise-Grade Industrial IoT Platform",
-    "title2": "Built for 3C Electronics Manufacturing",
+    "title1": "A Community IIoT Project",
+    "title2": "Exploring 3C Electronics Manufacturing",
     "subtitle": "Let industrial data speak -- making smart manufacturing simpler",
     "ctaPrimary": "Try the Platform",
     "ctaSecondary": "View Architecture",
@@ -16,7 +16,7 @@
   },
   "intro": {
     "heading": "Platform Overview",
-    "p1Prefix": "openIndu is a community-grade Industrial IoT platform focused on 3C electronics manufacturing, covering the complete chain from",
+    "p1Prefix": "openIndu-platform is a community-grade Industrial IoT project for 3C electronics manufacturing, exploring",
     "p1Chain": [
       "edge data acquisition",
       "real-time monitoring",
@@ -24,7 +24,7 @@
       "product traceability",
       "data dashboards"
     ],
-    "p1Suffix": ".",
+    "p1Suffix": "; actual capabilities depend on repository version and validation environment.",
     "p2Prefix": "The platform consists of two parts: the ",
     "p2Strong1": "web app",
     "p2Mid1": "is a modern Vue 3 application that gives each role a personalized workbench and data dashboard; the ",
@@ -33,7 +33,7 @@
   },
   "features": {
     "heading": "Core Features",
-    "subheading": "Six core feature modules, covering every smart-manufacturing scenario",
+    "subheading": "Six capability directions, validated per repository version and environment",
     "smartLogin": {
       "title": "Smart Login · Secure & Convenient",
       "description": "Phone-number verification-code sign-in/sign-up, secured by JWT token authentication.",
@@ -179,16 +179,16 @@
       "description": "Focused on 3C electronics manufacturing, with a deep understanding of industry pain points and needs"
     },
     "traceability": {
-      "title": "Complete Traceability Chain",
-      "description": "End-to-end product traceability from raw material to finished product, keeping quality under control"
+      "title": "Traceability Model",
+      "description": "Explore relationships between material identity, process history, and quality data"
     },
     "frontend": {
       "title": "Excellent Frontend Experience",
       "description": "A modern web application built with Vue 3 + Element Plus"
     },
     "deviceCompat": {
-      "title": "Broad Device Compatibility",
-      "description": "Supports mainstream PLC protocols from Siemens, Mitsubishi, Omron, Keyence, Inovance, and more"
+      "title": "Device Integration Assessment",
+      "description": "Protocol support depends on integrated drivers, device models, versions, and validated environments"
     },
     "cloudEdge": {
       "title": "Cloud-Edge Collaboration",

@@ -1,74 +1,80 @@
 {
   "seo": {
-    "title": "全栈架构｜openIndu 全链路平台",
-    "description": "了解 openIndu 完整的工业自动化技术栈：从国产工控芯片到工艺知识，端到端打通制造全流程。"
+    "title": "项目地图｜openIndu 工程工具栈社区",
+    "description": "了解 openIndu 的五个协作方向：Forum、openIndu-vision、openIndu-studio、openIndu-cim + openIndu-platform 与 PLC Experiment，以及各方向的能力边界。"
   },
   "hero": {
-    "title": "openIndu 全链路架构",
-    "subtitle": "从工控芯片到工艺知识，打通工业制造全流程",
-    "formula": "国产工控芯片 + openEuler + openIndu-studio + 三层应用 + 工艺知识 = 完整工业自动化操作系统"
+    "title": "openIndu 项目地图",
+    "subtitle": "论坛沉淀知识，工具承载工程复用，状态与证据说明当前边界",
+    "formula": "Forum + openIndu-vision + openIndu-studio + openIndu-cim & openIndu-platform + PLC Experiment"
   },
   "layers": {
-    "craftsmanship": {
-      "title": "工艺知识层",
-      "titleEn": "Craftsmanship Layer",
-      "description": "论坛工艺专栏：面板、芯片、新能源等行业的工艺主链、现场做法与缺陷逆推",
-      "benefits": ["行业最佳实践", "众包知识库", "工艺参数共享"]
+    "forum": {
+      "title": "论坛",
+      "titleEn": "Forum · Content",
+      "description": "社区共同沉淀工控、自动化、制造工艺与行业观察。话题可以持续补充，不强制结案。",
+      "benefits": ["现场问题", "工艺流程", "验证方法", "行业观察"]
     },
-    "application": {
-      "title": "应用层",
-      "titleEn": "Application Layer",
-      "description": "三个方向协同：工业视觉检测、数据采集边缘计算、IIoT 平台分析",
-      "benefits": ["工业视觉定位检测", "边缘实时决策", "数据驱动洞察"]
+    "vision": {
+      "title": "工业视觉",
+      "titleEn": "openIndu-vision",
+      "description": "探索跨相机、跨算法的视觉检测与工作流编排；实际支持范围以仓库、版本和验证记录为准。",
+      "benefits": ["相机抽象", "算法编排", "检测定位", "结果集成"]
     },
-    "programming": {
-      "title": "编程与组态层",
-      "titleEn": "Programming & Configuration",
-      "description": "openIndu-studio：PLC 编程、HMI 组态、PLC 选型、BOM 清单、电路图绘制、跨品牌代码生成",
-      "benefits": ["多品牌支持", "工程自动化", "成本降低"]
+    "studio": {
+      "title": "工程资产",
+      "titleEn": "openIndu-studio",
+      "description": "围绕电气模组、电路图、BOM、IO 地址规划与 PLC/HMI 中间产物组织工程工作流。",
+      "benefits": ["工程资产", "模板复用", "过程可追踪", "产物可核验"]
     },
-    "hardware": {
-      "title": "硬件与 OS 层",
-      "titleEn": "Hardware & OS Layer",
-      "description": "国产工控芯片 + openEuler 国产操作系统：实时控制、工业协议、边缘本地决策",
-      "benefits": ["国产可控", "成本优势", "实时可靠"]
+    "data": {
+      "title": "设备互联与数据",
+      "titleEn": "openIndu-cim + openIndu-platform",
+      "description": "连接设备、制造系统与工业数据，服务采集、追溯和分析；协议能力按驱动、版本和环境逐项验证。",
+      "benefits": ["设备互联", "数据采集", "产品追溯", "制造集成"]
+    },
+    "plc": {
+      "title": "开放控制实验",
+      "titleEn": "PLC Experiment · E0",
+      "description": "RK3588 + openEuler + RTOS/实时 Linux + EtherCAT 路线探索。尚未完成实时性、HIL、长稳和故障恢复验证。",
+      "benefits": ["Experiment / E0", "实验方案", "证据门槛", "非生产可用"]
     }
   },
   "interaction": {
-    "heading": "层级如何协同工作",
-    "flowTitle": "📐 工程流程",
-    "flowStep1Label": "设计阶段",
-    "flowStep1": "在 openIndu-studio 中一次性设计 PLC 逻辑、HMI 界面、选择 PLC 型号",
-    "flowStep2Label": "生成阶段",
-    "flowStep2": "自动生成西门子 S7、三菱、欧姆龙等跨品牌代码 + BOM 清单 + 电路图",
-    "flowStep3Label": "部署阶段",
-    "flowStep3": "代码部署到国产芯片软 PLC 或目标硬件 PLC",
-    "appsTitle": "👁️ 应用协同",
-    "appsLeftLabel": "左翼 - openIndu-vision（工业视觉）",
-    "appsLeft": "基于 OpenCV 的检测定位，反馈给 PLC",
-    "appsCoreLabel": "核心 - openIndu-studio（编程控制）",
-    "appsCore": "PLC 逻辑执行，接收视觉信息，驱动执行机构",
-    "appsRightLabel": "右翼 - openIndu-cim + platform（数据采集）",
-    "appsRight": "采集所有数据上报到 IIoT 平台进行分析",
-    "loopTitle": "📊 数据闭环",
-    "loop": "实时数据 → Platform 分析 → 发现工艺瓶颈 → 论坛工艺专栏分享解决方案 → 优化生产参数 → 良率提升"
+    "heading": "这些方向如何协作",
+    "flowTitle": "📐 知识到工程资产",
+    "flowStep1Label": "记录",
+    "flowStep1": "论坛保留现场场景、约束、验证过程和已知边界",
+    "flowStep2Label": "评审",
+    "flowStep2": "经过复核的经验再整理为指南、模板、映射或实验用例",
+    "flowStep3Label": "复用",
+    "flowStep3": "工具在明确状态和证据范围内复用这些工程资产",
+    "appsTitle": "🧭 工具协同",
+    "appsLeftLabel": "openIndu-vision",
+    "appsLeft": "视觉检测与工作流探索",
+    "appsCoreLabel": "openIndu-studio",
+    "appsCore": "组织工程资产与生成工作流",
+    "appsRightLabel": "openIndu-cim + openIndu-platform",
+    "appsRight": "连接设备、制造系统与工业数据",
+    "loopTitle": "🧪 实验边界",
+    "loop": "PLC Experiment 独立展示为 Experiment / E0；没有实时性、HIL、长稳和故障恢复证据前，不宣称生产可用。"
   },
   "comparison": {
-    "heading": "与传统方案对标",
+    "heading": "我们坚持的表达方式",
     "colAspect": "维度",
-    "colTraditional": "传统方案",
-    "colOpenIndu": "openIndu 全栈",
+    "colTraditional": "容易产生的误解",
+    "colOpenIndu": "openIndu 的做法",
     "rows": [
-      { "aspect": "硬件成本", "traditional": "昂贵的工业 PC + 专有系统", "openindu": "国产工控芯片 + 开源 openEuler" },
-      { "aspect": "编程周期", "traditional": "每个品牌专属编程 → 代码重写", "openindu": "设计一次 → 跨品牌代码自动生成" },
-      { "aspect": "应用集成", "traditional": "视觉/IIoT 各自为政 → 数据孤岛", "openindu": "三层应用协同 → 数据驱动闭环" },
-      { "aspect": "工艺知识", "traditional": "各企业各自探索", "openindu": "论坛众包工艺库 → 行业共同进步" },
-      { "aspect": "厂商锁定", "traditional": "依赖专有平台 → 升级昂贵", "openindu": "Apache 2.0 开源 → 完全自主" }
+      { "aspect": "项目地图", "traditional": "方向存在等于产品已经完成", "openindu": "方向、状态和证据分别展示" },
+      { "aspect": "论坛文章", "traditional": "内容覆盖等于具备行业交付能力", "openindu": "内容标为 Content，不外推交付能力" },
+      { "aspect": "代码仓库", "traditional": "有代码等于已经工程验证", "openindu": "README、Release、测试和限制共同说明状态" },
+      { "aspect": "许可证", "traditional": "把整个生态统一概括为一种许可证", "openindu": "以各仓库 LICENSE 和依赖义务为准" },
+      { "aspect": "软 PLC", "traditional": "实验路线等于可替代硬 PLC", "openindu": "明确标记 Experiment / E0 和下一验证门槛" }
     ]
   },
   "cta": {
-    "heading": "准备好探索全链路了吗？",
-    "useCases": "查看行业场景方案",
-    "studio": "查看 openIndu-studio"
+    "heading": "从一个可复核的问题开始",
+    "useCases": "查看行业内容",
+    "studio": "浏览 openIndu 项目"
   }
 }

@@ -68,6 +68,7 @@ export function Station() {
                     alt={t(`screenshots.${shot.key}Alt`)}
                     className="w-full h-auto"
                     loading="lazy"
+                    decoding="async"
                   />
                 </div>
                 <figcaption className="text-sm text-gray-500 mt-3 text-center">

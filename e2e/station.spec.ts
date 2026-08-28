@@ -88,7 +88,7 @@ for (const { locale, prefix, label } of LOCALES) {
 
       // The dropdown only renders on the desktop nav (xl breakpoint); the
       // default Desktop Chrome viewport is 1280px wide, so it is present.
-      await page.locator("header").getByTestId("nav-vision").hover();
+      await page.locator("header").getByTestId("nav-products").hover();
       await page.locator("header").getByTestId("nav-station").click();
 
       await expect(page).toHaveURL(prefix + "/vision/station");

@@ -13,7 +13,7 @@ const GOLDEN = {
     h1: { zh: "AI+视觉", en: "AI + Machine Vision" },
   },
   iiot: {
-    h1: { zh: "工业互联网平台", en: "Industrial IoT Platform" },
+    h1: { zh: "openIndu-platform 社区项目", en: "A Community IIoT Project" },
     architectureHeading: { zh: "技术架构", en: "Technical Architecture" },
     wechatFollowAbsent: { zh: "关注微信公众号", en: "Follow us on WeChat" },
   },
