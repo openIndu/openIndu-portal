@@ -85,7 +85,7 @@ for (const { locale, prefix, label } of LOCALES) {
         await expect(main.getByText(title, { exact: true })).toBeVisible();
       }
       await expect(main.getByText("openIndu-studio", { exact: true }).first()).toBeVisible();
-      await expect(main.getByText(/openIndu-cim/).first()).toBeVisible();
+      await expect(main.getByText(/openIndu-cim \/ openIndu-platform/).first()).toBeVisible();
     });
 
     test("displays the three-step guide", async ({ page }) => {
@@ -136,6 +136,20 @@ for (const { locale, prefix, label } of LOCALES) {
       await expect(footer).toBeVisible();
       // Brand name -- invariant across locales.
       await expect(footer).toContainText("openIndu Community");
+      const quickLinks = footer.getByTestId("footer-quick-links");
+      const expectedHrefs = [
+        prefix || "/",
+        `${prefix}/architecture`,
+        `${prefix}/use-cases`,
+        `${prefix}/craftsmanship`,
+        `${prefix}/resources`,
+      ];
+      for (const href of expectedHrefs) {
+        await expect(quickLinks.locator(`a[href="${href}"]`)).toHaveCount(1);
+      }
+      await expect(quickLinks.locator('a[href$="/motion-control"]')).toHaveCount(0);
+      await expect(quickLinks.locator('a[href$="/vision"]')).toHaveCount(0);
+      await expect(quickLinks.locator('a[href$="/developers"]')).toHaveCount(0);
     });
   });
 }

@@ -1,12 +1,12 @@
 {
   "seo": {
     "title": "项目地图｜openIndu 工程工具栈社区",
-    "description": "了解 openIndu 的五个协作方向：Forum、Vision、Studio、CIM + Platform 与 PLC Experiment，以及各方向的能力边界。"
+    "description": "了解 openIndu 的五个协作方向：Forum、Vision、Studio、openIndu-cim + openIndu-platform 与 PLC Experiment，以及各方向的能力边界。"
   },
   "hero": {
     "title": "openIndu 项目地图",
     "subtitle": "论坛沉淀知识，工具承载工程复用，状态与证据说明当前边界",
-    "formula": "Forum + Vision + Studio + CIM & Platform + PLC Experiment"
+    "formula": "Forum + Vision + Studio + openIndu-cim & openIndu-platform + PLC Experiment"
   },
   "layers": {
     "forum": {
@@ -29,7 +29,7 @@
     },
     "data": {
       "title": "设备互联与数据",
-      "titleEn": "CIM + Platform",
+      "titleEn": "openIndu-cim + openIndu-platform",
       "description": "连接设备、制造系统与工业数据，服务采集、追溯和分析；协议能力按驱动、版本和环境逐项验证。",
       "benefits": ["设备互联", "数据采集", "产品追溯", "制造集成"]
     },
@@ -54,7 +54,7 @@
     "appsLeft": "视觉检测与工作流探索",
     "appsCoreLabel": "Studio",
     "appsCore": "组织工程资产与生成工作流",
-    "appsRightLabel": "CIM + Platform",
+    "appsRightLabel": "openIndu-cim + openIndu-platform",
     "appsRight": "连接设备、制造系统与工业数据",
     "loopTitle": "🧪 实验边界",
     "loop": "PLC Experiment 独立展示为 Experiment / E0；没有实时性、HIL、长稳和故障恢复证据前，不宣称生产可用。"

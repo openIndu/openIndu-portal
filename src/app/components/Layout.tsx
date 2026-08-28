@@ -356,24 +356,24 @@ export function Layout() {
             {/* Quick Links */}
             <div className="flex flex-col items-start">
               <h3 className="font-semibold text-white mb-4">{t("footer.quickLinks")}</h3>
-              <ul className="space-y-1 text-sky-100">
+              <ul data-testid="footer-quick-links" className="space-y-1 text-sky-100">
                 <li>
                   <Link to="/" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">{t("footer.home")}</Link>
+                </li>
+                <li>
+                  <Link to="/architecture" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">{t("nav.architecture")}</Link>
+                </li>
+                <li>
+                  <Link to="/use-cases" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">{t("nav.useCases")}</Link>
+                </li>
+                <li>
+                  <Link to="/craftsmanship" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">{t("nav.craftsmanship")}</Link>
                 </li>
                 <li>
                   <Link to="/resources" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">{t("footer.downloads")}</Link>
                 </li>
                 <li>
-                  <Link to="/motion-control" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">{t("footer.motionControl")}</Link>
-                </li>
-                <li>
-                  <Link to="/vision" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">{t("footer.vision")}</Link>
-                </li>
-                <li>
                   <a href="https://forum.openindu.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">{t("footer.forum")}</a>
-                </li>
-                <li>
-                  <Link to="/developers" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">{t("footer.developers")}</Link>
                 </li>
               </ul>
             </div>

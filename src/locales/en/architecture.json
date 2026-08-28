@@ -1,12 +1,12 @@
 {
   "seo": {
     "title": "Project Map | openIndu Engineering Tool Stack Community",
-    "description": "Explore five openIndu collaboration directions: Forum, Vision, Studio, CIM + Platform, and PLC Experiment, with explicit capability boundaries."
+    "description": "Explore five openIndu collaboration directions: Forum, Vision, Studio, openIndu-cim + openIndu-platform, and PLC Experiment, with explicit capability boundaries."
   },
   "hero": {
     "title": "The openIndu Project Map",
     "subtitle": "The forum preserves knowledge, tools enable engineering reuse, and status plus evidence define today's boundaries",
-    "formula": "Forum + Vision + Studio + CIM & Platform + PLC Experiment"
+    "formula": "Forum + Vision + Studio + openIndu-cim & openIndu-platform + PLC Experiment"
   },
   "layers": {
     "forum": {
@@ -29,7 +29,7 @@
     },
     "data": {
       "title": "Connectivity and Data",
-      "titleEn": "CIM + Platform",
+      "titleEn": "openIndu-cim + openIndu-platform",
       "description": "Connect equipment, manufacturing systems, and industrial data for collection, traceability, and analysis. Protocols are validated per driver, version, and environment.",
       "benefits": ["Connectivity", "Data acquisition", "Traceability", "Manufacturing integration"]
     },
@@ -54,7 +54,7 @@
     "appsLeft": "Visual inspection and workflow exploration",
     "appsCoreLabel": "Studio",
     "appsCore": "Organises engineering assets and generation workflows",
-    "appsRightLabel": "CIM + Platform",
+    "appsRightLabel": "openIndu-cim + openIndu-platform",
     "appsRight": "Connects equipment, manufacturing systems, and industrial data",
     "loopTitle": "🧪 Experimental Boundary",
     "loop": "PLC Experiment remains Experiment / E0. It is not production-ready without real-time, HIL, endurance, and fault-recovery evidence."
