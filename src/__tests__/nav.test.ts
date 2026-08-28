@@ -4,8 +4,8 @@ import { isNavItemActive } from "@/app/utils/nav";
 // Mirrors the real header items in Layout.tsx.
 const HOME = { href: "/" };
 const ARCHITECTURE = { href: "/architecture" };
+// "Projects" is a pure dropdown group — no href of its own.
 const PRODUCTS = {
-  href: "/architecture",
   match: ["/motion-control", "/vision", "/iiot-platform", "/edge-computing"],
 };
 const RESOURCES = { href: "/resources" };
@@ -16,13 +16,18 @@ describe("isNavItemActive", () => {
     expect(isNavItemActive(HOME, "/architecture")).toBe(false);
   });
 
+  it("a group with no href and no match is never active", () => {
+    expect(isNavItemActive({}, "/")).toBe(false);
+    expect(isNavItemActive({}, "/anything")).toBe(false);
+  });
+
   it("a plain item matches its path and nested paths, segment-aware", () => {
     expect(isNavItemActive(RESOURCES, "/resources")).toBe(true);
     expect(isNavItemActive(RESOURCES, "/resources/software")).toBe(true);
     expect(isNavItemActive(RESOURCES, "/resources-archive")).toBe(false);
   });
 
-  // The bug: "Projects" and "Architecture" share href "/architecture".
+  // The original bug: "Projects" and "Architecture" both matched /architecture.
   it("on /architecture, only Architecture is active — not Projects", () => {
     expect(isNavItemActive(ARCHITECTURE, "/architecture")).toBe(true);
     expect(isNavItemActive(PRODUCTS, "/architecture")).toBe(false);

@@ -12,6 +12,8 @@ import logo from "/assets/logo-96.png";
 
 export function Layout() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  /** Which desktop dropdown was opened by click (hover/focus open independently via CSS). */
+  const [openMenu, setOpenMenu] = useState<string | null>(null);
   const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
@@ -19,10 +21,28 @@ export function Layout() {
   const { t, i18n } = useTranslation("common");
   const locale = i18n.language; // "zh" | "en"
 
-  // Scroll to top on every page navigation
+  // Scroll to top and close any open dropdown on every page navigation
   useEffect(() => {
     window.scrollTo(0, 0);
+    setOpenMenu(null);
   }, [location.pathname]);
+
+  // Close a click-opened dropdown on Escape or an outside click.
+  useEffect(() => {
+    if (!openMenu) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpenMenu(null);
+    };
+    const onClick = (e: MouseEvent) => {
+      if (!(e.target as HTMLElement).closest("[data-nav-dropdown]")) setOpenMenu(null);
+    };
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("click", onClick);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("click", onClick);
+    };
+  }, [openMenu]);
 
   useEffect(() => {
     if (!mobileMenuOpen) return;
@@ -64,7 +84,8 @@ export function Layout() {
 
   type NavItem = {
     name: string;
-    href: string;
+    /** Link target. Absent for a pure dropdown group (the trigger only opens the menu). */
+    href?: string;
     testid?: string;
     children?: NavItem[];
     external?: boolean;
@@ -79,11 +100,10 @@ export function Layout() {
       { name: t("nav.craftsmanship"), href: "/craftsmanship", testid: "nav-craftsmanship" },
       {
         name: t("nav.products"),
-        href: "/architecture",
         testid: "nav-products",
-        // "Projects" is a category — it owns its child pages, NOT /architecture
-        // (which belongs to the "全栈架构" item). Without this the two share a
-        // href and both highlight on /architecture.
+        // A category, not a page — the trigger only opens the menu. Its child
+        // pages are the destinations; the /architecture overview ("项目地图")
+        // lives under the "全栈架构" item. `match` lights this up on a child page.
         match: ["/motion-control", "/vision", "/iiot-platform", "/edge-computing"],
         children: [
           { name: t("nav.studio"), href: "/motion-control/studio", testid: "nav-studio" },
@@ -143,11 +163,13 @@ export function Layout() {
             <div className="hidden min-w-0 flex-1 items-center justify-center gap-x-6 xl:flex">
               {navigation.map((item) =>
                 item.children ? (
-                  <div key={item.name} className="group relative">
-                    <Link
-                      to={item.href}
+                  <div key={item.name} data-nav-dropdown className="group relative">
+                    <button
+                      type="button"
                       data-testid={item.testid}
-                      aria-current={isActive(item) ? "page" : undefined}
+                      aria-haspopup="true"
+                      aria-expanded={openMenu === item.name}
+                      onClick={() => setOpenMenu((cur) => (cur === item.name ? null : item.name))}
                       className={`flex items-center justify-center gap-1 text-sm transition-colors whitespace-nowrap py-2 px-2 min-h-[44px] min-w-[60px] ${
                         isActive(item)
                           ? "text-sky-700 font-medium"
@@ -156,9 +178,13 @@ export function Layout() {
                     >
                       {item.name}
                       <ChevronDown className="h-3.5 w-3.5 transition-transform group-hover:rotate-180" aria-hidden="true" />
-                    </Link>
-                    {/* pt-2 bridges the hover gap between parent item and dropdown */}
-                    <div className="absolute left-0 top-full z-50 hidden min-w-[180px] pt-2 group-hover:block group-focus-within:block">
+                    </button>
+                    {/* Opens on hover/focus (CSS) or an explicit click (openMenu). pt-2 bridges the hover gap. */}
+                    <div
+                      className={`absolute left-0 top-full z-50 min-w-[180px] pt-2 group-hover:block group-focus-within:block ${
+                        openMenu === item.name ? "block" : "hidden"
+                      }`}
+                    >
                       <div className="rounded-lg border border-gray-100 bg-white py-1 shadow-lg">
                         {item.children.map((child) =>
                           child.external ? (
@@ -168,6 +194,7 @@ export function Layout() {
                               target="_blank"
                               rel="noopener noreferrer"
                               data-testid={child.testid}
+                              onClick={() => setOpenMenu(null)}
                               className="flex items-center px-4 py-3.5 text-sm transition-colors text-gray-700 hover:bg-gray-50 hover:text-sky-700 min-h-[44px] w-full"
                             >
                               {child.name}
@@ -175,8 +202,10 @@ export function Layout() {
                           ) : (
                             <Link
                               key={child.name}
-                              to={child.href}
+                              to={child.href!}
                               data-testid={child.testid}
+                              onClick={() => setOpenMenu(null)}
+                              aria-current={location.pathname === child.href ? "page" : undefined}
                               className={`flex items-center px-4 py-3.5 text-sm transition-colors min-h-[44px] w-full ${
                                 location.pathname === child.href
                                   ? "bg-sky-50 font-medium text-sky-700"
@@ -204,7 +233,7 @@ export function Layout() {
                 ) : (
                   <Link
                     key={item.name}
-                    to={item.href}
+                    to={item.href ?? "/"}
                     data-testid={item.testid}
                     aria-current={isActive(item) ? "page" : undefined}
                     className={`text-sm transition-colors whitespace-nowrap py-2 px-2 min-h-[44px] min-w-[60px] inline-flex items-center justify-center ${
@@ -274,27 +303,40 @@ export function Layout() {
           <div className="space-y-1 px-4 pb-3 pt-2">
             {navigation.map((item) => (
               <div key={item.name}>
-                <Link
-                  to={item.href}
-                  data-testid={item.testid}
-                  onClick={() => setMobileMenuOpen(false)}
-                  aria-current={isActive(item) ? "page" : undefined}
-                  className={`flex min-h-[44px] items-center rounded-lg px-3 py-2 ${
-                    isActive(item)
-                      ? "bg-sky-50 font-medium text-sky-700"
-                      : "text-gray-700 hover:bg-gray-50"
-                  }`}
-                >
-                  {item.name}
-                </Link>
+                {item.children ? (
+                  // A group is a section label on mobile — its children are listed inline below.
+                  <div
+                    data-testid={item.testid}
+                    className={`flex min-h-[44px] items-center rounded-lg px-3 py-2 font-medium ${
+                      isActive(item) ? "bg-sky-50 text-sky-700" : "text-gray-500"
+                    }`}
+                  >
+                    {item.name}
+                  </div>
+                ) : (
+                  <Link
+                    to={item.href ?? "/"}
+                    data-testid={item.testid}
+                    onClick={() => setMobileMenuOpen(false)}
+                    aria-current={isActive(item) ? "page" : undefined}
+                    className={`flex min-h-[44px] items-center rounded-lg px-3 py-2 ${
+                      isActive(item)
+                        ? "bg-sky-50 font-medium text-sky-700"
+                        : "text-gray-700 hover:bg-gray-50"
+                    }`}
+                  >
+                    {item.name}
+                  </Link>
+                )}
                 {item.children && (
                   <div className="ml-3 mt-1 space-y-1 border-l border-gray-100 pl-3">
                     {item.children.map((child) => (
                       <Link
                         key={child.name}
-                        to={child.href}
+                        to={child.href!}
                         data-testid={child.testid}
                         onClick={() => setMobileMenuOpen(false)}
+                        aria-current={location.pathname === child.href ? "page" : undefined}
                         className={`flex min-h-[44px] items-center rounded-lg px-3 py-2 text-sm ${
                           location.pathname === child.href
                             ? "bg-sky-50 font-medium text-sky-700"
