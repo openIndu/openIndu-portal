@@ -5,7 +5,7 @@ const BREADCRUMB_NAMES: Record<string, string> = {
   "motion-control": "AI+运动控制",
   studio: "openIndu-studio 平台",
   vision: "AI+视觉",
-  station: "openindu-station",
+  station: "openIndu-station",
   "iiot-platform": "AI+工业互联网平台",
   infrastructure: "AI+基础设施",
   resources: "下载中心",

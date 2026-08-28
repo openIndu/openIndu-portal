@@ -42,7 +42,7 @@ export function Forum() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="https://forum.openindu.com/c/process/7"
+                href="https://forum.openindu.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center px-8 py-4 bg-sky-700 text-white rounded-lg hover:bg-[#085A90] transition-colors font-medium"
@@ -115,7 +115,7 @@ export function Forum() {
             {t("forumPage.ctaDescription")}
           </p>
           <a
-            href="https://forum.openindu.com/c/process/7"
+            href="https://forum.openindu.com/"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center px-8 py-4 bg-white text-[#085A90] rounded-lg hover:bg-sky-50 transition-colors font-medium"

@@ -12,7 +12,7 @@
     "ctaStudio": "Learn about openIndu-studio",
     "ctaSolutions": "View Solutions",
     "accent": "Domestic silicon at the base, open source end to end",
-    "chain": "Domestic industrial SoC + openEuler → openindu-studio → Industrial Vision/Edge/IIoT → Craftsmanship Knowledge"
+    "chain": "Domestic industrial SoC + openEuler → openIndu-studio → Industrial Vision/Edge/IIoT → Craftsmanship Knowledge"
   },
   "products": {
     "heading": "Three Core Projects",
@@ -46,14 +46,13 @@
     "l3Vision": "Industrial Vision",
     "l3VisionDesc": "openIndu-vision",
     "l3Studio": "Programming & Configuration",
-    "l3StudioDesc": "openindu-studio",
+    "l3StudioDesc": "openIndu-studio",
     "l3Data": "Data Acquisition",
-    "l3DataDesc": "CIM + Platform",
+    "l3DataDesc": "openIndu-cim and openIndu-platform",
     "l2Title": "Programming Layer",
     "l2Desc": "PLC programming, HMI, selection, BOM, circuit diagrams, cross-brand codegen",
     "l1Title": "Hardware & OS Layer (Foundation)",
     "l1Desc": "Domestic industrial SoC + openEuler (domestic operating system)",
-    "readingHint": "Read bottom-up: ① hardware & OS → ④ craftsmanship knowledge",
     "ctaArchitecture": "Explore the Full Stack",
     "ctaUseCases": "View Industry Scenarios"
   },
@@ -87,7 +86,7 @@
     "heading": "Fully Open Source — Come Build With Us",
     "description": "All openIndu code is open on GitHub and Gitee. Whether you submit code, share process parameters or join a discussion, every contribution moves industrial automation forward.",
     "item1Title": "Code contributions",
-    "item1Desc": "Core projects including openindu-studio, platform and vision",
+    "item1Desc": "Core projects including openIndu-studio, platform and vision",
     "item2Title": "Knowledge sharing",
     "item2Desc": "Forum discussions, process parameters, lessons learned",
     "item3Title": "Protocol extensions",

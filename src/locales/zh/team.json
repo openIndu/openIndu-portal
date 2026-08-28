@@ -20,7 +20,7 @@
     },
     "platform": {
       "name": "工业互联网",
-      "description": "openIndu-platform 与 openindu-cim：数据采集、边缘计算与产线分析"
+      "description": "openIndu-platform 与 openIndu-cim：数据采集、边缘计算与产线分析"
     },
     "portal": {
       "name": "社区门户",

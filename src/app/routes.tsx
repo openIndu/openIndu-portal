@@ -74,7 +74,7 @@ export const router = createBrowserRouter(
         // Chat's RAG knowledge base is Chinese-only — same ZH-only treatment as legal pages.
         { path: "chat", element: <ZhOnlyGuard><ChatPage /></ZhOnlyGuard> },
         { path: "vision", Component: Vision },
-        // openindu-station: sub-page of AI+Vision, publicly visible
+        // openIndu-station: sub-page of AI+Vision, publicly visible
         { path: "vision/station", Component: Station },
         { path: "iiot-platform", Component: IIoTPlatform },
         // Community forum — may redirect to external platform (Discourse/GitHub Discussions) in future

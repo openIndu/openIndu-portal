@@ -24,7 +24,7 @@ const resourceKeys = [
 const projectKeys = [
   { key: "studio", name: "openIndu-studio", href: GH },
   { key: "platform", name: "openIndu-platform", href: GH },
-  { key: "station", name: "openindu-station", href: GH },
+  { key: "station", name: "openIndu-station", href: GH },
 ] as const;
 
 export function Developers() {

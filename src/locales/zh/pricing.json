@@ -21,7 +21,7 @@
     "edge": {
       "name": "边缘端侧",
       "description": "国产工控芯片 + openEuler 软 PLC 一体化方案，开箱即用",
-      "features": ["国产工控芯片预装", "openindu-cim + 工业协议", "实时决策、本地告警", "云边协同支持"],
+      "features": ["国产工控芯片预装", "openIndu-cim + 工业协议", "实时决策、本地告警", "云边协同支持"],
       "price": "8-15 万元（设备 + 软件）",
       "cta": "获取报价"
     },

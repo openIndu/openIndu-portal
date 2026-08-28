@@ -3,9 +3,9 @@ import { test, expect } from "@playwright/test";
 // Golden values -- curated manually against src/locales/{zh,en}/station.json.
 // NOT read from locale JSON (see i18n-test-rework-plan.md 1.1).
 const GOLDEN = {
-  h1: { zh: "openindu-station", en: "openindu-station" },
+  h1: { zh: "openIndu-station", en: "openIndu-station" },
   navParent: { zh: "AI+视觉", en: "AI + Machine Vision" },
-  navChild: { zh: "openindu-station", en: "openindu-station" },
+  navChild: { zh: "openIndu-station", en: "openIndu-station" },
   badge: {
     zh: "社区共建 · 即将开源",
     en: "Community-built · Open-sourcing soon",
@@ -34,7 +34,7 @@ const LOCALES = [
 ] as const;
 
 for (const { locale, prefix, label } of LOCALES) {
-  test.describe(`openindu-station Page (${label})`, () => {
+  test.describe(`openIndu-station Page (${label})`, () => {
     test("should load station page at /vision/station", async ({ page }) => {
       await page.goto(prefix + "/vision/station");
 

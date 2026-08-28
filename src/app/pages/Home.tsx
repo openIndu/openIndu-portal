@@ -34,7 +34,6 @@ export function Home() {
           </div>
 
           {/* 4-Layer Stack Visualization */}
-          <p className="text-center text-sm text-gray-500 mb-4">{t("stack.readingHint")}</p>
           <div className="space-y-3 mb-12 max-w-4xl mx-auto">
             {/* Layer 4: Craftsmanship */}
             <div className="bg-white border border-sky-100 rounded-xl p-4 sm:p-5 shadow-sm">

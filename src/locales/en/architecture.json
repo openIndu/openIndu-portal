@@ -6,7 +6,7 @@
   "hero": {
     "title": "The openIndu Full-Chain Architecture",
     "subtitle": "From industrial silicon to craftsmanship knowledge — one chain across the whole manufacturing flow",
-    "formula": "Domestic industrial SoC + openEuler + openindu-studio + three application layers + craftsmanship knowledge = a complete industrial automation OS"
+    "formula": "Domestic industrial SoC + openEuler + openIndu-studio + three application layers + craftsmanship knowledge = a complete industrial automation OS"
   },
   "layers": {
     "craftsmanship": {
@@ -24,7 +24,7 @@
     "programming": {
       "title": "Programming & Configuration Layer",
       "titleEn": "Layer 2",
-      "description": "openindu-studio: PLC programming, HMI configuration, PLC selection, BOM, circuit diagrams and cross-brand code generation",
+      "description": "openIndu-studio: PLC programming, HMI configuration, PLC selection, BOM, circuit diagrams and cross-brand code generation",
       "benefits": ["Multi-brand support", "Engineering automation", "Lower cost"]
     },
     "hardware": {
@@ -38,7 +38,7 @@
     "heading": "How the Layers Work Together",
     "flowTitle": "📐 Engineering Flow",
     "flowStep1Label": "Design",
-    "flowStep1": "Design the PLC logic, HMI screens and PLC selection once, inside openindu-studio",
+    "flowStep1": "Design the PLC logic, HMI screens and PLC selection once, inside openIndu-studio",
     "flowStep2Label": "Generate",
     "flowStep2": "Automatically emit cross-brand code for Siemens S7, Mitsubishi, Omron and others — plus BOM and circuit diagrams",
     "flowStep3Label": "Deploy",
@@ -46,9 +46,9 @@
     "appsTitle": "👁️ Applications in Concert",
     "appsLeftLabel": "Left — openIndu-vision (machine vision)",
     "appsLeft": "OpenCV-based inspection and positioning, fed back to the PLC",
-    "appsCoreLabel": "Centre — openindu-studio (programming & control)",
+    "appsCoreLabel": "Centre — openIndu-studio (programming & control)",
     "appsCore": "Runs the PLC logic, consumes vision results, drives the actuators",
-    "appsRightLabel": "Right — openindu-cim + platform (data acquisition)",
+    "appsRightLabel": "Right — openIndu-cim + platform (data acquisition)",
     "appsRight": "Collects everything and reports it to the IIoT platform for analysis",
     "loopTitle": "📊 The Data Loop",
     "loop": "Live data → platform analysis → process bottleneck found → solution shared in the forum's process column → parameters tuned → yield improves"
@@ -69,6 +69,6 @@
   "cta": {
     "heading": "Ready to explore the full chain?",
     "useCases": "View Industry Scenarios",
-    "studio": "Explore openindu-studio"
+    "studio": "Explore openIndu-studio"
   }
 }

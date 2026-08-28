@@ -47,19 +47,19 @@
 **使用技术栈**：
 - RK3588 + openEuler 软 PLC（编程平台）
 - openindu-vision（工业视觉）
-- openindu-cim/platform（数据采集）
+- openIndu-cim/platform（数据采集）
 - 论坛工艺知识库
 
 **实施步骤**：
-1. **编程**：用 openindu-studio 设计一次通用 PLC 程序
+1. **编程**：用 openIndu-studio 设计一次通用 PLC 程序
 2. **视觉**：集成 openindu-vision 进行实时检测
 3. **参数**：通过 platform 可视化调试参数，不需要重新编译
 4. **共享**：参数配置和调试经验上传论坛，后续项目复用
 
 **示例**：
-> 1. 使用 openindu-studio 设计卷绕速度控制逻辑，通过抽象的"参数表"暴露关键参数
+> 1. 使用 openIndu-studio 设计卷绕速度控制逻辑，通过抽象的"参数表"暴露关键参数
 > 2. 集成 openindu-vision 进行卷绕接头检测，自动调整速度
-> 3. 在 openindu-platform 的 Dashboard 中实时查看良率、速度波动
+> 3. 在 openIndu-platform 的 Dashboard 中实时查看良率、速度波动
 > 4. 将最优参数（卷绕速度、检测阈值、加热温度）发布到论坛电池工艺专栏
 
 ### 4. 工程指标（可衡量的结果）

@@ -12,7 +12,7 @@
     "ctaStudio": "了解 openIndu-studio",
     "ctaSolutions": "查看解决方案",
     "accent": "国产芯片筑基，全链路开源",
-    "chain": "国产工控芯片 + openEuler → openindu-studio → 工业视觉/边缘/IIoT → 工艺知识"
+    "chain": "国产工控芯片 + openEuler → openIndu-studio → 工业视觉/边缘/IIoT → 工艺知识"
   },
   "products": {
     "heading": "三大核心产品",
@@ -46,14 +46,13 @@
     "l3Vision": "工业视觉",
     "l3VisionDesc": "openIndu-vision",
     "l3Studio": "编程组态",
-    "l3StudioDesc": "openindu-studio",
+    "l3StudioDesc": "openIndu-studio",
     "l3Data": "数据采集",
-    "l3DataDesc": "CIM + Platform",
+    "l3DataDesc": "openIndu-cim 和 openIndu-platform",
     "l2Title": "编程与组态层 (Programming)",
     "l2Desc": "PLC编程、HMI、选型、BOM、电路图、跨品牌代码生成",
     "l1Title": "硬件与 OS 层 (Foundation)",
     "l1Desc": "国产工控芯片 + openEuler（国产操作系统）",
-    "readingHint": "架构自下而上：① 硬件与操作系统 → ④ 工艺知识",
     "ctaArchitecture": "理解全栈架构",
     "ctaUseCases": "查看行业场景"
   },
@@ -87,7 +86,7 @@
     "heading": "完全开源，欢迎参与",
     "description": "openIndu 所有代码都在 GitHub 和 Gitee 开源。无论是提交代码、分享工艺参数，还是参与讨论，每一个贡献都推动工业自动化向前发展。",
     "item1Title": "代码贡献",
-    "item1Desc": "openindu-studio、platform、vision 等核心项目",
+    "item1Desc": "openIndu-studio、platform、vision 等核心项目",
     "item2Title": "知识分享",
     "item2Desc": "论坛讨论、工艺参数、经验教训",
     "item3Title": "协议扩展",

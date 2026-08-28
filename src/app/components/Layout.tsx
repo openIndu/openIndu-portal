@@ -370,7 +370,7 @@ export function Layout() {
                   <Link to="/vision" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">{t("footer.vision")}</Link>
                 </li>
                 <li>
-                  <a href="https://forum.openindu.com/c/process/7" target="_blank" rel="noopener noreferrer" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">{t("footer.forum")}</a>
+                  <a href="https://forum.openindu.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">{t("footer.forum")}</a>
                 </li>
                 <li>
                   <Link to="/developers" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">{t("footer.developers")}</Link>

@@ -1,12 +1,12 @@
 {
   "seo": {
-    "title": "openindu-station Overview | openIndu",
-    "description": "openindu-station is a motion-vision-scan universal equipment platform incubating in the openIndu community, already running a dual-camera precision dispensing machine and a dual-platform laser cutting machine.",
-    "keywords": "openindu-station,universal equipment platform,motion control,machine vision,hand-eye calibration,template matching,dispensing machine,laser cutting machine"
+    "title": "openIndu-station Overview | openIndu",
+    "description": "openIndu-station is a motion-vision-scan universal equipment platform incubating in the openIndu community, already running a dual-camera precision dispensing machine and a dual-platform laser cutting machine.",
+    "keywords": "openIndu-station,universal equipment platform,motion control,machine vision,hand-eye calibration,template matching,dispensing machine,laser cutting machine"
   },
   "hero": {
     "badge": "Community-built · Open-sourcing soon",
-    "title": "openindu-station",
+    "title": "openIndu-station",
     "subtitle": "A motion-vision-scan universal equipment platform"
   },
   "intro": {
@@ -15,9 +15,9 @@
   },
   "screenshots": {
     "heading": "Interface Preview",
-    "overviewAlt": "openindu-station main dashboard showing live camera feed, axis status, and run logs",
+    "overviewAlt": "openIndu-station main dashboard showing live camera feed, axis status, and run logs",
     "overviewCaption": "Station Overview · Live Feed & Axis Status",
-    "visionAlt": "openindu-station Vision workbench showing template-matching and feature-detection tools",
+    "visionAlt": "openIndu-station Vision workbench showing template-matching and feature-detection tools",
     "visionCaption": "Vision Workbench · Template Matching & Hand-Eye Calibration"
   },
   "capabilities": {
@@ -49,7 +49,7 @@
   },
   "cta": {
     "status": "Currently incubating in the openIndu community; open-sourcing soon.",
-    "heading": "Want to know more about openindu-station?",
+    "heading": "Want to know more about openIndu-station?",
     "description": "If your line has similar motion-vision-scan equipment needs, come talk to the community.",
     "contact": "Contact Us"
   }

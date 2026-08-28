@@ -6,7 +6,7 @@
   "hero": {
     "title": "openIndu 全链路架构",
     "subtitle": "从工控芯片到工艺知识，打通工业制造全流程",
-    "formula": "国产工控芯片 + openEuler + openindu-studio + 三层应用 + 工艺知识 = 完整工业自动化操作系统"
+    "formula": "国产工控芯片 + openEuler + openIndu-studio + 三层应用 + 工艺知识 = 完整工业自动化操作系统"
   },
   "layers": {
     "craftsmanship": {
@@ -24,7 +24,7 @@
     "programming": {
       "title": "编程与组态层",
       "titleEn": "Programming & Configuration",
-      "description": "openindu-studio：PLC 编程、HMI 组态、PLC 选型、BOM 清单、电路图绘制、跨品牌代码生成",
+      "description": "openIndu-studio：PLC 编程、HMI 组态、PLC 选型、BOM 清单、电路图绘制、跨品牌代码生成",
       "benefits": ["多品牌支持", "工程自动化", "成本降低"]
     },
     "hardware": {
@@ -38,7 +38,7 @@
     "heading": "层级如何协同工作",
     "flowTitle": "📐 工程流程",
     "flowStep1Label": "设计阶段",
-    "flowStep1": "在 openindu-studio 中一次性设计 PLC 逻辑、HMI 界面、选择 PLC 型号",
+    "flowStep1": "在 openIndu-studio 中一次性设计 PLC 逻辑、HMI 界面、选择 PLC 型号",
     "flowStep2Label": "生成阶段",
     "flowStep2": "自动生成西门子 S7、三菱、欧姆龙等跨品牌代码 + BOM 清单 + 电路图",
     "flowStep3Label": "部署阶段",
@@ -46,9 +46,9 @@
     "appsTitle": "👁️ 应用协同",
     "appsLeftLabel": "左翼 - openIndu-vision（工业视觉）",
     "appsLeft": "基于 OpenCV 的检测定位，反馈给 PLC",
-    "appsCoreLabel": "核心 - openindu-studio（编程控制）",
+    "appsCoreLabel": "核心 - openIndu-studio（编程控制）",
     "appsCore": "PLC 逻辑执行，接收视觉信息，驱动执行机构",
-    "appsRightLabel": "右翼 - openindu-cim + platform（数据采集）",
+    "appsRightLabel": "右翼 - openIndu-cim + platform（数据采集）",
     "appsRight": "采集所有数据上报到 IIoT 平台进行分析",
     "loopTitle": "📊 数据闭环",
     "loop": "实时数据 → Platform 分析 → 发现工艺瓶颈 → 论坛工艺专栏分享解决方案 → 优化生产参数 → 良率提升"
@@ -69,6 +69,6 @@
   "cta": {
     "heading": "准备好探索全链路了吗？",
     "useCases": "查看行业场景方案",
-    "studio": "查看 openindu-studio"
+    "studio": "查看 openIndu-studio"
   }
 }

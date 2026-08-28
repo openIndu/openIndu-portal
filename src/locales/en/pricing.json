@@ -21,7 +21,7 @@
     "edge": {
       "name": "Edge Appliance",
       "description": "Domestic industrial SoC + openEuler soft PLC as one integrated, ready-to-run unit",
-      "features": ["Domestic industrial SoC pre-installed", "openindu-cim + industrial protocols", "Real-time decisions and local alarms", "Cloud-edge coordination"],
+      "features": ["Domestic industrial SoC pre-installed", "openIndu-cim + industrial protocols", "Real-time decisions and local alarms", "Cloud-edge coordination"],
       "price": "¥80,000–150,000 (hardware + software)",
       "cta": "Request a quote"
     },

@@ -36,7 +36,7 @@
     "automation": {
       "domain": "自动化（自动化编程）",
       "description": "PLC 编程、HMI 编程、工业视觉、运动控制",
-      "product": "openIndu-studio + openindu-station"
+      "product": "openIndu-studio + openIndu-station"
     },
     "process": {
       "domain": "工艺（工艺优化）",

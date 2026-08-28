@@ -20,7 +20,7 @@
     },
     "platform": {
       "name": "Industrial IoT",
-      "description": "openIndu-platform and openindu-cim: data acquisition, edge computing and line analytics"
+      "description": "openIndu-platform and openIndu-cim: data acquisition, edge computing and line analytics"
     },
     "portal": {
       "name": "Community Portal",

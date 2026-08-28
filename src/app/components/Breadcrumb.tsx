@@ -50,7 +50,7 @@ const routeBreadcrumbs: Record<string, BreadcrumbItem[]> = {
   "/vision/station": [
     { label: "Home", href: "/" },
     { label: "Industrial Vision", href: "/vision" },
-    { label: "openindu-station", current: true }
+    { label: "openIndu-station", current: true }
   ],
   "/iiot-platform": [],
   "/resources": [],
