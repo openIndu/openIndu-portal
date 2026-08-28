@@ -1,23 +1,28 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Navigation", () => {
-  test("should navigate from the Projects parent to the project map", async ({ page }) => {
+  test("the Projects trigger opens its menu without navigating", async ({ page }) => {
     await page.goto("/");
-    await page.locator("header").getByTestId("nav-products").click();
-    await expect(page).toHaveURL("/architecture");
-    await expect(page.locator("h1")).toContainText("openIndu 项目地图");
+    const trigger = page.locator("header").getByTestId("nav-products");
+    await trigger.click();
+    await expect(trigger).toHaveAttribute("aria-expanded", "true");
+    await expect(page).toHaveURL("/"); // did not navigate
+    await expect(page.locator("header").getByTestId("nav-vision")).toBeVisible();
   });
 
-  // Regression: "Projects" and "Architecture" share href "/architecture", so
+  // Regression: "Projects" and "Architecture" both matched /architecture, so
   // both used to light up (and both got aria-current) on that page.
-  test("only the owning header item is marked current", async ({ page }) => {
+  // Discriminators: active items carry `font-medium`, inactive ones `text-gray-700`.
+  test("only the owning header item shows as current", async ({ page }) => {
     await page.goto("/architecture");
     await expect(page.locator("header").getByTestId("nav-architecture")).toHaveAttribute("aria-current", "page");
-    await expect(page.locator("header").getByTestId("nav-products")).not.toHaveAttribute("aria-current", "page");
+    await expect(page.locator("header").getByTestId("nav-architecture")).toHaveClass(/font-medium/);
+    await expect(page.locator("header").getByTestId("nav-products")).toHaveClass(/text-gray-700/);
 
     await page.goto("/vision");
-    await expect(page.locator("header").getByTestId("nav-products")).toHaveAttribute("aria-current", "page");
     await expect(page.locator("header").getByTestId("nav-architecture")).not.toHaveAttribute("aria-current", "page");
+    await expect(page.locator("header").getByTestId("nav-architecture")).toHaveClass(/text-gray-700/);
+    await expect(page.locator("header").getByTestId("nav-products")).toHaveClass(/font-medium/);
   });
 
   test("should navigate from home to vision via header link", async ({ page }) => {
