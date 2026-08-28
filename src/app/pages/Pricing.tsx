@@ -14,7 +14,6 @@ export function Pricing() {
       {/* Hero */}
       <section className="relative bg-gradient-to-b from-sky-50 via-white to-white py-16 sm:py-24 overflow-hidden">
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 bg-grid-pattern"></div>
         </div>
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center">

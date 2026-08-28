@@ -17,7 +17,13 @@
   "intro": {
     "heading": "Platform Overview",
     "p1Prefix": "openIndu is a community-grade Industrial IoT platform focused on 3C electronics manufacturing, covering the complete chain from",
-    "p1Chain": ["edge data acquisition", "real-time monitoring", "process management", "product traceability", "data dashboards"],
+    "p1Chain": [
+      "edge data acquisition",
+      "real-time monitoring",
+      "process management",
+      "product traceability",
+      "data dashboards"
+    ],
     "p1Suffix": ".",
     "p2Prefix": "The platform consists of two parts: the ",
     "p2Strong1": "web app",
@@ -37,7 +43,8 @@
         "JWT dual-token authentication (Access + Refresh)",
         "Fast entry into the workspace, one click to core functions",
         "Fine-grained permission control -- different roles see different views"
-      ]
+      ],
+      "subtitle": "Phone Code Sign-in · Secure & Convenient"
     },
     "workbench": {
       "title": "Workbench · Global Overview at a Glance",
@@ -50,7 +57,8 @@
         "Latest alerts: unresolved alerts shown in real time",
         "Recent activity: audit-log traceability",
         "Quick links: user management, role management, device list, data dashboard"
-      ]
+      ],
+      "subtitle": "Workbench · Global Overview at a Glance"
     },
     "dashboard": {
       "title": "Data Dashboard · Production Status on One Screen",
@@ -63,7 +71,8 @@
         "Real-time alert log: instant push of anomaly events",
         "Station defect-rate statistics: quality comparison across stations",
         "Raw-material consumption monitoring: real-time material-usage tracking"
-      ]
+      ],
+      "subtitle": "Data Dashboard · Production Status on One Screen"
     },
     "deviceManagement": {
       "title": "Equipment Management · Full Lifecycle Control",
@@ -76,7 +85,8 @@
         "Key parameters: real-time parameter monitoring and history tracking",
         "Device maintenance: maintenance plans and record management",
         "Device-type management: custom device-type configuration"
-      ]
+      ],
+      "subtitle": "Equipment Management · Full Lifecycle Control"
     },
     "traceability": {
       "title": "Product Traceability · From Raw Material to Finished Product",
@@ -87,13 +97,19 @@
         "End-to-end traceability: complete records for every station, raw material, and process parameter",
         "Process records: station in/out times, operator, equipment, and parameter snapshots",
         "Material traceability: trace affected products by batch"
-      ]
+      ],
+      "subtitle": "Product Traceability · Material to Finished Goods"
     },
     "miniProgram": {
       "title": "WeChat Mini Program Support",
       "description": "Convenient mobile operation -- stay on top of production anytime, anywhere.",
       "screenshotAlt": "WeChat Mini Program",
-      "details": ["View device status and production data from the WeChat Mini Program", "Mobile alert push and handling", "Real-time sync with the web app"]
+      "details": [
+        "View device status and production data from the WeChat Mini Program",
+        "Mobile alert push and handling",
+        "Real-time sync with the web app"
+      ],
+      "subtitle": "WeChat Mini Program Support"
     }
   },
   "architecture": {
@@ -101,28 +117,86 @@
     "subheading": "An 8-layer microservices architecture, full-stack coverage from edge devices to the user interface",
     "diagramAlt": "openIndu platform architecture diagram",
     "layers": {
-      "webFrontend": { "name": "Web Frontend", "tech": "Vue 3.5 + Element Plus + ECharts + Pinia", "desc": "Modern SPA, RBAC permissions, data visualization, multi-role adaptation" },
-      "backend": { "name": "Backend Services", "tech": "Spring Boot 3.5 + Java 21 + Spring Security", "desc": "RESTful API, JWT dual-token auth, microservices architecture" },
-      "edgeGateway": { "name": "Edge Gateway", "tech": "S7 / Modbus / FINS / MC Protocols", "desc": "Siemens / Mitsubishi / Keyence / Omron / Inovance PLC connectivity" },
-      "dataAcquisition": { "name": "Data Acquisition", "tech": "FastAPI + Kafka + MQTT", "desc": "High-throughput acquisition, UUID authentication, time-series database" },
-      "businessDb": { "name": "Business Database", "tech": "PostgreSQL 15.7", "desc": "User, permission, process, and traceability business data" },
-      "timeseriesDb": { "name": "Time-Series Database", "tech": "TDengine 3.0", "desc": "Time-series storage for equipment status and process history" },
-      "cache": { "name": "Cache Layer", "tech": "Redis 7.2", "desc": "Session management, permission cache, real-time data" },
-      "messageBroker": { "name": "Message Broker", "tech": "Mosquitto MQTT 5.0", "desc": "IoT device message routing and distribution" }
+      "webFrontend": {
+        "name": "Web Frontend",
+        "tech": "Vue 3.5 + Element Plus + ECharts + Pinia",
+        "desc": "Modern SPA, RBAC permissions, data visualization, multi-role adaptation"
+      },
+      "backend": {
+        "name": "Backend Services",
+        "tech": "Spring Boot 3.5 + Java 21 + Spring Security",
+        "desc": "RESTful API, JWT dual-token auth, microservices architecture"
+      },
+      "edgeGateway": {
+        "name": "Edge Gateway",
+        "tech": "S7 / Modbus / FINS / MC Protocols",
+        "desc": "Siemens / Mitsubishi / Keyence / Omron / Inovance PLC connectivity"
+      },
+      "dataAcquisition": {
+        "name": "Data Acquisition",
+        "tech": "FastAPI + Kafka + MQTT",
+        "desc": "High-throughput acquisition, UUID authentication, time-series database"
+      },
+      "businessDb": {
+        "name": "Business Database",
+        "tech": "PostgreSQL 15.7",
+        "desc": "User, permission, process, and traceability business data"
+      },
+      "timeseriesDb": {
+        "name": "Time-Series Database",
+        "tech": "TDengine 3.0",
+        "desc": "Time-series storage for equipment status and process history"
+      },
+      "cache": {
+        "name": "Cache Layer",
+        "tech": "Redis 7.2",
+        "desc": "Session management, permission cache, real-time data"
+      },
+      "messageBroker": {
+        "name": "Message Broker",
+        "tech": "Mosquitto MQTT 5.0",
+        "desc": "IoT device message routing and distribution"
+      }
     }
   },
   "dataFlow": {
     "heading": "Data Flow",
-    "chain": ["PLC Devices", "Edge Gateway", "Message Queue", "Data Acquisition", "Persistence Layer", "Backend Services", "Frontend Application"]
+    "chain": [
+      "PLC Devices",
+      "Edge Gateway",
+      "Message Queue",
+      "Data Acquisition",
+      "Persistence Layer",
+      "Backend Services",
+      "Frontend Application"
+    ]
   },
   "advantages": {
     "heading": "Core Advantages",
     "subheading": "Why choose the openIndu platform",
-    "industryFocus": { "title": "Industry Focus", "description": "Focused on 3C electronics manufacturing, with a deep understanding of industry pain points and needs" },
-    "traceability": { "title": "Complete Traceability Chain", "description": "End-to-end product traceability from raw material to finished product, keeping quality under control" },
-    "frontend": { "title": "Excellent Frontend Experience", "description": "A modern web application built with Vue 3 + Element Plus" },
-    "deviceCompat": { "title": "Broad Device Compatibility", "description": "Supports mainstream PLC protocols from Siemens, Mitsubishi, Omron, Keyence, Inovance, and more" },
-    "cloudEdge": { "title": "Cloud-Edge Collaboration", "description": "A collaborative edge-gateway + cloud-platform architecture, flexible to deploy" },
-    "community": { "title": "Community-Driven", "description": "Built together by the open-source community, continuously iterated, code fully transparent" }
+    "industryFocus": {
+      "title": "Industry Focus",
+      "description": "Focused on 3C electronics manufacturing, with a deep understanding of industry pain points and needs"
+    },
+    "traceability": {
+      "title": "Complete Traceability Chain",
+      "description": "End-to-end product traceability from raw material to finished product, keeping quality under control"
+    },
+    "frontend": {
+      "title": "Excellent Frontend Experience",
+      "description": "A modern web application built with Vue 3 + Element Plus"
+    },
+    "deviceCompat": {
+      "title": "Broad Device Compatibility",
+      "description": "Supports mainstream PLC protocols from Siemens, Mitsubishi, Omron, Keyence, Inovance, and more"
+    },
+    "cloudEdge": {
+      "title": "Cloud-Edge Collaboration",
+      "description": "A collaborative edge-gateway + cloud-platform architecture, flexible to deploy"
+    },
+    "community": {
+      "title": "Community-Driven",
+      "description": "Built together by the open-source community, continuously iterated, code fully transparent"
+    }
   }
 }

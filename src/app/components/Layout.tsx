@@ -91,7 +91,7 @@ export function Layout() {
         href="#main-content"
         className="absolute -top-16 -left-16 focus:top-0 focus:left-0 focus:z-50 px-4 py-4 bg-sky-700 text-white flex items-center justify-center min-h-[48px] min-w-[240px] rounded-lg font-medium"
       >
-        Skip to main content
+        {t("a11y.skipToContent")}
       </a>
 
       {/* Header */}

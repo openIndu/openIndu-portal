@@ -11,7 +11,7 @@
     "subtitle": "Domestic industrial SoCs + the openEuler operating system + a fully open-source toolchain. Four layers, silicon to craftsmanship knowledge, without a single closed-source link.",
     "ctaStudio": "Learn about openIndu-studio",
     "ctaSolutions": "View Solutions",
-    "accent": "Domestic silicon → a fully open chain",
+    "accent": "Domestic silicon at the base, open source end to end",
     "chain": "Domestic industrial SoC + openEuler → openindu-studio → Industrial Vision/Edge/IIoT → Craftsmanship Knowledge"
   },
   "products": {
@@ -52,6 +52,47 @@
     "l2Title": "Programming Layer",
     "l2Desc": "PLC programming, HMI, selection, BOM, circuit diagrams, cross-brand codegen",
     "l1Title": "Hardware & OS Layer (Foundation)",
-    "l1Desc": "Domestic industrial SoC + openEuler (domestic operating system)"
+    "l1Desc": "Domestic industrial SoC + openEuler (domestic operating system)",
+    "readingHint": "Read bottom-up: ① hardware & OS → ④ craftsmanship knowledge",
+    "ctaArchitecture": "Explore the Full Stack",
+    "ctaUseCases": "View Industry Scenarios"
+  },
+  "steps": {
+    "heading": "Three Steps to openIndu",
+    "subheading": "From understanding the full stack to picking the right tool — openIndu gets you started fast",
+    "s1Title": "Understand the full stack",
+    "s1Desc": "Four layers from silicon to craftsmanship knowledge — see how openIndu connects the whole automation flow",
+    "s1Cta": "Learn more",
+    "s2Title": "Pick your industry scenario",
+    "s2Desc": "Complete solutions and engineering practice for the panel, semiconductor and new-energy chains",
+    "s2Cta": "View scenarios",
+    "s3Title": "Choose your tools",
+    "s3Desc": "Pick motion control, machine vision or the IIoT platform to match your scenario",
+    "motionControl": "Motion Control",
+    "vision": "Machine Vision",
+    "iiot": "Industrial IoT"
+  },
+  "knowledge": {
+    "badge": "Layer 4: Craftsmanship Knowledge",
+    "heading": "A Crowdsourced Process Library",
+    "description": "openIndu is more than tooling — it gathers the process knowledge of manufacturing engineers worldwide. Every parameter and every case shared on the forum is hard-won experience from a real production line.",
+    "item1Title": "Battery processes",
+    "item1Desc": "Winding speed, welding temperature, yield optimisation",
+    "item2Title": "PCB processes",
+    "item2Desc": "Reflow profiles, placement accuracy, defect countermeasures",
+    "item3Title": "Semiconductor & automotive processes",
+    "item3Desc": "Bonding parameters, welding standards, quality traceability",
+    "cta": "Explore the Knowledge Base"
+  },
+  "openSource": {
+    "badge": "Open source · Open community · Collaborative",
+    "heading": "Fully Open Source — Come Build With Us",
+    "description": "All openIndu code is open on GitHub and Gitee. Whether you submit code, share process parameters or join a discussion, every contribution moves industrial automation forward.",
+    "item1Title": "Code contributions",
+    "item1Desc": "Core projects including openindu-studio, platform and vision",
+    "item2Title": "Knowledge sharing",
+    "item2Desc": "Forum discussions, process parameters, lessons learned",
+    "item3Title": "Protocol extensions",
+    "item3Desc": "Add industrial protocol support on top of Apache PLC4X"
   }
 }

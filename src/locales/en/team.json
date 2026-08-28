@@ -1,0 +1,49 @@
+{
+  "seo": {
+    "title": "Team | openIndu Community",
+    "description": "The maintained areas of openIndu, its open-source repositories, and how to take part."
+  },
+  "hero": {
+    "title": "Community & Maintainers",
+    "subtitle": "openIndu is community-maintained — all code and discussion happen in public repositories and on the forum"
+  },
+  "areas": {
+    "heading": "Maintained Areas",
+    "subheading": "Maintenance is organised by repository, and every area below maps to a public open-source project",
+    "repoLabel": "Repository",
+    "studio": {
+      "name": "Programming & Configuration",
+      "description": "openIndu-studio: PLC programming, HMI configuration, selection and cross-brand code generation",
+      "repo": "openIndu/openIndu-studio"
+    },
+    "vision": {
+      "name": "Machine Vision",
+      "description": "openIndu-vision: OpenCV-based inspection and positioning",
+      "repo": "openIndu/openIndu-vision"
+    },
+    "platform": {
+      "name": "Industrial IoT",
+      "description": "openIndu-platform and openindu-cim: data acquisition, edge computing and line analytics",
+      "repo": "openIndu/openIndu-platform"
+    },
+    "portal": {
+      "name": "Community Portal",
+      "description": "openIndu-portal: this site and the community documentation",
+      "repo": "openIndu/openIndu-portal"
+    }
+  },
+  "community": {
+    "heading": "Our Community",
+    "subheading": "openIndu is driven by contributors, maintainers and industry advisors around the world",
+    "item1": "Code contributors on GitHub and Gitee",
+    "item2": "Forum moderators and industry advisors",
+    "item3": "Engineers sharing real process experience",
+    "joinPrompt": "Want to take part?",
+    "joinCta": "Contribute on GitHub"
+  },
+  "contact": {
+    "heading": "Get in Touch",
+    "description": "Questions, or want to collaborate? Reach the community through any of these channels.",
+    "email": "Email"
+  }
+}

@@ -71,7 +71,8 @@
   },
   "a11y": {
     "mobileMenuOpen": "打开导航菜单",
-    "mobileMenuClose": "关闭导航菜单"
+    "mobileMenuClose": "关闭导航菜单",
+    "skipToContent": "跳到主要内容"
   },
   "edgeComputing": {
     "description": "工业边缘计算平台",
@@ -101,5 +102,48 @@
     "ctaDesc": "开始构建边缘驱动的自动化。开源、Apache 2.0、无厂商锁定。",
     "getStarted": "在 GitHub 上开始",
     "learnMore": "了解 openIndu"
+  },
+  "forumPage": {
+    "seoDescription": "加入 openIndu 社区论坛，讨论工业自动化、分享经验、协作贡献开源项目。",
+    "badge": "openIndu 社区论坛",
+    "subtitle": "加入全球开发者社区，讨论工业自动化技术、分享经验、协作贡献",
+    "enterForum": "进入论坛",
+    "githubDiscussions": "GitHub 讨论",
+    "categoriesHeading": "论坛主要板块",
+    "categoriesSubheading": "三大核心主题，汇聚全球工业自动化经验",
+    "hotTopics": "热门话题",
+    "industrialControl": {
+      "title": "工控",
+      "description": "讨论 PLC 硬件、软件、通信总线（EtherCAT、CANopen 等）和工控系统架构。分享多品牌 PLC 的选型、集成和工业控制网络方案。",
+      "topics": [
+        "PLC 硬件/软件",
+        "EtherCAT 总线",
+        "通信协议",
+        "系统架构"
+      ]
+    },
+    "automation": {
+      "title": "自动化",
+      "description": "分享 PLC 编程、HMI 编程、工业视觉、运动控制等自动化应用。讨论各类自动化设备集成、工程规范和最佳实践。",
+      "topics": [
+        "PLC 编程",
+        "HMI 编程",
+        "工业视觉",
+        "运动控制"
+      ]
+    },
+    "process": {
+      "title": "工艺",
+      "description": "分享工业工艺流程优化、工艺参数设定、缺陷分析和良率提升经验。讨论工艺知识库建设和工程方法论。",
+      "topics": [
+        "工艺流程",
+        "参数优化",
+        "良率分析",
+        "知识库"
+      ]
+    },
+    "ctaHeading": "准备好加入社区了吗？",
+    "ctaDescription": "无论你是提问者、解答者还是贡献者，论坛都欢迎你的参与。一起打造开源工业自动化生态。",
+    "ctaButton": "前往论坛 →"
   }
 }

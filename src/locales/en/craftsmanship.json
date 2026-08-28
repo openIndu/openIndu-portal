@@ -1,0 +1,76 @@
+{
+  "seo": {
+    "title": "Craftsmanship Knowledge | openIndu Community Forum",
+    "description": "An industrial craftsmanship knowledge base covering display panels, semiconductors, new energy, automotive electronics and high-end equipment: end-to-end process chains, shop-floor practice and defect reasoning, shared on the openIndu forum."
+  },
+  "hero": {
+    "title": "Craftsmanship Knowledge Base",
+    "subtitle": "End-to-end process chains across five industries: display panels, semiconductors, new energy, automotive electronics and high-end equipment",
+    "tagline": "Engineers share what really happens on the floor → the industry improves together → better yield, lower cost"
+  },
+  "industries": {
+    "heading": "Industry Process Columns",
+    "enterForum": "Open on the forum",
+    "panel": {
+      "name": "Display Panel Processes",
+      "description": "Two chains, TFT-LCD and OLED: substrate → array/backplane → colour filter/evaporation → cell → module",
+      "topics": ["Substrate cleaning", "Alignment exposure", "Colour filter BM/RGB", "Evaporation & encapsulation", "Lit-panel inspection"]
+    },
+    "semiconductor": {
+      "name": "Semiconductor Processes",
+      "description": "Wafer fabrication → wafer test → assembly & packaging → final test and traceability",
+      "topics": ["Deposition & patterning", "Metrology & SPC", "Defect maps", "Bonding & moulding", "Reliability & shipment"]
+    },
+    "newEnergy": {
+      "name": "New-Energy Processes",
+      "description": "Lithium: slurry → electrode → cell → formation & grading → PACK. PV: cell → module → EL/IV",
+      "topics": ["Slurry & coating", "Cell assembly", "Formation, aging & grading", "Module PACK", "EL/IV inspection"]
+    },
+    "automotive": {
+      "name": "Automotive Electronics Processes",
+      "description": "PCBA → controller assembly → firmware flashing → end-of-line inspection",
+      "topics": ["PCBA placement", "Assembly", "Firmware flashing", "EOL testing", "Quality traceability"]
+    },
+    "equipment": {
+      "name": "High-End Equipment Processes",
+      "description": "Industrial robots: components → assembly → calibration → FAT → delivery",
+      "topics": ["Incoming components", "Mechanical assembly", "Accuracy calibration", "FAT acceptance", "Delivery & documentation"]
+    }
+  },
+  "benefits": {
+    "heading": "Why Contribute to the Knowledge Base",
+    "items": [
+      { "icon": "📋", "title": "Real case studies", "description": "Process engineers share the problems they actually hit in production, and how they solved them" },
+      { "icon": "📊", "title": "Shared parameter library", "description": "A crowdsourced library of process parameters, temperature curves and timing settings" },
+      { "icon": "🎯", "title": "Best practice", "description": "Learn across companies and industries — what battery makers learned helps panel makers optimise" },
+      { "icon": "🔧", "title": "Problem solving", "description": "Yield dropping? Forum process discussions get you to the root cause faster" },
+      { "icon": "💰", "title": "Cost optimisation", "description": "Share process innovations that cut cost and raise throughput" },
+      { "icon": "⭐", "title": "Industry recognition", "description": "Get your process work recognised by peers and build professional standing" }
+    ]
+  },
+  "articles": {
+    "heading": "Process Articles on the Forum",
+    "viewAll": "Open the full knowledge base",
+    "tftLcd": { "title": "Panel process chain | TFT-LCD: from glass substrate to display module", "industry": "Display Panels" },
+    "oled": { "title": "Panel process chain | OLED: from backplane to encapsulation, cutting and module", "industry": "Display Panels" },
+    "wafer": { "title": "Semiconductor process chain | from silicon wafer to packaged, tested product", "industry": "Semiconductors" },
+    "battery": { "title": "Battery process chain | from lithium-ion cell to module and PACK", "industry": "New Energy" },
+    "pv": { "title": "Energy equipment process chain | crystalline-silicon PV modules from cell to EL/IV and shipment", "industry": "New Energy" },
+    "automotive": { "title": "Automotive electronics process chain | from PCBA to controller assembly, flashing and EOL", "industry": "Automotive Electronics" },
+    "robot": { "title": "High-end equipment process chain | industrial robots from components to calibration, FAT and delivery", "industry": "High-End Equipment" }
+  },
+  "howItWorks": {
+    "heading": "How to Contribute",
+    "steps": [
+      { "title": "Share experience", "desc": "Write up a real case from your line and how you handled it" },
+      { "title": "Discuss and verify", "desc": "Work through the approach with other engineers and refine it" },
+      { "title": "Form a standard", "desc": "Proven practice gradually becomes an industry reference" },
+      { "title": "Earn recognition", "desc": "Contributors gain community recognition and professional standing" }
+    ]
+  },
+  "cta": {
+    "heading": "Join the Craftsmanship Community",
+    "description": "Share your process practice, learn what works across the industry, and push manufacturing forward with engineers worldwide",
+    "button": "Open the forum"
+  }
+}

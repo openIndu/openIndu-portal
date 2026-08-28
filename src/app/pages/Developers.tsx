@@ -27,7 +27,6 @@ export function Developers() {
 
       {/* Hero */}
       <section className="relative bg-gradient-to-br from-blue-50 via-white to-cyan-50 py-16 sm:py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center">
             <span className="inline-flex items-center gap-2 px-4 py-2 bg-sky-100 text-sky-800 rounded-full text-sm font-semibold mb-5">

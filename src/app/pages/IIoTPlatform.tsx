@@ -7,14 +7,14 @@ import {
 import { SEO } from "../components/SEO";
 
 const featureKeys = [
-  // `subtitle` is a fixed bilingual design caption, already English in the
-  // original ZH page -- locale-invariant, not sourced from i18n.
-  { key: "smartLogin", icon: Shield, iconColor: "text-sky-700", iconBg: "bg-sky-100", screenshotSrc: "/assets/iiot/login.png", subtitle: "Phone Code Sign-in · Secure & Convenient" },
-  { key: "workbench", icon: LayoutDashboard, iconColor: "text-cyan-600", iconBg: "bg-cyan-100", screenshotSrc: "/assets/iiot/workbench.png", subtitle: "Workbench · Global Overview at a Glance" },
-  { key: "dashboard", icon: Monitor, iconColor: "text-purple-600", iconBg: "bg-purple-100", screenshotSrc: "/assets/iiot/dashboard.png", subtitle: "Data Dashboard · Production Status on One Screen" },
-  { key: "deviceManagement", icon: Database, iconColor: "text-green-600", iconBg: "bg-green-100", screenshotSrc: "/assets/iiot/device-mgmt.png", subtitle: "Equipment Management · Full Lifecycle Control" },
-  { key: "traceability", icon: BarChart3, iconColor: "text-orange-600", iconBg: "bg-orange-100", screenshotSrc: "/assets/iiot/traceability.png", subtitle: "Product Traceability · Material to Finished Goods" },
-  { key: "miniProgram", icon: Smartphone, iconColor: "text-pink-600", iconBg: "bg-pink-100", screenshotSrc: "/assets/iiot/mini-program.png", isTall: true, subtitle: "WeChat Mini Program Support" },
+  // Subtitles come from i18n: they are prose captions, and leaving them in
+  // English put English sentences on every Chinese screenshot card.
+  { key: "smartLogin", icon: Shield, iconColor: "text-sky-700", iconBg: "bg-sky-100", screenshotSrc: "/assets/iiot/login.png" },
+  { key: "workbench", icon: LayoutDashboard, iconColor: "text-cyan-600", iconBg: "bg-cyan-100", screenshotSrc: "/assets/iiot/workbench.png" },
+  { key: "dashboard", icon: Monitor, iconColor: "text-purple-600", iconBg: "bg-purple-100", screenshotSrc: "/assets/iiot/dashboard.png" },
+  { key: "deviceManagement", icon: Database, iconColor: "text-green-600", iconBg: "bg-green-100", screenshotSrc: "/assets/iiot/device-mgmt.png" },
+  { key: "traceability", icon: BarChart3, iconColor: "text-orange-600", iconBg: "bg-orange-100", screenshotSrc: "/assets/iiot/traceability.png" },
+  { key: "miniProgram", icon: Smartphone, iconColor: "text-pink-600", iconBg: "bg-pink-100", screenshotSrc: "/assets/iiot/mini-program.png", isTall: true },
 ] as const;
 
 const advantageKeys = [
@@ -47,7 +47,6 @@ type Feature = {
   iconColor: string;
   iconBg: string;
   screenshotSrc: string;
-  subtitle: string;
   isTall?: boolean;
 };
 
@@ -77,7 +76,7 @@ function FeatureRow({ feature, reversed, t }: { feature: Feature; reversed: bool
           </div>
           <div className="min-w-0">
             <h3 className="text-xl sm:text-2xl font-bold text-gray-900 leading-tight">{t(`features.${feature.key}.title`)}</h3>
-            <p className="text-xs sm:text-sm text-gray-500 truncate">{feature.subtitle}</p>
+            <p className="text-xs sm:text-sm text-gray-600 truncate">{t(`features.${feature.key}.subtitle`)}</p>
           </div>
         </div>
         <p className="text-sm sm:text-base text-gray-600 mb-4">{t(`features.${feature.key}.description`)}</p>

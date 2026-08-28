@@ -1,48 +1,41 @@
 import { Link } from "react-router";
+import { useTranslation } from "react-i18next";
 import { ArrowRight, CheckCircle, Users, Zap, Globe, Code } from "lucide-react";
 import { SEO } from "../components/SEO";
 
-export function About() {
+const domainKeys = [
+  { key: "industrialControl", icon: Code },
+  { key: "automation", icon: Zap },
+  { key: "process", icon: Globe },
+] as const;
 
-  const domainProducts = [
-    {
-      icon: Code,
-      domain: "工控 (PLC Hardware/Software)",
-      description: "PLC硬件、软件、EtherCAT总线、通信协议",
-      product: "基础设施"
-    },
-    {
-      icon: Zap,
-      domain: "自动化 (Automation Programming)",
-      description: "PLC编程、HMI编程、工业视觉、运动控制",
-      product: "openIndu-studio + openindu-station"
-    },
-    {
-      icon: Globe,
-      domain: "工艺 (Process Optimization)",
-      description: "流程优化、参数调优、良率分析、知识库",
-      product: "openIndu-platform (IIoT)"
-    }
-  ];
+export function About() {
+  const { t } = useTranslation("about");
+
+  const domainProducts = domainKeys.map((d) => ({
+    ...d,
+    domain: t(`domains.${d.key}.domain`),
+    description: t(`domains.${d.key}.description`),
+    product: t(`domains.${d.key}.product`),
+  }));
 
   return (
     <div>
       <SEO
-        title="About openIndu | openIndu Community"
-        description="Understand openIndu's mission, three core domains (工控/自动化/工艺), and how our products solve industrial automation challenges end-to-end."
+        title={t("seo.title")}
+        description={t("seo.description")}
         canonicalPath="/about"
       />
 
       {/* Hero */}
-      <section className="relative bg-gradient-to-br from-blue-50 via-white to-cyan-50 py-16 sm:py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 relative">
+      <section className="bg-gradient-to-b from-sky-50 via-white to-white py-16 sm:py-24">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-              About openIndu
+              {t("hero.title")}
             </h1>
             <p className="text-lg sm:text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-              The end-to-end open-source OS for industrial automation — solving fragmentation across工控, 自动化, and工艺 domains
+              {t("hero.subtitle")}
             </p>
           </div>
         </div>
@@ -53,43 +46,29 @@ export function About() {
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">The Problem</h2>
-              <p className="text-lg text-gray-600 mb-4 leading-relaxed">
-                Industrial automation today is fragmented. Engineers work in silos across three domains:
-              </p>
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">{t("problem.heading")}</h2>
+              <p className="text-lg text-gray-600 mb-4 leading-relaxed">{t("problem.intro")}</p>
               <ul className="space-y-3">
-                <li className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-sky-700 flex-shrink-0 mt-1" />
-                  <span className="text-gray-700"><strong>工控:</strong> Struggling with multi-brand PLC compatibility</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-sky-700 flex-shrink-0 mt-1" />
-                  <span className="text-gray-700"><strong>自动化:</strong> Recoding for each platform, no cross-brand generation</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-sky-700 flex-shrink-0 mt-1" />
-                  <span className="text-gray-700"><strong>工艺:</strong> No data-driven insight into process performance</span>
-                </li>
+                {[1, 2, 3].map((n) => (
+                  <li key={n} className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-sky-700 flex-shrink-0 mt-1" />
+                    <span className="text-gray-700">
+                      <strong>{t(`problem.item${n}Label`)}:</strong> {t(`problem.item${n}`)}
+                    </span>
+                  </li>
+                ))}
               </ul>
             </div>
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Our Solution</h2>
-              <p className="text-lg text-gray-600 mb-4 leading-relaxed">
-                openIndu bridges all three domains with one stack:
-              </p>
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">{t("solution.heading")}</h2>
+              <p className="text-lg text-gray-600 mb-4 leading-relaxed">{t("solution.intro")}</p>
               <ul className="space-y-3">
-                <li className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-sky-700 flex-shrink-0 mt-1" />
-                  <span className="text-gray-700">Process knowledge → Code generation → Cross-brand execution</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-sky-700 flex-shrink-0 mt-1" />
-                  <span className="text-gray-700">End-to-end traceability from electrical design to production data</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-sky-700 flex-shrink-0 mt-1" />
-                  <span className="text-gray-700">Apache-2.0 open source, no vendor lock-in</span>
-                </li>
+                {[1, 2, 3].map((n) => (
+                  <li key={n} className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-sky-700 flex-shrink-0 mt-1" />
+                    <span className="text-gray-700">{t(`solution.item${n}`)}</span>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
@@ -100,12 +79,12 @@ export function About() {
       <section className="py-16 sm:py-20 bg-gray-50">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Three Domains, Three Products</h2>
-            <p className="text-gray-600">How openIndu addresses each area of industrial automation</p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">{t("domains.heading")}</h2>
+            <p className="text-gray-600">{t("domains.subheading")}</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {domainProducts.map((item) => (
-              <div key={item.domain} className="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow">
+              <div key={item.key} className="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-10 h-10 rounded-lg bg-sky-100 text-sky-700 flex items-center justify-center">
                     <item.icon className="w-5 h-5" />
@@ -114,7 +93,7 @@ export function About() {
                 </div>
                 <p className="text-sm text-gray-600 mb-4">{item.description}</p>
                 <div className="bg-sky-50 p-3 rounded border border-sky-200">
-                  <p className="text-xs font-semibold text-sky-800 uppercase tracking-wide">Product</p>
+                  <p className="text-xs font-semibold text-sky-800 uppercase tracking-wide">{t("domains.productLabel")}</p>
                   <p className="text-sm font-medium text-[#0B72B5] mt-1">{item.product}</p>
                 </div>
               </div>
@@ -126,37 +105,33 @@ export function About() {
       {/* Core Values */}
       <section className="py-16 sm:py-20 bg-white">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">Our Principles</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">{t("principles.heading")}</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <Code className="w-12 h-12 text-sky-700 mx-auto mb-4" />
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Open Source</h3>
-              <p className="text-gray-600">All code under Apache-2.0. No vendor lock-in. Full transparency.</p>
-            </div>
-            <div className="text-center">
-              <Globe className="w-12 h-12 text-sky-700 mx-auto mb-4" />
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">End-to-End</h3>
-              <p className="text-gray-600">From process parameters to production insight. One stack, complete value chain.</p>
-            </div>
-            <div className="text-center">
-              <Users className="w-12 h-12 text-sky-700 mx-auto mb-4" />
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Community-Driven</h3>
-              <p className="text-gray-600">Contributions don't require code. Data, insights, and ideas all count.</p>
-            </div>
+            {[
+              { icon: Code, key: "openSource" },
+              { icon: Globe, key: "endToEnd" },
+              { icon: Users, key: "community" },
+            ].map(({ icon: Icon, key }) => (
+              <div key={key} className="text-center">
+                <Icon className="w-12 h-12 text-sky-700 mx-auto mb-4" />
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">{t(`principles.${key}Title`)}</h3>
+                <p className="text-gray-600">{t(`principles.${key}Desc`)}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-16 sm:py-20 bg-sky-700 text-white">
+      <section className="py-16 sm:py-20 bg-[#085A90] text-white">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold mb-6">Ready to Get Started?</h2>
+          <h2 className="text-3xl font-bold mb-6">{t("cta.heading")}</h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               to="/motion-control/studio"
-              className="inline-flex items-center justify-center px-8 py-3 bg-white text-sky-700 rounded-lg hover:bg-sky-50 transition-colors font-medium"
+              className="inline-flex items-center justify-center px-8 py-3 bg-white text-[#085A90] rounded-lg hover:bg-sky-50 transition-colors font-medium"
             >
-              Explore openIndu-studio
+              {t("cta.studio")}
               <ArrowRight className="ml-2 w-4 h-4" />
             </Link>
             <a
@@ -165,7 +140,7 @@ export function About() {
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-8 py-3 border-2 border-white text-white rounded-lg hover:bg-white/10 transition-colors font-medium"
             >
-              View on GitHub
+              {t("cta.github")}
               <ArrowRight className="ml-2 w-4 h-4" />
             </a>
           </div>

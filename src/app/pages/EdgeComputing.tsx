@@ -39,7 +39,6 @@ export function EdgeComputing() {
 
       {/* Hero */}
       <section className="relative bg-white py-16 sm:py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">

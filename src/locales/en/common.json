@@ -71,7 +71,8 @@
   },
   "a11y": {
     "mobileMenuOpen": "Open navigation menu",
-    "mobileMenuClose": "Close navigation menu"
+    "mobileMenuClose": "Close navigation menu",
+    "skipToContent": "Skip to main content"
   },
   "edgeComputing": {
     "description": "Edge computing platform for industrial automation",
@@ -101,5 +102,48 @@
     "ctaDesc": "Start building edge-powered automation. Open source, Apache 2.0, no vendor lock-in.",
     "getStarted": "Get Started on GitHub",
     "learnMore": "Learn About openIndu"
+  },
+  "forumPage": {
+    "seoDescription": "Join the openIndu community forum to discuss industrial automation, share experience, and collaborate on open-source projects.",
+    "badge": "openIndu Community Forum",
+    "subtitle": "Join developers worldwide to discuss industrial automation, share experience and contribute together",
+    "enterForum": "Open the forum",
+    "githubDiscussions": "GitHub Discussions",
+    "categoriesHeading": "Main Forum Categories",
+    "categoriesSubheading": "Three core themes gathering industrial automation experience from around the world",
+    "hotTopics": "Popular topics",
+    "industrialControl": {
+      "title": "Industrial Control",
+      "description": "PLC hardware and software, fieldbuses (EtherCAT, CANopen and others) and control-system architecture. Selection, integration and control-network design across PLC brands.",
+      "topics": [
+        "PLC hardware/software",
+        "EtherCAT fieldbus",
+        "Communication protocols",
+        "System architecture"
+      ]
+    },
+    "automation": {
+      "title": "Automation",
+      "description": "PLC programming, HMI development, machine vision and motion control. Equipment integration, engineering conventions and best practice.",
+      "topics": [
+        "PLC programming",
+        "HMI development",
+        "Machine vision",
+        "Motion control"
+      ]
+    },
+    "process": {
+      "title": "Craftsmanship",
+      "description": "Process-flow optimisation, parameter setting, defect analysis and yield improvement. Building the craftsmanship knowledge base and the engineering method behind it.",
+      "topics": [
+        "Process flow",
+        "Parameter tuning",
+        "Yield analysis",
+        "Knowledge base"
+      ]
+    },
+    "ctaHeading": "Ready to join the community?",
+    "ctaDescription": "Whether you ask, answer or contribute, the forum is open to you. Let's build the open-source industrial automation ecosystem together.",
+    "ctaButton": "Go to the forum →"
   }
 }

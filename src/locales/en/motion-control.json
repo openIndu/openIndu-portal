@@ -11,27 +11,70 @@
   },
   "features": {
     "heading": "Core Features",
-    "plc": { "title": "PLC Motion Control", "description": "Motion-control instruction development for mainstream PLC brands, enabling high-precision multi-axis coordination." },
-    "hostDev": { "title": "Host-PC Application Development", "description": "C#/C++ development of motion-control host-PC software, enabling human-machine interaction and motion planning." },
-    "motionCard": { "title": "Motion Control Cards", "description": "Integrates mainstream motion control cards, supporting complex trajectory planning and multi-axis synchronization." }
+    "plc": {
+      "title": "PLC Motion Control",
+      "description": "Motion-control instruction development for mainstream PLC brands, enabling high-precision multi-axis coordination."
+    },
+    "hostDev": {
+      "title": "Host-PC Application Development",
+      "description": "C#/C++ development of motion-control host-PC software, enabling human-machine interaction and motion planning."
+    },
+    "motionCard": {
+      "title": "Motion Control Cards",
+      "description": "Integrates mainstream motion control cards, supporting complex trajectory planning and multi-axis synchronization."
+    }
   },
   "plcBrands": {
     "heading": "Supported PLC Brands",
-    "subheading": "Extensive PLC motion-control development experience, with instruction-level programming support for mainstream brands.",
-    "mitsubishi": { "name": "Mitsubishi PLC", "desc": "FX/Q series motion control, positioning module applications" },
-    "siemens": { "name": "Siemens PLC", "desc": "S7-1200/1500 motion control, TIA Portal programming" },
-    "omron": { "name": "Omron PLC", "desc": "NJ/NX series motion control, EtherCAT fieldbus" },
-    "keyence": { "name": "Keyence PLC", "desc": "KV series high-speed positioning, vision-system integration" },
-    "inovance": { "name": "Inovance PLC", "desc": "H5U series motion control, a domestic-alternative solution" }
+    "subheading": "Each brand has a technology-selection guide and a PLC validation guide published on the community forum.",
+    "mitsubishi": {
+      "name": "Mitsubishi PLC",
+      "desc": "FX/Q series motion control, positioning module applications"
+    },
+    "siemens": {
+      "name": "Siemens PLC",
+      "desc": "S7-1200/1500 motion control, TIA Portal programming"
+    },
+    "omron": {
+      "name": "Omron PLC",
+      "desc": "NJ/NX series motion control, EtherCAT fieldbus"
+    },
+    "keyence": {
+      "name": "Keyence PLC",
+      "desc": "KV series high-speed positioning, vision-system integration"
+    },
+    "inovance": {
+      "name": "Inovance PLC",
+      "desc": "H5U series motion control, a domestic-alternative solution"
+    },
+    "selectionLabel": "Selection guide",
+    "validationLabel": "Validation guide",
+    "guidesNote": "All ten guides are published in the forum’s Automation category.",
+    "guidesLink": "Browse the Automation category"
   },
   "motionCardBrands": {
     "heading": "Motion Control Cards / Controllers",
     "subheading": "Integrates mainstream motion-control-card brands with C#/C++ host-PC development for complex motion control.",
-    "leadshine": { "name": "Leadshine", "desc": "DMC series motion control cards, a cost-effective solution" },
-    "googol": { "name": "Googol Technology", "desc": "GT series motion controllers, multi-axis interpolation" },
-    "advantech": { "name": "Advantech", "desc": "PCI/PCIe motion control cards, industrial-PC integration" },
-    "adlink": { "name": "ADLINK", "desc": "PCIE-81xx series, high-speed data acquisition" },
-    "zmotion": { "name": "Zmotion", "desc": "ZMC series controllers, script programming" }
+    "leadshine": {
+      "name": "Leadshine",
+      "desc": "DMC series motion control cards, a cost-effective solution"
+    },
+    "googol": {
+      "name": "Googol Technology",
+      "desc": "GT series motion controllers, multi-axis interpolation"
+    },
+    "advantech": {
+      "name": "Advantech",
+      "desc": "PCI/PCIe motion control cards, industrial-PC integration"
+    },
+    "adlink": {
+      "name": "ADLINK",
+      "desc": "PCIE-81xx series, high-speed data acquisition"
+    },
+    "zmotion": {
+      "name": "Zmotion",
+      "desc": "ZMC series controllers, script programming"
+    }
   },
   "industries": {
     "heading": "Industry Applications",
@@ -39,17 +82,32 @@
     "coreTechLabel": "Core Technology",
     "display": {
       "name": "Display Industry",
-      "applications": ["Motion control for LCD/OLED bonding equipment", "Glass-substrate handling and positioning systems", "Motion platforms for AOI inspection equipment", "Laser cutting/drilling equipment control"],
+      "applications": [
+        "Motion control for LCD/OLED bonding equipment",
+        "Glass-substrate handling and positioning systems",
+        "Motion platforms for AOI inspection equipment",
+        "Laser cutting/drilling equipment control"
+      ],
       "tech": "Multi-axis coordination, high-precision positioning, EtherCAT fieldbus"
     },
     "newEnergy": {
       "name": "New-Energy Industry",
-      "applications": ["Tension control for lithium-battery coating machines", "Motion control for battery-module assembly lines", "Photovoltaic-module welding equipment", "Automation for EV-charger test equipment"],
+      "applications": [
+        "Tension control for lithium-battery coating machines",
+        "Motion control for battery-module assembly lines",
+        "Photovoltaic-module welding equipment",
+        "Automation for EV-charger test equipment"
+      ],
       "tech": "Speed synchronization, tension control, CAN bus"
     },
     "medical": {
       "name": "Medical Industry",
-      "applications": ["Motion platforms for medical-imaging equipment", "Sample sorting for in-vitro diagnostic equipment", "Motion control for surgical robots", "Positioning systems for pharmaceutical packaging equipment"],
+      "applications": [
+        "Motion platforms for medical-imaging equipment",
+        "Sample sorting for in-vitro diagnostic equipment",
+        "Motion control for surgical robots",
+        "Positioning systems for pharmaceutical packaging equipment"
+      ],
       "tech": "High-precision positioning, smooth motion, safety protection"
     }
   },
@@ -57,11 +115,21 @@
     "heading": "Host-PC Development Technologies",
     "csharp": {
       "title": "C# + WinForm",
-      "items": ["Rapid development of Windows desktop applications", "Rich library of UI controls", "Convenient serial-port and TCP/IP communication", "Motion-control-card SDK integration"]
+      "items": [
+        "Rapid development of Windows desktop applications",
+        "Rich library of UI controls",
+        "Convenient serial-port and TCP/IP communication",
+        "Motion-control-card SDK integration"
+      ]
     },
     "cpp": {
       "title": "C++ + Qt",
-      "items": ["Cross-platform support (Windows/Linux)", "High-performance real-time data processing", "Modern UI design", "Direct low-level hardware access"]
+      "items": [
+        "Cross-platform support (Windows/Linux)",
+        "High-performance real-time data processing",
+        "Modern UI design",
+        "Direct low-level hardware access"
+      ]
     }
   },
   "cta": {
