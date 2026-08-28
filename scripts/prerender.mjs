@@ -28,7 +28,7 @@ const DIST = resolve(ROOT, "dist");
 const PORT = 4173; // vite preview default
 
 /**
- * Routes to prerender — 35 total (pricing added).
+ * Routes to prerender — keep this list aligned with src/app/routes.tsx.
  * This is a DIFFERENT list from sitemap.xml: the 4 legal pages are
  * ZH-only and their /en/* counterparts 302 to the ZH version instead of being
  * prerendered separately.
@@ -42,7 +42,6 @@ const SHARED = [
   "/architecture",
   "/craftsmanship",
   "/use-cases",
-  "/pricing",
   "/about",
   "/developers",
   "/team",
@@ -79,15 +78,20 @@ function startPreviewServer() {
       detached: process.platform !== "win32",
     });
 
+    let settled = false;
     const timeout = setTimeout(() => {
-      // Fallback — if we didn't catch the "Local:" line, assume it's up
-      resolvePromise(server);
+      if (settled) return;
+      settled = true;
+      stopServer(server).finally(() => {
+        reject(new Error(`vite preview did not become ready on port ${PORT} within 8 seconds`));
+      });
     }, 8000);
 
     function onData(data) {
       const text = data.toString();
       process.stdout.write(text);
-      if (text.includes("Local:") || text.includes("localhost")) {
+      if (!settled && (text.includes("Local:") || text.includes("localhost"))) {
+        settled = true;
         clearTimeout(timeout);
         // Give Vite an extra moment to finish initialisation
         setTimeout(() => resolvePromise(server), 500);
@@ -98,8 +102,21 @@ function startPreviewServer() {
     server.stderr.on("data", onData);
 
     server.on("error", (err) => {
+      if (settled) return;
+      settled = true;
       clearTimeout(timeout);
       reject(err);
+    });
+
+    server.on("exit", (code, signal) => {
+      if (settled) return;
+      settled = true;
+      clearTimeout(timeout);
+      reject(
+        new Error(
+          `vite preview exited before becoming ready (code=${code ?? "null"}, signal=${signal ?? "null"})`
+        )
+      );
     });
   });
 }
@@ -111,15 +128,18 @@ function startPreviewServer() {
  *  keeps the stdio pipes it inherited from us open, Node's event loop never
  *  drains, and the build hangs until the CI job hits its 6h timeout. */
 function stopServer(server) {
-  if (!server || server.exitCode !== null || server.signalCode !== null) return;
+  if (!server || server.exitCode !== null || server.signalCode !== null) {
+    return Promise.resolve();
+  }
 
   if (process.platform === "win32") {
-    try {
-      spawn("taskkill", ["/F", "/T", "/PID", String(server.pid)], { stdio: "ignore" });
-    } catch {
-      // best-effort cleanup
-    }
-    return;
+    return new Promise((resolvePromise) => {
+      const killer = spawn("taskkill", ["/F", "/T", "/PID", String(server.pid)], {
+        stdio: "ignore",
+      });
+      killer.on("error", () => resolvePromise());
+      killer.on("exit", () => resolvePromise());
+    });
   }
 
   try {
@@ -131,6 +151,7 @@ function stopServer(server) {
       // best-effort cleanup
     }
   }
+  return Promise.resolve();
 }
 
 /** Render a single route to static HTML. Returns the HTML string. */
@@ -217,7 +238,7 @@ async function main() {
         "  Skipping prerender — the SPA fallback will serve client-rendered pages.\n" +
         "  Install Chromium for static HTML generation: apt install chromium\n"
     );
-    stopServer(server);
+    await stopServer(server);
     process.exit(0);
   }
 
@@ -244,7 +265,7 @@ async function main() {
     }
   } finally {
     await browser.close();
-    stopServer(server);
+    await stopServer(server);
   }
 
   // 4. Summary
