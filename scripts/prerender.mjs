@@ -83,9 +83,9 @@ function startPreviewServer() {
       if (settled) return;
       settled = true;
       stopServer(server).finally(() => {
-        reject(new Error(`vite preview did not become ready on port ${PORT} within 8 seconds`));
+        reject(new Error(`vite preview did not become ready on port ${PORT} within 30 seconds`));
       });
-    }, 8000);
+    }, 30_000);
 
     function onData(data) {
       const text = data.toString();
