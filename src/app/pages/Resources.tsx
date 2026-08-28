@@ -58,7 +58,7 @@ function ChipBar({ label, options, selected, onSelect, disabled }: { label: stri
           className={`rounded-full border px-3 py-1 text-xs transition-colors disabled:opacity-50 ${
             selected === option.value
               ? "border-sky-700 bg-sky-700 text-white"
-              : "border-gray-300 bg-white text-gray-700 hover:border-blue-400 hover:bg-sky-50"
+              : "border-gray-300 bg-white text-gray-700 hover:border-sky-400 hover:bg-sky-50"
           }`}
         >
           {option.value === "" ? t("filters.allOption") : option.label}

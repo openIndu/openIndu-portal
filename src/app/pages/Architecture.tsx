@@ -39,7 +39,7 @@ export function Architecture() {
       />
 
       {/* Hero */}
-      <section className="bg-gradient-to-b from-sky-50 via-white to-white py-16 sm:py-24">
+      <section className="bg-gradient-to-b from-sky-50 via-white to-white pt-16 sm:pt-24 pb-10 sm:pb-14">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight text-gray-900 [word-break:keep-all]">
@@ -162,7 +162,7 @@ export function Architecture() {
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
             <a
-              href="https://github.com/openIndu/openIndu-studio"
+              href="https://github.com/openIndu"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white rounded-lg hover:bg-white/10 transition-colors font-medium"

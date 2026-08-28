@@ -49,7 +49,7 @@ export function EdgeComputing() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="https://github.com/openIndu/openIndu-cim"
+                href="https://github.com/openIndu"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center px-8 py-4 bg-[#0B72B5] text-white rounded-lg hover:bg-[#085A90] transition-colors font-medium"
@@ -127,7 +127,7 @@ export function EdgeComputing() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="https://github.com/openIndu/openIndu-cim"
+              href="https://github.com/openIndu"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-8 py-4 bg-white text-sky-700 rounded-lg hover:bg-sky-50 transition-colors font-medium"

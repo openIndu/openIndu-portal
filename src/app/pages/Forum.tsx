@@ -51,7 +51,7 @@ export function Forum() {
                 <ArrowRight className="ml-2 h-5 w-5" />
               </a>
               <a
-                href="https://github.com/openIndu/openIndu-portal/discussions"
+                href="https://github.com/openIndu/community/discussions"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center px-8 py-4 bg-white text-gray-900 border-2 border-gray-200 rounded-lg hover:border-sky-700 hover:text-sky-700 transition-colors font-medium"

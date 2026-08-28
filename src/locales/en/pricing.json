@@ -1,0 +1,49 @@
+{
+  "seo": {
+    "title": "Deployment Options | openIndu Full-Stack Platform",
+    "description": "Deploy openIndu on-premises, at the edge, or in the cloud. Flexible licensing for development, production and enterprise, with self-hosted and managed options."
+  },
+  "hero": {
+    "title": "Deployment & Licensing",
+    "subtitle": "Flexible deployment options, from development through to enterprise production"
+  },
+  "recommended": "Recommended",
+  "priceLabel": "Price",
+  "startingAtLabel": "Starting at",
+  "options": {
+    "onPremises": {
+      "name": "Self-Hosted",
+      "description": "Full control on your own infrastructure — for manufacturers with strict data-security requirements",
+      "features": ["On-premise deployment, your data stays yours", "Built on openEuler + domestic silicon", "Multi-brand PLC support", "Apache-2.0 open source"],
+      "price": "Free (open source) + deployment consulting",
+      "cta": "Discuss deployment"
+    },
+    "edge": {
+      "name": "Edge Appliance",
+      "description": "Domestic industrial SoC + openEuler soft PLC as one integrated, ready-to-run unit",
+      "features": ["Domestic industrial SoC pre-installed", "openindu-cim + industrial protocols", "Real-time decisions and local alarms", "Cloud-edge coordination"],
+      "price": "¥80,000–150,000 (hardware + software)",
+      "cta": "Request a quote"
+    },
+    "cloud": {
+      "name": "Managed Cloud",
+      "description": "openIndu-platform, hosted — focus on the line, not the infrastructure",
+      "features": ["Fully managed IIoT platform", "Real-time analytics dashboards", "Machine-vision integration", "99.9% SLA"],
+      "price": "Usage-based",
+      "cta": "Learn more"
+    }
+  },
+  "license": {
+    "heading": "Licensing & Support",
+    "openSourceTitle": "Open Source",
+    "openSourceItems": ["Apache-2.0 licence", "Fully open on GitHub / Gitee", "Community support", "Best for: R&D, startups, learning"],
+    "enterpriseTitle": "Enterprise",
+    "enterpriseItems": ["Custom licensing", "Professional support (phone / email)", "Deployment and integration consulting", "Best for: production manufacturing, critical applications"]
+  },
+  "cta": {
+    "heading": "Ready to get started?",
+    "description": "Whichever way you deploy, openIndu helps you get your automation upgrade running quickly",
+    "contact": "Contact sales",
+    "useCases": "View industry cases"
+  }
+}

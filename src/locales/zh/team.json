@@ -5,31 +5,26 @@
   },
   "hero": {
     "title": "社区与维护者",
-    "subtitle": "openIndu 由社区维护，所有代码与讨论都在公开仓库和论坛里进行"
+    "subtitle": "openIndu 由社区维护；社区规范、协议适配与流程工具已开源，讨论在论坛公开进行"
   },
   "areas": {
     "heading": "维护方向",
-    "subheading": "按仓库划分的维护范围，每一项都对应一个公开的开源项目",
-    "repoLabel": "仓库",
+    "subheading": "按仓库划分的维护范围，覆盖门户所介绍的各个方向",
     "studio": {
       "name": "编程与组态",
-      "description": "openIndu-studio：PLC 编程、HMI 组态、选型与跨品牌代码生成",
-      "repo": "openIndu/openIndu-studio"
+      "description": "openIndu-studio：PLC 编程、HMI 组态、选型与跨品牌代码生成"
     },
     "vision": {
       "name": "工业视觉",
-      "description": "openIndu-vision：基于 OpenCV 的检测与定位",
-      "repo": "openIndu/openIndu-vision"
+      "description": "openIndu-vision：基于 OpenCV 的检测与定位"
     },
     "platform": {
       "name": "工业互联网",
-      "description": "openIndu-platform 与 openindu-cim：数据采集、边缘计算与产线分析",
-      "repo": "openIndu/openIndu-platform"
+      "description": "openIndu-platform 与 openindu-cim：数据采集、边缘计算与产线分析"
     },
     "portal": {
       "name": "社区门户",
-      "description": "openIndu-portal：本站与社区文档",
-      "repo": "openIndu/openIndu-portal"
+      "description": "openIndu-portal：本站与社区文档"
     }
   },
   "community": {
@@ -45,5 +40,14 @@
     "heading": "联系我们",
     "description": "有问题或希望合作？可以通过下面任一渠道找到社区。",
     "email": "邮件"
+  },
+  "repos": {
+    "heading": "公开仓库",
+    "subheading": "以下是 openIndu 组织当前公开的仓库；产品仓库尚未开放，可关注组织主页。",
+    "orgCta": "查看组织主页",
+    "community": "社区指南与贡献规范",
+    "openplcRuntime": "OpenPLC Runtime v4，运行 OpenPLC 构建的程序",
+    "plc4x": "PLC4X 工业物联网协议适配器",
+    "controlTower": "社区研发流程控制塔"
   }
 }

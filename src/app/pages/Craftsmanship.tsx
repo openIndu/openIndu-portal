@@ -63,7 +63,7 @@ export function Craftsmanship() {
       />
 
       {/* Hero */}
-      <section className="bg-gradient-to-b from-sky-50 via-white to-white py-16 sm:py-24">
+      <section className="bg-gradient-to-b from-sky-50 via-white to-white pt-16 sm:pt-24 pb-10 sm:pb-14">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">

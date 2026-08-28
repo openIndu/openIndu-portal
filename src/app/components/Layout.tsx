@@ -298,7 +298,7 @@ export function Layout() {
                           </span>
                         )}
                       </div>
-                      <div className="mt-0.5 truncate text-xs text-blue-600/80">{maskPhone(user?.phone)}</div>
+                      <div className="mt-0.5 truncate text-xs text-gray-600">{maskPhone(user?.phone)}</div>
                     </div>
                     <ChevronRight className="h-5 w-5 shrink-0 text-sky-300" />
                   </Link>
@@ -392,7 +392,7 @@ export function Layout() {
                   <Link to="/vision/station" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">{t("footer.station")}</Link>
                 </li>
                 <li>
-                  <a href="https://github.com/openIndu/openIndu-cim" target="_blank" rel="noopener noreferrer" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">{t("footer.edgeComputing")}</a>
+                  <a href="https://github.com/openIndu" target="_blank" rel="noopener noreferrer" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">{t("footer.edgeComputing")}</a>
                 </li>
                 <li>
                   <Link to="/chat" className="hover:text-white inline-flex flex-wrap items-center gap-x-2 gap-y-1 py-1.5 pr-3 min-h-[44px]">

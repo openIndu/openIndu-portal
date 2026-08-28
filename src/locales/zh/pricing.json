@@ -1,0 +1,49 @@
+{
+  "seo": {
+    "title": "部署与许可方案｜openIndu 全栈平台",
+    "description": "openIndu 支持自建部署、边缘端侧与云平台三种方式，覆盖研发、生产与企业级需求，提供自托管与托管两类选项。"
+  },
+  "hero": {
+    "title": "部署与许可方案",
+    "subtitle": "灵活的部署选项，满足从开发到企业生产的所有需求"
+  },
+  "recommended": "推荐",
+  "priceLabel": "价格",
+  "startingAtLabel": "起价",
+  "options": {
+    "onPremises": {
+      "name": "自建部署",
+      "description": "完全自主控制，适合对数据安全有严格要求的制造企业",
+      "features": ["本地部署，数据完全自主", "openEuler + 国产芯片基础", "支持多品牌 PLC", "Apache-2.0 开源"],
+      "price": "免费（开源）+ 部署咨询",
+      "cta": "咨询部署"
+    },
+    "edge": {
+      "name": "边缘端侧",
+      "description": "国产工控芯片 + openEuler 软 PLC 一体化方案，开箱即用",
+      "features": ["国产工控芯片预装", "openindu-cim + 工业协议", "实时决策、本地告警", "云边协同支持"],
+      "price": "8-15 万元（设备 + 软件）",
+      "cta": "获取报价"
+    },
+    "cloud": {
+      "name": "云平台服务",
+      "description": "托管版 openIndu-platform，专注业务不关心基础设施",
+      "features": ["全托管 IIoT 平台", "实时数据分析仪表板", "工业视觉集成", "99.9% SLA 保障"],
+      "price": "按使用量计费",
+      "cta": "了解详情"
+    }
+  },
+  "license": {
+    "heading": "许可与支持",
+    "openSourceTitle": "开源版本",
+    "openSourceItems": ["Apache-2.0 许可证", "GitHub / Gitee 完全开源", "社区支持", "适合：研发、创业、学习"],
+    "enterpriseTitle": "企业版本",
+    "enterpriseItems": ["自定义许可模式", "专业技术支持（电话 / 邮件）", "部署与集成咨询", "适合：生产制造、关键应用"]
+  },
+  "cta": {
+    "heading": "准备好开始了吗？",
+    "description": "无论选择哪种部署方式，openIndu 都能帮助你快速实现工业自动化升级",
+    "contact": "联系销售",
+    "useCases": "查看行业案例"
+  }
+}

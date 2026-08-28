@@ -62,7 +62,7 @@ const MARKDOWN_COMPONENTS: Partial<Components> = {
     <pre className="my-2 overflow-x-auto rounded-lg bg-gray-800 p-3 text-xs leading-relaxed text-gray-100">{children}</pre>
   ),
   blockquote: ({ children }) => (
-    <blockquote className="my-1.5 border-l-3 border-blue-400 pl-3 text-sm italic text-gray-600">{children}</blockquote>
+    <blockquote className="my-1.5 border-l-3 border-sky-400 pl-3 text-sm italic text-gray-600">{children}</blockquote>
   ),
   table: ({ children }) => (
     <div className="my-2 overflow-x-auto"><table className="min-w-full border-collapse text-xs">{children}</table></div>
@@ -274,7 +274,7 @@ export default function ChatPage() {
 
       {!isMember ? (
         <div className="flex flex-1 flex-col items-center justify-center gap-3 text-center">
-          <MessageCircle className="h-12 w-12 text-blue-500" />
+          <MessageCircle className="h-12 w-12 text-sky-500" />
           <p className="text-lg text-gray-600">智能咨询面向<strong>会员</strong>开放</p>
           {isAuthenticated ? (
             application?.status === "pending" ? (
@@ -360,7 +360,7 @@ export default function ChatPage() {
                 {EXAMPLE_PROMPTS.map((prompt) => (
                   <button key={prompt} type="button"
                     onClick={() => void sendPrompt(prompt)}
-                    className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-left text-sm text-gray-600 transition-colors hover:border-blue-300 hover:bg-sky-50 hover:text-sky-800">
+                    className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-left text-sm text-gray-600 transition-colors hover:border-sky-300 hover:bg-sky-50 hover:text-sky-800">
                     {prompt}
                   </button>
                 ))}

@@ -25,7 +25,10 @@ for (const f of files) {
   const ids = [...src.matchAll(/(?:selection|validation|topic):\s*(\d+)/g)].map((m) => m[1]);
   for (const id of ids) src += `
 "https://forum.openindu.com/t/topic/${id}"`;
-  for (const m of src.matchAll(/https:\/\/(?:forum|www)\.openindu\.com[^\s"'`)}]*/g)) {
+  for (const m of src.matchAll(/const (GH|ORG|FORUM|COMMUNITY) = ["`]([^"`]+)["`]/g)) {
+    src = src.split('${' + m[1] + '}').join(m[2]);
+  }
+  for (const m of src.matchAll(/https:\/\/(?:forum\.openindu\.com|www\.openindu\.com|github\.com\/openIndu|gitee\.com\/openIndu)[^\s"'`)}]*/g)) {
     const u = m[0].replace(/\/$/, '') || m[0];
     if (u.includes('${')) continue; // unresolved template fragment, not a real link
     urls.set(u, f);

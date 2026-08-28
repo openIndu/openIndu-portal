@@ -31,7 +31,7 @@ export function Workflow() {
   const artifactItems = t("artifactChain.items", { returnObjects: true }) as string[];
 
   return (
-    <section className="bg-gradient-to-br from-slate-50 via-white to-blue-50 px-4 py-12 sm:px-6 lg:px-8">
+    <section className="bg-gradient-to-br from-slate-50 via-white to-sky-50 px-4 py-12 sm:px-6 lg:px-8">
       <SEO
         title={t("seo.title")}
         description={t("seo.description")}
@@ -61,7 +61,7 @@ export function Workflow() {
               >
                 <CardContent className="p-6">
                   <div className="flex gap-4">
-                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-600 text-white shadow-md">
+                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#0B72B5] to-cyan-600 text-white shadow-md">
                       <step.icon className="h-7 w-7" />
                     </div>
                     <div className="min-w-0 flex-1">

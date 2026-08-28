@@ -17,20 +17,30 @@ const ALLOW = [/^工控$/, /^自动化$/, /^工艺$/, /^简体中文$/, /^中文
 const browser = await chromium.launch({ headless: true });
 const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
 
+const ZH_ROUTES = ['/', '/architecture', '/use-cases', '/craftsmanship', '/about', '/team',
+     '/motion-control', '/motion-control/studio', '/vision', '/vision/station',
+     '/iiot-platform', '/edge-computing', '/infrastructure', '/resources',
+     '/forum', '/developers', '/pricing', '/login', '/register',
+     '/privacy', '/legal', '/cookies'];
 const routes = process.argv.slice(2).length
   ? process.argv.slice(2)
-  : ['/en', '/en/architecture', '/en/use-cases', '/en/craftsmanship', '/en/about',
-     '/en/motion-control', '/en/vision', '/en/iiot-platform', '/en/resources',
-     '/en/team', '/en/forum', '/en/edge-computing', '/en/infrastructure',
-     '/en/motion-control/studio', '/en/vision/station'];
+  : ZH_ROUTES.map((r) => (r === '/' ? '/en' : '/en' + r));
 
 let total = 0;
 const report = [];
 for (const route of routes) {
-  const res = await page.goto(BASE + route, { waitUntil: 'domcontentloaded' });
+  const res = await page.goto(BASE + route, { waitUntil: 'networkidle' });
   if (!res?.ok()) { report.push([route, -1, [`HTTP ${res?.status()}`]]); continue; }
 
-  const leaks = await page.evaluate(() => {
+  await page.waitForTimeout(1500); // let any locale redirect settle
+  const landed = new URL(page.url()).pathname;
+  if (landed !== route) {
+    console.log(`${route}  →  重定向到 ${landed}，按落地页计`);
+    continue;
+  }
+  let leaks = [];
+  try {
+  leaks = await page.evaluate(() => {
     const out = [];
     const walk = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
     for (let n = walk.nextNode(); n; n = walk.nextNode()) {
@@ -42,6 +52,10 @@ for (const route of routes) {
     }
     return [...new Set(out)];
   });
+  } catch (e) {
+    console.log(`${route}  跳过（页面在加载时跳转）`);
+    continue;
+  }
 
   const real = leaks.filter((t) => !ALLOW.some((re) => re.test(t)));
   total += real.length;

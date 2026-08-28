@@ -9,9 +9,8 @@ mkdirSync(OUT, { recursive: true });
 const browser = await chromium.launch({ headless: true });
 const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
 
-const routes = ['/', '/architecture', '/use-cases', '/craftsmanship',
-                '/motion-control', '/about', '/team', '/forum',
-                '/en', '/en/craftsmanship', '/en/motion-control', '/en/team'];
+const routes = ['/team', '/developers', '/pricing', '/token-service', '/vision/station',
+                '/en/team', '/en/developers', '/en/pricing'];
 
 for (const r of routes) {
   await page.goto('http://localhost:4173' + r, { waitUntil: 'networkidle' });

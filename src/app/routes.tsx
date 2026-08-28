@@ -31,13 +31,18 @@ import { detectLocale, stripLocalePrefix } from "@/i18n/locale";
  * ZH locale this is a transparent pass-through.
  */
 function ZhOnlyGuard({ children }: { children: ReactNode }) {
+  // Computed during render, not in the effect: returning the children first
+  // painted the full Chinese page for the frame before the redirect fired, so
+  // an EN visitor saw a flash of Chinese legal text on the way out.
+  const leaving = typeof window !== "undefined" && detectLocale() === "en";
+
   useEffect(() => {
-    const locale = detectLocale();
-    if (locale === "en") {
-      const zhPath = stripLocalePrefix(window.location.pathname);
-      window.location.replace(zhPath);
+    if (leaving) {
+      window.location.replace(stripLocalePrefix(window.location.pathname));
     }
-  }, []);
+  }, [leaving]);
+
+  if (leaving) return null;
   return <>{children}</>;
 }
 

@@ -5,31 +5,26 @@
   },
   "hero": {
     "title": "Community & Maintainers",
-    "subtitle": "openIndu is community-maintained — all code and discussion happen in public repositories and on the forum"
+    "subtitle": "openIndu is community-maintained. The community guidelines, protocol adapters and workflow tooling are open source, and discussion happens in the open on the forum"
   },
   "areas": {
     "heading": "Maintained Areas",
-    "subheading": "Maintenance is organised by repository, and every area below maps to a public open-source project",
-    "repoLabel": "Repository",
+    "subheading": "Maintenance is organised by area, covering everything the portal describes",
     "studio": {
       "name": "Programming & Configuration",
-      "description": "openIndu-studio: PLC programming, HMI configuration, selection and cross-brand code generation",
-      "repo": "openIndu/openIndu-studio"
+      "description": "openIndu-studio: PLC programming, HMI configuration, selection and cross-brand code generation"
     },
     "vision": {
       "name": "Machine Vision",
-      "description": "openIndu-vision: OpenCV-based inspection and positioning",
-      "repo": "openIndu/openIndu-vision"
+      "description": "openIndu-vision: OpenCV-based inspection and positioning"
     },
     "platform": {
       "name": "Industrial IoT",
-      "description": "openIndu-platform and openindu-cim: data acquisition, edge computing and line analytics",
-      "repo": "openIndu/openIndu-platform"
+      "description": "openIndu-platform and openindu-cim: data acquisition, edge computing and line analytics"
     },
     "portal": {
       "name": "Community Portal",
-      "description": "openIndu-portal: this site and the community documentation",
-      "repo": "openIndu/openIndu-portal"
+      "description": "openIndu-portal: this site and the community documentation"
     }
   },
   "community": {
@@ -45,5 +40,14 @@
     "heading": "Get in Touch",
     "description": "Questions, or want to collaborate? Reach the community through any of these channels.",
     "email": "Email"
+  },
+  "repos": {
+    "heading": "Public Repositories",
+    "subheading": "These are the repositories the openIndu org currently publishes; the product repos are not open yet — watch the org page.",
+    "orgCta": "Open the org page",
+    "community": "Community and contribution guidelines",
+    "openplcRuntime": "OpenPLC Runtime v4, running programs built with OpenPLC",
+    "plc4x": "PLC4X industrial IoT protocol adapter",
+    "controlTower": "Community engineering workflow control tower"
   }
 }
