@@ -54,11 +54,11 @@
     "heading": "Why the openIndu Stack Works",
     "subheading": "Conventional setups are fragmented: the vision system stands alone, the PLC stands alone, the data system stands alone. openIndu solves that with one integrated four-layer design.",
     "items": [
-      { "title": "One design, cross-brand output", "description": "Design once in openIndu-studio and generate code for Siemens, Mitsubishi, Inovance and other PLC vendors — less duplicated work, lower maintenance cost." },
+      { "title": "Cross-brand engineering asset exploration", "description": "Mappings and intermediate artifacts can reduce repeated entry; every brand, version, and output format still requires validation in the target IDE and hardware environment." },
       { "title": "Vision and control, natively integrated", "description": "openIndu-vision is built into studio, so there is no manual system integration. Inspection results feed the PLC control loop in real time." },
       { "title": "Parameter changes take effect live", "description": "Changing a process parameter needs no recompile and no firmware download. Edit it in platform and it reaches the line in seconds." },
       { "title": "Full-stack, data-driven optimisation", "description": "A complete data path from hardware → vision → parameters → craftsmanship. Diagnosis shifts from on-site debugging to remote data analysis." },
-      { "title": "A crowdsourced parameter library", "description": "The forum's craftsmanship library gathers industry best practice, so new projects reuse proven parameters instead of starting from zero." },
+      { "title": "Process knowledge discussion", "description": "The forum preserves context, constraints, validation steps, and applicability boundaries. Parameters cannot be reused outside their material, equipment, and test conditions." },
       { "title": "Built for engineers", "description": "No complex commercial SaaS pricing. Fully open source — deploy on-premise, stay in control, extend freely." }
     ]
   },

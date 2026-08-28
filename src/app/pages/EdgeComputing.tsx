@@ -25,7 +25,7 @@ export function EdgeComputing() {
     {
       icon: TrendingUp,
       title: t("edgeComputing.perfTitle") || "Performance",
-      description: t("edgeComputing.perfDesc") || "Low-latency edge computation for mission-critical automation"
+      description: t("edgeComputing.perfDesc") || "A testable edge-computing path with latency measured in the target environment"
     }
   ];
 

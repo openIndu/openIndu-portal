@@ -8,16 +8,16 @@ import { test, expect } from "@playwright/test";
 
 const GOLDEN = {
   heroTitleLine1: {
-    zh: "一栈贯通，开放智造",
-    en: "One Stack, End to End — Open Manufacturing",
+    zh: "分享工艺，共建工具",
+    en: "Share Process Knowledge. Build Tools Together.",
   },
   heroTitleLine2: {
-    zh: "工业自动化的端到端开源操作系统",
-    en: "The End-to-End Open-Source OS for Industrial Automation",
+    zh: "连接视觉、控制与工业数据",
+    en: "Connect Vision, Control, and Industrial Data",
   },
   heroSubtitle: {
-    zh: "从工艺参数到产线数据，一个栈打通。任意品牌 PLC，全部开源。",
-    en: "From process parameters to line data — one stack, end to end. Any brand PLC, fully open source.",
+    zh: "面向工业自动化与非标设备的开源智能制造工业生态。以论坛、开源工程工具和可验证项目支撑协作。",
+    en: "An open smart manufacturing ecosystem for industrial automation and non-standard equipment, supported by the forum, open engineering tools, and verifiable projects.",
   },
   productsHeading: { zh: "三大核心产品", en: "Three Core Projects" },
   nodesHeading: { zh: "五大节点闭环", en: "The Five-Stage Closed Loop" },
@@ -94,7 +94,7 @@ for (const { locale, prefix, label } of LOCALES) {
 
     // ─── Tier 1: golden-value copy ───
 
-    test("displays hero OS positioning", async ({ page }) => {
+    test("displays current community positioning", async ({ page }) => {
       await page.goto(prefix + "/");
       // Scoped to <h1> -- the tagline is deliberately echoed in the footer
       // description prose, so an unscoped getByText matches both.

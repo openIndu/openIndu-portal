@@ -34,7 +34,7 @@
     "admin": "Admin"
   },
   "footer": {
-    "description": "Vertical integration from hardware to craftsmanship knowledge. Domestic industrial SoC + openEuler → openIndu-studio → Industrial Vision/Edge/IIoT → Craftsmanship Knowledge Base. Domestic chip, full-stack open source, cross-brand support, data-driven closed loop.",
+    "description": "An open smart manufacturing ecosystem for industrial automation and non-standard equipment. Share process knowledge, build tools, reuse experience, and connect vision, control, and data.",
     "communityDevelopers": "Community & Developers",
     "developers": "Developers",
     "github": "GitHub",
@@ -76,17 +76,17 @@
   },
   "edgeComputing": {
     "description": "Edge computing platform for industrial automation",
-    "subtitle": "Industrial edge computing platform for real-time control, data processing, and distributed automation",
+    "subtitle": "A project direction for equipment connectivity, edge data processing, and distributed automation; capabilities depend on repository evidence",
     "github": "View on GitHub",
     "iotPlatform": "Industrial IoT Platform",
-    "realtimeTitle": "Real-time Control",
-    "realtimeDesc": "Instant response to equipment signals without cloud latency",
+    "realtimeTitle": "Edge Data Processing",
+    "realtimeDesc": "Process data close to equipment; latency depends on tests in the target environment",
     "securityTitle": "Data Security",
     "securityDesc": "On-premise data processing keeps sensitive manufacturing data local",
     "connectTitle": "Connectivity",
     "connectDesc": "Multi-protocol support: Modbus, EtherCAT, OPC-UA, CANopen",
     "perfTitle": "Performance",
-    "perfDesc": "Low-latency edge computation for mission-critical automation",
+    "perfDesc": "A testable edge-computing path without unverified mission-critical control claims",
     "capabilities": "Core Capabilities",
     "capabilitiesDesc": "Everything you need for edge-based industrial automation",
     "useCases": "Use Cases",
@@ -98,19 +98,19 @@
     "useCase3Desc": "Unified interface for multi-protocol devices: Modbus, EtherCAT, CANopen, OPC-UA",
     "useCase4": "Offline-First Resilience",
     "useCase4Desc": "Continue operating during connectivity loss, sync data when connection restored",
-    "cta": "Deploy openIndu-cim Today",
-    "ctaDesc": "Start building edge-powered automation. Open source, Apache 2.0, no vendor lock-in.",
+    "cta": "Explore openIndu-cim",
+    "ctaDesc": "Review the current code, documentation, license, and known limitations before evaluating it for your environment.",
     "getStarted": "Get Started on GitHub",
     "learnMore": "Learn About openIndu"
   },
   "forumPage": {
     "seoDescription": "Join the openIndu community forum to discuss industrial automation, share experience, and collaborate on open-source projects.",
     "badge": "openIndu Community Forum",
-    "subtitle": "Join developers worldwide to discuss industrial automation, share experience and contribute together",
+    "subtitle": "Share real field problems with their context, constraints, validation evidence, and known boundaries",
     "enterForum": "Open the forum",
-    "githubDiscussions": "GitHub Discussions",
+    "communityRepo": "Community contribution guide",
     "categoriesHeading": "Main Forum Categories",
-    "categoriesSubheading": "Three core themes gathering industrial automation experience from around the world",
+    "categoriesSubheading": "Six areas for continuing discussion around real industrial work",
     "hotTopics": "Popular topics",
     "industrialControl": {
       "title": "Industrial Control",
@@ -142,8 +142,23 @@
         "Knowledge base"
       ]
     },
+    "insights": {
+      "title": "Industry Insights",
+      "description": "Companies, product portfolios, industrial software, and technology evolution — and what they mean for engineering decisions and delivery.",
+      "topics": ["Company observations", "Product direction", "Industrial software", "Technology evolution"]
+    },
+    "help": {
+      "title": "Community Help",
+      "description": "Questions that do not fit elsewhere, plus careers, learning resources, project collaboration, and industry exchange.",
+      "topics": ["Questions", "Careers", "Learning resources", "Collaboration"]
+    },
+    "feedback": {
+      "title": "Feedback and Suggestions",
+      "description": "Forum feature requests, bugs, category and tag requests, content feedback, and appeals.",
+      "topics": ["Feature requests", "Bug reports", "Categories and tags", "Content feedback"]
+    },
     "ctaHeading": "Ready to join the community?",
-    "ctaDescription": "Whether you ask, answer or contribute, the forum is open to you. Let's build the open-source industrial automation ecosystem together.",
+    "ctaDescription": "Start with one well-described field problem: equipment and version, symptoms, attempted methods, and what remains uncertain.",
     "ctaButton": "Go to the forum →"
   }
 }

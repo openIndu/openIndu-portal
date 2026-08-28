@@ -1,14 +1,17 @@
 import { useTranslation } from "react-i18next";
-import { ArrowRight, MessageCircle, Code, Cpu, Lightbulb } from "lucide-react";
+import { ArrowRight, MessageCircle, Code, Cpu, Lightbulb, Building2, LifeBuoy, MessageSquare } from "lucide-react";
 import { SEO } from "../components/SEO";
 
 export function Forum() {
   const { t } = useTranslation("common");
 
   const categoryKeys = [
-    { key: "industrialControl", icon: Code },
-    { key: "automation", icon: Cpu },
-    { key: "process", icon: Lightbulb },
+    { key: "industrialControl", icon: Code, href: "https://forum.openindu.com/c/industrial-control/5" },
+    { key: "automation", icon: Cpu, href: "https://forum.openindu.com/c/automation/6" },
+    { key: "process", icon: Lightbulb, href: "https://forum.openindu.com/c/process/7" },
+    { key: "insights", icon: Building2, href: "https://forum.openindu.com/c/9" },
+    { key: "help", icon: LifeBuoy, href: "https://forum.openindu.com/c/community/8" },
+    { key: "feedback", icon: MessageSquare, href: "https://forum.openindu.com/c/feedback/2" },
   ] as const;
 
   const categories = categoryKeys.map((c) => ({
@@ -51,12 +54,12 @@ export function Forum() {
                 <ArrowRight className="ml-2 h-5 w-5" />
               </a>
               <a
-                href="https://github.com/openIndu/community/discussions"
+                href="https://github.com/openIndu/community"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center px-8 py-4 bg-white text-gray-900 border-2 border-gray-200 rounded-lg hover:border-sky-700 hover:text-sky-700 transition-colors font-medium"
               >
-                {t("forumPage.githubDiscussions")}
+                {t("forumPage.communityRepo")}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </a>
             </div>
@@ -75,9 +78,15 @@ export function Forum() {
               {t("forumPage.categoriesSubheading")}
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {categories.map((category) => (
-              <div key={category.key} className="bg-white rounded-xl p-6 sm:p-8 shadow-sm border border-gray-100 hover:shadow-lg transition-shadow">
+              <a
+                key={category.key}
+                href={category.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block bg-white rounded-xl p-6 sm:p-8 shadow-sm border border-gray-100 hover:shadow-lg hover:border-sky-200 transition-all"
+              >
                 <div className="flex items-center gap-3 mb-4">
                   <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-sky-100 text-sky-700">
                     <category.icon className="h-6 w-6" />
@@ -99,7 +108,7 @@ export function Forum() {
                     ))}
                   </div>
                 </div>
-              </div>
+              </a>
             ))}
           </div>
         </div>

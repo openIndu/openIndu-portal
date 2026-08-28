@@ -1,11 +1,11 @@
 {
   "seo": {
     "title": "About openIndu | openIndu Community",
-    "description": "Understand openIndu's mission, its three core domains — industrial control, automation and craftsmanship — and how our products solve industrial automation challenges end to end."
+    "description": "Learn how openIndu uses its forum, open tools, and engineering collaboration to preserve field knowledge and connect vision, control, and data."
   },
   "hero": {
     "title": "About openIndu",
-    "subtitle": "The end-to-end open-source OS for industrial automation — closing the gaps between industrial control, automation and craftsmanship"
+    "subtitle": "An open smart manufacturing ecosystem connecting vision, control, data, and field experience"
   },
   "problem": {
     "heading": "The Problem",
@@ -19,10 +19,10 @@
   },
   "solution": {
     "heading": "Our Solution",
-    "intro": "openIndu bridges all three domains with one stack:",
-    "item1": "Process knowledge → code generation → cross-brand execution",
-    "item2": "End-to-end traceability from electrical design to production data",
-    "item3": "Apache-2.0 open source, no vendor lock-in"
+    "intro": "openIndu develops independently verifiable tools and shares the engineering process:",
+    "item1": "Field context → intermediate assets → target-platform validation",
+    "item2": "Traceable evidence from design assumptions to test results",
+    "item3": "Public repositories with licenses and maturity stated per project"
   },
   "domains": {
     "heading": "Three Domains, Three Products",
@@ -47,9 +47,9 @@
   "principles": {
     "heading": "Our Principles",
     "openSourceTitle": "Open Source",
-    "openSourceDesc": "All code under Apache-2.0. No vendor lock-in. Full transparency.",
-    "endToEndTitle": "End-to-End",
-    "endToEndDesc": "From process parameters to production insight. One stack, the complete value chain.",
+    "openSourceDesc": "Public code, documentation, licenses, and known limits are stated per repository.",
+    "endToEndTitle": "Evidence First",
+    "endToEndDesc": "Claims should be backed by reproducible environments, test methods, and results.",
     "communityTitle": "Community-Driven",
     "communityDesc": "Contributions don't require code. Data, insights and ideas all count."
   },

@@ -1,29 +1,29 @@
 {
   "seo": {
-    "title": "openIndu Community｜工业自动化的端到端开源操作系统",
-    "description": "从工艺参数到产线数据，一个栈打通。AI 辅助全链路工控开发（电气→BOM→IO→PLC/HMI）、跨品牌代码生成、工业物联网数据采集与良率分析。任意品牌 PLC，Apache-2.0 全开源。",
+    "title": "openIndu Community｜开源智能制造工业生态",
+    "description": "面向工业自动化与非标设备的开源智能制造工业生态：分享工艺、共建工具、复用工程经验，连接觉、控制与工业数据。",
     "keywords": "openIndu,工业自动化,开源,PLC,HMI,跨品牌,电气设计,BOM,IO地址表,工业互联网,PLC4X,OEE,良率分析,非标自动化"
   },
   "hero": {
-    "badge": "Apache-2.0 开源 · 国产芯片 + 国产 OS · 自主可控",
-    "titleLine1": "一栈贯通，开放智造",
-    "titleLine2": "工业自动化的端到端开源操作系统",
-    "subtitle": "国产工控芯片 + openEuler 国产操作系统 + 全栈开源工具链。从硅到工艺知识，四层一贯到底，没有一个闭源环节。",
+    "badge": "开源 · 开放 · 工程协作",
+    "titleLine1": "分享工艺，共建工具",
+    "titleLine2": "连接视觉、控制与工业数据",
+    "subtitle": "面向工业自动化与非标设备的开源智能制造工业生态。以论坛、开源工程工具和可验证项目支撑协作。",
     "ctaStudio": "了解 openIndu-studio",
     "ctaSolutions": "查看解决方案",
-    "accent": "国产芯片筑基，全链路开源",
-    "chain": "国产工控芯片 + openEuler → openIndu-studio → 工业视觉/边缘/IIoT → 工艺知识"
+    "accent": "从现场问题到可复用工程资产",
+    "chain": "Forum → Vision / Studio / CIM + Platform / PLC Experiment"
   },
   "products": {
     "heading": "三大核心产品",
-    "subheading": "全部 Apache-2.0 开源，覆盖从工艺知识到生产洞察的完整链路",
+    "subheading": "项目代码、论坛内容与生产证据分别标注；许可证以各仓库 LICENSE 为准",
     "studio": {
       "stage": "工艺知识 + 工程生成",
-      "description": "AI 辅助全链路工控开发工具链。电气模组 → 电路图 → BOM → IO 地址表 → PLC 程序 → HMI 画面，六步一个工具，多品牌输出。"
+      "description": "工程资产与生成工作流：电气模组、电路图、BOM、IO 地址规划及 PLC/HMI 中间产物；具体可用范围以仓库文档和测试为准。"
     },
     "platform": {
       "stage": "工业互联网",
-      "description": "工业物联网平台。设备接入、数据采集、产线监控、产品追溯一体化。协议层基于 Apache PLC4X，S7、Modbus、EtherNet/IP、OPC-UA 全覆盖。边缘端侧通过 openIndu-cim 实现。"
+      "description": "设备互联、数据采集、产线监控与产品追溯平台。协议支持取决于已集成驱动、版本和验证环境，不使用“全覆盖”承诺。"
     },
     "station": {
       "stage": "工业视觉",
@@ -32,7 +32,7 @@
   },
   "cta": {
     "heading": "加入 openIndu 社区",
-    "description": "从工艺参数到产线数据，一个栈打通。与全球开发者共同构建工业自动化开源生态",
+    "description": "从一个现场问题、一份失败记录或一个工程模板开始，共同积累可复核、可复用的工业经验。",
     "quickStart": "快速开始",
     "learnPlatform": "了解平台",
     "wechatHeading": "微信扫码关注公众号",
@@ -63,7 +63,7 @@
     "s1Desc": "4 层从硬件到工艺知识，掌握 openIndu 如何打通工业自动化全流程",
     "s1Cta": "深入了解",
     "s2Title": "选择行业场景",
-    "s2Desc": "面板、芯片、新能源三条工艺主链的完整解决方案与工程实践",
+    "s2Desc": "浏览面板、半导体、电池等工艺知识文章；内容覆盖不代表已验证交付能力",
     "s2Cta": "查看场景",
     "s3Title": "选择产品工具",
     "s3Desc": "根据场景选择运动控制、工业视觉或 IIoT 平台",
@@ -73,7 +73,7 @@
   },
   "knowledge": {
     "heading": "工艺知识众包库",
-    "description": "openIndu 不仅提供工具，更重要的是汇聚全球制造工程师的工艺知识。论坛中共享的每一条参数、每一个案例，都是生产线实战经验的积累。",
+    "description": "论坛用于持续讨论制造工艺与现场问题。内容应说明来源、场景、约束和验证边界，不把未经复核的参数当作标准答案。",
     "item1Title": "电池工艺",
     "item1Desc": "卷绕速度、焊接温度、良率优化",
     "item2Title": "PCB 工艺",
@@ -83,8 +83,8 @@
     "cta": "了解工艺知识库"
   },
   "openSource": {
-    "heading": "完全开源，欢迎参与",
-    "description": "openIndu 所有代码都在 GitHub 和 Gitee 开源。无论是提交代码、分享工艺参数，还是参与讨论，每一个贡献都推动工业自动化向前发展。",
+    "heading": "开放协作，欢迎参与",
+    "description": "每个项目的代码、成熟度和许可证以对应仓库为准。论坛也欢迎现场问题、失败记录、验证方法和适用边界。",
     "item1Title": "代码贡献",
     "item1Desc": "openIndu-studio、platform、vision 等核心项目",
     "item2Title": "知识分享",

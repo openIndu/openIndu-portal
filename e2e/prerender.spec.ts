@@ -43,8 +43,8 @@ const ZH_ONLY = ["/privacy", "/legal", "/cookies", "/legal-center"];
 // output, not derived from the locale JSON (see i18n-test-rework-plan.md
 // 1.1 on why golden values must hold their own opinion).
 const TITLES: Record<string, string> = {
-  "/": "openIndu Community｜工业自动化的端到端开源操作系统",
-  "/en": "openIndu Community | The End-to-End Open-Source OS for Industrial Automation",
+  "/": "openIndu Community｜开源智能制造工业生态",
+  "/en": "openIndu Community | Open Smart Manufacturing Ecosystem",
   "/motion-control": "AI+运动控制｜openIndu 智能制造",
   "/en/motion-control": "AI + Motion Control | openIndu Smart Manufacturing",
   "/motion-control/studio": "openIndu-studio 介绍｜openIndu",

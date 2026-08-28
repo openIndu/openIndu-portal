@@ -1,29 +1,29 @@
 {
   "seo": {
-    "title": "openIndu Community | The End-to-End Open-Source OS for Industrial Automation",
-    "description": "From process parameters to line data — one stack, end to end. AI-assisted, full-chain industrial control development (electrical → BOM → I/O → PLC/HMI), cross-brand code generation, industrial IoT data acquisition, and yield analysis. Any brand PLC, fully open source under Apache-2.0.",
+    "title": "openIndu Community | Open Smart Manufacturing Ecosystem",
+    "description": "An open smart manufacturing ecosystem for industrial automation and non-standard equipment: share process knowledge, build tools, and connect vision, control, and industrial data.",
     "keywords": "openIndu,industrial automation,open source,PLC,HMI,cross-brand,electrical design,BOM,I/O address table,industrial IoT,PLC4X,OEE,yield analysis,custom automation"
   },
   "hero": {
-    "badge": "Apache-2.0 · Domestic silicon + domestic OS · Self-reliant",
-    "titleLine1": "One Stack, End to End — Open Manufacturing",
-    "titleLine2": "The End-to-End Open-Source OS for Industrial Automation",
-    "subtitle": "Domestic industrial SoCs + the openEuler operating system + a fully open-source toolchain. Four layers, silicon to craftsmanship knowledge, without a single closed-source link.",
+    "badge": "Open source · Open engineering · Collaboration",
+    "titleLine1": "Share Process Knowledge. Build Tools Together.",
+    "titleLine2": "Connect Vision, Control, and Industrial Data",
+    "subtitle": "An open smart manufacturing ecosystem for industrial automation and non-standard equipment, supported by the forum, open engineering tools, and verifiable projects.",
     "ctaStudio": "Learn about openIndu-studio",
     "ctaSolutions": "View Solutions",
-    "accent": "Domestic silicon at the base, open source end to end",
-    "chain": "Domestic industrial SoC + openEuler → openIndu-studio → Industrial Vision/Edge/IIoT → Craftsmanship Knowledge"
+    "accent": "From field problems to reusable engineering assets",
+    "chain": "Forum → Vision / Studio / CIM + Platform / PLC Experiment"
   },
   "products": {
     "heading": "Three Core Projects",
-    "subheading": "All Apache-2.0 open source, spanning the complete loop from process knowledge to production insight",
+    "subheading": "Code, forum content, and production evidence are distinct; each repository's LICENSE is authoritative",
     "studio": {
       "stage": "Process Knowledge + Engineering Generation",
-      "description": "An AI-assisted, full-chain industrial control development toolchain. Electrical modules → circuit diagrams → BOM → I/O address tables → PLC programs → HMI screens — one tool per step, multi-brand output."
+      "description": "Engineering assets and generation workflows for electrical modules, diagrams, BOM, I/O planning, and PLC/HMI intermediate artifacts. Refer to repository docs and tests for the usable scope."
     },
     "platform": {
       "stage": "Industrial IoT",
-      "description": "An industrial IoT platform unifying device connectivity, data acquisition, line monitoring, and product traceability. Protocol layer built on Apache PLC4X, covering S7, Modbus, EtherNet/IP, and OPC-UA. Edge computing enabled via openIndu-cim."
+      "description": "A platform for device connectivity, data acquisition, line monitoring, and traceability. Protocol support depends on integrated drivers, versions, and validated environments; it is not universal coverage."
     },
     "station": {
       "stage": "Industrial Vision",
@@ -32,7 +32,7 @@
   },
   "cta": {
     "heading": "Join the openIndu Community",
-    "description": "From process parameters to line data — one stack, end to end. Build the open-source industrial-automation ecosystem together with developers worldwide.",
+    "description": "Start with a field problem, a failure record, or an engineering template, and help build verifiable, reusable industrial knowledge.",
     "quickStart": "Quick Start",
     "learnPlatform": "Learn about the Platform",
     "wechatHeading": "Follow us on WeChat",
@@ -63,7 +63,7 @@
     "s1Desc": "Four layers from silicon to craftsmanship knowledge — see how openIndu connects the whole automation flow",
     "s1Cta": "Learn more",
     "s2Title": "Pick your industry scenario",
-    "s2Desc": "Complete solutions and engineering practice for the panel, semiconductor and new-energy chains",
+    "s2Desc": "Explore process articles for panels, semiconductors, batteries, and more; content coverage is not validated delivery capability",
     "s2Cta": "View scenarios",
     "s3Title": "Choose your tools",
     "s3Desc": "Pick motion control, machine vision or the IIoT platform to match your scenario",
@@ -73,7 +73,7 @@
   },
   "knowledge": {
     "heading": "A Crowdsourced Process Library",
-    "description": "openIndu is more than tooling — it gathers the process knowledge of manufacturing engineers worldwide. Every parameter and every case shared on the forum is hard-won experience from a real production line.",
+    "description": "The forum supports continuing discussion of manufacturing processes and field problems. Content should state sources, context, constraints, and validation boundaries rather than present unreviewed parameters as standard answers.",
     "item1Title": "Battery processes",
     "item1Desc": "Winding speed, welding temperature, yield optimisation",
     "item2Title": "PCB processes",
@@ -83,8 +83,8 @@
     "cta": "Explore the Knowledge Base"
   },
   "openSource": {
-    "heading": "Fully Open Source — Come Build With Us",
-    "description": "All openIndu code is open on GitHub and Gitee. Whether you submit code, share process parameters or join a discussion, every contribution moves industrial automation forward.",
+    "heading": "Open Collaboration — Come Build With Us",
+    "description": "Code, maturity, and licenses are defined by each project repository. The forum also welcomes field questions, failure records, validation methods, and applicability boundaries.",
     "item1Title": "Code contributions",
     "item1Desc": "Core projects including openIndu-studio, platform and vision",
     "item2Title": "Knowledge sharing",

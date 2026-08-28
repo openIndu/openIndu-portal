@@ -36,7 +36,7 @@
   "license": {
     "heading": "许可与支持",
     "openSourceTitle": "开源版本",
-    "openSourceItems": ["Apache-2.0 许可证", "GitHub / Gitee 完全开源", "社区支持", "适合：研发、创业、学习"],
+    "openSourceItems": ["许可证以各仓库 LICENSE 为准", "公开仓库与社区内容", "社区支持", "适合：研发、创业、学习"],
     "enterpriseTitle": "企业版本",
     "enterpriseItems": ["自定义许可模式", "专业技术支持（电话 / 邮件）", "部署与集成咨询", "适合：生产制造、关键应用"]
   },

@@ -75,7 +75,7 @@ export function StructuredData({
         url: origin,
         logo: `${origin}/assets/logo.png`,
         description:
-          "面向智能制造场景的开源工业生态，提供工业互联网平台、PLC 开发工作流、资源中心与 AI 赋能解决方案。",
+          "面向工业自动化与非标设备的开源智能制造工业生态，通过论坛、开源工程工具和可验证项目推动协作。",
       },
       {
         "@context": "https://schema.org",
@@ -116,7 +116,7 @@ export function StructuredData({
         pageDescription ||
         "openIndu Community — 开源智能制造工业生态",
       url,
-      dateModified: "2026-07-01",
+      dateModified: "2026-08-28",
       isPartOf: {
         "@type": "WebSite",
         name: "openIndu Community",
