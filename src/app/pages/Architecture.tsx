@@ -1,16 +1,15 @@
 import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
-import { ArrowRight, Layers, Cpu, Code, TrendingUp } from "lucide-react";
+import { ArrowRight, MessageCircle, Eye, Workflow, Database, FlaskConical } from "lucide-react";
 import { SEO } from "../components/SEO";
 
-// Layer 4 first, matching the stack drawing on the home page. The tints are
-// per-layer identity, not decoration, so they stay multi-hue while the rest of
-// the site runs on the sky palette.
+// The five public directions describe collaboration boundaries, not maturity.
 const layerKeys = [
-  { key: "craftsmanship", icon: TrendingUp, color: "from-orange-50 to-amber-50", border: "border-orange-200" },
-  { key: "application", icon: Layers, color: "from-blue-50 to-cyan-50", border: "border-sky-200" },
-  { key: "programming", icon: Code, color: "from-green-50 to-emerald-50", border: "border-green-200" },
-  { key: "hardware", icon: Cpu, color: "from-purple-50 to-pink-50", border: "border-purple-200" },
+  { key: "forum", icon: MessageCircle, color: "from-orange-50 to-amber-50", border: "border-orange-200" },
+  { key: "vision", icon: Eye, color: "from-blue-50 to-cyan-50", border: "border-sky-200" },
+  { key: "studio", icon: Workflow, color: "from-green-50 to-emerald-50", border: "border-green-200" },
+  { key: "data", icon: Database, color: "from-indigo-50 to-blue-50", border: "border-indigo-200" },
+  { key: "plc", icon: FlaskConical, color: "from-purple-50 to-pink-50", border: "border-purple-200" },
 ] as const;
 
 export function Architecture() {
@@ -53,7 +52,7 @@ export function Architecture() {
         </div>
       </section>
 
-      {/* Four Layers */}
+      {/* Five Directions */}
       <section className="py-16 sm:py-20 bg-white">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <div className="space-y-6 sm:space-y-8">

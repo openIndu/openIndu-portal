@@ -1,74 +1,80 @@
 {
   "seo": {
-    "title": "Architecture | openIndu Full-Stack Platform",
-    "description": "Understand openIndu's complete industrial automation stack: from domestic industrial SoCs to craftsmanship knowledge. An end-to-end solution for manufacturing."
+    "title": "Project Map | openIndu Engineering Tool Stack Community",
+    "description": "Explore five openIndu collaboration directions: Forum, Vision, Studio, CIM + Platform, and PLC Experiment, with explicit capability boundaries."
   },
   "hero": {
-    "title": "The openIndu Full-Chain Architecture",
-    "subtitle": "From industrial silicon to craftsmanship knowledge — one chain across the whole manufacturing flow",
-    "formula": "Domestic industrial SoC + openEuler + openIndu-studio + three application layers + craftsmanship knowledge = a complete industrial automation OS"
+    "title": "The openIndu Project Map",
+    "subtitle": "The forum preserves knowledge, tools enable engineering reuse, and status plus evidence define today's boundaries",
+    "formula": "Forum + Vision + Studio + CIM & Platform + PLC Experiment"
   },
   "layers": {
-    "craftsmanship": {
-      "title": "Craftsmanship Knowledge Layer",
-      "titleEn": "Layer 4",
-      "description": "Forum process columns: end-to-end chains, shop-floor practice and defect reasoning for panels, semiconductors, new energy and more",
-      "benefits": ["Industry best practice", "Crowdsourced knowledge base", "Shared process parameters"]
+    "forum": {
+      "title": "Forum",
+      "titleEn": "Content",
+      "description": "Community knowledge across industrial control, automation, manufacturing processes, and industry observations. Topics can remain open as evidence evolves.",
+      "benefits": ["Field problems", "Process flows", "Validation methods", "Industry observations"]
     },
-    "application": {
-      "title": "Application Layer",
-      "titleEn": "Layer 3",
-      "description": "Three directions working together: machine-vision inspection, edge data acquisition, and IIoT platform analytics",
-      "benefits": ["Vision positioning & inspection", "Real-time edge decisions", "Data-driven insight"]
+    "vision": {
+      "title": "Industrial Vision",
+      "titleEn": "Vision",
+      "description": "Exploration of cross-camera, cross-algorithm inspection and workflow orchestration. Support depends on repositories, versions, and validation records.",
+      "benefits": ["Camera abstraction", "Algorithm workflows", "Inspection", "Result integration"]
     },
-    "programming": {
-      "title": "Programming & Configuration Layer",
-      "titleEn": "Layer 2",
-      "description": "openIndu-studio: PLC programming, HMI configuration, PLC selection, BOM, circuit diagrams and cross-brand code generation",
-      "benefits": ["Multi-brand support", "Engineering automation", "Lower cost"]
+    "studio": {
+      "title": "Engineering Assets",
+      "titleEn": "Studio",
+      "description": "Engineering workflows around electrical modules, diagrams, BOM, I/O planning, and PLC/HMI intermediate artifacts.",
+      "benefits": ["Engineering assets", "Template reuse", "Traceable process", "Verifiable artifacts"]
     },
-    "hardware": {
-      "title": "Hardware & OS Layer",
-      "titleEn": "Layer 1",
-      "description": "Domestic industrial SoC + the openEuler operating system: real-time control, industrial protocols, local edge decisions",
-      "benefits": ["Domestic and self-reliant", "Cost advantage", "Real-time and reliable"]
+    "data": {
+      "title": "Connectivity and Data",
+      "titleEn": "CIM + Platform",
+      "description": "Connect equipment, manufacturing systems, and industrial data for collection, traceability, and analysis. Protocols are validated per driver, version, and environment.",
+      "benefits": ["Connectivity", "Data acquisition", "Traceability", "Manufacturing integration"]
+    },
+    "plc": {
+      "title": "Open Control Experiment",
+      "titleEn": "PLC Experiment · E0",
+      "description": "RK3588 + openEuler + RTOS/real-time Linux + EtherCAT exploration. Real-time, HIL, endurance, and fault-recovery evidence is not complete.",
+      "benefits": ["Experiment / E0", "Test plan", "Evidence gates", "Not production-ready"]
     }
   },
   "interaction": {
-    "heading": "How the Layers Work Together",
-    "flowTitle": "📐 Engineering Flow",
-    "flowStep1Label": "Design",
-    "flowStep1": "Design the PLC logic, HMI screens and PLC selection once, inside openIndu-studio",
-    "flowStep2Label": "Generate",
-    "flowStep2": "Automatically emit cross-brand code for Siemens S7, Mitsubishi, Omron and others — plus BOM and circuit diagrams",
-    "flowStep3Label": "Deploy",
-    "flowStep3": "Deploy to a soft PLC on domestic silicon, or to the target hardware PLC",
-    "appsTitle": "👁️ Applications in Concert",
-    "appsLeftLabel": "Left — openIndu-vision (machine vision)",
-    "appsLeft": "OpenCV-based inspection and positioning, fed back to the PLC",
-    "appsCoreLabel": "Centre — openIndu-studio (programming & control)",
-    "appsCore": "Runs the PLC logic, consumes vision results, drives the actuators",
-    "appsRightLabel": "Right — openIndu-cim + platform (data acquisition)",
-    "appsRight": "Collects everything and reports it to the IIoT platform for analysis",
-    "loopTitle": "📊 The Data Loop",
-    "loop": "Live data → platform analysis → process bottleneck found → solution shared in the forum's process column → parameters tuned → yield improves"
+    "heading": "How the Directions Work Together",
+    "flowTitle": "📐 From Knowledge to Engineering Assets",
+    "flowStep1Label": "Record",
+    "flowStep1": "The forum preserves field context, constraints, validation steps, and known boundaries",
+    "flowStep2Label": "Review",
+    "flowStep2": "Reviewed experience can become guides, templates, mappings, or experimental cases",
+    "flowStep3Label": "Reuse",
+    "flowStep3": "Tools reuse those assets only within explicit status and evidence boundaries",
+    "appsTitle": "🧭 Tool Collaboration",
+    "appsLeftLabel": "Vision",
+    "appsLeft": "Visual inspection and workflow exploration",
+    "appsCoreLabel": "Studio",
+    "appsCore": "Organises engineering assets and generation workflows",
+    "appsRightLabel": "CIM + Platform",
+    "appsRight": "Connects equipment, manufacturing systems, and industrial data",
+    "loopTitle": "🧪 Experimental Boundary",
+    "loop": "PLC Experiment remains Experiment / E0. It is not production-ready without real-time, HIL, endurance, and fault-recovery evidence."
   },
   "comparison": {
-    "heading": "Compared With Conventional Setups",
+    "heading": "How We Communicate Maturity",
     "colAspect": "Dimension",
-    "colTraditional": "Conventional approach",
-    "colOpenIndu": "openIndu full stack",
+    "colTraditional": "Common misunderstanding",
+    "colOpenIndu": "openIndu approach",
     "rows": [
-      { "aspect": "Hardware cost", "traditional": "Expensive industrial PCs + proprietary systems", "openindu": "Domestic industrial SoC + open-source openEuler" },
-      { "aspect": "Programming cycle", "traditional": "Brand-specific programming → rewrite the code", "openindu": "Design once → generate code for every brand" },
-      { "aspect": "Application integration", "traditional": "Vision and IIoT each on their own → data silos", "openindu": "Three application layers in concert → a data-driven loop" },
-      { "aspect": "Craftsmanship knowledge", "traditional": "Every company works it out alone", "openindu": "A crowdsourced forum library → the industry improves together" },
-      { "aspect": "Vendor lock-in", "traditional": "Tied to a proprietary platform → costly upgrades", "openindu": "Apache 2.0 open source → fully self-determined" }
+      { "aspect": "Project map", "traditional": "A direction means a finished product", "openindu": "Direction, status, and evidence are shown separately" },
+      { "aspect": "Forum articles", "traditional": "Content coverage means delivery capability", "openindu": "Content is labelled as Content, without delivery claims" },
+      { "aspect": "Repositories", "traditional": "Code means engineering validation", "openindu": "README, releases, tests, and limitations define status" },
+      { "aspect": "Licensing", "traditional": "One license describes the whole ecosystem", "openindu": "Each repository LICENSE and dependency obligation is authoritative" },
+      { "aspect": "Soft PLC", "traditional": "An experiment can replace a hardware PLC", "openindu": "Experiment / E0 and the next evidence gates are explicit" }
     ]
   },
   "cta": {
-    "heading": "Ready to explore the full chain?",
-    "useCases": "View Industry Scenarios",
-    "studio": "Explore openIndu-studio"
+    "heading": "Start With One Reproducible Problem",
+    "useCases": "Explore Industry Content",
+    "studio": "Browse openIndu Projects"
   }
 }
