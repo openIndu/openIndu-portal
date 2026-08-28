@@ -65,6 +65,7 @@ function FeatureRow({ feature, reversed, t }: { feature: Feature; reversed: bool
             alt={t(`features.${feature.key}.screenshotAlt`)}
             className="w-full h-auto"
             loading="lazy"
+            decoding="async"
           />
         </div>
       </div>
@@ -205,6 +206,10 @@ export function IIoTPlatform() {
               <img
                 src="/assets/iiot/architecture.svg"
                 alt={t("architecture.diagramAlt")}
+                width="960"
+                height="640"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-auto"
               />
             </div>

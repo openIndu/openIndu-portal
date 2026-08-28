@@ -378,6 +378,10 @@ export function Home() {
               <img
                 src="/assets/iiot/qr-code.jpg"
                 alt={t("cta.wechatAlt")}
+                width="1080"
+                height="394"
+                loading="lazy"
+                decoding="async"
                 className="w-80 sm:w-[480px] lg:w-[560px] h-auto max-w-full"
               />
             </div>

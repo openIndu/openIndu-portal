@@ -7,7 +7,7 @@ import { visitsApi } from "@/api";
 import { getDisplayName, maskPhone } from "../utils/user";
 import { StructuredData } from "./StructuredData";
 import { LanguageSwitcher, LanguageSwitcherCompact, LanguageSwitcherMobile } from "./LanguageSwitcher";
-import logo from "/assets/logo.png";
+import logo from "/assets/logo-96.png";
 
 export function Layout() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -124,6 +124,8 @@ export function Layout() {
               <img
                 src={logo}
                 alt="openIndu Logo"
+                width="96"
+                height="96"
                 className="w-10 h-10 rounded-lg object-contain"
               />
               <span className="text-xl font-semibold text-gray-900">openIndu</span>
@@ -366,6 +368,10 @@ export function Layout() {
                 <img
                   src={logo}
                   alt="openIndu Logo"
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
                   className="w-10 h-10 rounded-lg object-contain"
                 />
                 <span className="text-xl font-semibold text-white">openIndu Community</span>
