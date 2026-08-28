@@ -64,7 +64,7 @@ export function Layout() {
     ];
     // Hide AI Assistant on EN — the RAG knowledge base is Chinese-only
     if (locale === "zh") {
-      items.push({ name: `${t("nav.aiAssistant")} 🇨🇳`, href: "/chat", testid: "nav-ai-assistant" });
+      items.push({ name: t("nav.aiAssistant"), href: "/chat", testid: "nav-ai-assistant" });
     }
     return items;
   }, [t, locale]);
@@ -89,9 +89,9 @@ export function Layout() {
       {/* Skip to content link for accessibility */}
       <a
         href="#main-content"
-        className="absolute left-[-9999px] focus:left-0 focus:top-0 focus:z-50 focus:p-4 focus:bg-blue-600 focus:text-white focus:block"
+        className="absolute -top-16 -left-16 focus:top-0 focus:left-0 focus:z-50 px-4 py-4 bg-sky-700 text-white flex items-center justify-center min-h-[48px] min-w-[240px] rounded-lg font-medium"
       >
-        Skip to main content
+        {t("a11y.skipToContent")}
       </a>
 
       {/* Header */}
@@ -99,7 +99,7 @@ export function Layout() {
         <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" aria-label="Main navigation">
           <div className="flex h-16 items-center justify-between gap-4">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-2">
+            <Link to="/" className="flex items-center gap-2 py-2 px-1 min-h-[44px]">
               <img
                 src={logo}
                 alt="openIndu Logo"
@@ -117,10 +117,10 @@ export function Layout() {
                       to={item.href}
                       data-testid={item.testid}
                       aria-current={isActive(item.href) ? "page" : undefined}
-                      className={`flex items-center gap-1 text-sm transition-colors whitespace-nowrap ${
+                      className={`flex items-center justify-center gap-1 text-sm transition-colors whitespace-nowrap py-2 px-2 min-h-[44px] min-w-[60px] ${
                         isActive(item.href)
-                          ? "text-blue-600 font-medium"
-                          : "text-gray-700 hover:text-blue-600"
+                          ? "text-sky-700 font-medium"
+                          : "text-gray-700 hover:text-sky-700"
                       }`}
                     >
                       {item.name}
@@ -137,7 +137,7 @@ export function Layout() {
                               target="_blank"
                               rel="noopener noreferrer"
                               data-testid={child.testid}
-                              className="block px-4 py-2 text-sm transition-colors text-gray-700 hover:bg-gray-50 hover:text-blue-600"
+                              className="flex items-center px-4 py-3.5 text-sm transition-colors text-gray-700 hover:bg-gray-50 hover:text-sky-700 min-h-[44px] w-full"
                             >
                               {child.name}
                             </a>
@@ -146,10 +146,10 @@ export function Layout() {
                               key={child.name}
                               to={child.href}
                               data-testid={child.testid}
-                              className={`block px-4 py-2 text-sm transition-colors ${
+                              className={`flex items-center px-4 py-3.5 text-sm transition-colors min-h-[44px] w-full ${
                                 location.pathname === child.href
-                                  ? "bg-blue-50 font-medium text-blue-600"
-                                  : "text-gray-700 hover:bg-gray-50 hover:text-blue-600"
+                                  ? "bg-sky-50 font-medium text-sky-700"
+                                  : "text-gray-700 hover:bg-gray-50 hover:text-sky-700"
                               }`}
                             >
                               {child.name}
@@ -166,7 +166,7 @@ export function Layout() {
                     target="_blank"
                     rel="noopener noreferrer"
                     data-testid={item.testid}
-                    className="text-sm transition-colors whitespace-nowrap text-gray-700 hover:text-blue-600"
+                    className="text-sm transition-colors whitespace-nowrap text-gray-700 hover:text-sky-700 py-2 px-2 min-h-[44px] min-w-[60px] inline-flex items-center justify-center"
                   >
                     {item.name}
                   </a>
@@ -175,10 +175,10 @@ export function Layout() {
                     key={item.name}
                     to={item.href}
                     data-testid={item.testid}
-                    className={`text-sm transition-colors whitespace-nowrap ${
+                    className={`text-sm transition-colors whitespace-nowrap py-2 px-2 min-h-[44px] min-w-[60px] inline-flex items-center justify-center ${
                       isActive(item.href)
-                        ? "text-blue-600 font-medium"
-                        : "text-gray-700 hover:text-blue-600"
+                        ? "text-sky-700 font-medium"
+                        : "text-gray-700 hover:text-sky-700"
                     }`}
                   >
                     {item.name}
@@ -192,7 +192,7 @@ export function Layout() {
               <LanguageSwitcherCompact />
               {isAuthenticated ? (
                 <>
-                  <Link to="/account" className="flex max-w-[240px] items-center gap-2 rounded-full bg-blue-50 px-3 py-1.5 text-sm text-blue-700 hover:bg-blue-100">
+                  <Link to="/account" className="flex max-w-[240px] items-center gap-2 rounded-full bg-sky-50 px-3 py-1.5 text-sm text-sky-800 hover:bg-sky-100">
                     <UserRound className="h-4 w-4 shrink-0" />
                     <span className="truncate">{displayName}</span>
                     {user?.role && <span className="shrink-0 rounded-full bg-white px-2 py-0.5 text-xs">{ROLE_LABELS[user.role] ?? user.role}</span>}
@@ -200,7 +200,7 @@ export function Layout() {
                   <button
                     type="button"
                     onClick={() => void handleLogout()}
-                    className="inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-600"
+                    className="inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-sky-700"
                   >
                     <LogOut className="h-4 w-4" />
                     {t("auth.signOut")}
@@ -208,7 +208,7 @@ export function Layout() {
                 </>
               ) : (
                 <>
-                  <Link to="/login" className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700">{t("auth.signIn")}</Link>
+                  <Link to="/login" className="rounded-lg bg-sky-700 px-4 py-2.5 text-sm font-medium text-white hover:bg-sky-800 min-h-[44px] inline-flex items-center">{t("auth.signIn")}</Link>
                 </>
               )}
             </div>
@@ -216,7 +216,7 @@ export function Layout() {
             {/* Mobile menu button */}
             <button
               type="button"
-              className="xl:hidden p-2 text-gray-700"
+              className="xl:hidden p-2.5 text-gray-700 min-w-[44px] min-h-[44px] flex items-center justify-center"
               onClick={() => {
                 setMobileMenuOpen(!mobileMenuOpen);
                 if (!mobileMenuOpen) window.scrollTo({ top: 0, behavior: "smooth" });
@@ -247,7 +247,7 @@ export function Layout() {
                   onClick={() => setMobileMenuOpen(false)}
                   className={`block px-3 py-2 rounded-lg ${
                     isActive(item.href)
-                      ? "bg-blue-600 text-white font-medium"
+                      ? "bg-sky-700 text-white font-medium"
                       : "text-gray-700 hover:bg-gray-50"
                   }`}
                 >
@@ -263,7 +263,7 @@ export function Layout() {
                         onClick={() => setMobileMenuOpen(false)}
                         className={`block rounded-lg px-3 py-2 text-sm ${
                           location.pathname === child.href
-                            ? "bg-blue-50 font-medium text-blue-600"
+                            ? "bg-sky-50 font-medium text-sky-700"
                             : "text-gray-600 hover:bg-gray-50"
                         }`}
                       >
@@ -284,28 +284,28 @@ export function Layout() {
                   <Link
                     to="/account"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="flex items-center gap-3 rounded-xl bg-blue-50 px-3 py-3 hover:bg-blue-100"
+                    className="flex items-center gap-3 rounded-xl bg-sky-50 px-3 py-3 hover:bg-sky-100"
                   >
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-600 text-white">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-sky-700 text-white">
                       <UserRound className="h-5 w-5" />
                     </div>
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2">
                         <span className="truncate font-medium text-gray-900">{displayName}</span>
                         {user?.role && (
-                          <span className="shrink-0 rounded-full bg-white px-2 py-0.5 text-xs text-blue-700">
+                          <span className="shrink-0 rounded-full bg-white px-2 py-0.5 text-xs text-sky-800">
                             {ROLE_LABELS[user.role] ?? user.role}
                           </span>
                         )}
                       </div>
-                      <div className="mt-0.5 truncate text-xs text-blue-600/80">{maskPhone(user?.phone)}</div>
+                      <div className="mt-0.5 truncate text-xs text-gray-600">{maskPhone(user?.phone)}</div>
                     </div>
-                    <ChevronRight className="h-5 w-5 shrink-0 text-blue-400" />
+                    <ChevronRight className="h-5 w-5 shrink-0 text-sky-300" />
                   </Link>
                   <button
                     type="button"
                     onClick={() => void handleLogout()}
-                    className="flex w-full items-center justify-center gap-2 rounded-xl border border-gray-200 px-3 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-600"
+                    className="flex w-full items-center justify-center gap-2 rounded-xl border border-gray-200 px-3 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-sky-700"
                   >
                     <LogOut className="h-4 w-4" />
                     {t("auth.signOutFull")}
@@ -317,7 +317,7 @@ export function Layout() {
                   <Link
                     to="/login"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="flex items-center justify-center gap-1.5 rounded-lg bg-blue-600 px-3 py-2.5 text-sm font-medium text-white hover:bg-blue-700"
+                    className="flex items-center justify-center gap-1.5 rounded-lg bg-sky-700 px-3 py-2.5 text-sm font-medium text-white hover:bg-sky-800"
                   >
                     {t("auth.signIn")}
                     <ArrowRight className="h-4 w-4" />
@@ -335,11 +335,11 @@ export function Layout() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-blue-900 text-white mt-20" role="contentinfo">
+      <footer className="bg-sky-900 text-white mt-20" role="contentinfo">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
           <nav aria-label="Footer navigation" className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-6">
             {/* Logo and Description */}
-            <div className="flex flex-col items-start">
+            <div className="flex flex-col items-start md:col-span-2 lg:col-span-2">
               <div className="flex items-center gap-2 mb-4">
                 <img
                   src={logo}
@@ -348,7 +348,7 @@ export function Layout() {
                 />
                 <span className="text-xl font-semibold text-white">openIndu Community</span>
               </div>
-              <p className="text-blue-100 max-w-md">
+              <p className="text-sky-100 max-w-md">
                 {t("footer.description")}
               </p>
             </div>
@@ -356,21 +356,24 @@ export function Layout() {
             {/* Quick Links */}
             <div className="flex flex-col items-start">
               <h3 className="font-semibold text-white mb-4">{t("footer.quickLinks")}</h3>
-              <ul className="space-y-2 text-blue-100">
+              <ul className="space-y-1 text-sky-100">
                 <li>
-                  <Link to="/" className="hover:text-white">{t("footer.home")}</Link>
+                  <Link to="/" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">{t("footer.home")}</Link>
                 </li>
                 <li>
-                  <Link to="/resources" className="hover:text-white">{t("footer.downloads")}</Link>
+                  <Link to="/resources" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">{t("footer.downloads")}</Link>
                 </li>
                 <li>
-                  <Link to="/motion-control" className="hover:text-white">{t("footer.motionControl")}</Link>
+                  <Link to="/motion-control" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">{t("footer.motionControl")}</Link>
                 </li>
                 <li>
-                  <Link to="/vision" className="hover:text-white">{t("footer.vision")}</Link>
+                  <Link to="/vision" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">{t("footer.vision")}</Link>
                 </li>
                 <li>
-                  <a href="https://forum.openindu.com/c/process/7" target="_blank" rel="noopener noreferrer" className="hover:text-white">{t("footer.forum")}</a>
+                  <a href="https://forum.openindu.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">{t("footer.forum")}</a>
+                </li>
+                <li>
+                  <Link to="/developers" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">{t("footer.developers")}</Link>
                 </li>
               </ul>
             </div>
@@ -378,40 +381,26 @@ export function Layout() {
             {/* Core Services */}
             <div className="flex flex-col items-start">
               <h3 className="font-semibold text-white mb-4">{t("footer.coreServices")}</h3>
-              <ul className="space-y-2 text-blue-100">
+              <ul className="space-y-1 text-sky-100">
                 <li>
-                  <Link to="/iiot-platform" className="hover:text-white">{t("footer.iiotPlatform")}</Link>
+                  <Link to="/iiot-platform" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">{t("footer.iiotPlatform")}</Link>
                 </li>
                 <li>
-                  <Link to="/motion-control/studio" className="hover:text-white">{t("footer.studioPlatform")}</Link>
+                  <Link to="/motion-control/studio" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">{t("footer.studioPlatform")}</Link>
                 </li>
                 <li>
-                  <Link to="/vision/station" className="hover:text-white">{t("footer.station")}</Link>
+                  <Link to="/vision/station" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">{t("footer.station")}</Link>
                 </li>
                 <li>
-                  <a href="https://github.com/openIndu/openIndu-cim" target="_blank" rel="noopener noreferrer" className="hover:text-white">{t("footer.edgeComputing")}</a>
+                  <a href="https://github.com/openIndu" target="_blank" rel="noopener noreferrer" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">{t("footer.edgeComputing")}</a>
                 </li>
                 <li>
-                  <Link to="/chat" className="hover:text-white inline-flex items-center gap-2">
-                    {t("footer.aiAssistantBot")}
-                    <span className="text-xs bg-blue-600 px-2 py-1 rounded">🇨🇳 ZH</span>
+                  <Link to="/chat" className="hover:text-white inline-flex flex-wrap items-center gap-x-2 gap-y-1 py-1.5 pr-3 min-h-[44px]">
+                    <span>{t("footer.aiAssistantBot")}</span>
+                    {locale === "en" && (
+                      <sup className="shrink-0 text-[10px] font-semibold tracking-wide text-sky-300" aria-label="Chinese only">ZH</sup>
+                    )}
                   </Link>
-                </li>
-              </ul>
-            </div>
-
-            {/* Community & Developers */}
-            <div className="flex flex-col items-start">
-              <h3 className="font-semibold text-white mb-4">{t("footer.communityDevelopers")}</h3>
-              <ul className="space-y-2 text-blue-100">
-                <li>
-                  <Link to="/developers" className="hover:text-white">{t("footer.developers")}</Link>
-                </li>
-                <li>
-                  <a href="https://github.com/openIndu" target="_blank" rel="noopener noreferrer" className="hover:text-white">{t("footer.github")}</a>
-                </li>
-                <li>
-                  <a href="https://gitee.com/openIndu" target="_blank" rel="noopener noreferrer" className="hover:text-white">{t("footer.gitee")}</a>
                 </li>
               </ul>
             </div>
@@ -419,16 +408,24 @@ export function Layout() {
             {/* Related platforms */}
             <div className="flex flex-col items-start">
               <h3 className="font-semibold text-white mb-4">{t("footer.relatedPlatforms")}</h3>
-              <ul className="space-y-2 text-blue-100">
+              <ul className="space-y-1 text-sky-100">
                 <li>
-                  <a href="https://monitor.openindu.com/status/service" target="_blank" rel="noopener noreferrer" className="hover:text-white">
+                  <a href="https://monitor.openindu.com/status/service" target="_blank" rel="noopener noreferrer" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">
                     {t("footer.serviceStatus")}
                   </a>
                 </li>
                 <li>
-                  <a href="https://admin.openindu.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white">
+                  <a href="https://admin.openindu.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">
                     {t("footer.communityAdmin")}
                   </a>
+                </li>
+                {/* Rehomed from the removed "Community & Developers" column so
+                    the code-hosting links stay reachable from the footer. */}
+                <li>
+                  <a href="https://github.com/openIndu" target="_blank" rel="noopener noreferrer" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">{t("footer.github")}</a>
+                </li>
+                <li>
+                  <a href="https://gitee.com/openIndu" target="_blank" rel="noopener noreferrer" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">{t("footer.gitee")}</a>
                 </li>
               </ul>
             </div>
@@ -436,55 +433,60 @@ export function Layout() {
             {/* Legal */}
             <div className="flex flex-col items-start">
               <h3 className="font-semibold text-white mb-4">{t("footer.legalAndPrivacy")}</h3>
-              <ul className="space-y-2 text-blue-100">
+              <ul className="space-y-1 text-sky-100">
                 <li>
                   {locale === "en" ? (
-                    <a href="/privacy" className="hover:text-white inline-flex items-center gap-2">
+                    <a href="/privacy" className="hover:text-white inline-flex flex-wrap items-center gap-x-2 gap-y-1 py-1.5 pr-3 min-h-[44px]">
                       {t("footer.privacyStatement")}
-                      <span className="text-xs bg-blue-600 px-2 py-1 rounded">🇨🇳 ZH</span>
+                      <sup className="shrink-0 text-[10px] font-semibold tracking-wide text-sky-300" aria-label="Chinese only">ZH</sup>
                     </a>
                   ) : (
-                    <Link to="/privacy" className="hover:text-white">{t("footer.privacyStatement")}</Link>
+                    <Link to="/privacy" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">{t("footer.privacyStatement")}</Link>
                   )}
                 </li>
                 <li>
                   {locale === "en" ? (
-                    <a href="/legal" className="hover:text-white inline-flex items-center gap-2">
+                    <a href="/legal" className="hover:text-white inline-flex flex-wrap items-center gap-x-2 gap-y-1 py-1.5 pr-3 min-h-[44px]">
                       {t("footer.legalNotice")}
-                      <span className="text-xs bg-blue-600 px-2 py-1 rounded">🇨🇳 ZH</span>
+                      <sup className="shrink-0 text-[10px] font-semibold tracking-wide text-sky-300" aria-label="Chinese only">ZH</sup>
                     </a>
                   ) : (
-                    <Link to="/legal" className="hover:text-white">{t("footer.legalNotice")}</Link>
+                    <Link to="/legal" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">{t("footer.legalNotice")}</Link>
                   )}
                 </li>
                 <li>
                   {locale === "en" ? (
-                    <a href="/cookies" className="hover:text-white inline-flex items-center gap-2">
+                    <a href="/cookies" className="hover:text-white inline-flex flex-wrap items-center gap-x-2 gap-y-1 py-1.5 pr-3 min-h-[44px]">
                       {t("footer.aboutCookies")}
-                      <span className="text-xs bg-blue-600 px-2 py-1 rounded">🇨🇳 ZH</span>
+                      <sup className="shrink-0 text-[10px] font-semibold tracking-wide text-sky-300" aria-label="Chinese only">ZH</sup>
                     </a>
                   ) : (
-                    <Link to="/cookies" className="hover:text-white">{t("footer.aboutCookies")}</Link>
+                    <Link to="/cookies" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">{t("footer.aboutCookies")}</Link>
                   )}
                 </li>
               </ul>
             </div>
 
-            {/* Language (footer column) */}
-            <div className="flex flex-col items-start">
-              <h3 className="font-semibold text-white mb-4">{t("language.label")}</h3>
-              <LanguageSwitcher variant="dark" />
-            </div>
-
           </nav>
 
-          {/* Copyright */}
-          <div className="border-t border-blue-800 mt-8 pt-8">
-            <p className="text-center text-blue-100 text-sm">{t("footer.copyright")}</p>
-            <p className="text-center text-blue-100 text-sm mt-2">
-              {`${t("footer.icpFiling")}: `}
-              <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">蜀ICP备2025160760号-1</a>
-            </p>
+          {/* Copyright + language.
+              The switcher used to be a seventh grid column, which squeezed every
+              link column to 146px — narrow enough that "Privacy Statement" and
+              its ZH marker wrapped, and "Community Admin" cleared it by 1px.
+              Moving it here leaves six tracks and 176px per column. */}
+          <div className="border-t border-sky-800 mt-8 pt-8">
+            <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
+              <div className="order-2 text-center sm:order-1 sm:text-left">
+                <p className="text-sky-100 text-sm">{t("footer.copyright", { date: __BUILD_DATE__ })}</p>
+                <p className="text-sky-100 text-sm mt-1">
+                  {`${t("footer.icpFiling")}: `}
+                  <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors inline-flex items-center py-1.5 pr-2 min-h-[44px]">蜀ICP备2025160760号-1</a>
+                </p>
+              </div>
+              <div className="order-1 sm:order-2">
+                <LanguageSwitcher variant="dark" />
+              </div>
+            </div>
           </div>
         </div>
       </footer>

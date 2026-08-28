@@ -12,7 +12,7 @@ export function NotFound() {
         </p>
         <Link
           to="/"
-          className="inline-flex items-center justify-center gap-2 rounded-lg bg-blue-600 px-6 py-3 font-medium text-white transition-colors hover:bg-blue-700"
+          className="inline-flex items-center justify-center gap-2 rounded-lg bg-sky-700 px-6 py-3 font-medium text-white transition-colors hover:bg-sky-800"
         >
           <Home className="h-5 w-5" />
           返回首页

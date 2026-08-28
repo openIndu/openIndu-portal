@@ -1,0 +1,76 @@
+{
+  "seo": {
+    "title": "工艺知识库｜openIndu 社区论坛",
+    "description": "覆盖面板显示、半导体、新能源、汽车电子与高端装备的工业工艺知识库：端到端工艺主链、现场做法与缺陷逆推，沉淀在 openIndu 论坛。"
+  },
+  "hero": {
+    "title": "工艺知识库",
+    "subtitle": "面板、半导体、新能源、汽车电子、高端装备五大行业的端到端工艺主链",
+    "tagline": "一线工程师分享真实经验 → 行业共同进步 → 良率提升、成本优化"
+  },
+  "industries": {
+    "heading": "行业工艺专栏",
+    "enterForum": "进入论坛",
+    "panel": {
+      "name": "面板显示工艺",
+      "description": "TFT-LCD 与 OLED 两条主链：基板 → Array/背板 → CF/蒸镀 → Cell → Module",
+      "topics": ["基板清洗", "对位曝光", "彩膜 BM/RGB", "蒸镀封装", "点灯与外观检测"]
+    },
+    "semiconductor": {
+      "name": "半导体工艺",
+      "description": "晶圆制造 → 晶圆测试 → 封装组装 → 成品测试与追溯",
+      "topics": ["薄膜与图形化", "量测与 SPC", "缺陷地图", "键合与塑封", "可靠性与出货"]
+    },
+    "newEnergy": {
+      "name": "新能源工艺",
+      "description": "锂电：制浆 → 极片 → 电芯 → 化成分容 → PACK；光伏：电池片 → 组件 → EL/IV",
+      "topics": ["制浆与涂布", "电芯装配", "化成老化分容", "模组 PACK", "EL/IV 检测"]
+    },
+    "automotive": {
+      "name": "汽车电子工艺",
+      "description": "PCBA → 控制器总成 → 刷写 → EOL 下线检测",
+      "topics": ["PCBA 贴装", "总成装配", "程序刷写", "EOL 测试", "质量溯源"]
+    },
+    "equipment": {
+      "name": "高端装备工艺",
+      "description": "工业机器人：部件 → 装配 → 标定 → FAT → 交付",
+      "topics": ["部件来料", "机械装配", "精度标定", "FAT 验收", "交付与文档"]
+    }
+  },
+  "benefits": {
+    "heading": "参与工艺知识库的价值",
+    "items": [
+      { "icon": "📋", "title": "真实案例分享", "description": "来自一线的工艺工程师分享实际生产中遇到的问题和解决方案" },
+      { "icon": "📊", "title": "参数库共享", "description": "工艺参数、温度曲线、时间设定等关键参数的众包库" },
+      { "icon": "🎯", "title": "最佳实践", "description": "跨企业、跨行业学习——电池企业的经验帮助面板企业优化" },
+      { "icon": "🔧", "title": "问题解决", "description": "遇到良率下降？论坛工艺讨论快速定位根本原因" },
+      { "icon": "💰", "title": "成本优化", "description": "分享降低成本、提升效率的工艺创新" },
+      { "icon": "⭐", "title": "行业认可", "description": "工艺实践获得同行认可，建立行业影响力" }
+    ]
+  },
+  "articles": {
+    "heading": "论坛工艺文章",
+    "viewAll": "进入完整工艺知识库",
+    "tftLcd": { "title": "面板工艺流程｜TFT-LCD：从玻璃基板到显示模组", "industry": "面板显示" },
+    "oled": { "title": "面板工艺流程｜OLED：从背板到封装、切割与显示模组", "industry": "面板显示" },
+    "wafer": { "title": "半导体工艺流程｜从硅晶圆到封装测试成品", "industry": "半导体" },
+    "battery": { "title": "电池工艺流程｜锂离子电芯到模组与 PACK", "industry": "新能源" },
+    "pv": { "title": "能源装备工艺流程｜晶硅光伏组件从电池片到 EL/IV 与出货", "industry": "新能源" },
+    "automotive": { "title": "汽车电子工艺流程｜从 PCBA 到控制器总成、刷写与 EOL", "industry": "汽车电子" },
+    "robot": { "title": "高端装备工艺流程｜工业机器人从部件到标定、FAT 与交付", "industry": "高端装备" }
+  },
+  "howItWorks": {
+    "heading": "如何贡献工艺知识",
+    "steps": [
+      { "title": "分享经验", "desc": "写下你在生产中的真实案例和解决方案" },
+      { "title": "讨论验证", "desc": "与其他工程师讨论、优化方案的可行性" },
+      { "title": "形成标准", "desc": "最佳实践逐步形成行业标准" },
+      { "title": "获得认可", "desc": "贡献者获得社区认可和职业影响力" }
+    ]
+  },
+  "cta": {
+    "heading": "加入工艺知识库社区",
+    "description": "分享你的工艺实践，学习行业最佳方案，与全球工程师一起推动工业进步",
+    "button": "进入论坛"
+  }
+}

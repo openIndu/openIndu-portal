@@ -1,0 +1,74 @@
+{
+  "seo": {
+    "title": "Architecture | openIndu Full-Stack Platform",
+    "description": "Understand openIndu's complete industrial automation stack: from domestic industrial SoCs to craftsmanship knowledge. An end-to-end solution for manufacturing."
+  },
+  "hero": {
+    "title": "The openIndu Full-Chain Architecture",
+    "subtitle": "From industrial silicon to craftsmanship knowledge — one chain across the whole manufacturing flow",
+    "formula": "Domestic industrial SoC + openEuler + openIndu-studio + three application layers + craftsmanship knowledge = a complete industrial automation OS"
+  },
+  "layers": {
+    "craftsmanship": {
+      "title": "Craftsmanship Knowledge Layer",
+      "titleEn": "Layer 4",
+      "description": "Forum process columns: end-to-end chains, shop-floor practice and defect reasoning for panels, semiconductors, new energy and more",
+      "benefits": ["Industry best practice", "Crowdsourced knowledge base", "Shared process parameters"]
+    },
+    "application": {
+      "title": "Application Layer",
+      "titleEn": "Layer 3",
+      "description": "Three directions working together: machine-vision inspection, edge data acquisition, and IIoT platform analytics",
+      "benefits": ["Vision positioning & inspection", "Real-time edge decisions", "Data-driven insight"]
+    },
+    "programming": {
+      "title": "Programming & Configuration Layer",
+      "titleEn": "Layer 2",
+      "description": "openIndu-studio: PLC programming, HMI configuration, PLC selection, BOM, circuit diagrams and cross-brand code generation",
+      "benefits": ["Multi-brand support", "Engineering automation", "Lower cost"]
+    },
+    "hardware": {
+      "title": "Hardware & OS Layer",
+      "titleEn": "Layer 1",
+      "description": "Domestic industrial SoC + the openEuler operating system: real-time control, industrial protocols, local edge decisions",
+      "benefits": ["Domestic and self-reliant", "Cost advantage", "Real-time and reliable"]
+    }
+  },
+  "interaction": {
+    "heading": "How the Layers Work Together",
+    "flowTitle": "📐 Engineering Flow",
+    "flowStep1Label": "Design",
+    "flowStep1": "Design the PLC logic, HMI screens and PLC selection once, inside openIndu-studio",
+    "flowStep2Label": "Generate",
+    "flowStep2": "Automatically emit cross-brand code for Siemens S7, Mitsubishi, Omron and others — plus BOM and circuit diagrams",
+    "flowStep3Label": "Deploy",
+    "flowStep3": "Deploy to a soft PLC on domestic silicon, or to the target hardware PLC",
+    "appsTitle": "👁️ Applications in Concert",
+    "appsLeftLabel": "Left — openIndu-vision (machine vision)",
+    "appsLeft": "OpenCV-based inspection and positioning, fed back to the PLC",
+    "appsCoreLabel": "Centre — openIndu-studio (programming & control)",
+    "appsCore": "Runs the PLC logic, consumes vision results, drives the actuators",
+    "appsRightLabel": "Right — openIndu-cim + platform (data acquisition)",
+    "appsRight": "Collects everything and reports it to the IIoT platform for analysis",
+    "loopTitle": "📊 The Data Loop",
+    "loop": "Live data → platform analysis → process bottleneck found → solution shared in the forum's process column → parameters tuned → yield improves"
+  },
+  "comparison": {
+    "heading": "Compared With Conventional Setups",
+    "colAspect": "Dimension",
+    "colTraditional": "Conventional approach",
+    "colOpenIndu": "openIndu full stack",
+    "rows": [
+      { "aspect": "Hardware cost", "traditional": "Expensive industrial PCs + proprietary systems", "openindu": "Domestic industrial SoC + open-source openEuler" },
+      { "aspect": "Programming cycle", "traditional": "Brand-specific programming → rewrite the code", "openindu": "Design once → generate code for every brand" },
+      { "aspect": "Application integration", "traditional": "Vision and IIoT each on their own → data silos", "openindu": "Three application layers in concert → a data-driven loop" },
+      { "aspect": "Craftsmanship knowledge", "traditional": "Every company works it out alone", "openindu": "A crowdsourced forum library → the industry improves together" },
+      { "aspect": "Vendor lock-in", "traditional": "Tied to a proprietary platform → costly upgrades", "openindu": "Apache 2.0 open source → fully self-determined" }
+    ]
+  },
+  "cta": {
+    "heading": "Ready to explore the full chain?",
+    "useCases": "View Industry Scenarios",
+    "studio": "Explore openIndu-studio"
+  }
+}

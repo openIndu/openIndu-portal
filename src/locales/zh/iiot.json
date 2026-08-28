@@ -17,7 +17,13 @@
   "intro": {
     "heading": "平台简介",
     "p1Prefix": "openIndu 是一个社区级工业互联网平台，专注于 3C 电子制造行业，覆盖从",
-    "p1Chain": ["边缘数据采集", "实时监控", "工艺管理", "产品追溯", "数据大屏"],
+    "p1Chain": [
+      "边缘数据采集",
+      "实时监控",
+      "工艺管理",
+      "产品追溯",
+      "数据大屏"
+    ],
     "p1Suffix": "的完整链路。",
     "p2Prefix": "平台由两部分组成：",
     "p2Strong1": "页面端",
@@ -37,7 +43,8 @@
         "JWT Token 双令牌认证（Access + Refresh）",
         "快速进入工作空间，一键直达核心功能",
         "细粒度权限控制，不同角色看到不同界面"
-      ]
+      ],
+      "subtitle": "智能登录 · 安全便捷"
     },
     "workbench": {
       "title": "工作台 · 全局一目了然",
@@ -50,7 +57,8 @@
         "最新告警：未恢复告警实时展示",
         "最近操作：审计日志追溯",
         "快捷入口：用户管理、角色管理、设备列表、数据大屏"
-      ]
+      ],
+      "subtitle": "工作台 · 全局概览一屏掌握"
     },
     "dashboard": {
       "title": "数据大屏 · 生产态势一屏掌控",
@@ -63,7 +71,8 @@
         "实时告警日志：异常事件即时推送",
         "工位不良率统计：各工位质量数据对比",
         "原料消耗监控：实时物料使用跟踪"
-      ]
+      ],
+      "subtitle": "数据看板 · 生产状态一屏尽览"
     },
     "deviceManagement": {
       "title": "设备管理 · 全生命周期管控",
@@ -76,7 +85,8 @@
         "关键参数：实时参数监控与历史追踪",
         "设备维护：维护计划与记录管理",
         "设备类型管理：自定义设备类型配置"
-      ]
+      ],
+      "subtitle": "设备管理 · 全生命周期管控"
     },
     "traceability": {
       "title": "产品追溯 · 从原料到成品全链路",
@@ -87,13 +97,19 @@
         "全链路追溯：所有工位、原材料、工艺参数完整记录",
         "工艺记录：进出站时间、操作员、设备、参数快照",
         "原料追溯：按批次追溯受影响的产品"
-      ]
+      ],
+      "subtitle": "产品追溯 · 从物料到成品"
     },
     "miniProgram": {
       "title": "支持微信小程序",
       "description": "移动端便捷操作，随时随地掌握生产动态。",
       "screenshotAlt": "微信小程序",
-      "details": ["微信小程序端查看设备状态与生产数据", "移动端告警推送与处理", "与 Web 端数据实时同步"]
+      "details": [
+        "微信小程序端查看设备状态与生产数据",
+        "移动端告警推送与处理",
+        "与 Web 端数据实时同步"
+      ],
+      "subtitle": "支持微信小程序"
     }
   },
   "architecture": {
@@ -101,28 +117,86 @@
     "subheading": "8 层微服务架构，从边缘设备到用户界面全栈覆盖",
     "diagramAlt": "openIndu 平台架构图",
     "layers": {
-      "webFrontend": { "name": "Web 前端", "tech": "Vue 3.5 + Element Plus + ECharts + Pinia", "desc": "现代化 SPA，RBAC 权限，数据可视化，多角色适配" },
-      "backend": { "name": "后端服务", "tech": "Spring Boot 3.5 + Java 21 + Spring Security", "desc": "RESTful API，JWT 双令牌，微服务架构" },
-      "edgeGateway": { "name": "边缘网关", "tech": "S7 / Modbus / FINS / MC 协议", "desc": "西门子 / 三菱 / 基恩士 / 欧姆龙 / 汇川 PLC 接入" },
-      "dataAcquisition": { "name": "数据采集", "tech": "FastAPI + Kafka + MQTT", "desc": "高吞吐量采集，UUID 认证，时序数据库" },
-      "businessDb": { "name": "业务数据库", "tech": "PostgreSQL 15.7", "desc": "用户、权限、工艺、追溯等业务数据" },
-      "timeseriesDb": { "name": "时序数据库", "tech": "TDengine 3.0", "desc": "设备状态与工艺历史时序数据存储" },
-      "cache": { "name": "缓存层", "tech": "Redis 7.2", "desc": "会话管理、权限缓存、实时数据" },
-      "messageBroker": { "name": "消息代理", "tech": "Mosquitto MQTT 5.0", "desc": "IoT 设备消息路由与分发" }
+      "webFrontend": {
+        "name": "Web 前端",
+        "tech": "Vue 3.5 + Element Plus + ECharts + Pinia",
+        "desc": "现代化 SPA，RBAC 权限，数据可视化，多角色适配"
+      },
+      "backend": {
+        "name": "后端服务",
+        "tech": "Spring Boot 3.5 + Java 21 + Spring Security",
+        "desc": "RESTful API，JWT 双令牌，微服务架构"
+      },
+      "edgeGateway": {
+        "name": "边缘网关",
+        "tech": "S7 / Modbus / FINS / MC 协议",
+        "desc": "西门子 / 三菱 / 基恩士 / 欧姆龙 / 汇川 PLC 接入"
+      },
+      "dataAcquisition": {
+        "name": "数据采集",
+        "tech": "FastAPI + Kafka + MQTT",
+        "desc": "高吞吐量采集，UUID 认证，时序数据库"
+      },
+      "businessDb": {
+        "name": "业务数据库",
+        "tech": "PostgreSQL 15.7",
+        "desc": "用户、权限、工艺、追溯等业务数据"
+      },
+      "timeseriesDb": {
+        "name": "时序数据库",
+        "tech": "TDengine 3.0",
+        "desc": "设备状态与工艺历史时序数据存储"
+      },
+      "cache": {
+        "name": "缓存层",
+        "tech": "Redis 7.2",
+        "desc": "会话管理、权限缓存、实时数据"
+      },
+      "messageBroker": {
+        "name": "消息代理",
+        "tech": "Mosquitto MQTT 5.0",
+        "desc": "IoT 设备消息路由与分发"
+      }
     }
   },
   "dataFlow": {
     "heading": "数据流向",
-    "chain": ["PLC设备", "边缘网关", "消息队列", "数据采集", "持久层", "后端服务", "前端应用"]
+    "chain": [
+      "PLC设备",
+      "边缘网关",
+      "消息队列",
+      "数据采集",
+      "持久层",
+      "后端服务",
+      "前端应用"
+    ]
   },
   "advantages": {
     "heading": "核心优势",
     "subheading": "为什么选择 openIndu 平台",
-    "industryFocus": { "title": "行业聚焦", "description": "专注 3C 电子制造行业，深度理解行业痛点与需求" },
-    "traceability": { "title": "完整追溯链", "description": "从原材料到成品的全链路产品追溯，确保品质可控" },
-    "frontend": { "title": "优秀前端体验", "description": "Vue 3 + Element Plus 构建的现代化 Web 应用" },
-    "deviceCompat": { "title": "设备兼容广泛", "description": "支持西门子、三菱、欧姆龙、基恩士、汇川等主流 PLC 协议" },
-    "cloudEdge": { "title": "云边协同", "description": "边缘网关 + 云端平台的协同架构，灵活部署" },
-    "community": { "title": "社区驱动", "description": "开源社区共建，持续迭代优化，代码公开透明" }
+    "industryFocus": {
+      "title": "行业聚焦",
+      "description": "专注 3C 电子制造行业，深度理解行业痛点与需求"
+    },
+    "traceability": {
+      "title": "完整追溯链",
+      "description": "从原材料到成品的全链路产品追溯，确保品质可控"
+    },
+    "frontend": {
+      "title": "优秀前端体验",
+      "description": "Vue 3 + Element Plus 构建的现代化 Web 应用"
+    },
+    "deviceCompat": {
+      "title": "设备兼容广泛",
+      "description": "支持西门子、三菱、欧姆龙、基恩士、汇川等主流 PLC 协议"
+    },
+    "cloudEdge": {
+      "title": "云边协同",
+      "description": "边缘网关 + 云端平台的协同架构，灵活部署"
+    },
+    "community": {
+      "title": "社区驱动",
+      "description": "开源社区共建，持续迭代优化，代码公开透明"
+    }
   }
 }

@@ -4,19 +4,19 @@
     "architecture": "全栈架构",
     "useCases": "行业场景",
     "craftsmanship": "工艺知识",
-    "products": "产品",
+    "products": "项目",
     "about": "关于",
     "developers": "开发者",
     "team": "团队",
     "downloads": "下载中心",
     "motionControl": "运动控制",
     "overview": "概览",
-    "studio": "openindu-studio",
+    "studio": "openIndu-studio",
     "studioPlatform": "openIndu-studio",
-    "vision": "openindu-vision",
-    "cim": "openindu-cim",
-    "platform": "openindu-platform",
-    "station": "openindu-station",
+    "vision": "openIndu-vision",
+    "cim": "openIndu-cim",
+    "platform": "openIndu-platform",
+    "station": "openIndu-station",
     "iiotPlatform": "工业互联网",
     "edgeComputing": "openIndu-cim",
     "forum": "论坛",
@@ -34,7 +34,7 @@
     "admin": "管理员"
   },
   "footer": {
-    "description": "从硬件到工艺的垂直整合平台。RK3588 + openEuler → openindu-studio → 工业视觉/边缘/IIoT → 工艺知识库。国产芯片、全链路开源、跨品牌支持、数据驱动闭环。",
+    "description": "从硬件到工艺的垂直整合平台。国产工控芯片 + openEuler → openIndu-studio → 工业视觉/边缘/IIoT → 工艺知识库。国产芯片、全链路开源、跨品牌支持、数据驱动闭环。",
     "communityDevelopers": "社区与开发者",
     "developers": "开发者",
     "github": "GitHub",
@@ -48,7 +48,7 @@
     "forum": "论坛",
     "coreServices": "核心服务",
     "studioPlatform": "openIndu-studio",
-    "station": "openindu-station",
+    "station": "openIndu-station",
     "edgeComputing": "openIndu-cim",
     "aiAssistantBot": "智能咨询机器人",
     "relatedPlatforms": "相关平台",
@@ -58,11 +58,11 @@
     "privacyStatement": "隐私声明",
     "legalNotice": "法律声明",
     "aboutCookies": "关于 Cookies",
-    "copyright": "© 2026 openIndu Community. 最后更新: 2026-07-04",
+    "copyright": "© 2026 openIndu Community. 最后更新: {{date}}",
     "icpFiling": "备案号"
   },
   "language": {
-    "label": "语言 Language",
+    "label": "语言",
     "zh": "简体中文",
     "en": "English",
     "zhShort": "中文",
@@ -71,6 +71,79 @@
   },
   "a11y": {
     "mobileMenuOpen": "打开导航菜单",
-    "mobileMenuClose": "关闭导航菜单"
+    "mobileMenuClose": "关闭导航菜单",
+    "skipToContent": "跳到主要内容"
+  },
+  "edgeComputing": {
+    "description": "工业边缘计算平台",
+    "subtitle": "工业边缘计算平台，用于实时控制、数据处理和分布式自动化",
+    "github": "在 GitHub 上查看",
+    "iotPlatform": "工业物联网平台",
+    "realtimeTitle": "实时控制",
+    "realtimeDesc": "即时响应设备信号，无云延迟",
+    "securityTitle": "数据安全",
+    "securityDesc": "本地化数据处理，敏感制造数据存储本地",
+    "connectTitle": "协议支持",
+    "connectDesc": "多协议支持：Modbus、EtherCAT、OPC-UA、CANopen",
+    "perfTitle": "性能",
+    "perfDesc": "低延迟边缘计算，适合关键自动化应用",
+    "capabilities": "核心能力",
+    "capabilitiesDesc": "边缘自动化所需的一切",
+    "useCases": "使用场景",
+    "useCase1": "分布式 PLC 网络",
+    "useCase1Desc": "跨生产设施连接多个边缘节点，集中管理",
+    "useCase2": "实时数据处理",
+    "useCase2Desc": "在边缘处理传感器数据，汇总到云进行分析和历史数据分析",
+    "useCase3": "工业协议网关",
+    "useCase3Desc": "多协议设备统一接口：Modbus、EtherCAT、CANopen、OPC-UA",
+    "useCase4": "离线优先弹性",
+    "useCase4Desc": "连接中断时继续运行，恢复后同步数据",
+    "cta": "立即部署 openIndu-cim",
+    "ctaDesc": "开始构建边缘驱动的自动化。开源、Apache 2.0、无厂商锁定。",
+    "getStarted": "在 GitHub 上开始",
+    "learnMore": "了解 openIndu"
+  },
+  "forumPage": {
+    "seoDescription": "加入 openIndu 社区论坛，讨论工业自动化、分享经验、协作贡献开源项目。",
+    "badge": "openIndu 社区论坛",
+    "subtitle": "加入全球开发者社区，讨论工业自动化技术、分享经验、协作贡献",
+    "enterForum": "进入论坛",
+    "githubDiscussions": "GitHub 讨论",
+    "categoriesHeading": "论坛主要板块",
+    "categoriesSubheading": "三大核心主题，汇聚全球工业自动化经验",
+    "hotTopics": "热门话题",
+    "industrialControl": {
+      "title": "工控",
+      "description": "讨论 PLC 硬件、软件、通信总线（EtherCAT、CANopen 等）和工控系统架构。分享多品牌 PLC 的选型、集成和工业控制网络方案。",
+      "topics": [
+        "PLC 硬件/软件",
+        "EtherCAT 总线",
+        "通信协议",
+        "系统架构"
+      ]
+    },
+    "automation": {
+      "title": "自动化",
+      "description": "分享 PLC 编程、HMI 编程、工业视觉、运动控制等自动化应用。讨论各类自动化设备集成、工程规范和最佳实践。",
+      "topics": [
+        "PLC 编程",
+        "HMI 编程",
+        "工业视觉",
+        "运动控制"
+      ]
+    },
+    "process": {
+      "title": "工艺",
+      "description": "分享工业工艺流程优化、工艺参数设定、缺陷分析和良率提升经验。讨论工艺知识库建设和工程方法论。",
+      "topics": [
+        "工艺流程",
+        "参数优化",
+        "良率分析",
+        "知识库"
+      ]
+    },
+    "ctaHeading": "准备好加入社区了吗？",
+    "ctaDescription": "无论你是提问者、解答者还是贡献者，论坛都欢迎你的参与。一起打造开源工业自动化生态。",
+    "ctaButton": "前往论坛 →"
   }
 }

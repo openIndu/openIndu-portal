@@ -19,7 +19,7 @@ openIndu is a **vertically-integrated, end-to-end industrial automation operatin
 └────────────────┴─────────────────┴──────────────────────────┘
               ↑ Data ↑  Commands ↓  Results ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 2️⃣ Programming & Configuration Layer (openindu-studio)     │
+│ 2️⃣ Programming & Configuration Layer (openIndu-studio)     │
 │                                                              │
 │  • PLC Programming (Ladder Logic, Function Blocks)         │
 │  • HMI Configuration (Touchscreen, Dashboard)              │
@@ -58,7 +58,7 @@ openIndu is a **vertically-integrated, end-to-end industrial automation operatin
 
 ---
 
-### Layer 2: Programming & Configuration (openindu-studio)
+### Layer 2: Programming & Configuration (openIndu-studio)
 
 **Core**: Design once, deploy to any brand
 
@@ -98,7 +98,7 @@ Edge computing + IIoT data platform
 - **Platform** (Cloud): Time-series database, analytics dashboard, traceability
 - **Data loop**: Capture → Analyze → Alert → Optimize
 
-#### 🔗 **Center: openindu-studio** (PLC编程)
+#### 🔗 **Center: openIndu-studio** (PLC编程)
 
 Orchestrates vision feedback and data sending
 
@@ -162,13 +162,13 @@ Competitors typically own only 1-2 layers:
 ```
 Manufacturer defines process parameters (工艺参数)
          ↓
-openindu-studio converts to PLC code (跨品牌生成)
+openIndu-studio converts to PLC code (跨品牌生成)
          ↓
 RK3588 SoftPLC executes in real-time (硬件执行)
          ↓
 openindu-vision checks quality (工业检测)
          ↓
-openindu-cim collects data at edge (边缘采集)
+openIndu-cim collects data at edge (边缘采集)
          ↓
 openIndu-platform analyzes trends (数据分析)
          ↓
@@ -241,8 +241,8 @@ Manufacturer updates parameters (持续改进)
 
 ### Current (Stable)
 
-- ✅ openindu-studio (IDE + code generation)
-- ✅ openindu-station (C# station control app)
+- ✅ openIndu-studio (IDE + code generation)
+- ✅ openIndu-station (C# station control app)
 - ✅ openIndu-platform (IIoT data + dashboards)
 - ✅ openIndu-cim (Edge gateway)
 - ✅ Community forum (basic)

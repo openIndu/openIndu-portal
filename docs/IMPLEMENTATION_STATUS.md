@@ -115,10 +115,10 @@
 ```json
 {
   "nav": {
-    "studio": "openindu-studio",
+    "studio": "openIndu-studio",
     "vision": "openindu-vision",
-    "cim": "openindu-cim",
-    "platform": "openindu-platform"
+    "cim": "openIndu-cim",
+    "platform": "openIndu-platform"
   },
   "footer": {
     "communityDevelopers": "社区与开发者",

@@ -50,7 +50,7 @@ const routeBreadcrumbs: Record<string, BreadcrumbItem[]> = {
   "/vision/station": [
     { label: "Home", href: "/" },
     { label: "Industrial Vision", href: "/vision" },
-    { label: "openindu-station", current: true }
+    { label: "openIndu-station", current: true }
   ],
   "/iiot-platform": [],
   "/resources": [],
@@ -88,12 +88,12 @@ export function Breadcrumb() {
               {item.href ? (
                 <Link
                   to={item.href}
-                  className="hover:text-blue-600 transition-colors"
+                  className="hover:text-sky-700 transition-colors"
                 >
                   {item.label}
                 </Link>
               ) : (
-                <span className="text-blue-600 font-medium">
+                <span className="text-sky-700 font-medium">
                   {item.label}
                 </span>
               )}

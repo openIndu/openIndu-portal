@@ -1,0 +1,47 @@
+{
+  "seo": {
+    "title": "Developers | openIndu Community",
+    "description": "Get started with openIndu development: setup guides, API documentation, contribution guidelines and examples for building with openIndu."
+  },
+  "hero": {
+    "badge": "Developer Guide",
+    "title": "Build with openIndu",
+    "subtitle": "Everything you need to develop with, integrate, and contribute to openIndu"
+  },
+  "quickStart": {
+    "heading": "Quick Start (5 minutes)",
+    "learnMore": "Learn more",
+    "step1Title": "Clone the repository",
+    "step1Desc": "Get the latest code from GitHub",
+    "step2Title": "Read the README",
+    "step2Desc": "Understand the project structure and setup",
+    "step3Title": "Install dependencies",
+    "step3Desc": "npm ci && npm run dev",
+    "step4Title": "Make your first contribution",
+    "step4Desc": "Check CONTRIBUTING.md for the guidelines"
+  },
+  "resources": {
+    "heading": "Developer Resources",
+    "view": "View",
+    "architectureTitle": "Architecture Overview",
+    "architectureDesc": "Understand the system design",
+    "apiTitle": "API Documentation",
+    "apiDesc": "Backend API reference",
+    "setupTitle": "Development Setup",
+    "setupDesc": "Local dev environment guide",
+    "contributingTitle": "Contributing Guide",
+    "contributingDesc": "How to submit PRs and contribute"
+  },
+  "projects": {
+    "heading": "Three Core Projects to Contribute To",
+    "explore": "Explore",
+    "studioDesc": "AI-assisted industrial control development tools. Java/Spring Boot backend, React frontend.",
+    "platformDesc": "Industrial IoT platform for data collection, monitoring and analysis. Python FastAPI.",
+    "stationDesc": "C# station control application for motion, vision and industrial automation."
+  },
+  "cta": {
+    "heading": "Ready to contribute?",
+    "description": "Contributions don't have to be code. Documentation, examples, brand mappings and bug reports all help the community grow.",
+    "button": "View repositories on GitHub"
+  }
+}

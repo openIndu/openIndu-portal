@@ -1,0 +1,74 @@
+{
+  "seo": {
+    "title": "全栈架构｜openIndu 全链路平台",
+    "description": "了解 openIndu 完整的工业自动化技术栈：从国产工控芯片到工艺知识，端到端打通制造全流程。"
+  },
+  "hero": {
+    "title": "openIndu 全链路架构",
+    "subtitle": "从工控芯片到工艺知识，打通工业制造全流程",
+    "formula": "国产工控芯片 + openEuler + openIndu-studio + 三层应用 + 工艺知识 = 完整工业自动化操作系统"
+  },
+  "layers": {
+    "craftsmanship": {
+      "title": "工艺知识层",
+      "titleEn": "Craftsmanship Layer",
+      "description": "论坛工艺专栏：面板、芯片、新能源等行业的工艺主链、现场做法与缺陷逆推",
+      "benefits": ["行业最佳实践", "众包知识库", "工艺参数共享"]
+    },
+    "application": {
+      "title": "应用层",
+      "titleEn": "Application Layer",
+      "description": "三个方向协同：工业视觉检测、数据采集边缘计算、IIoT 平台分析",
+      "benefits": ["工业视觉定位检测", "边缘实时决策", "数据驱动洞察"]
+    },
+    "programming": {
+      "title": "编程与组态层",
+      "titleEn": "Programming & Configuration",
+      "description": "openIndu-studio：PLC 编程、HMI 组态、PLC 选型、BOM 清单、电路图绘制、跨品牌代码生成",
+      "benefits": ["多品牌支持", "工程自动化", "成本降低"]
+    },
+    "hardware": {
+      "title": "硬件与 OS 层",
+      "titleEn": "Hardware & OS Layer",
+      "description": "国产工控芯片 + openEuler 国产操作系统：实时控制、工业协议、边缘本地决策",
+      "benefits": ["国产可控", "成本优势", "实时可靠"]
+    }
+  },
+  "interaction": {
+    "heading": "层级如何协同工作",
+    "flowTitle": "📐 工程流程",
+    "flowStep1Label": "设计阶段",
+    "flowStep1": "在 openIndu-studio 中一次性设计 PLC 逻辑、HMI 界面、选择 PLC 型号",
+    "flowStep2Label": "生成阶段",
+    "flowStep2": "自动生成西门子 S7、三菱、欧姆龙等跨品牌代码 + BOM 清单 + 电路图",
+    "flowStep3Label": "部署阶段",
+    "flowStep3": "代码部署到国产芯片软 PLC 或目标硬件 PLC",
+    "appsTitle": "👁️ 应用协同",
+    "appsLeftLabel": "左翼 - openIndu-vision（工业视觉）",
+    "appsLeft": "基于 OpenCV 的检测定位，反馈给 PLC",
+    "appsCoreLabel": "核心 - openIndu-studio（编程控制）",
+    "appsCore": "PLC 逻辑执行，接收视觉信息，驱动执行机构",
+    "appsRightLabel": "右翼 - openIndu-cim + platform（数据采集）",
+    "appsRight": "采集所有数据上报到 IIoT 平台进行分析",
+    "loopTitle": "📊 数据闭环",
+    "loop": "实时数据 → Platform 分析 → 发现工艺瓶颈 → 论坛工艺专栏分享解决方案 → 优化生产参数 → 良率提升"
+  },
+  "comparison": {
+    "heading": "与传统方案对标",
+    "colAspect": "维度",
+    "colTraditional": "传统方案",
+    "colOpenIndu": "openIndu 全栈",
+    "rows": [
+      { "aspect": "硬件成本", "traditional": "昂贵的工业 PC + 专有系统", "openindu": "国产工控芯片 + 开源 openEuler" },
+      { "aspect": "编程周期", "traditional": "每个品牌专属编程 → 代码重写", "openindu": "设计一次 → 跨品牌代码自动生成" },
+      { "aspect": "应用集成", "traditional": "视觉/IIoT 各自为政 → 数据孤岛", "openindu": "三层应用协同 → 数据驱动闭环" },
+      { "aspect": "工艺知识", "traditional": "各企业各自探索", "openindu": "论坛众包工艺库 → 行业共同进步" },
+      { "aspect": "厂商锁定", "traditional": "依赖专有平台 → 升级昂贵", "openindu": "Apache 2.0 开源 → 完全自主" }
+    ]
+  },
+  "cta": {
+    "heading": "准备好探索全链路了吗？",
+    "useCases": "查看行业场景方案",
+    "studio": "查看 openIndu-studio"
+  }
+}

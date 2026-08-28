@@ -81,7 +81,7 @@ export function Register() {
 
   return (
     <section className="bg-gradient-to-br from-blue-50 via-white to-cyan-50 px-4 py-16 sm:py-24">
-      <Card className="mx-auto max-w-md border-blue-100 shadow-xl">
+      <Card className="mx-auto max-w-md border-sky-100 shadow-xl">
         <CardHeader className="text-center">
           <CardTitle>注册 openIndu社区账号</CardTitle>
           <CardDescription>手机号验证后即可注册成功</CardDescription>
@@ -123,17 +123,17 @@ export function Register() {
                 className="mt-1"
               />
               <span>
-                我已阅读并同意 <Link to="/privacy" className="font-medium text-blue-600 hover:text-blue-700">openIndu社区隐私声明</Link>，了解平台对个人信息的处理方式。
+                我已阅读并同意 <Link to="/privacy" className="font-medium text-sky-700 hover:text-sky-800">openIndu社区隐私声明</Link>，了解平台对个人信息的处理方式。
               </span>
             </label>
             {message && <p className="rounded-lg bg-green-50 px-3 py-2 text-sm text-green-700">{message}</p>}
             {error && <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{error}</p>}
-            <Button type="submit" disabled={!canRegister} className="w-full bg-blue-600 hover:bg-[#1a3a6d]">
+            <Button type="submit" disabled={!canRegister} className="w-full bg-sky-700 hover:bg-[#085A90]">
               {submitting ? <Loader2 className="animate-spin" /> : "注册并登录"}
             </Button>
           </form>
           <p className="mt-6 text-center text-sm text-gray-600">
-            已有账号？ <Link to="/login" className="font-medium text-blue-600 hover:text-blue-700">返回登录</Link>
+            已有账号？ <Link to="/login" className="font-medium text-sky-700 hover:text-sky-800">返回登录</Link>
           </p>
         </CardContent>
       </Card>

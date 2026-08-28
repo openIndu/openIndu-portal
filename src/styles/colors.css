@@ -1,15 +1,21 @@
 /* openIndu Design System - Color Tokens */
 
 :root {
-  /* Primary Colors */
-  --color-primary: #002FA7;          /* 深蓝 - 信任、专业 */
-  --color-primary-dark: #001a66;     /* 深蓝加深 - hover状态 */
-  --color-primary-light: #f0f4ff;    /* 深蓝浅 - 背景 */
+  /* Primary Colors — sky blue.
+   * Every value here is chosen against WCAG AA, not by eye:
+   *   #0B72B5 carries white text at 5.14:1 (buttons, filled bands)
+   *   and reads at 5.14:1 as text on white (links, accents).
+   * Tailwind's sky-600 (#0284C7) is the prettier hue but only manages
+   * 4.10:1 with white, so it is reserved for large display text and
+   * graphics — never for body copy or button labels. */
+  --color-primary: #0B72B5;          /* 天蓝 - 主色，填充与链接 */
+  --color-primary-dark: #085A90;     /* 天蓝加深 - hover */
+  --color-primary-light: #EFF8FE;    /* 天蓝浅 - 背景洗色 */
 
   /* Secondary Colors */
-  --color-secondary: #5383FE;        /* 亮蓝 - 交互、链接 */
-  --color-secondary-dark: #3d5ecc;   /* 亮蓝加深 */
-  --color-secondary-light: #e3f2fd;  /* 亮蓝浅 */
+  --color-secondary: #0B72B5;        /* 链接色，与主色同值以保证 AA */
+  --color-secondary-dark: #085A90;
+  --color-secondary-light: #E0F2FE;  /* sky-100 */
 
   /* Accent Colors */
   --color-accent: #FFA816;           /* 橙色 - 重点、警告 */
@@ -23,7 +29,12 @@
   --color-gray-200: #E8EEF5;
   --color-gray-300: #D8E0EB;
   --color-gray-400: #C0C8D8;
-  --color-gray-500: #999999;
+  /* #999999 here hijacked Tailwind's own `text-gray-500` utility app-wide
+   * (Tailwind v4 reads --color-* as theme tokens), and #999 on white is only
+   * 2.85:1 — every `text-gray-500` label silently failed WCAG AA. Restored to
+   * Tailwind's stock gray-500 (4.83:1). For disabled text use
+   * --color-text-disabled instead. */
+  --color-gray-500: #6B7280;
   --color-gray-600: #666666;
   --color-gray-700: #333333;
   --color-gray-900: #111111;
@@ -89,62 +100,71 @@
   --transition-slow: 500ms ease-in-out;
 }
 
-/* CSS Reset for semantic colors */
-body {
-  background-color: var(--color-background);
-  color: var(--color-text-primary);
-  font-family: var(--font-family);
+/*
+ * CSS Reset for semantic colors — wrapped in Tailwind's `base` layer.
+ *
+ * ROOT CAUSE: these element selectors used to sit OUTSIDE any @layer. Per the
+ * CSS Cascade Layers spec unlayered CSS always beats layered CSS regardless of
+ * specificity, so every Tailwind `text-*` utility on an <h1-h6>/<p>/<a> lost to
+ * the hard colours below. Additionally a rule that directly matches an element
+ * beats an inherited value, so hard-coding colour on headings defeated
+ * `text-white` on any dark section wrapper — leave colour to inheritance.
+ */
+@layer base {
+  body {
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+    font-family: var(--font-family);
+  }
+
+  h1 {
+    font-size: var(--font-size-h1);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+  }
+
+  h2 {
+    font-size: var(--font-size-h2);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-normal);
+  }
+
+  h3 {
+    font-size: var(--font-size-h3);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-normal);
+  }
+
+  h4, h5, h6 {
+    font-weight: var(--font-weight-semibold);
+  }
+
+  p {
+    font-size: var(--font-size-body);
+    line-height: var(--line-height-relaxed);
+  }
+
+  a {
+    color: var(--color-secondary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  a:hover {
+    color: var(--color-primary);
+  }
+
+  button {
+    font-family: var(--font-family);
+    font-weight: var(--font-weight-medium);
+    transition: all var(--transition-fast);
+  }
 }
 
-h1 {
-  font-size: var(--font-size-h1);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-tight);
-  color: var(--color-text-primary);
-}
-
-h2 {
-  font-size: var(--font-size-h2);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-normal);
-  color: var(--color-text-primary);
-}
-
-h3 {
-  font-size: var(--font-size-h3);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-normal);
-  color: var(--color-text-primary);
-}
-
-h4, h5, h6 {
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-primary);
-}
-
-p {
-  font-size: var(--font-size-body);
-  line-height: var(--line-height-relaxed);
-  color: var(--color-text-primary);
-}
-
-a {
-  color: var(--color-secondary);
-  text-decoration: none;
-  transition: color var(--transition-fast);
-}
-
-a:hover {
-  color: var(--color-primary);
-}
-
-button {
-  font-family: var(--font-family);
-  font-weight: var(--font-weight-medium);
-  transition: all var(--transition-fast);
-}
-
-/* Button Variants */
+/* Same unlayered-CSS problem as above — component classes and the bare
+ * input/textarea/select selectors below live in `@layer components` so any
+ * Tailwind utility can still override them. */
+@layer components {
 .btn-primary {
   background-color: var(--color-primary);
   color: var(--color-white);
@@ -251,4 +271,5 @@ input:focus, textarea:focus, select:focus {
 .badge-error {
   background-color: #fee;
   color: var(--color-error);
+}
 }

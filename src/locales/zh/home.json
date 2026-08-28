@@ -5,12 +5,14 @@
     "keywords": "openIndu,工业自动化,开源,PLC,HMI,跨品牌,电气设计,BOM,IO地址表,工业互联网,PLC4X,OEE,良率分析,非标自动化"
   },
   "hero": {
-    "badge": "Apache-2.0 · 开源 · 开放 · 协作",
+    "badge": "Apache-2.0 开源 · 国产芯片 + 国产 OS · 自主可控",
     "titleLine1": "一栈贯通，开放智造",
     "titleLine2": "工业自动化的端到端开源操作系统",
-    "subtitle": "从工艺参数到产线数据，一个栈打通。任意品牌 PLC，全部开源。",
+    "subtitle": "国产工控芯片 + openEuler 国产操作系统 + 全栈开源工具链。从硅到工艺知识，四层一贯到底，没有一个闭源环节。",
     "ctaStudio": "了解 openIndu-studio",
-    "ctaSolutions": "查看解决方案"
+    "ctaSolutions": "查看解决方案",
+    "accent": "国产芯片筑基，全链路开源",
+    "chain": "国产工控芯片 + openEuler → openIndu-studio → 工业视觉/边缘/IIoT → 工艺知识"
   },
   "products": {
     "heading": "三大核心产品",
@@ -35,5 +37,59 @@
     "learnPlatform": "了解平台",
     "wechatHeading": "微信扫码关注公众号",
     "wechatAlt": "openIndu 微信公众号二维码"
+  },
+  "stack": {
+    "view": "查看 →",
+    "learn": "了解 →",
+    "l4Title": "工艺知识库 (Craftsmanship)",
+    "l4Desc": "论坛工艺专栏：面板、芯片、新能源",
+    "l3Vision": "工业视觉",
+    "l3VisionDesc": "openIndu-vision",
+    "l3Studio": "编程组态",
+    "l3StudioDesc": "openIndu-studio",
+    "l3Data": "数据采集",
+    "l3DataDesc": "openIndu-cim 和 openIndu-platform",
+    "l2Title": "编程与组态层 (Programming)",
+    "l2Desc": "PLC编程、HMI、选型、BOM、电路图、跨品牌代码生成",
+    "l1Title": "硬件与 OS 层 (Foundation)",
+    "l1Desc": "国产工控芯片 + openEuler（国产操作系统）",
+    "ctaArchitecture": "理解全栈架构",
+    "ctaUseCases": "查看行业场景"
+  },
+  "steps": {
+    "heading": "三步掌握 openIndu",
+    "subheading": "从理解全栈架构，到选择适合的产品，openIndu 帮你快速上手",
+    "s1Title": "理解全栈架构",
+    "s1Desc": "4 层从硬件到工艺知识，掌握 openIndu 如何打通工业自动化全流程",
+    "s1Cta": "深入了解",
+    "s2Title": "选择行业场景",
+    "s2Desc": "面板、芯片、新能源三条工艺主链的完整解决方案与工程实践",
+    "s2Cta": "查看场景",
+    "s3Title": "选择产品工具",
+    "s3Desc": "根据场景选择运动控制、工业视觉或 IIoT 平台",
+    "motionControl": "运动控制",
+    "vision": "工业视觉",
+    "iiot": "工业互联网"
+  },
+  "knowledge": {
+    "heading": "工艺知识众包库",
+    "description": "openIndu 不仅提供工具，更重要的是汇聚全球制造工程师的工艺知识。论坛中共享的每一条参数、每一个案例，都是生产线实战经验的积累。",
+    "item1Title": "电池工艺",
+    "item1Desc": "卷绕速度、焊接温度、良率优化",
+    "item2Title": "PCB 工艺",
+    "item2Desc": "回流曲线、贴片精度、不良对策",
+    "item3Title": "芯片与汽车工艺",
+    "item3Desc": "键合参数、焊接标准、质量溯源",
+    "cta": "了解工艺知识库"
+  },
+  "openSource": {
+    "heading": "完全开源，欢迎参与",
+    "description": "openIndu 所有代码都在 GitHub 和 Gitee 开源。无论是提交代码、分享工艺参数，还是参与讨论，每一个贡献都推动工业自动化向前发展。",
+    "item1Title": "代码贡献",
+    "item1Desc": "openIndu-studio、platform、vision 等核心项目",
+    "item2Title": "知识分享",
+    "item2Desc": "论坛讨论、工艺参数、经验教训",
+    "item3Title": "协议扩展",
+    "item3Desc": "基于 Apache PLC4X 添加工业协议支持"
   }
 }

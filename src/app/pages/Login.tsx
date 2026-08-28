@@ -116,7 +116,7 @@ export function Login() {
         keywords={t("seo.keywords")}
         canonicalPath="/login"
       />
-      <Card className="mx-auto max-w-md border-blue-100 shadow-xl">
+      <Card className="mx-auto max-w-md border-sky-100 shadow-xl">
         <CardHeader className="text-center">
           <CardTitle>{t("title")}</CardTitle>
           <CardDescription className="space-y-1">
@@ -161,12 +161,12 @@ export function Login() {
                 className="mt-1 h-5 w-5 shrink-0"
               />
               <span>
-                {t("privacyPrefix")}<Link to="/privacy" className="font-medium text-blue-600 hover:text-blue-700">{t("privacyLinkText")}</Link>{t("privacySuffix")}
+                {t("privacyPrefix")}<Link to="/privacy" className="font-medium text-sky-700 hover:text-sky-800">{t("privacyLinkText")}</Link>{t("privacySuffix")}
               </span>
             </label>
             {message && <p className="rounded-lg bg-green-50 px-3 py-2 text-sm text-green-700">{message}</p>}
             {error && <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{error}</p>}
-            <Button type="submit" disabled={!canSubmit} className="w-full bg-blue-600 hover:bg-[#1a3a6d]">
+            <Button type="submit" disabled={!canSubmit} className="w-full bg-sky-700 hover:bg-[#085A90]">
               {submitting ? <Loader2 className="animate-spin" /> : t("submit")}
             </Button>
           </form>

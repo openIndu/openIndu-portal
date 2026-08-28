@@ -1,0 +1,53 @@
+{
+  "seo": {
+    "title": "团队｜openIndu 社区",
+    "description": "了解 openIndu 的维护方向、开源仓库与参与方式。"
+  },
+  "hero": {
+    "title": "社区与维护者",
+    "subtitle": "openIndu 由社区维护；社区规范、协议适配与流程工具已开源，讨论在论坛公开进行"
+  },
+  "areas": {
+    "heading": "维护方向",
+    "subheading": "按仓库划分的维护范围，覆盖门户所介绍的各个方向",
+    "studio": {
+      "name": "编程与组态",
+      "description": "openIndu-studio：PLC 编程、HMI 组态、选型与跨品牌代码生成"
+    },
+    "vision": {
+      "name": "工业视觉",
+      "description": "openIndu-vision：基于 OpenCV 的检测与定位"
+    },
+    "platform": {
+      "name": "工业互联网",
+      "description": "openIndu-platform 与 openIndu-cim：数据采集、边缘计算与产线分析"
+    },
+    "portal": {
+      "name": "社区门户",
+      "description": "openIndu-portal：本站与社区文档"
+    }
+  },
+  "community": {
+    "heading": "社区构成",
+    "subheading": "openIndu 由全球的贡献者、维护者与行业顾问共同推动",
+    "item1": "GitHub / Gitee 上的代码贡献者",
+    "item2": "论坛版主与行业顾问",
+    "item3": "分享工艺经验的一线工程师",
+    "joinPrompt": "想一起参与？",
+    "joinCta": "在 GitHub 上贡献"
+  },
+  "contact": {
+    "heading": "联系我们",
+    "description": "有问题或希望合作？可以通过下面任一渠道找到社区。",
+    "email": "邮件"
+  },
+  "repos": {
+    "heading": "公开仓库",
+    "subheading": "以下是 openIndu 组织当前公开的仓库；产品仓库尚未开放，可关注组织主页。",
+    "orgCta": "查看组织主页",
+    "community": "社区指南与贡献规范",
+    "openplcRuntime": "OpenPLC Runtime v4，运行 OpenPLC 构建的程序",
+    "plc4x": "PLC4X 工业物联网协议适配器",
+    "controlTower": "社区研发流程控制塔"
+  }
+}

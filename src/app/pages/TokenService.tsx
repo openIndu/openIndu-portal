@@ -16,7 +16,7 @@ export function TokenService() {
   const { t } = useTranslation("infrastructure");
 
   return (
-    <div className="py-12">
+    <div>
       <SEO
         title={t("seo.title")}
         description={t("seo.description")}
@@ -24,10 +24,10 @@ export function TokenService() {
         canonicalPath="/infrastructure"
       />
       {/* Hero */}
-      <section className="bg-gradient-to-br from-purple-50 via-blue-50 to-cyan-50 py-16">
+      <section className="bg-gradient-to-br from-sky-50 via-white to-cyan-50 py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-3 mb-4">
-            <div className="flex items-center justify-center w-12 h-12 bg-purple-600 text-white rounded-lg">
+            <div className="flex items-center justify-center w-12 h-12 bg-[#0B72B5] text-white rounded-lg">
               <Server className="w-7 h-7" />
             </div>
             <h1 className="text-4xl font-bold text-gray-900">{t("hero.title")}</h1>
@@ -46,10 +46,10 @@ export function TokenService() {
       {/* Quick Access */}
       <section className="py-16 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-to-br from-purple-600 to-blue-600 rounded-2xl p-6 sm:p-12 text-center">
+          <div className="bg-[#085A90] rounded-2xl p-6 sm:p-12 text-center">
             <Server className="w-16 h-16 mx-auto mb-6 opacity-80" />
             <h2 className="text-4xl font-bold mb-4 text-white">{t("quickAccess.heading")}</h2>
-            <p className="text-xl mb-8 text-purple-100">
+            <p className="text-xl mb-8 text-white/90">
               {t("quickAccess.description")}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -57,7 +57,7 @@ export function TokenService() {
                 href="https://model.openindu.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-8 py-4 bg-white text-purple-600 rounded-lg hover:bg-purple-50 transition-colors font-medium text-lg"
+                className="inline-flex items-center justify-center px-8 py-4 bg-white text-[#0B72B5] rounded-lg hover:bg-sky-50 transition-colors font-medium text-lg"
               >
                 {t("quickAccess.cta")}
                 <ExternalLink className="ml-2 h-5 w-5" />
@@ -84,7 +84,7 @@ export function TokenService() {
                   key={feature.key}
                   className="bg-gradient-to-br from-white to-gray-50 border border-gray-200 rounded-2xl p-8 hover:shadow-xl transition-all"
                 >
-                  <div className="flex items-center justify-center w-16 h-16 bg-purple-100 text-purple-600 rounded-xl mb-6">
+                  <div className="flex items-center justify-center w-16 h-16 bg-sky-100 text-[#0B72B5] rounded-xl mb-6">
                     <feature.icon className="w-8 h-8" />
                   </div>
                   <h3 className="text-2xl font-semibold text-gray-900 mb-3">{t(`features.${feature.key}.title`)}</h3>
@@ -92,7 +92,7 @@ export function TokenService() {
                   <ul className="space-y-2">
                     {items.map((item) => (
                       <li key={item} className="flex items-center gap-2 text-gray-700">
-                        <CheckCircle className="w-4 h-4 text-purple-600 flex-shrink-0" />
+                        <CheckCircle className="w-4 h-4 text-[#0B72B5] flex-shrink-0" />
                         <span>{item}</span>
                       </li>
                     ))}
@@ -114,7 +114,7 @@ export function TokenService() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {useCaseKeys.map((key) => (
               <div key={key} className="bg-white rounded-2xl shadow-sm p-8 hover:shadow-xl transition-all">
-                <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-purple-600 to-blue-600 text-white rounded-xl mx-auto mb-6">
+                <div className="flex items-center justify-center w-16 h-16 bg-[#0B72B5] text-white rounded-xl mx-auto mb-6">
                   <Cpu className="w-8 h-8" />
                 </div>
                 <h3 className="text-2xl font-semibold text-gray-900 mb-3 text-center">{t(`useCases.${key}.name`)}</h3>
@@ -137,12 +137,12 @@ export function TokenService() {
             <p className="text-lg text-gray-600">{t("architecture.subheading")}</p>
           </div>
           <div className="max-w-4xl mx-auto">
-            <div className="bg-gradient-to-br from-purple-50 to-blue-50 p-8 rounded-2xl border border-purple-200">
+            <div className="bg-sky-50 p-8 rounded-2xl border border-sky-200">
               <div className="space-y-4">
                 {architectureKeys.map((key, index) => (
-                  <div key={key} className="border-l-2 border-purple-300 ml-6 pl-6">
+                  <div key={key} className="border-l-2 border-sky-300 ml-6 pl-6">
                     <div className="flex items-center gap-4">
-                      <div className="flex-shrink-0 w-12 h-12 bg-purple-600 text-white rounded-lg flex items-center justify-center font-bold">
+                      <div className="flex-shrink-0 w-12 h-12 bg-[#0B72B5] text-white rounded-lg flex items-center justify-center font-bold">
                         {index + 1}
                       </div>
                       <div>
@@ -186,7 +186,7 @@ response = openai.ChatCompletion.create(
 print(response.choices[0].message.content)`}
               </pre>
             </div>
-            <div className="bg-purple-50 p-8 rounded-2xl border border-purple-200">
+            <div className="bg-sky-50 p-8 rounded-2xl border border-sky-200">
               <h4 className="font-semibold text-gray-900 mb-4">{t("integration.endpointsHeading")}</h4>
               <div className="grid grid-cols-1 gap-2 text-sm text-gray-700">
                 <div className="font-medium text-gray-900 mb-2">{t("integration.chatLabel")}</div>

@@ -161,7 +161,7 @@ export function AccountSettings() {
       />
       <div className="mx-auto max-w-3xl">
         <div className="mb-8">
-          <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-blue-100 px-4 py-2 text-sm font-semibold text-blue-700">
+          <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-sky-100 px-4 py-2 text-sm font-semibold text-sky-800">
             <UserRound className="h-4 w-4" />
             {t("header.badge")}
           </div>
@@ -170,7 +170,7 @@ export function AccountSettings() {
         </div>
 
         {/* 个人资料 - 昵称修改 */}
-        <Card className="border-blue-100 shadow-sm mb-6">
+        <Card className="border-sky-100 shadow-sm mb-6">
           <CardHeader>
             <CardTitle>{t("profile.cardTitle")}</CardTitle>
             <CardDescription>{t("profile.cardDescription")}</CardDescription>
@@ -191,7 +191,7 @@ export function AccountSettings() {
               {message && <p className="rounded-lg bg-green-50 px-3 py-2 text-sm text-green-700">{message}</p>}
               {error && <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{error}</p>}
 
-              <Button type="submit" disabled={saving} className="bg-blue-600 hover:bg-[#1a3a6d]">
+              <Button type="submit" disabled={saving} className="bg-sky-700 hover:bg-[#085A90]">
                 {saving ? <Loader2 className="animate-spin mr-2" /> : null}
                 {t("profile.saveButton")}
               </Button>
@@ -200,10 +200,10 @@ export function AccountSettings() {
         </Card>
 
         {/* 账号角色 - 独立卡片 */}
-        <Card className="border-blue-100 shadow-sm mb-6">
+        <Card className="border-sky-100 shadow-sm mb-6">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <ShieldCheck className="h-5 w-5 text-blue-600" />
+              <ShieldCheck className="h-5 w-5 text-sky-700" />
               {t("role.cardTitle")}
             </CardTitle>
             <CardDescription>{t("role.cardDescription")}</CardDescription>
@@ -236,7 +236,7 @@ export function AccountSettings() {
                       type="button"
                       size="sm"
                       disabled={applying}
-                      className="bg-blue-600 hover:bg-[#1a3a6d]"
+                      className="bg-sky-700 hover:bg-[#085A90]"
                       onClick={async () => {
                         setApplyError("");
                         setApplying(true);
@@ -259,7 +259,7 @@ export function AccountSettings() {
                     type="button"
                     size="sm"
                     disabled={applying}
-                    className="bg-blue-600 hover:bg-[#1a3a6d]"
+                    className="bg-sky-700 hover:bg-[#085A90]"
                     onClick={async () => {
                       setApplyError("");
                       setApplying(true);
@@ -286,7 +286,7 @@ export function AccountSettings() {
         </Card>
 
         {/* 修改手机号 - 独立卡片 */}
-        <Card className="border-blue-100 shadow-sm mb-6">
+        <Card className="border-sky-100 shadow-sm mb-6">
           <CardHeader>
             <CardTitle>{t("phoneChange.cardTitle")}</CardTitle>
             <CardDescription>{t("phoneChange.cardDescription")}</CardDescription>
@@ -309,9 +309,9 @@ export function AccountSettings() {
               </>
             ) : (
               <form className="space-y-4" onSubmit={handleChangePhone}>
-                <div className="rounded-xl border border-blue-100 bg-blue-50 py-4 px-3 mb-4">
-                  <div className="text-sm font-medium text-blue-700">{t("phoneChange.currentPhoneLabel")}</div>
-                  <p className="text-lg font-semibold text-[#002FA7]">{maskPhone(user?.phone)}</p>
+                <div className="rounded-xl border border-sky-100 bg-sky-50 py-4 px-3 mb-4">
+                  <div className="text-sm font-medium text-sky-800">{t("phoneChange.currentPhoneLabel")}</div>
+                  <p className="text-lg font-semibold text-[#0B72B5]">{maskPhone(user?.phone)}</p>
                 </div>
 
                 <div className="space-y-2">
@@ -368,7 +368,7 @@ export function AccountSettings() {
                   <Button
                     type="submit"
                     disabled={!phonePattern.test(newPhone) || !codePattern.test(phoneCode) || changingPhone}
-                    className="flex-1 bg-blue-600 hover:bg-[#1a3a6d]"
+                    className="flex-1 bg-sky-700 hover:bg-[#085A90]"
                   >
                     {changingPhone ? <Loader2 className="animate-spin mr-2" /> : t("phoneChange.confirmButton")}
                   </Button>

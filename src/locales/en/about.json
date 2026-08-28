@@ -1,0 +1,61 @@
+{
+  "seo": {
+    "title": "About openIndu | openIndu Community",
+    "description": "Understand openIndu's mission, its three core domains — industrial control, automation and craftsmanship — and how our products solve industrial automation challenges end to end."
+  },
+  "hero": {
+    "title": "About openIndu",
+    "subtitle": "The end-to-end open-source OS for industrial automation — closing the gaps between industrial control, automation and craftsmanship"
+  },
+  "problem": {
+    "heading": "The Problem",
+    "intro": "Industrial automation today is fragmented. Engineers work in silos across three domains:",
+    "item1Label": "Industrial control",
+    "item1": "Fighting multi-brand PLC compatibility",
+    "item2Label": "Automation",
+    "item2": "Recoding for every platform, with no cross-brand generation",
+    "item3Label": "Craftsmanship",
+    "item3": "No data-driven insight into how a process actually performs"
+  },
+  "solution": {
+    "heading": "Our Solution",
+    "intro": "openIndu bridges all three domains with one stack:",
+    "item1": "Process knowledge → code generation → cross-brand execution",
+    "item2": "End-to-end traceability from electrical design to production data",
+    "item3": "Apache-2.0 open source, no vendor lock-in"
+  },
+  "domains": {
+    "heading": "Three Domains, Three Products",
+    "subheading": "How openIndu addresses each area of industrial automation",
+    "productLabel": "Product",
+    "industrialControl": {
+      "domain": "Industrial Control (PLC hardware & software)",
+      "description": "PLC hardware, software, EtherCAT fieldbus, communication protocols",
+      "product": "Infrastructure"
+    },
+    "automation": {
+      "domain": "Automation (automation programming)",
+      "description": "PLC programming, HMI development, machine vision, motion control",
+      "product": "openIndu-studio + openIndu-station"
+    },
+    "process": {
+      "domain": "Craftsmanship (process optimisation)",
+      "description": "Process-flow optimisation, parameter tuning, yield analysis, knowledge base",
+      "product": "openIndu-platform (IIoT)"
+    }
+  },
+  "principles": {
+    "heading": "Our Principles",
+    "openSourceTitle": "Open Source",
+    "openSourceDesc": "All code under Apache-2.0. No vendor lock-in. Full transparency.",
+    "endToEndTitle": "End-to-End",
+    "endToEndDesc": "From process parameters to production insight. One stack, the complete value chain.",
+    "communityTitle": "Community-Driven",
+    "communityDesc": "Contributions don't require code. Data, insights and ideas all count."
+  },
+  "cta": {
+    "heading": "Ready to Get Started?",
+    "studio": "Explore openIndu-studio",
+    "github": "View on GitHub"
+  }
+}

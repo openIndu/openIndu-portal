@@ -4,19 +4,19 @@
     "architecture": "Architecture",
     "useCases": "Use Cases",
     "craftsmanship": "Craftsmanship",
-    "products": "Products",
+    "products": "Projects",
     "about": "About",
     "developers": "Developers",
     "team": "Team",
     "downloads": "Downloads",
     "motionControl": "Motion Control",
     "overview": "Overview",
-    "studio": "openindu-studio",
+    "studio": "openIndu-studio",
     "studioPlatform": "openIndu-studio",
-    "vision": "openindu-vision",
-    "cim": "openindu-cim",
-    "platform": "openindu-platform",
-    "station": "openindu-station",
+    "vision": "openIndu-vision",
+    "cim": "openIndu-cim",
+    "platform": "openIndu-platform",
+    "station": "openIndu-station",
     "iiotPlatform": "Industrial IoT",
     "edgeComputing": "openIndu-cim",
     "forum": "Forum",
@@ -34,7 +34,7 @@
     "admin": "Admin"
   },
   "footer": {
-    "description": "Vertical integration from hardware to craftsmanship knowledge. RK3588 + openEuler → openindu-studio → Industrial Vision/Edge/IIoT → Craftsmanship Knowledge Base. Domestic chip, full-stack open source, cross-brand support, data-driven closed loop.",
+    "description": "Vertical integration from hardware to craftsmanship knowledge. Domestic industrial SoC + openEuler → openIndu-studio → Industrial Vision/Edge/IIoT → Craftsmanship Knowledge Base. Domestic chip, full-stack open source, cross-brand support, data-driven closed loop.",
     "communityDevelopers": "Community & Developers",
     "developers": "Developers",
     "github": "GitHub",
@@ -48,17 +48,17 @@
     "forum": "Community Forum",
     "coreServices": "Core Services",
     "studioPlatform": "openIndu-studio",
-    "station": "openindu-station",
+    "station": "openIndu-station",
     "edgeComputing": "openIndu-cim",
     "aiAssistantBot": "AI Assistant Bot",
     "relatedPlatforms": "Related Platforms",
     "serviceStatus": "Service Status",
     "communityAdmin": "Community Admin",
     "legalAndPrivacy": "Legal & Privacy",
-    "privacyStatement": "Privacy Statement (中文)",
-    "legalNotice": "Legal Notice (中文)",
-    "aboutCookies": "About Cookies (中文)",
-    "copyright": "© 2026 openIndu Community. Last updated: 2026-07-04",
+    "privacyStatement": "Privacy Statement",
+    "legalNotice": "Legal Notice",
+    "aboutCookies": "About Cookies",
+    "copyright": "© 2026 openIndu Community. Last updated: {{date}}",
     "icpFiling": "ICP Filing No."
   },
   "language": {
@@ -71,6 +71,79 @@
   },
   "a11y": {
     "mobileMenuOpen": "Open navigation menu",
-    "mobileMenuClose": "Close navigation menu"
+    "mobileMenuClose": "Close navigation menu",
+    "skipToContent": "Skip to main content"
+  },
+  "edgeComputing": {
+    "description": "Edge computing platform for industrial automation",
+    "subtitle": "Industrial edge computing platform for real-time control, data processing, and distributed automation",
+    "github": "View on GitHub",
+    "iotPlatform": "Industrial IoT Platform",
+    "realtimeTitle": "Real-time Control",
+    "realtimeDesc": "Instant response to equipment signals without cloud latency",
+    "securityTitle": "Data Security",
+    "securityDesc": "On-premise data processing keeps sensitive manufacturing data local",
+    "connectTitle": "Connectivity",
+    "connectDesc": "Multi-protocol support: Modbus, EtherCAT, OPC-UA, CANopen",
+    "perfTitle": "Performance",
+    "perfDesc": "Low-latency edge computation for mission-critical automation",
+    "capabilities": "Core Capabilities",
+    "capabilitiesDesc": "Everything you need for edge-based industrial automation",
+    "useCases": "Use Cases",
+    "useCase1": "Distributed PLC Networks",
+    "useCase1Desc": "Connect multiple edge nodes across production facilities with centralized management",
+    "useCase2": "Real-time Data Processing",
+    "useCase2Desc": "Process sensor data at the edge, aggregate to cloud for analytics and historical analysis",
+    "useCase3": "Industrial Protocol Gateway",
+    "useCase3Desc": "Unified interface for multi-protocol devices: Modbus, EtherCAT, CANopen, OPC-UA",
+    "useCase4": "Offline-First Resilience",
+    "useCase4Desc": "Continue operating during connectivity loss, sync data when connection restored",
+    "cta": "Deploy openIndu-cim Today",
+    "ctaDesc": "Start building edge-powered automation. Open source, Apache 2.0, no vendor lock-in.",
+    "getStarted": "Get Started on GitHub",
+    "learnMore": "Learn About openIndu"
+  },
+  "forumPage": {
+    "seoDescription": "Join the openIndu community forum to discuss industrial automation, share experience, and collaborate on open-source projects.",
+    "badge": "openIndu Community Forum",
+    "subtitle": "Join developers worldwide to discuss industrial automation, share experience and contribute together",
+    "enterForum": "Open the forum",
+    "githubDiscussions": "GitHub Discussions",
+    "categoriesHeading": "Main Forum Categories",
+    "categoriesSubheading": "Three core themes gathering industrial automation experience from around the world",
+    "hotTopics": "Popular topics",
+    "industrialControl": {
+      "title": "Industrial Control",
+      "description": "PLC hardware and software, fieldbuses (EtherCAT, CANopen and others) and control-system architecture. Selection, integration and control-network design across PLC brands.",
+      "topics": [
+        "PLC hardware/software",
+        "EtherCAT fieldbus",
+        "Communication protocols",
+        "System architecture"
+      ]
+    },
+    "automation": {
+      "title": "Automation",
+      "description": "PLC programming, HMI development, machine vision and motion control. Equipment integration, engineering conventions and best practice.",
+      "topics": [
+        "PLC programming",
+        "HMI development",
+        "Machine vision",
+        "Motion control"
+      ]
+    },
+    "process": {
+      "title": "Craftsmanship",
+      "description": "Process-flow optimisation, parameter setting, defect analysis and yield improvement. Building the craftsmanship knowledge base and the engineering method behind it.",
+      "topics": [
+        "Process flow",
+        "Parameter tuning",
+        "Yield analysis",
+        "Knowledge base"
+      ]
+    },
+    "ctaHeading": "Ready to join the community?",
+    "ctaDescription": "Whether you ask, answer or contribute, the forum is open to you. Let's build the open-source industrial automation ecosystem together.",
+    "ctaButton": "Go to the forum →"
   }
 }

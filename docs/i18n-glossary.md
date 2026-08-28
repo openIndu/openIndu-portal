@@ -22,7 +22,7 @@ This glossary is the single source of truth for all translation work.
 | Chinese | English | Notes |
 |---|---|---|
 | openIndu Community | openIndu Community | Never translate |
-| openIndu-studio / openIndu-platform / openindu-station / openIndu-cim | As-is | Repo names are product names — preserve case |
+| openIndu-studio / openIndu-platform / openIndu-station / openIndu-cim | As-is | Repo names are product names — preserve case |
 | 全链路架构 | Full-Stack Architecture | New: explains 4-layer vertical integration |
 | 行业场景 | Industry Use Cases | New: battery, PCB, chip, automotive |
 | 工艺知识库 | Craftsmanship Knowledge | New: forum-driven best practices |
@@ -57,7 +57,7 @@ This glossary is the single source of truth for all translation work.
 | 工业互联网 | Industrial IoT | Shortened from "AI+工业互联网" |
 | 概览 | Overview | Sub-menu |
 | openIndu-studio | openIndu-studio | Studio platform |
-| openindu-station | openindu-station | Station software |
+| openIndu-station | openIndu-station | Station software |
 | openIndu-cim | openIndu-cim | Edge computing |
 | 下载中心 | Downloads | URL stays `/resources` |
 | 关于 | About | |
@@ -90,4 +90,4 @@ This glossary is the single source of truth for all translation work.
 | 数据大屏 | Operations Dashboard | Not "big screen" |
 | 边缘网关 | edge gateway | |
 | 云边协同 | cloud-edge collaboration | |
-| 工站 / 工站软件 | station / station software | Maps to openindu-station |
+| 工站 / 工站软件 | station / station software | Maps to openIndu-station |

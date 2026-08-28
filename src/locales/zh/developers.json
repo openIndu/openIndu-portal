@@ -1,0 +1,47 @@
+{
+  "seo": {
+    "title": "开发者｜openIndu 社区",
+    "description": "openIndu 开发上手指南：环境搭建、API 文档、贡献规范与示例，帮助你基于 openIndu 构建。"
+  },
+  "hero": {
+    "badge": "开发者指南",
+    "title": "基于 openIndu 构建",
+    "subtitle": "开发、集成、贡献 openIndu 所需的一切"
+  },
+  "quickStart": {
+    "heading": "快速上手（5 分钟）",
+    "learnMore": "了解更多",
+    "step1Title": "克隆仓库",
+    "step1Desc": "从 GitHub 获取最新代码",
+    "step2Title": "阅读 README",
+    "step2Desc": "了解项目结构与初始化方式",
+    "step3Title": "安装依赖",
+    "step3Desc": "npm ci && npm run dev",
+    "step4Title": "提交第一个贡献",
+    "step4Desc": "先看 CONTRIBUTING.md 里的规范"
+  },
+  "resources": {
+    "heading": "开发者资源",
+    "view": "查看",
+    "architectureTitle": "架构总览",
+    "architectureDesc": "理解系统设计",
+    "apiTitle": "API 文档",
+    "apiDesc": "后端 API 参考",
+    "setupTitle": "开发环境搭建",
+    "setupDesc": "本地开发环境指南",
+    "contributingTitle": "贡献指南",
+    "contributingDesc": "如何提交 PR 与参与贡献"
+  },
+  "projects": {
+    "heading": "三个可参与的核心项目",
+    "explore": "去看看",
+    "studioDesc": "AI 辅助的工业控制开发工具链。Java/Spring Boot 后端，React 前端。",
+    "platformDesc": "工业物联网平台，负责数据采集、监控与分析。Python FastAPI。",
+    "stationDesc": "C# 工位控制应用，覆盖运动控制、视觉与工业自动化。"
+  },
+  "cta": {
+    "heading": "准备好贡献了吗？",
+    "description": "贡献不一定是代码。文档、示例、品牌映射、缺陷报告，都能让社区成长。",
+    "button": "在 GitHub 上查看仓库"
+  }
+}

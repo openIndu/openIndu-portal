@@ -114,7 +114,7 @@ for (const { locale, prefix, label } of LOCALES) {
       const main = page.locator("main");
       await expect(main.getByText("openIndu-studio", { exact: true }).first()).toBeVisible();
       await expect(main.getByText("openIndu-platform", { exact: true }).first()).toBeVisible();
-      await expect(main.getByText("openindu-station", { exact: true }).first()).toBeVisible();
+      await expect(main.getByText("openIndu-station", { exact: true }).first()).toBeVisible();
     });
 
     test("displays the five-stage closed loop", async ({ page }) => {

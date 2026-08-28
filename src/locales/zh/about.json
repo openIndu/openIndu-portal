@@ -1,0 +1,61 @@
+{
+  "seo": {
+    "title": "关于 openIndu｜openIndu 社区",
+    "description": "了解 openIndu 的使命、工控 / 自动化 / 工艺三大核心领域，以及我们如何端到端解决工业自动化的碎片化问题。"
+  },
+  "hero": {
+    "title": "关于 openIndu",
+    "subtitle": "工业自动化的端到端开源操作系统 —— 打通工控、自动化、工艺三个领域之间的割裂"
+  },
+  "problem": {
+    "heading": "我们要解决的问题",
+    "intro": "今天的工业自动化是碎片化的，工程师被割裂在三个领域里各自作战：",
+    "item1Label": "工控",
+    "item1": "被多品牌 PLC 的兼容性反复消耗",
+    "item2Label": "自动化",
+    "item2": "每换一个平台就要重写一遍，没有跨品牌生成",
+    "item3Label": "工艺",
+    "item3": "工艺表现缺乏数据支撑，靠经验拍板"
+  },
+  "solution": {
+    "heading": "我们的答案",
+    "intro": "openIndu 用一套栈把三个领域连起来：",
+    "item1": "工艺知识 → 代码生成 → 跨品牌执行",
+    "item2": "从电气设计到生产数据的端到端可追溯",
+    "item3": "Apache-2.0 开源，没有厂商锁定"
+  },
+  "domains": {
+    "heading": "三个领域，三类产品",
+    "subheading": "openIndu 在工业自动化的每个环节分别做了什么",
+    "productLabel": "对应产品",
+    "industrialControl": {
+      "domain": "工控（PLC 硬件与软件）",
+      "description": "PLC 硬件、软件、EtherCAT 总线、通信协议",
+      "product": "基础设施"
+    },
+    "automation": {
+      "domain": "自动化（自动化编程）",
+      "description": "PLC 编程、HMI 编程、工业视觉、运动控制",
+      "product": "openIndu-studio + openIndu-station"
+    },
+    "process": {
+      "domain": "工艺（工艺优化）",
+      "description": "流程优化、参数调优、良率分析、知识库",
+      "product": "openIndu-platform（IIoT）"
+    }
+  },
+  "principles": {
+    "heading": "我们坚持什么",
+    "openSourceTitle": "开源",
+    "openSourceDesc": "全部代码采用 Apache-2.0。没有厂商锁定，完全透明。",
+    "endToEndTitle": "端到端",
+    "endToEndDesc": "从工艺参数到生产洞察。一套栈，覆盖完整价值链。",
+    "communityTitle": "社区驱动",
+    "communityDesc": "贡献不必是代码。数据、洞察与想法同样重要。"
+  },
+  "cta": {
+    "heading": "准备好开始了吗？",
+    "studio": "了解 openIndu-studio",
+    "github": "在 GitHub 上查看"
+  }
+}
