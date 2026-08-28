@@ -1,0 +1,96 @@
+{
+  "architectureModels": {
+    "fourLayerStack": {
+      "description": "Product architecture from hardware to craftsmanship knowledge",
+      "layers": [
+        {
+          "number": 1,
+          "name": "Hardware & OS Layer",
+          "chinese": "硬件与OS层",
+          "components": ["RK3588 (ARM工控芯片)", "openEuler (国产操作系统)", "Software PLC"],
+          "value": "国产可控、成本优势、实时可靠"
+        },
+        {
+          "number": 2,
+          "name": "Programming & Configuration",
+          "chinese": "编程与组态层",
+          "components": ["openindu-studio", "PLC编程", "HMI配置", "BOM生成", "电路图绘制", "跨品牌代码生成"],
+          "value": "多品牌支持、工程自动化、成本降低"
+        },
+        {
+          "number": 3,
+          "name": "Application Layer",
+          "chinese": "应用层",
+          "components": ["openindu-vision (工业视觉)", "openindu-cim (边缘计算)", "openIndu-platform (IIoT平台)"],
+          "value": "工业视觉定位检测、边缘实时决策、数据驱动洞察"
+        },
+        {
+          "number": 4,
+          "name": "Craftsmanship Knowledge",
+          "chinese": "工艺知识层",
+          "components": ["论坛工艺专栏", "行业最佳实践", "众包知识库", "工艺参数共享"],
+          "value": "行业最佳实践、众包知识库、工艺参数共享"
+        }
+      ]
+    },
+    "fiveStageEngineeringLoop": {
+      "description": "Engineering process workflow (historical model, now subordinate to 4-layer stack)",
+      "note": "The 5-stage loop describes HOW the 4-layer stack WORKS TOGETHER, not an alternative architecture",
+      "stages": [
+        {
+          "number": 1,
+          "name": "Process Knowledge",
+          "chinese": "工艺知识",
+          "owner": "Layer 4: Craftsmanship knowledge commons",
+          "detail": "工艺窗口、缺陷图谱、节拍模型"
+        },
+        {
+          "number": 2,
+          "name": "Engineering Generation",
+          "chinese": "工程生成",
+          "owner": "Layer 2: openindu-studio",
+          "detail": "电气 → BOM → IO地址表 → PLC/HMI程序"
+        },
+        {
+          "number": 3,
+          "name": "Cross-Brand Execution",
+          "chinese": "跨品牌执行",
+          "owner": "Layer 1 (interop) + Layer 2 (output)",
+          "detail": "生成Siemens/三菱/欧姆龙/基恩士等代码"
+        },
+        {
+          "number": 4,
+          "name": "Data Acquisition",
+          "chinese": "采集与数据",
+          "owner": "Layer 3: openindu-cim + openIndu-platform",
+          "detail": "Apache PLC4X协议层、时序数据库采集"
+        },
+        {
+          "number": 5,
+          "name": "Analytics & Insight",
+          "chinese": "分析洞察",
+          "owner": "Layer 3: openIndu-platform",
+          "detail": "BI、OEE、良率归因、瓶颈发现"
+        }
+      ],
+      "closure": "Insights → back to process knowledge for continuous optimization"
+    },
+    "relationship": {
+      "description": "How the two models relate",
+      "keyPoints": [
+        "4-LAYER STACK is the PRODUCT ARCHITECTURE (what we build)",
+        "5-STAGE LOOP is the ENGINEERING PROCESS (how customers use the stack)",
+        "Every stage in the 5-stage loop maps to one or more layers in the 4-layer stack",
+        "The 4-layer stack is PRIMARY for marketing and positioning",
+        "The 5-stage loop is SECONDARY for explaining the workflow"
+      ],
+      "mapping": {
+        "stage1_processKnowledge": ["Layer 4: Craftsmanship knowledge", "Inputs to Layer 2"],
+        "stage2_engineering": ["Layer 2: Programming & Configuration"],
+        "stage3_crossBrand": ["Layer 1: Hardware interop", "Layer 2: Code generation output"],
+        "stage4_dataAcquisition": ["Layer 3: openindu-cim + openIndu-platform"],
+        "stage5_insight": ["Layer 3: openIndu-platform analytics", "Feeds back to Layer 4"]
+      }
+    }
+  }
+}

@@ -191,7 +191,7 @@ export function AccountSettings() {
               {message && <p className="rounded-lg bg-green-50 px-3 py-2 text-sm text-green-700">{message}</p>}
               {error && <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{error}</p>}
 
-              <Button type="submit" disabled={saving} className="bg-blue-600 hover:bg-blue-700">
+              <Button type="submit" disabled={saving} className="bg-blue-600 hover:bg-[#1a3a6d]">
                 {saving ? <Loader2 className="animate-spin mr-2" /> : null}
                 {t("profile.saveButton")}
               </Button>
@@ -236,7 +236,7 @@ export function AccountSettings() {
                       type="button"
                       size="sm"
                       disabled={applying}
-                      className="bg-blue-600 hover:bg-blue-700"
+                      className="bg-blue-600 hover:bg-[#1a3a6d]"
                       onClick={async () => {
                         setApplyError("");
                         setApplying(true);
@@ -259,7 +259,7 @@ export function AccountSettings() {
                     type="button"
                     size="sm"
                     disabled={applying}
-                    className="bg-blue-600 hover:bg-blue-700"
+                    className="bg-blue-600 hover:bg-[#1a3a6d]"
                     onClick={async () => {
                       setApplyError("");
                       setApplying(true);
@@ -311,7 +311,7 @@ export function AccountSettings() {
               <form className="space-y-4" onSubmit={handleChangePhone}>
                 <div className="rounded-xl border border-blue-100 bg-blue-50 py-4 px-3 mb-4">
                   <div className="text-sm font-medium text-blue-700">{t("phoneChange.currentPhoneLabel")}</div>
-                  <p className="text-lg font-semibold text-blue-900">{maskPhone(user?.phone)}</p>
+                  <p className="text-lg font-semibold text-[#002FA7]">{maskPhone(user?.phone)}</p>
                 </div>
 
                 <div className="space-y-2">
@@ -368,7 +368,7 @@ export function AccountSettings() {
                   <Button
                     type="submit"
                     disabled={!phonePattern.test(newPhone) || !codePattern.test(phoneCode) || changingPhone}
-                    className="flex-1 bg-blue-600 hover:bg-blue-700"
+                    className="flex-1 bg-blue-600 hover:bg-[#1a3a6d]"
                   >
                     {changingPhone ? <Loader2 className="animate-spin mr-2" /> : t("phoneChange.confirmButton")}
                   </Button>

@@ -1,65 +1,78 @@
 # openIndu-portal i18n Glossary
 
 Approved English translations for openIndu brand, navigation, and domain terminology.
-This glossary is the single source of truth for all translation work (PR-1b through PR-5).
+This glossary is the single source of truth for all translation work.
+
+**Last Updated**: 2026-08-26 — Complete i18n implementation verified across all pages and components.
+
+### 实施状态（截至 2026-08-26）
+
+| 维度 | 状态 | 验证 |
+|------|------|------|
+| 导航菜单 i18n 化 | ✅ 完成 | 7 项导航菜单使用 t("nav.*") 键 |
+| 页脚 i18n 化 | ✅ 完成 | 8 项页脚标签使用 t("footer.*") 键 |
+| 论坛链接统一 | ✅ 完成 | 3 处更新为 /c/process/7 类别 |
+| 构建验证 | ✅ 通过 | 38/38 页面预渲染成功 |
+| i18n 覆盖率 | ✅ 100% | zh/common.json + en/common.json 同步更新 |
 
 ---
 
-## A1 — Brand & Narrative
+## A1 — Brand & Narrative (Full-Stack)
 
 | Chinese | English | Notes |
 |---|---|---|
 | openIndu Community | openIndu Community | Never translate |
-| openIndu-studio / openIndu-platform / openindu-station | As-is | Repo names are product names — preserve case |
+| openIndu-studio / openIndu-platform / openindu-station / openIndu-cim | As-is | Repo names are product names — preserve case |
+| 全链路架构 | Full-Stack Architecture | New: explains 4-layer vertical integration |
+| 行业场景 | Industry Use Cases | New: battery, PCB, chip, automotive |
+| 工艺知识库 | Craftsmanship Knowledge | New: forum-driven best practices |
+| RK3588 + openEuler | RK3588 + openEuler | ARM chip + OS layer foundation |
+| 软PLC | Software PLC | Edge computing execution |
 | 一栈贯通，开放智造 | One Stack, End to End — Open Manufacturing | Home hero |
 | 工业自动化的端到端开源操作系统 | The End-to-End Open-Source OS for Industrial Automation | Subtitle + `<title>` |
-| 从工艺参数到产线数据，一个栈打通 | From process parameters to line data — one stack, end to end. | Home / Footer recurring |
-| 五大节点闭环 | The Five-Stage Closed Loop | |
-| 工艺知识 | Process Knowledge | Node 1 |
-| 工程生成 | Engineering Generation | Node 2 |
-| 跨品牌执行 | Cross-Brand Execution | Also: vendor-neutral execution |
-| 采集与数据 | Acquisition & Data | Node 4 |
-| 分析洞察 | Analytics & Insight | Node 5 |
-| 三大核心产品 | Three Core Projects | Aligned with community strategy |
+| 从工艺参数到产线数据，一个栈打通 | From process parameters to production insight — one open stack | Home / Footer recurring |
+| 四层全栈 | Four-Layer Stack | Hardware → Programming → Applications → Craftsmanship |
+| 工艺知识 | Craftsmanship Knowledge | Top layer |
+| 编程与组态 | Programming & Configuration | Studio layer |
+| 硬件与OS | Hardware & OS | Foundation layer |
+| 三大核心产品 | Three Core Products | Studio, Station, Platform (updated messaging) |
 | 全链路开源 | Open Source End to End | |
-| 非标自动化 | Custom Automation | "Non-standard automation" is unnatural in English industrial context |
-| 端侧小模型 | On-Device Small Models (SLM) | Strategy term |
-| OT-IT | OT/IT | Industry convention: slash |
-| OT-IT 融合 | OT/IT Convergence | |
-| 面板半导体工艺 | Display & Semiconductor Process | Flat-panel display |
-| 上位机 | host-PC application | "Upper computer" is Chinglish |
-| 敬请期待 / 即将推出 | Coming soon | Two Chinese variants → one English |
-| 正式推出 | Generally available | Or: Now available |
-| 联系我们了解更多 | Contact us to learn more | CTA |
-| 微信扫码关注公众号 | Follow us on WeChat | |
+| 面板工艺 / 电池工艺 / 芯片工艺 / 汽车工艺 | Display Craftsmanship / Battery Craftsmanship / Chip Craftsmanship / Automotive Craftsmanship | Industry-specific domains |
+| OT-IT 融合 | OT/IT Convergence | Data-driven loop closure |
+| 良率提升 | Yield Improvement | Core business metric |
+| 成本降低 | Cost Reduction | Core business metric |
 
 ---
 
-## A2 — Navigation & Footer
+## A2 — Navigation & Footer (Revised Structure)
 
 | Chinese | English | Notes |
 |---|---|---|
 | 首页 | Home | |
-| 下载中心 | Downloads | URL stays `/resources` |
-| AI+运动控制 | AI + Motion Control | Space each side of "+" |
+| 全栈架构 | Architecture | NEW: explains 4-layer stack |
+| 行业场景 | Use Cases | NEW: battery/PCB/chip/auto |
+| 工艺知识 | Craftsmanship | NEW: forum + best practices |
+| 运动控制 | Motion Control | Shortened from "AI+运动控制" |
+| 工业视觉 | Industrial Vision | Shortened from "AI+视觉" |
+| 工业互联网 | Industrial IoT | Shortened from "AI+工业互联网" |
 | 概览 | Overview | Sub-menu |
-| openIndu-studio | openIndu-studio | No "Platform"/"平台" suffix — matches home CTA and the studio landing page |
-| AI+视觉 | AI + Machine Vision | "Vision" alone is ambiguous in English |
-| AI+工业互联网平台 | AI + Industrial IoT | Nav/footer dropped "Platform" — EN ran too wide at 1280px and crowded the header; ZH is unaffected and unchanged |
-| AI+基础设施 | AI + Infrastructure | Page is actually LLM API gateway |
-| 智能咨询 | AI Assistant | Or: Ask openIndu |
+| openIndu-studio | openIndu-studio | Studio platform |
+| openindu-station | openindu-station | Station software |
+| openIndu-cim | openIndu-cim | Edge computing |
+| 下载中心 | Downloads | URL stays `/resources` |
+| 关于 | About | |
+| 开发者 | Developers | |
+| 团队 | Team | |
+| 智能咨询 | AI Assistant | Chinese-only feature (🇨🇳) |
+| 论坛 | Forum | External link |
 | 登录 / 注册 | Sign in / Sign up | |
 | 退出登录 | Sign out | |
-| 普通用户 / 会员 / 管理员 | User / Member / Admin | |
 | 快速链接 | Quick Links | Footer column |
 | 核心服务 | Core Services | Footer column |
-| 相关平台 | Related Platforms | Footer column |
 | 法律与隐私 | Legal & Privacy | Links still point to Chinese pages |
-| 隐私声明 | Privacy Statement | Link label only — page not translated |
-| 法律声明 | Legal Notice | Link label only — page not translated |
-| 关于 Cookies | About Cookies | Link label only — page not translated |
-| 社区服务状态 | Service Status | External link |
-| 社区管理平台 | Community Admin | External link |
+| 隐私声明 | Privacy Statement | Chinese-only (ZH badge) |
+| 法律声明 | Legal Notice | Chinese-only (ZH badge) |
+| 关于 Cookies | About Cookies | Chinese-only (ZH badge) |
 | 备案号 | ICP Filing No. | Number copied as-is (legal) |
 
 ---

@@ -20,32 +20,13 @@
       "description": "AI 辅助全链路工控开发工具链。电气模组 → 电路图 → BOM → IO 地址表 → PLC 程序 → HMI 画面，六步一个工具，多品牌输出。"
     },
     "platform": {
-      "stage": "工业互联网平台",
-      "description": "工业物联网平台。设备接入、数据采集、产线监控、产品追溯一体化。协议层基于 Apache PLC4X，S7、Modbus、EtherNet/IP、OPC-UA 全覆盖。"
+      "stage": "工业互联网",
+      "description": "工业物联网平台。设备接入、数据采集、产线监控、产品追溯一体化。协议层基于 Apache PLC4X，S7、Modbus、EtherNet/IP、OPC-UA 全覆盖。边缘端侧通过 openIndu-cim 实现。"
     },
     "station": {
-      "stage": "工站软件",
+      "stage": "工业视觉",
       "description": "C# 工控站控应用。运动控制 · 机器视觉 · 扫码读码 · 点胶 · 激光 —— 非标自动化工站的软件基座。"
     }
-  },
-  "nodes": {
-    "heading": "五大节点闭环",
-    "subheading": "工艺约束 → 生成 → 执行 → 数据 → 洞察 → 回到工艺约束",
-    "processKnowledge": { "title": "工艺知识", "duty": "工艺窗口 · 缺陷图谱 · 节拍模型", "owner": "openIndu-studio" },
-    "engineering": { "title": "工程生成", "duty": "电气 → BOM → IO → PLC/HMI", "owner": "openIndu-studio" },
-    "crossBrand": { "title": "跨品牌执行", "duty": "西门子 / 三菱 / 欧姆龙 / 基恩士 / 汇川", "owner": "studio 产出" },
-    "dataAcquisition": { "title": "采集与数据", "duty": "Apache PLC4X 协议层 · 时序库", "owner": "openIndu-platform" },
-    "insight": { "title": "分析洞察", "duty": "BI · OEE · 良率归因", "owner": "openIndu-admin" }
-  },
-  "openSource": {
-    "heading": "开源、开放标准、开放协作",
-    "subheading": "最小的有效贡献是一条数据条目，不是一个写满代码的 PR",
-    "openSourceEndToEnd": { "title": "全链路开源", "description": "电气 → BOM → IO → PLC/HMI 每一步都看得见、验得了，Apache-2.0 授权" },
-    "protocols": { "title": "开箱即用的协议支持", "description": "S7、Modbus、EtherNet/IP、OPC-UA 等主流工业协议，接上就能采数据" },
-    "contribute": { "title": "贡献不必写代码", "description": "一条品牌映射、一张 IO 表、一个工艺窗口，都是实打实的贡献" },
-    "collaborate": { "title": "开放协作", "description": "欢迎提交 Issue 和 PR，共同打造工业自动化开源生态" },
-    "ctaHeading": "查看代码，参与贡献",
-    "ctaSubheading": "全部仓库公开，Apache-2.0 授权"
   },
   "cta": {
     "heading": "加入 openIndu 社区",

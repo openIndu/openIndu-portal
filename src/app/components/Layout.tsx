@@ -41,35 +41,30 @@ export function Layout() {
     [t],
   );
 
-  type NavItem = { name: string; href: string; testid?: string; children?: NavItem[] };
+  type NavItem = { name: string; href: string; testid?: string; children?: NavItem[]; external?: boolean };
   const navigation: NavItem[] = useMemo(() => {
     const items: NavItem[] = [
       { name: t("nav.home"), href: "/", testid: "nav-home" },
-      { name: t("nav.downloads"), href: "/resources", testid: "nav-downloads" },
+      { name: t("nav.architecture"), href: "/architecture", testid: "nav-architecture" },
+      { name: t("nav.useCases"), href: "/use-cases", testid: "nav-use-cases" },
+      { name: t("nav.craftsmanship"), href: "/craftsmanship", testid: "nav-craftsmanship" },
       {
-        name: t("nav.motionControl"),
+        name: t("nav.products"),
         href: "/motion-control",
-        testid: "nav-motion-control",
+        testid: "nav-products",
         children: [
-          { name: t("nav.overview"), href: "/motion-control", testid: "nav-motion-control-overview" },
-          { name: t("nav.studioPlatform"), href: "/motion-control/studio", testid: "nav-studio" },
+          { name: t("nav.studio"), href: "/motion-control/studio", testid: "nav-studio" },
+          { name: t("nav.vision"), href: "/vision/station", testid: "nav-station" },
+          { name: t("nav.cim"), href: "/edge-computing", testid: "nav-edge-computing" },
+          { name: t("nav.platform"), href: "/iiot-platform", testid: "nav-iiot-platform" },
         ],
       },
-      {
-        name: t("nav.vision"),
-        href: "/vision",
-        testid: "nav-vision",
-        children: [
-          { name: t("nav.overview"), href: "/vision", testid: "nav-vision-overview" },
-          { name: t("nav.station"), href: "/vision/station", testid: "nav-station" },
-        ],
-      },
-      { name: t("nav.iiotPlatform"), href: "/iiot-platform", testid: "nav-iiot-platform" },
-      { name: t("nav.infrastructure"), href: "/infrastructure", testid: "nav-infrastructure" },
+      { name: t("nav.forum"), href: "/forum", testid: "nav-forum" },
+      { name: t("nav.downloads"), href: "/resources", testid: "nav-downloads" },
     ];
     // Hide AI Assistant on EN — the RAG knowledge base is Chinese-only
     if (locale === "zh") {
-      items.push({ name: t("nav.aiAssistant"), href: "/chat", testid: "nav-ai-assistant" });
+      items.push({ name: `${t("nav.aiAssistant")} 🇨🇳`, href: "/chat", testid: "nav-ai-assistant" });
     }
     return items;
   }, [t, locale]);
@@ -91,9 +86,17 @@ export function Layout() {
     <div className="min-h-screen bg-white">
       <StructuredData pagePath={location.pathname === "/" ? "/" : location.pathname} />
 
+      {/* Skip to content link for accessibility */}
+      <a
+        href="#main-content"
+        className="absolute left-[-9999px] focus:left-0 focus:top-0 focus:z-50 focus:p-4 focus:bg-blue-600 focus:text-white focus:block"
+      >
+        Skip to main content
+      </a>
+
       {/* Header */}
       <header className="sticky top-0 z-50 border-b border-gray-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80">
-        <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" aria-label="Main navigation">
           <div className="flex h-16 items-center justify-between gap-4">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2">
@@ -113,6 +116,7 @@ export function Layout() {
                     <Link
                       to={item.href}
                       data-testid={item.testid}
+                      aria-current={isActive(item.href) ? "page" : undefined}
                       className={`flex items-center gap-1 text-sm transition-colors whitespace-nowrap ${
                         isActive(item.href)
                           ? "text-blue-600 font-medium"
@@ -120,28 +124,52 @@ export function Layout() {
                       }`}
                     >
                       {item.name}
-                      <ChevronDown className="h-3.5 w-3.5 transition-transform group-hover:rotate-180" />
+                      <ChevronDown className="h-3.5 w-3.5 transition-transform group-hover:rotate-180" aria-hidden="true" />
                     </Link>
                     {/* pt-2 bridges the hover gap between parent item and dropdown */}
                     <div className="absolute left-0 top-full z-50 hidden min-w-[180px] pt-2 group-hover:block group-focus-within:block">
                       <div className="rounded-lg border border-gray-100 bg-white py-1 shadow-lg">
-                        {item.children.map((child) => (
-                          <Link
-                            key={child.name}
-                            to={child.href}
-                            data-testid={child.testid}
-                            className={`block px-4 py-2 text-sm transition-colors ${
-                              location.pathname === child.href
-                                ? "bg-blue-50 font-medium text-blue-600"
-                                : "text-gray-700 hover:bg-gray-50 hover:text-blue-600"
-                            }`}
-                          >
-                            {child.name}
-                          </Link>
-                        ))}
+                        {item.children.map((child) =>
+                          child.external ? (
+                            <a
+                              key={child.name}
+                              href={child.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              data-testid={child.testid}
+                              className="block px-4 py-2 text-sm transition-colors text-gray-700 hover:bg-gray-50 hover:text-blue-600"
+                            >
+                              {child.name}
+                            </a>
+                          ) : (
+                            <Link
+                              key={child.name}
+                              to={child.href}
+                              data-testid={child.testid}
+                              className={`block px-4 py-2 text-sm transition-colors ${
+                                location.pathname === child.href
+                                  ? "bg-blue-50 font-medium text-blue-600"
+                                  : "text-gray-700 hover:bg-gray-50 hover:text-blue-600"
+                              }`}
+                            >
+                              {child.name}
+                            </Link>
+                          )
+                        )}
                       </div>
                     </div>
                   </div>
+                ) : item.external ? (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-testid={item.testid}
+                    className="text-sm transition-colors whitespace-nowrap text-gray-700 hover:text-blue-600"
+                  >
+                    {item.name}
+                  </a>
                 ) : (
                   <Link
                     key={item.name}
@@ -194,6 +222,8 @@ export function Layout() {
                 if (!mobileMenuOpen) window.scrollTo({ top: 0, behavior: "smooth" });
               }}
               aria-label={mobileMenuOpen ? t("a11y.mobileMenuClose") : t("a11y.mobileMenuOpen")}
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-menu"
             >
               {mobileMenuOpen ? (
                 <X className="h-6 w-6" />
@@ -207,7 +237,7 @@ export function Layout() {
 
       {/* Mobile Navigation */}
       {mobileMenuOpen && (
-        <div className="xl:hidden border-t border-gray-200 bg-white">
+        <div id="mobile-menu" className="xl:hidden border-t border-gray-200 bg-white" role="navigation" aria-label="Mobile navigation">
           <div className="space-y-1 px-4 pb-3 pt-2">
             {navigation.map((item) => (
               <div key={item.name}>
@@ -300,14 +330,14 @@ export function Layout() {
       )}
 
       {/* Main Content */}
-      <main>
+      <main id="main-content" role="main">
         <Outlet />
       </main>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white mt-20">
+      <footer className="bg-blue-900 text-white mt-20" role="contentinfo">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-6">
+          <nav aria-label="Footer navigation" className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-6">
             {/* Logo and Description */}
             <div className="flex flex-col items-start">
               <div className="flex items-center gap-2 mb-4">
@@ -318,7 +348,7 @@ export function Layout() {
                 />
                 <span className="text-xl font-semibold text-white">openIndu Community</span>
               </div>
-              <p className="text-gray-400 max-w-md">
+              <p className="text-blue-100 max-w-md">
                 {t("footer.description")}
               </p>
             </div>
@@ -326,7 +356,7 @@ export function Layout() {
             {/* Quick Links */}
             <div className="flex flex-col items-start">
               <h3 className="font-semibold text-white mb-4">{t("footer.quickLinks")}</h3>
-              <ul className="space-y-2 text-gray-400">
+              <ul className="space-y-2 text-blue-100">
                 <li>
                   <Link to="/" className="hover:text-white">{t("footer.home")}</Link>
                 </li>
@@ -340,7 +370,7 @@ export function Layout() {
                   <Link to="/vision" className="hover:text-white">{t("footer.vision")}</Link>
                 </li>
                 <li>
-                  <Link to="/infrastructure" className="hover:text-white">{t("footer.infrastructure")}</Link>
+                  <a href="https://forum.openindu.com/c/process/7" target="_blank" rel="noopener noreferrer" className="hover:text-white">{t("footer.forum")}</a>
                 </li>
               </ul>
             </div>
@@ -348,7 +378,7 @@ export function Layout() {
             {/* Core Services */}
             <div className="flex flex-col items-start">
               <h3 className="font-semibold text-white mb-4">{t("footer.coreServices")}</h3>
-              <ul className="space-y-2 text-gray-400">
+              <ul className="space-y-2 text-blue-100">
                 <li>
                   <Link to="/iiot-platform" className="hover:text-white">{t("footer.iiotPlatform")}</Link>
                 </li>
@@ -359,7 +389,29 @@ export function Layout() {
                   <Link to="/vision/station" className="hover:text-white">{t("footer.station")}</Link>
                 </li>
                 <li>
-                  <Link to="/chat" className="hover:text-white">{t("footer.aiAssistantBot")}</Link>
+                  <a href="https://github.com/openIndu/openIndu-cim" target="_blank" rel="noopener noreferrer" className="hover:text-white">{t("footer.edgeComputing")}</a>
+                </li>
+                <li>
+                  <Link to="/chat" className="hover:text-white inline-flex items-center gap-2">
+                    {t("footer.aiAssistantBot")}
+                    <span className="text-xs bg-blue-600 px-2 py-1 rounded">🇨🇳 ZH</span>
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Community & Developers */}
+            <div className="flex flex-col items-start">
+              <h3 className="font-semibold text-white mb-4">{t("footer.communityDevelopers")}</h3>
+              <ul className="space-y-2 text-blue-100">
+                <li>
+                  <Link to="/developers" className="hover:text-white">{t("footer.developers")}</Link>
+                </li>
+                <li>
+                  <a href="https://github.com/openIndu" target="_blank" rel="noopener noreferrer" className="hover:text-white">{t("footer.github")}</a>
+                </li>
+                <li>
+                  <a href="https://gitee.com/openIndu" target="_blank" rel="noopener noreferrer" className="hover:text-white">{t("footer.gitee")}</a>
                 </li>
               </ul>
             </div>
@@ -367,7 +419,7 @@ export function Layout() {
             {/* Related platforms */}
             <div className="flex flex-col items-start">
               <h3 className="font-semibold text-white mb-4">{t("footer.relatedPlatforms")}</h3>
-              <ul className="space-y-2 text-gray-400">
+              <ul className="space-y-2 text-blue-100">
                 <li>
                   <a href="https://monitor.openindu.com/status/service" target="_blank" rel="noopener noreferrer" className="hover:text-white">
                     {t("footer.serviceStatus")}
@@ -384,24 +436,33 @@ export function Layout() {
             {/* Legal */}
             <div className="flex flex-col items-start">
               <h3 className="font-semibold text-white mb-4">{t("footer.legalAndPrivacy")}</h3>
-              <ul className="space-y-2 text-gray-400">
+              <ul className="space-y-2 text-blue-100">
                 <li>
                   {locale === "en" ? (
-                    <a href="/privacy" className="hover:text-white">{t("footer.privacyStatement")}</a>
+                    <a href="/privacy" className="hover:text-white inline-flex items-center gap-2">
+                      {t("footer.privacyStatement")}
+                      <span className="text-xs bg-blue-600 px-2 py-1 rounded">🇨🇳 ZH</span>
+                    </a>
                   ) : (
                     <Link to="/privacy" className="hover:text-white">{t("footer.privacyStatement")}</Link>
                   )}
                 </li>
                 <li>
                   {locale === "en" ? (
-                    <a href="/legal" className="hover:text-white">{t("footer.legalNotice")}</a>
+                    <a href="/legal" className="hover:text-white inline-flex items-center gap-2">
+                      {t("footer.legalNotice")}
+                      <span className="text-xs bg-blue-600 px-2 py-1 rounded">🇨🇳 ZH</span>
+                    </a>
                   ) : (
                     <Link to="/legal" className="hover:text-white">{t("footer.legalNotice")}</Link>
                   )}
                 </li>
                 <li>
                   {locale === "en" ? (
-                    <a href="/cookies" className="hover:text-white">{t("footer.aboutCookies")}</a>
+                    <a href="/cookies" className="hover:text-white inline-flex items-center gap-2">
+                      {t("footer.aboutCookies")}
+                      <span className="text-xs bg-blue-600 px-2 py-1 rounded">🇨🇳 ZH</span>
+                    </a>
                   ) : (
                     <Link to="/cookies" className="hover:text-white">{t("footer.aboutCookies")}</Link>
                   )}
@@ -415,12 +476,12 @@ export function Layout() {
               <LanguageSwitcher variant="dark" />
             </div>
 
-          </div>
+          </nav>
 
           {/* Copyright */}
-          <div className="border-t border-gray-800 mt-8 pt-8">
-            <p className="text-center text-gray-400 text-sm">{t("footer.copyright")}</p>
-            <p className="text-center text-gray-400 text-sm mt-2">
+          <div className="border-t border-blue-800 mt-8 pt-8">
+            <p className="text-center text-blue-100 text-sm">{t("footer.copyright")}</p>
+            <p className="text-center text-blue-100 text-sm mt-2">
               {`${t("footer.icpFiling")}: `}
               <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">蜀ICP备2025160760号-1</a>
             </p>

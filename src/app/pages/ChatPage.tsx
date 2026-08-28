@@ -53,8 +53,8 @@ const MARKDOWN_COMPONENTS: Partial<Components> = {
   p: ({ children }) => <p className="my-1.5 text-sm leading-relaxed first:mt-0 last:mb-0">{children}</p>,
   strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
   em: ({ children }) => <em className="italic">{children}</em>,
-  code: ({ className, children, ...props }) => {
-    const isBlock = (props as any).node?.tagName === "pre" || (className ?? "").startsWith("language-");
+  code: ({ className, children, ...props }: any) => {
+    const isBlock = props.node?.tagName === "pre" || (className ?? "").startsWith("language-");
     if (isBlock) return <code className={className}>{children}</code>;
     return <code className="rounded bg-gray-200 px-1 py-0.5 text-xs text-red-700">{children}</code>;
   },
@@ -292,19 +292,19 @@ export default function ChatPage() {
                 </div>
                 <button type="button" disabled={applying}
                   onClick={async () => { setApplying(true); try { setApplication(await memberApplicationApi.apply()); } catch (err) { alert(getApiErrorMessage(err, "申请失败")); } finally { setApplying(false); } }}
-                  className="flex items-center gap-1.5 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50">
+                  className="flex items-center gap-1.5 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-[#1a3a6d] disabled:opacity-50">
                   {applying ? <Loader2 className="h-4 w-4 animate-spin" /> : null} 重新申请
                 </button>
               </div>
             ) : (
               <button type="button" disabled={applying}
                 onClick={async () => { setApplying(true); try { setApplication(await memberApplicationApi.apply()); } catch (err) { alert(getApiErrorMessage(err, "申请失败")); } finally { setApplying(false); } }}
-                className="flex items-center gap-1.5 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50">
+                className="flex items-center gap-1.5 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-[#1a3a6d] disabled:opacity-50">
                 {applying ? <Loader2 className="h-4 w-4 animate-spin" /> : null} 申请成为会员
               </button>
             )
           ) : (
-            <Link to="/login?redirect=/chat" className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700">
+            <Link to="/login?redirect=/chat" className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-[#1a3a6d]">
               登录 / 注册
             </Link>
           )}
@@ -324,7 +324,7 @@ export default function ChatPage() {
               </select>
               <button type="button" title="新建会话" disabled={streaming}
                 onClick={() => void handleNewSession()}
-                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-700 text-white hover:bg-blue-800 disabled:opacity-50">
+                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-700 text-white hover:bg-[#1a3a6d] disabled:opacity-50">
                 <Plus className="h-4 w-4" />
               </button>
               <button type="button" title="删除当前会话" disabled={streaming || !activeSessionId}
@@ -443,7 +443,7 @@ export default function ChatPage() {
                 placeholder="输入你的工业问题，可粘贴报错日志 / 程序段… (Enter 发送，Shift+Enter 换行)"
                 className="max-h-60 flex-1 resize-none overflow-y-auto break-words rounded-lg border border-gray-200 px-3 py-2 text-sm leading-relaxed focus:border-blue-500 focus:outline-none" />
               <button type="button" onClick={() => void handleSend()} disabled={streaming || !input.trim()} aria-label="发送"
-                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-blue-600 text-white transition hover:bg-blue-700 disabled:opacity-40">
+                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-blue-600 text-white transition hover:bg-[#1a3a6d] disabled:opacity-40">
                 {streaming ? <Loader2 className="h-5 w-5 animate-spin" /> : <Send className="h-5 w-5" />}
               </button>
             </div>
