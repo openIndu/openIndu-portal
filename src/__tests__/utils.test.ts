@@ -7,7 +7,9 @@ describe("cn utility function", () => {
   });
 
   it("should handle conditional classes", () => {
-    expect(cn("foo", true && "bar", false && "baz")).toBe("foo bar");
+    const enabled = true;
+    const disabled = false;
+    expect(cn("foo", enabled && "bar", disabled && "baz")).toBe("foo bar");
   });
 
   it("should handle arrays of classes", () => {
