@@ -4,6 +4,28 @@ import { ArrowRight, Github, Users, Code, ExternalLink, Plug, CheckCircle } from
 import { SEO } from "../components/SEO";
 
 
+/**
+ * Product names contain a hyphen, and a hyphen is a soft wrap opportunity, so
+ * "openIndu-platform" was being split across lines in the narrow Layer-3 cards.
+ * No CSS property suppresses a break at an explicit hyphen, so make each
+ * hyphenated token atomic and let the line break at a space instead.
+ */
+function NoBreakNames({ text }: { text: string }) {
+  return (
+    <>
+      {text.split(/(\s+)/).map((part, i) =>
+        part.includes("-") ? (
+          <span key={i} className="whitespace-nowrap">
+            {part}
+          </span>
+        ) : (
+          part
+        ),
+      )}
+    </>
+  );
+}
+
 export function Home() {
   const { t } = useTranslation("home");
 
@@ -54,25 +76,37 @@ export function Home() {
             {/* Layer 3: Applications */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div className="bg-white border border-sky-100 rounded-xl p-4 shadow-sm">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="text-lg font-bold">③</span>
-                  <h4 className="font-semibold text-gray-900">{t("stack.l3Vision")}</h4>
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-sky-50 text-[#0B72B5] flex items-center justify-center flex-shrink-0">
+                    <span className="text-base font-bold">③</span>
+                  </div>
+                  <div className="min-w-0">
+                    <h4 className="font-semibold text-gray-900">{t("stack.l3Vision")}</h4>
+                    <p className="text-sm text-gray-600"><NoBreakNames text={t("stack.l3VisionDesc")} /></p>
+                  </div>
                 </div>
-                <p className="text-sm text-gray-600">{t("stack.l3VisionDesc")}</p>
               </div>
               <div className="bg-white border border-sky-100 rounded-xl p-4 shadow-sm">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="text-lg font-bold">③</span>
-                  <h4 className="font-semibold text-gray-900">{t("stack.l3Studio")}</h4>
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-sky-50 text-[#0B72B5] flex items-center justify-center flex-shrink-0">
+                    <span className="text-base font-bold">③</span>
+                  </div>
+                  <div className="min-w-0">
+                    <h4 className="font-semibold text-gray-900">{t("stack.l3Studio")}</h4>
+                    <p className="text-sm text-gray-600"><NoBreakNames text={t("stack.l3StudioDesc")} /></p>
+                  </div>
                 </div>
-                <p className="text-sm text-gray-600">{t("stack.l3StudioDesc")}</p>
               </div>
               <div className="bg-white border border-sky-100 rounded-xl p-4 shadow-sm">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="text-lg font-bold">③</span>
-                  <h4 className="font-semibold text-gray-900">{t("stack.l3Data")}</h4>
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-sky-50 text-[#0B72B5] flex items-center justify-center flex-shrink-0">
+                    <span className="text-base font-bold">③</span>
+                  </div>
+                  <div className="min-w-0">
+                    <h4 className="font-semibold text-gray-900">{t("stack.l3Data")}</h4>
+                    <p className="text-sm text-gray-600"><NoBreakNames text={t("stack.l3DataDesc")} /></p>
+                  </div>
                 </div>
-                <p className="text-sm text-gray-600">{t("stack.l3DataDesc")}</p>
               </div>
             </div>
 
