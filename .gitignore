@@ -6,6 +6,11 @@ dist
 dist-ssr
 *.local
 
+# Environment files (track only the public template)
+.env
+.env.*
+!.env.example
+
 # Test / coverage
 coverage
 test-results
