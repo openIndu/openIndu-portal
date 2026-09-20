@@ -8,6 +8,8 @@ import { getDisplayName, maskPhone } from "../utils/user";
 import { isNavItemActive } from "../utils/nav";
 import { StructuredData } from "./StructuredData";
 import { LanguageSwitcher, LanguageSwitcherCompact, LanguageSwitcherMobile } from "./LanguageSwitcher";
+import { CookieConsent, OPEN_COOKIE_SETTINGS_EVENT } from "./CookieConsent";
+import { analyticsAllowed, readCookieConsent } from "@/lib/cookieConsent";
 import logo from "/assets/logo-96.png";
 
 export function Layout() {
@@ -20,6 +22,8 @@ export function Layout() {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation("common");
   const locale = i18n.language; // "zh" | "en"
+  const [cookieConsent, setCookieConsent] = useState(readCookieConsent);
+  const lastTrackedPath = useRef<string | null>(null);
 
   // Scroll to top and close any open dropdown on every page navigation
   useEffect(() => {
@@ -62,14 +66,11 @@ export function Layout() {
     };
   }, [mobileMenuOpen]);
 
-  // Report every SPA navigation to /visits/track. The shared axios client
-  // attaches the Bearer token automatically when one is in localStorage, so
-  // an authenticated user's pageviews land with user_id set — which is what
-  // the dashboard "Monthly Active Login Users" chart counts. Failures are
-  // swallowed: analytics must never break navigation.
   useEffect(() => {
+    if (!analyticsAllowed(cookieConsent) || lastTrackedPath.current === location.pathname) return;
+    lastTrackedPath.current = location.pathname;
     void visitsApi.track(location.pathname).catch(() => {});
-  }, [location.pathname]);
+  }, [cookieConsent, location.pathname]);
   const { isAuthenticated, user, logout } = useAuth();
   const displayName = getDisplayName(user);
 
@@ -544,6 +545,16 @@ export function Layout() {
                     <Link to="/cookies" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">{t("footer.aboutCookies")}</Link>
                   )}
                 </li>
+                <li>
+                  <button
+                    className="hover:text-white py-1.5 pr-3 min-h-[44px] inline-flex items-center"
+                    data-testid="cookie-settings"
+                    onClick={() => window.dispatchEvent(new Event(OPEN_COOKIE_SETTINGS_EVENT))}
+                    type="button"
+                  >
+                    {t("cookieConsent.settings")}
+                  </button>
+                </li>
               </ul>
             </div>
 
@@ -571,6 +582,7 @@ export function Layout() {
         </div>
       </footer>
 
+      <CookieConsent preference={cookieConsent} onChange={setCookieConsent} />
     </div>
   );
 }
