@@ -63,4 +63,16 @@ test("English route renders English privacy controls", async ({ page }) => {
     page.getByRole("heading", { name: "openIndu Community Respects Your Privacy" }),
   ).toBeVisible();
   await expect(page.getByTestId("cookie-accept")).toHaveText("Accept All");
+  await expect(page.getByTestId("cookie-consent-banner")).toContainText(
+    "By selecting Reject All, analytics remains disabled.",
+  );
+  await expect(page.getByTestId("cookie-consent-banner").getByRole("link")).toHaveAttribute(
+    "href",
+    "/en/cookies",
+  );
+  await expect(page.getByTestId("cookie-actions").getByRole("button")).toHaveText([
+    "Accept All",
+    "Reject All",
+    "Manage Cookies",
+  ]);
 });

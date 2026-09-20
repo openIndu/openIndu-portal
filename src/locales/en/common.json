@@ -24,8 +24,8 @@
   },
   "cookieConsent": {
     "title": "openIndu Community Respects Your Privacy",
-    "description": "We use necessary browser storage to operate the site and optional first-party analytics to improve the experience. We do not use third-party advertising trackers.",
-    "privacyLink": "Privacy Statement",
+    "description": "This site uses necessary browser storage to work properly and optional first-party analytics to improve your browsing experience. By selecting Accept All, you consent to analytics. By selecting Reject All, analytics remains disabled. Select Manage Cookies to choose your preference. We do not use third-party advertising trackers.",
+    "cookiesLink": "For more information, see About Cookies.",
     "accept": "Accept All",
     "reject": "Reject All",
     "manage": "Manage Cookies",
