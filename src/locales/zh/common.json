@@ -22,6 +22,21 @@
     "forum": "论坛",
     "aiAssistant": "智能咨询"
   },
+  "cookieConsent": {
+    "title": "openIndu 社区尊重您的隐私",
+    "description": "我们使用必要的浏览器存储保障网站正常运行，并在您同意后使用第一方访问统计来改善体验。我们不使用第三方广告追踪器。",
+    "privacyLink": "隐私声明",
+    "accept": "全部接受",
+    "reject": "全部拒绝",
+    "manage": "管理 Cookie",
+    "manageTitle": "Cookie 偏好设置",
+    "manageDescription": "必要存储用于核心功能与安全；访问统计帮助我们了解匿名页面访问情况。",
+    "necessary": "必要存储（始终启用）",
+    "analytics": "访问统计",
+    "cancel": "取消",
+    "save": "保存偏好",
+    "settings": "Cookie 设置"
+  },
   "auth": {
     "signIn": "登录 / 注册",
     "signOut": "退出",
