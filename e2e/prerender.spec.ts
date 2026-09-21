@@ -54,8 +54,8 @@ const ZH_ONLY = ["/privacy", "/legal", "/cookies", "/legal-center"];
 const TITLES: Record<string, string> = {
   "/": "openIndu Community｜开源智能制造工业生态",
   "/en": "openIndu Community | Open Smart Manufacturing Ecosystem",
-  "/architecture": "项目地图｜openIndu 工程工具栈社区",
-  "/en/architecture": "Project Map | openIndu Engineering Tool Stack Community",
+  "/architecture": "社区路线图｜openIndu",
+  "/en/architecture": "Community Roadmap | openIndu",
   "/craftsmanship": "工艺知识库｜openIndu 社区论坛",
   "/en/craftsmanship": "Craftsmanship Knowledge | openIndu Community Forum",
   "/use-cases": "行业场景参考｜openIndu 社区",
@@ -128,7 +128,9 @@ test.describe("Prerendered HTML", () => {
     });
   }
 
-  test("EN home lang/canonical are correct in the raw response and it carries no ZH-only content", async ({ page }) => {
+  test("EN home lang/canonical are correct in the raw response and it carries no ZH-only content", async ({
+    page,
+  }) => {
     const response = await page.goto(servePath("/en"));
     const html = await response!.text();
 
@@ -156,7 +158,9 @@ test.describe("Prerendered HTML", () => {
   test("EN subpage raw response canonical self-references correctly", async ({ page }) => {
     const response = await page.goto(servePath("/en/motion-control"));
     const html = await response!.text();
-    expect(html).toContain('<link rel="canonical" href="https://www.openindu.com/en/motion-control"');
+    expect(html).toContain(
+      '<link rel="canonical" href="https://www.openindu.com/en/motion-control"',
+    );
   });
 
   test("ZH subpage raw response canonical self-references correctly", async ({ page }) => {
@@ -165,14 +169,18 @@ test.describe("Prerendered HTML", () => {
     expect(html).toContain('<link rel="canonical" href="https://www.openindu.com/motion-control"');
   });
 
-  test("EN structured data matches the visible page metadata and canonical URL", async ({ page }) => {
+  test("EN structured data matches the visible page metadata and canonical URL", async ({
+    page,
+  }) => {
     const response = await page.goto(servePath("/en/architecture"));
     const html = await response!.text();
     const schema = webPageJsonLd(html);
     expect(schema.name).toBe(TITLES["/en/architecture"]);
     expect(schema.url).toBe("https://www.openindu.com/en/architecture");
-    expect(schema.description).toContain("five openIndu collaboration directions");
-    expect((schema.about as Record<string, unknown>).name).toBe("Smart Manufacturing and Industrial Automation");
+    expect(schema.description).toContain("openIndu community roadmap");
+    expect((schema.about as Record<string, unknown>).name).toBe(
+      "Smart Manufacturing and Industrial Automation",
+    );
   });
 
   test("sitemap contains every localized public route", async ({ request }) => {
@@ -185,7 +193,9 @@ test.describe("Prerendered HTML", () => {
     }
   });
 
-  test("EN/ZH raw responses carry hreflang alternates pointing back at each other", async ({ page }) => {
+  test("EN/ZH raw responses carry hreflang alternates pointing back at each other", async ({
+    page,
+  }) => {
     const enResponse = await page.goto(servePath("/en/vision"));
     const enHtml = await enResponse!.text();
     expect(enHtml).toContain('hreflang="zh-Hans" href="https://www.openindu.com/vision"');
