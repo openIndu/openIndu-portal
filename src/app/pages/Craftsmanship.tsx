@@ -80,7 +80,12 @@ export function Craftsmanship() {
       {/* Industries Grid */}
       <section className="py-16 sm:py-20 bg-white">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">{t("industries.heading")}</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-3 text-center">
+            {t("industries.heading")}
+          </h2>
+          <p className="text-sm sm:text-base text-gray-500 mb-12 max-w-2xl mx-auto text-center">
+            {t("industries.scopeNote")}
+          </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {industries.map((industry) => (
               <a
@@ -99,7 +104,10 @@ export function Craftsmanship() {
                 <p className="text-gray-600 mb-4">{industry.description}</p>
                 <div className="flex flex-wrap gap-2 mb-4">
                   {industry.topics.slice(0, 3).map((topic) => (
-                    <span key={topic} className="inline-block px-3 py-1 bg-sky-50 text-[#085A90] text-sm rounded-full">
+                    <span
+                      key={topic}
+                      className="inline-block px-3 py-1 bg-sky-50 text-[#085A90] text-sm rounded-full"
+                    >
                       {topic}
                     </span>
                   ))}
@@ -121,10 +129,15 @@ export function Craftsmanship() {
       {/* Benefits of Participation */}
       <section className="py-16 sm:py-20 bg-gray-50">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">{t("benefits.heading")}</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
+            {t("benefits.heading")}
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {benefits.map((benefit) => (
-              <div key={benefit.title} className="bg-white p-6 rounded-lg border border-gray-200 hover:shadow-md transition-shadow">
+              <div
+                key={benefit.title}
+                className="bg-white p-6 rounded-lg border border-gray-200 hover:shadow-md transition-shadow"
+              >
                 <div className="text-4xl mb-4">{benefit.icon}</div>
                 <h3 className="font-semibold text-lg text-gray-900 mb-2">{benefit.title}</h3>
                 <p className="text-gray-600 text-sm">{benefit.description}</p>
@@ -137,7 +150,9 @@ export function Craftsmanship() {
       {/* Forum articles */}
       <section className="py-16 sm:py-20 bg-white">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">{t("articles.heading")}</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
+            {t("articles.heading")}
+          </h2>
           <div className="space-y-4">
             {articles.map((article) => (
               <a
@@ -173,7 +188,9 @@ export function Craftsmanship() {
       {/* How It Works */}
       <section className="py-16 sm:py-20 bg-gray-50">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">{t("howItWorks.heading")}</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
+            {t("howItWorks.heading")}
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {steps.map((step, i) => (
               <div key={step.title} className="text-center">

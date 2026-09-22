@@ -2,7 +2,7 @@ import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
 import { ArrowRight, Github, Users, Code, ExternalLink, Plug, CheckCircle } from "lucide-react";
 import { SEO } from "../components/SEO";
-
+import { ProductShowcaseCarousel } from "../components/ProductShowcaseCarousel";
 
 /**
  * Product names contain a hyphen, and a hyphen is a soft wrap opportunity, so
@@ -70,7 +70,10 @@ export function Home() {
                   <h3 className="font-semibold text-gray-900">{t("stack.l4Title")}</h3>
                   <p className="text-sm text-gray-600">{t("stack.l4Desc")}</p>
                 </div>
-                <Link to="/craftsmanship" className="text-[#0B72B5] hover:text-[#085A90] text-sm font-medium whitespace-nowrap inline-flex items-center py-2 px-3 min-h-[44px]">
+                <Link
+                  to="/craftsmanship"
+                  className="text-[#0B72B5] hover:text-[#085A90] text-sm font-medium whitespace-nowrap inline-flex items-center py-2 px-3 min-h-[44px]"
+                >
                   {t("stack.view")}
                 </Link>
               </div>
@@ -78,36 +81,42 @@ export function Home() {
 
             {/* Layer 3: Applications */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              <div className="bg-white border border-sky-100 rounded-xl p-4 shadow-sm">
+              <div className="bg-white border border-sky-100 rounded-xl p-4 sm:p-5 shadow-sm">
                 <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-sky-50 text-[#0B72B5] flex items-center justify-center flex-shrink-0">
-                    <span className="text-base font-bold">③</span>
+                  <div className="w-10 h-10 rounded-lg bg-sky-50 text-[#0B72B5] flex items-center justify-center flex-shrink-0">
+                    <span className="text-lg font-bold">③</span>
                   </div>
                   <div className="min-w-0">
                     <h4 className="font-semibold text-gray-900">{t("stack.l3Vision")}</h4>
-                    <p className="text-sm text-gray-600"><NoBreakNames text={t("stack.l3VisionDesc")} /></p>
+                    <p className="text-sm text-gray-600">
+                      <NoBreakNames text={t("stack.l3VisionDesc")} />
+                    </p>
                   </div>
                 </div>
               </div>
-              <div className="bg-white border border-sky-100 rounded-xl p-4 shadow-sm">
+              <div className="bg-white border border-sky-100 rounded-xl p-4 sm:p-5 shadow-sm">
                 <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-sky-50 text-[#0B72B5] flex items-center justify-center flex-shrink-0">
-                    <span className="text-base font-bold">③</span>
+                  <div className="w-10 h-10 rounded-lg bg-sky-50 text-[#0B72B5] flex items-center justify-center flex-shrink-0">
+                    <span className="text-lg font-bold">③</span>
                   </div>
                   <div className="min-w-0">
                     <h4 className="font-semibold text-gray-900">{t("stack.l3Studio")}</h4>
-                    <p className="text-sm text-gray-600"><NoBreakNames text={t("stack.l3StudioDesc")} /></p>
+                    <p className="text-sm text-gray-600">
+                      <NoBreakNames text={t("stack.l3StudioDesc")} />
+                    </p>
                   </div>
                 </div>
               </div>
-              <div className="bg-white border border-sky-100 rounded-xl p-4 shadow-sm">
+              <div className="bg-white border border-sky-100 rounded-xl p-4 sm:p-5 shadow-sm">
                 <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-sky-50 text-[#0B72B5] flex items-center justify-center flex-shrink-0">
-                    <span className="text-base font-bold">③</span>
+                  <div className="w-10 h-10 rounded-lg bg-sky-50 text-[#0B72B5] flex items-center justify-center flex-shrink-0">
+                    <span className="text-lg font-bold">③</span>
                   </div>
                   <div className="min-w-0">
                     <h4 className="font-semibold text-gray-900">{t("stack.l3Data")}</h4>
-                    <p className="text-sm text-gray-600"><NoBreakNames text={t("stack.l3DataDesc")} /></p>
+                    <p className="text-sm text-gray-600">
+                      <NoBreakNames text={t("stack.l3DataDesc")} />
+                    </p>
                   </div>
                 </div>
               </div>
@@ -123,7 +132,10 @@ export function Home() {
                   <h3 className="font-semibold text-gray-900">{t("stack.l2Title")}</h3>
                   <p className="text-sm text-gray-600">{t("stack.l2Desc")}</p>
                 </div>
-                <Link to="/architecture" className="text-[#0B72B5] hover:text-[#085A90] text-sm font-medium whitespace-nowrap inline-flex items-center py-2 px-3 min-h-[44px]">
+                <Link
+                  to="/architecture"
+                  className="text-[#0B72B5] hover:text-[#085A90] text-sm font-medium whitespace-nowrap inline-flex items-center py-2 px-3 min-h-[44px]"
+                >
                   {t("stack.learn")}
                 </Link>
               </div>
@@ -176,7 +188,9 @@ export function Home() {
       <section className="py-16 sm:py-20 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-3">{t("steps.heading")}</h2>
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+              {t("steps.heading")}
+            </h2>
             <p className="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto">
               {t("steps.subheading")}
             </p>
@@ -189,10 +203,10 @@ export function Home() {
                 <div className="w-12 h-12 rounded-md bg-[#0B72B5] text-white flex items-center justify-center mb-5 font-bold text-lg">
                   1
                 </div>
-                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3">{t("steps.s1Title")}</h3>
-                <p className="text-sm text-gray-600 leading-relaxed mb-4">
-                  {t("steps.s1Desc")}
-                </p>
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3">
+                  {t("steps.s1Title")}
+                </h3>
+                <p className="text-sm text-gray-600 leading-relaxed mb-4">{t("steps.s1Desc")}</p>
                 <div className="inline-flex items-center gap-2 text-[#0B72B5] font-medium group-hover:gap-3 transition-all">
                   {t("steps.s1Cta")}
                   <ArrowRight className="w-4 h-4" />
@@ -206,10 +220,10 @@ export function Home() {
                 <div className="w-12 h-12 rounded-md bg-[#0B72B5] text-white flex items-center justify-center mb-5 font-bold text-lg">
                   2
                 </div>
-                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3">{t("steps.s2Title")}</h3>
-                <p className="text-sm text-gray-600 leading-relaxed mb-4">
-                  {t("steps.s2Desc")}
-                </p>
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3">
+                  {t("steps.s2Title")}
+                </h3>
+                <p className="text-sm text-gray-600 leading-relaxed mb-4">{t("steps.s2Desc")}</p>
                 <div className="inline-flex items-center gap-2 text-[#0B72B5] font-medium group-hover:gap-3 transition-all">
                   {t("steps.s2Cta")}
                   <ArrowRight className="w-4 h-4" />
@@ -223,18 +237,27 @@ export function Home() {
                 <div className="w-12 h-12 rounded-md bg-[#0B72B5] text-white flex items-center justify-center mb-5 font-bold text-lg">
                   3
                 </div>
-                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3">{t("steps.s3Title")}</h3>
-                <p className="text-sm text-gray-600 leading-relaxed mb-6">
-                  {t("steps.s3Desc")}
-                </p>
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3">
+                  {t("steps.s3Title")}
+                </h3>
+                <p className="text-sm text-gray-600 leading-relaxed mb-6">{t("steps.s3Desc")}</p>
                 <div className="grid grid-cols-1 gap-2">
-                  <Link to="/motion-control" className="inline-flex items-center justify-center px-3 py-3 bg-white text-[#0B72B5] rounded border border-gray-200 hover:bg-gray-100 transition-colors text-sm font-medium min-h-[44px]">
+                  <Link
+                    to="/motion-control"
+                    className="inline-flex items-center justify-center px-3 py-3 bg-white text-[#0B72B5] rounded border border-gray-200 hover:bg-gray-100 transition-colors text-sm font-medium min-h-[44px]"
+                  >
                     {t("steps.motionControl")}
                   </Link>
-                  <Link to="/vision" className="inline-flex items-center justify-center px-3 py-3 bg-white text-[#0B72B5] rounded border border-gray-200 hover:bg-gray-100 transition-colors text-sm font-medium min-h-[44px]">
+                  <Link
+                    to="/vision"
+                    className="inline-flex items-center justify-center px-3 py-3 bg-white text-[#0B72B5] rounded border border-gray-200 hover:bg-gray-100 transition-colors text-sm font-medium min-h-[44px]"
+                  >
                     {t("steps.vision")}
                   </Link>
-                  <Link to="/iiot-platform" className="inline-flex items-center justify-center px-3 py-3 bg-white text-[#0B72B5] rounded border border-gray-200 hover:bg-gray-100 transition-colors text-sm font-medium min-h-[44px]">
+                  <Link
+                    to="/iiot-platform"
+                    className="inline-flex items-center justify-center px-3 py-3 bg-white text-[#0B72B5] rounded border border-gray-200 hover:bg-gray-100 transition-colors text-sm font-medium min-h-[44px]"
+                  >
                     {t("steps.iiot")}
                   </Link>
                 </div>
@@ -244,7 +267,10 @@ export function Home() {
         </div>
       </section>
 
-      {/* ── 3. Craftsmanship knowledge base + community participation ── */}
+      {/* ── 3. Product showcase carousel ── */}
+      <ProductShowcaseCarousel />
+
+      {/* ── 4. Craftsmanship knowledge base + community participation ── */}
       <section className="py-16 sm:py-20 bg-gray-50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
