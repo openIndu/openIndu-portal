@@ -72,7 +72,7 @@ export function Architecture() {
             <h2 id="roadmap-heading" className="text-2xl font-semibold text-gray-900">
               {t("roadmap.heading")}
             </h2>
-            <p className="mx-auto mt-3 max-w-3xl leading-7 text-gray-600">{t("roadmap.note")}</p>
+            <p className="mx-auto mt-3 leading-7 text-gray-600">{t("roadmap.note")}</p>
           </div>
           <ol className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
             {["knowledge", "assets", "collaboration", "validation"].map((stage, index) => (
