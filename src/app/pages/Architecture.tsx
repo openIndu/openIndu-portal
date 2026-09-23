@@ -5,11 +5,26 @@ import { SEO } from "../components/SEO";
 
 // The five public directions describe collaboration boundaries, not maturity.
 const layerKeys = [
-  { key: "forum", icon: MessageCircle, color: "from-orange-50 to-amber-50", border: "border-orange-200" },
+  {
+    key: "forum",
+    icon: MessageCircle,
+    color: "from-orange-50 to-amber-50",
+    border: "border-orange-200",
+  },
   { key: "vision", icon: Eye, color: "from-blue-50 to-cyan-50", border: "border-sky-200" },
-  { key: "studio", icon: Workflow, color: "from-green-50 to-emerald-50", border: "border-green-200" },
+  {
+    key: "studio",
+    icon: Workflow,
+    color: "from-green-50 to-emerald-50",
+    border: "border-green-200",
+  },
   { key: "data", icon: Database, color: "from-indigo-50 to-blue-50", border: "border-indigo-200" },
-  { key: "plc", icon: FlaskConical, color: "from-purple-50 to-pink-50", border: "border-purple-200" },
+  {
+    key: "plc",
+    icon: FlaskConical,
+    color: "from-purple-50 to-pink-50",
+    border: "border-purple-200",
+  },
 ] as const;
 
 export function Architecture() {
@@ -47,17 +62,58 @@ export function Architecture() {
             <p className="text-lg sm:text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
               {t("hero.subtitle")}
             </p>
-            <p className="text-gray-600">{t("hero.formula")}</p>
           </div>
         </div>
       </section>
 
-      {/* Five Directions */}
-      <section className="py-16 sm:py-20 bg-white">
+      <section aria-labelledby="roadmap-heading" className="bg-white pb-16 sm:pb-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-10 text-center">
+            <h2 id="roadmap-heading" className="text-2xl font-semibold text-gray-900">
+              {t("roadmap.heading")}
+            </h2>
+            <p className="mx-auto mt-3 leading-7 text-gray-600">{t("roadmap.note")}</p>
+          </div>
+          <ol className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+            {["knowledge", "assets", "collaboration", "validation"].map((stage, index) => (
+              <li
+                key={stage}
+                className="relative rounded-2xl border border-sky-100 bg-gradient-to-b from-sky-50 to-white p-6 sm:p-8"
+              >
+                <span
+                  aria-hidden="true"
+                  className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-full bg-sky-800 text-lg font-semibold text-white"
+                >
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <h3 className="text-xl font-semibold text-gray-900">
+                  {t(`roadmap.${stage}.title`)}
+                </h3>
+                <p className="mt-4 leading-7 text-gray-600">{t(`roadmap.${stage}.description`)}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* Existing projects remain below the community roadmap. */}
+      <section
+        aria-labelledby="projects-heading"
+        className="py-16 sm:py-20 bg-white border-t border-gray-100"
+      >
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-12 text-center">
+            <h2 id="projects-heading" className="text-3xl font-bold text-gray-900">
+              {t("projects.heading")}
+            </h2>
+            <p className="mt-4 text-gray-600">{t("hero.formula")}</p>
+          </div>
           <div className="space-y-6 sm:space-y-8">
             {layers.map((layer) => (
-              <div key={layer.key} className={`border-l-4 ${layer.border} rounded-lg p-6 sm:p-8 bg-gradient-to-br ${layer.color}`}>
+              <div
+                key={layer.key}
+                className={`border-l-4 ${layer.border} rounded-lg p-6 sm:p-8 bg-gradient-to-br ${layer.color}`}
+              >
                 <div className="flex items-start gap-4 mb-4">
                   <div className="w-12 h-12 rounded-lg bg-white/80 flex items-center justify-center flex-shrink-0">
                     <layer.icon className="w-6 h-6 text-gray-900" />
@@ -72,7 +128,10 @@ export function Architecture() {
                 <p className="text-gray-700 mb-4 leading-relaxed">{layer.description}</p>
                 <div className="flex flex-wrap gap-2">
                   {layer.benefits.map((benefit) => (
-                    <span key={benefit} className="inline-block px-3 py-1 bg-white/70 text-gray-900 text-sm rounded-full font-medium">
+                    <span
+                      key={benefit}
+                      className="inline-block px-3 py-1 bg-white/70 text-gray-900 text-sm rounded-full font-medium"
+                    >
                       ✓ {benefit}
                     </span>
                   ))}
@@ -86,14 +145,19 @@ export function Architecture() {
       {/* Layer Interaction */}
       <section className="py-16 sm:py-20 bg-gray-50">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">{t("interaction.heading")}</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
+            {t("interaction.heading")}
+          </h2>
           <div className="space-y-8">
             <div className="bg-white p-6 sm:p-8 rounded-lg border border-gray-200">
-              <h3 className="font-semibold text-lg text-gray-900 mb-4">{t("interaction.flowTitle")}</h3>
+              <h3 className="font-semibold text-lg text-gray-900 mb-4">
+                {t("interaction.flowTitle")}
+              </h3>
               <div className="text-gray-700 space-y-2">
                 {[1, 2, 3].map((n) => (
                   <p key={n}>
-                    {["1️⃣", "2️⃣", "3️⃣"][n - 1]} <strong>{t(`interaction.flowStep${n}Label`)}</strong>：
+                    {["1️⃣", "2️⃣", "3️⃣"][n - 1]}{" "}
+                    <strong>{t(`interaction.flowStep${n}Label`)}</strong>：
                     {t(`interaction.flowStep${n}`)}
                   </p>
                 ))}
@@ -101,18 +165,23 @@ export function Architecture() {
             </div>
 
             <div className="bg-white p-6 sm:p-8 rounded-lg border border-gray-200">
-              <h3 className="font-semibold text-lg text-gray-900 mb-4">{t("interaction.appsTitle")}</h3>
+              <h3 className="font-semibold text-lg text-gray-900 mb-4">
+                {t("interaction.appsTitle")}
+              </h3>
               <div className="text-gray-700 space-y-2">
                 {["Left", "Core", "Right"].map((side) => (
                   <p key={side}>
-                    <strong>{t(`interaction.apps${side}Label`)}</strong>：{t(`interaction.apps${side}`)}
+                    <strong>{t(`interaction.apps${side}Label`)}</strong>：
+                    {t(`interaction.apps${side}`)}
                   </p>
                 ))}
               </div>
             </div>
 
             <div className="bg-white p-6 sm:p-8 rounded-lg border border-gray-200">
-              <h3 className="font-semibold text-lg text-gray-900 mb-4">{t("interaction.loopTitle")}</h3>
+              <h3 className="font-semibold text-lg text-gray-900 mb-4">
+                {t("interaction.loopTitle")}
+              </h3>
               <div className="text-gray-700 space-y-2">
                 <p>{t("interaction.loop")}</p>
               </div>
@@ -124,22 +193,36 @@ export function Architecture() {
       {/* Comparison vs Traditional */}
       <section className="py-16 sm:py-20 bg-white">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">{t("comparison.heading")}</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
+            {t("comparison.heading")}
+          </h2>
           <div className="overflow-x-auto">
             <table className="w-full border-collapse">
               <thead>
                 <tr className="bg-gray-100 border-b-2 border-gray-300">
-                  <th className="px-4 py-3 text-left font-semibold text-gray-900 min-w-[150px]">{t("comparison.colAspect")}</th>
-                  <th className="px-4 py-3 text-left font-semibold text-gray-700 min-w-[250px]">{t("comparison.colTraditional")}</th>
-                  <th className="px-4 py-3 text-left font-semibold text-sky-800 min-w-[250px]">{t("comparison.colOpenIndu")}</th>
+                  <th className="px-4 py-3 text-left font-semibold text-gray-900 min-w-[150px]">
+                    {t("comparison.colAspect")}
+                  </th>
+                  <th className="px-4 py-3 text-left font-semibold text-gray-700 min-w-[250px]">
+                    {t("comparison.colTraditional")}
+                  </th>
+                  <th className="px-4 py-3 text-left font-semibold text-sky-800 min-w-[250px]">
+                    {t("comparison.colOpenIndu")}
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 {comparisons.map((row, idx) => (
                   <tr key={row.aspect} className={idx % 2 === 0 ? "bg-white" : "bg-gray-50"}>
-                    <td className="px-4 py-4 font-semibold text-gray-900 border-b border-gray-200">{row.aspect}</td>
-                    <td className="px-4 py-4 text-gray-600 border-b border-gray-200">{row.traditional}</td>
-                    <td className="px-4 py-4 text-sky-800 border-b border-gray-200 font-medium">{row.openindu}</td>
+                    <td className="px-4 py-4 font-semibold text-gray-900 border-b border-gray-200">
+                      {row.aspect}
+                    </td>
+                    <td className="px-4 py-4 text-gray-600 border-b border-gray-200">
+                      {row.traditional}
+                    </td>
+                    <td className="px-4 py-4 text-sky-800 border-b border-gray-200 font-medium">
+                      {row.openindu}
+                    </td>
                   </tr>
                 ))}
               </tbody>

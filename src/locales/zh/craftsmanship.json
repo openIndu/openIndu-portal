@@ -10,6 +10,7 @@
   },
   "industries": {
     "heading": "行业工艺专栏",
+    "scopeNote": "本页汇总社区在五大行业积累的工艺经验；其中面板显示、半导体、新能源三个方向另有经过验证的完整解决方案案例，见「行业场景」。",
     "enterForum": "进入论坛",
     "panel": {
       "name": "面板显示工艺",
@@ -40,10 +41,26 @@
   "benefits": {
     "heading": "参与工艺知识库的价值",
     "items": [
-      { "icon": "📋", "title": "真实案例分享", "description": "来自一线的工艺工程师分享实际生产中遇到的问题和解决方案" },
-      { "icon": "📊", "title": "参数库共享", "description": "工艺参数、温度曲线、时间设定等关键参数的众包库" },
-      { "icon": "🎯", "title": "最佳实践", "description": "跨企业、跨行业学习——电池企业的经验帮助面板企业优化" },
-      { "icon": "🔧", "title": "问题解决", "description": "遇到良率下降？论坛工艺讨论快速定位根本原因" },
+      {
+        "icon": "📋",
+        "title": "真实案例分享",
+        "description": "来自一线的工艺工程师分享实际生产中遇到的问题和解决方案"
+      },
+      {
+        "icon": "📊",
+        "title": "参数库共享",
+        "description": "工艺参数、温度曲线、时间设定等关键参数的众包库"
+      },
+      {
+        "icon": "🎯",
+        "title": "最佳实践",
+        "description": "跨企业、跨行业学习——电池企业的经验帮助面板企业优化"
+      },
+      {
+        "icon": "🔧",
+        "title": "问题解决",
+        "description": "遇到良率下降？论坛工艺讨论快速定位根本原因"
+      },
       { "icon": "💰", "title": "成本优化", "description": "分享降低成本、提升效率的工艺创新" },
       { "icon": "⭐", "title": "行业认可", "description": "工艺实践获得同行认可，建立行业影响力" }
     ]
@@ -55,9 +72,18 @@
     "oled": { "title": "面板工艺流程｜OLED：从背板到封装、切割与显示模组", "industry": "面板显示" },
     "wafer": { "title": "半导体工艺流程｜从硅晶圆到封装测试成品", "industry": "半导体" },
     "battery": { "title": "电池工艺流程｜锂离子电芯到模组与 PACK", "industry": "新能源" },
-    "pv": { "title": "能源装备工艺流程｜晶硅光伏组件从电池片到 EL/IV 与出货", "industry": "新能源" },
-    "automotive": { "title": "汽车电子工艺流程｜从 PCBA 到控制器总成、刷写与 EOL", "industry": "汽车电子" },
-    "robot": { "title": "高端装备工艺流程｜工业机器人从部件到标定、FAT 与交付", "industry": "高端装备" }
+    "pv": {
+      "title": "能源装备工艺流程｜晶硅光伏组件从电池片到 EL/IV 与出货",
+      "industry": "新能源"
+    },
+    "automotive": {
+      "title": "汽车电子工艺流程｜从 PCBA 到控制器总成、刷写与 EOL",
+      "industry": "汽车电子"
+    },
+    "robot": {
+      "title": "高端装备工艺流程｜工业机器人从部件到标定、FAT 与交付",
+      "industry": "高端装备"
+    }
   },
   "howItWorks": {
     "heading": "如何贡献工艺知识",

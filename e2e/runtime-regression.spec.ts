@@ -30,7 +30,7 @@ test.describe("Runtime regression", () => {
     await page.goto("/");
 
     await expect(page.locator("h1").first()).toBeVisible();
-    await expect(page.getByRole("heading", { name: "三步掌握 openIndu" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "三步掌握openIndu社区" })).toBeVisible();
     expect(pageErrors).toEqual([]);
   });
 });

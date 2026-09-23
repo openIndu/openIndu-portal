@@ -22,6 +22,21 @@
     "forum": "Forum",
     "aiAssistant": "AI Assistant"
   },
+  "cookieConsent": {
+    "title": "openIndu Community Respects Your Privacy",
+    "description": "This site uses necessary browser storage to work properly and optional first-party analytics to improve your browsing experience. By selecting Accept All, you consent to analytics. By selecting Reject All, analytics remains disabled. Select Manage Cookies to choose your preference. We do not use third-party advertising trackers.",
+    "cookiesLink": "For more information, see About Cookies.",
+    "accept": "Accept All",
+    "reject": "Reject All",
+    "manage": "Manage Cookies",
+    "manageTitle": "Cookie preferences",
+    "manageDescription": "Necessary storage supports core and security features. Analytics helps us understand anonymous page visits.",
+    "necessary": "Necessary (always enabled)",
+    "analytics": "Analytics",
+    "cancel": "Cancel",
+    "save": "Save preferences",
+    "settings": "Cookie settings"
+  },
   "auth": {
     "signIn": "Sign in / Sign up",
     "signOut": "Sign out",
@@ -53,7 +68,6 @@
     "aiAssistantBot": "AI Assistant Bot",
     "relatedPlatforms": "Related Platforms",
     "serviceStatus": "Service Status",
-    "communityAdmin": "Community Admin",
     "legalAndPrivacy": "Legal & Privacy",
     "privacyStatement": "Privacy Statement",
     "legalNotice": "Legal Notice",
