@@ -23,5 +23,4 @@
 
 - [GitHub](https://github.com/openindu/): openIndu 开源组织，所有核心代码公开。
 - [Gitee](https://gitee.com/openIndu/): openIndu 国内镜像，方便国内开发者访问。
-- [管理后台](https://admin.openindu.com/): 社区管理平台，需登录。
 - [服务状态](https://monitor.openindu.com/status/service): 社区服务运行状态监控。

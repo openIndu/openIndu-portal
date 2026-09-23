@@ -1,13 +1,34 @@
 {
   "seo": {
-    "title": "项目地图｜openIndu 工程工具栈社区",
-    "description": "了解 openIndu 的五个协作方向：Forum、openIndu-vision、openIndu-studio、openIndu-cim + openIndu-platform 与 PLC Experiment，以及各方向的能力边界。"
+    "title": "社区路线图｜openIndu",
+    "description": "了解 openIndu 社区从知识共建、工程资产复用到工具协同与场景验证的演进路线，并探索路线图下方的五个项目方向。"
   },
   "hero": {
-    "title": "openIndu 项目地图",
-    "subtitle": "论坛沉淀知识，工具承载工程复用，状态与证据说明当前边界",
+    "title": "openIndu 社区路线图",
+    "subtitle": "从现场知识出发，共建可复用的工程资产，以可核验的实践连接社区与工具",
     "formula": "Forum + openIndu-vision + openIndu-studio + openIndu-cim & openIndu-platform + PLC Experiment"
   },
+  "roadmap": {
+    "heading": "从知识共建到实践验证",
+    "note": "以下阶段描述社区的演进方向，不代表发布日期或已完成的里程碑。实际进展以各仓库的发布、测试和验证记录为准。",
+    "knowledge": {
+      "title": "共建现场知识",
+      "description": "将真实问题带入论坛，记录现场场景、约束、工艺知识与验证方法，让经验能够被补充和复核。"
+    },
+    "assets": {
+      "title": "沉淀工程资产",
+      "description": "将经过评审的经验整理为指南、模板、映射与工程工作流产物，支持复用并保留可核验的依据。"
+    },
+    "collaboration": {
+      "title": "推动工具协同",
+      "description": "围绕视觉、工程工作流、设备互联与工业数据探索项目协作，明确接口和各自的能力边界。"
+    },
+    "validation": {
+      "title": "验证实际场景",
+      "description": "通过可复现的案例检验工具协作，公开支持版本、验证结果和已知限制，再逐步扩展能力范围。"
+    }
+  },
+  "projects": { "heading": "探索 openIndu 项目" },
   "layers": {
     "forum": {
       "title": "论坛",
@@ -65,11 +86,31 @@
     "colTraditional": "容易产生的误解",
     "colOpenIndu": "openIndu 的做法",
     "rows": [
-      { "aspect": "项目地图", "traditional": "方向存在等于产品已经完成", "openindu": "方向、状态和证据分别展示" },
-      { "aspect": "论坛文章", "traditional": "内容覆盖等于具备行业交付能力", "openindu": "内容标为 Content，不外推交付能力" },
-      { "aspect": "代码仓库", "traditional": "有代码等于已经工程验证", "openindu": "README、Release、测试和限制共同说明状态" },
-      { "aspect": "许可证", "traditional": "把整个生态统一概括为一种许可证", "openindu": "以各仓库 LICENSE 和依赖义务为准" },
-      { "aspect": "软 PLC", "traditional": "实验路线等于可替代硬 PLC", "openindu": "明确标记 Experiment / E0 和下一验证门槛" }
+      {
+        "aspect": "项目地图",
+        "traditional": "方向存在等于产品已经完成",
+        "openindu": "方向、状态和证据分别展示"
+      },
+      {
+        "aspect": "论坛文章",
+        "traditional": "内容覆盖等于具备行业交付能力",
+        "openindu": "内容标为 Content，不外推交付能力"
+      },
+      {
+        "aspect": "代码仓库",
+        "traditional": "有代码等于已经工程验证",
+        "openindu": "README、Release、测试和限制共同说明状态"
+      },
+      {
+        "aspect": "许可证",
+        "traditional": "把整个生态统一概括为一种许可证",
+        "openindu": "以各仓库 LICENSE 和依赖义务为准"
+      },
+      {
+        "aspect": "软 PLC",
+        "traditional": "实验路线等于可替代硬 PLC",
+        "openindu": "明确标记 Experiment / E0 和下一验证门槛"
+      }
     ]
   },
   "cta": {

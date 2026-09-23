@@ -40,7 +40,7 @@
   "stack": {
     "view": "查看 →",
     "learn": "了解 →",
-    "l4Title": "工艺知识库 (Craftsmanship)",
+    "l4Title": "工艺知识库 (Forum)",
     "l4Desc": "论坛工艺专栏：面板、芯片、新能源",
     "l3Vision": "工业视觉",
     "l3VisionDesc": "openIndu-vision",
@@ -48,15 +48,15 @@
     "l3StudioDesc": "openIndu-studio",
     "l3Data": "数据采集",
     "l3DataDesc": "openIndu-cim / openIndu-platform",
-    "l2Title": "编程与组态层 (Programming)",
+    "l2Title": "编程与组态层 (openIndu-studio)",
     "l2Desc": "PLC编程、HMI、选型、BOM、电路图、跨品牌代码生成",
-    "l1Title": "硬件与 OS 层 (Foundation)",
+    "l1Title": "硬件与 OS 层 (PLC Experiment)",
     "l1Desc": "国产工控芯片 + openEuler（国产操作系统）",
     "ctaArchitecture": "理解全栈架构",
     "ctaUseCases": "查看行业场景"
   },
   "steps": {
-    "heading": "三步掌握 openIndu",
+    "heading": "三步掌握openIndu社区",
     "subheading": "从理解全栈架构，到选择适合的产品，openIndu 帮你快速上手",
     "s1Title": "理解全栈架构",
     "s1Desc": "4 层从硬件到工艺知识，掌握 openIndu 如何打通工业自动化全流程",
@@ -69,6 +69,13 @@
     "motionControl": "运动控制",
     "vision": "工业视觉",
     "iiot": "工业互联网"
+  },
+  "showcase": {
+    "heading": "明星项目推荐",
+    "subheading": "openIndu-platform 工业互联网平台与 openIndu-station 视觉工作台的真实运行界面",
+    "prev": "上一张",
+    "next": "下一张",
+    "goTo": "查看第 {{n}} 张"
   },
   "knowledge": {
     "heading": "工艺知识众包库",

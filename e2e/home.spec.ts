@@ -20,14 +20,19 @@ const GOLDEN = {
     en: "Share process knowledge, build tools together, and advance collaboration across vision, control, and industrial data.",
   },
   stackTitles: {
-    zh: ["工艺知识库 (Craftsmanship)", "编程与组态层 (Programming)", "硬件与 OS 层 (Foundation)"],
-    en: ["Craftsmanship Knowledge Base", "Programming Layer", "Hardware & OS Layer (Foundation)"],
+    zh: ["工艺知识库 (Forum)", "编程与组态层 (openIndu-studio)", "硬件与 OS 层 (PLC Experiment)"],
+    en: [
+      "Craftsmanship Knowledge Base (Forum)",
+      "Programming Layer (openIndu-studio)",
+      "Hardware & OS Layer (PLC Experiment)",
+    ],
   },
-  stepsHeading: { zh: "三步掌握 openIndu", en: "Three Steps to openIndu" },
+  stepsHeading: { zh: "三步掌握openIndu社区", en: "Three Steps to openIndu" },
   stepTitles: {
     zh: ["理解全栈架构", "选择行业场景", "选择产品工具"],
     en: ["Understand the full stack", "Pick your industry scenario", "Choose your tools"],
   },
+  showcaseHeading: { zh: "明星项目推荐", en: "Product Interfaces" },
   knowledgeHeading: { zh: "工艺知识众包库", en: "A Crowdsourced Process Library" },
   openSourceHeading: { zh: "开放协作，欢迎参与", en: "Open Collaboration — Come Build With Us" },
   ctaHeading: { zh: "加入 openIndu 社区", en: "Join the openIndu Community" },
@@ -93,12 +98,22 @@ for (const { locale, prefix, label } of LOCALES) {
     test("mobile navigation locks scrolling and closes with Escape", async ({ page }) => {
       await page.setViewportSize({ width: 390, height: 844 });
       await page.goto(prefix + "/");
-      const menuButton = page.getByRole("button", { name: locale === "zh" ? "打开导航菜单" : "Open navigation menu" });
+      const menuButton = page.getByRole("button", {
+        name: locale === "zh" ? "打开导航菜单" : "Open navigation menu",
+      });
       await menuButton.click();
-      await expect(page.getByRole("navigation", { name: locale === "zh" ? "移动端导航" : "Mobile navigation" })).toBeVisible();
+      await expect(
+        page.getByRole("navigation", {
+          name: locale === "zh" ? "移动端导航" : "Mobile navigation",
+        }),
+      ).toBeVisible();
       await expect.poll(() => page.evaluate(() => document.body.style.overflow)).toBe("hidden");
       await page.keyboard.press("Escape");
-      await expect(page.getByRole("navigation", { name: locale === "zh" ? "移动端导航" : "Mobile navigation" })).toBeHidden();
+      await expect(
+        page.getByRole("navigation", {
+          name: locale === "zh" ? "移动端导航" : "Mobile navigation",
+        }),
+      ).toBeHidden();
       await expect(menuButton).toBeFocused();
       await expect.poll(() => page.evaluate(() => document.body.style.overflow)).toBe("");
     });
@@ -119,6 +134,16 @@ for (const { locale, prefix, label } of LOCALES) {
       for (const title of GOLDEN.stepTitles[locale]) {
         await expect(page.getByText(title, { exact: true }).first()).toBeVisible();
       }
+    });
+
+    test("displays the product showcase carousel", async ({ page }) => {
+      await page.goto(prefix + "/");
+      const carousel = page.getByRole("region", { name: gv("showcaseHeading", locale) });
+      await expect(carousel).toBeVisible();
+      const nextLabel = locale === "zh" ? "下一张" : "Next slide";
+      await expect(carousel.getByRole("link").first()).toBeVisible();
+      await carousel.getByRole("button", { name: nextLabel }).click();
+      await expect(carousel.getByRole("link").first()).toBeVisible();
     });
 
     test("displays knowledge sharing and open collaboration sections", async ({ page }) => {

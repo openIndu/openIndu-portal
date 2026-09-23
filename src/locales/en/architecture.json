@@ -1,13 +1,34 @@
 {
   "seo": {
-    "title": "Project Map | openIndu Engineering Tool Stack Community",
-    "description": "Explore five openIndu collaboration directions: Forum, openIndu-vision, openIndu-studio, openIndu-cim + openIndu-platform, and PLC Experiment, with explicit capability boundaries."
+    "title": "Community Roadmap | openIndu",
+    "description": "Explore the openIndu community roadmap, from shared knowledge and reusable engineering assets to tool collaboration and scenario validation, followed by our five project directions."
   },
   "hero": {
-    "title": "The openIndu Project Map",
-    "subtitle": "The forum preserves knowledge, tools enable engineering reuse, and status plus evidence define today's boundaries",
+    "title": "openIndu Community Roadmap",
+    "subtitle": "Build together: share field knowledge, create reusable engineering assets, and connect tools through verifiable practice",
     "formula": "Forum + openIndu-vision + openIndu-studio + openIndu-cim & openIndu-platform + PLC Experiment"
   },
+  "roadmap": {
+    "heading": "From Shared Knowledge to Validated Practice",
+    "note": "These stages describe our community's development direction, not release dates or completed milestones. Repository releases, tests, and validation records show actual progress.",
+    "knowledge": {
+      "title": "Share Field Knowledge",
+      "description": "Bring practical problems into the forum. Record context, constraints, process knowledge, and validation methods so others can contribute and review."
+    },
+    "assets": {
+      "title": "Build Reusable Assets",
+      "description": "Turn reviewed experience into guides, templates, mappings, and engineering workflow artifacts that can be reused and checked."
+    },
+    "collaboration": {
+      "title": "Connect Project Tools",
+      "description": "Develop collaboration across vision, engineering workflows, connectivity, and industrial data, with explicit interfaces and capability boundaries."
+    },
+    "validation": {
+      "title": "Validate Real Scenarios",
+      "description": "Use reproducible cases to check tool collaboration. Share supported versions, results, and limitations before extending a capability claim."
+    }
+  },
+  "projects": { "heading": "Explore the openIndu Projects" },
   "layers": {
     "forum": {
       "title": "Forum",
@@ -25,7 +46,12 @@
       "title": "Engineering Assets",
       "titleEn": "openIndu-studio",
       "description": "Engineering workflows around electrical modules, diagrams, BOM, I/O planning, and PLC/HMI intermediate artifacts.",
-      "benefits": ["Engineering assets", "Template reuse", "Traceable process", "Verifiable artifacts"]
+      "benefits": [
+        "Engineering assets",
+        "Template reuse",
+        "Traceable process",
+        "Verifiable artifacts"
+      ]
     },
     "data": {
       "title": "Connectivity and Data",
@@ -65,11 +91,31 @@
     "colTraditional": "Common misunderstanding",
     "colOpenIndu": "openIndu approach",
     "rows": [
-      { "aspect": "Project map", "traditional": "A direction means a finished product", "openindu": "Direction, status, and evidence are shown separately" },
-      { "aspect": "Forum articles", "traditional": "Content coverage means delivery capability", "openindu": "Content is labelled as Content, without delivery claims" },
-      { "aspect": "Repositories", "traditional": "Code means engineering validation", "openindu": "README, releases, tests, and limitations define status" },
-      { "aspect": "Licensing", "traditional": "One license describes the whole ecosystem", "openindu": "Each repository LICENSE and dependency obligation is authoritative" },
-      { "aspect": "Soft PLC", "traditional": "An experiment can replace a hardware PLC", "openindu": "Experiment / E0 and the next evidence gates are explicit" }
+      {
+        "aspect": "Project map",
+        "traditional": "A direction means a finished product",
+        "openindu": "Direction, status, and evidence are shown separately"
+      },
+      {
+        "aspect": "Forum articles",
+        "traditional": "Content coverage means delivery capability",
+        "openindu": "Content is labelled as Content, without delivery claims"
+      },
+      {
+        "aspect": "Repositories",
+        "traditional": "Code means engineering validation",
+        "openindu": "README, releases, tests, and limitations define status"
+      },
+      {
+        "aspect": "Licensing",
+        "traditional": "One license describes the whole ecosystem",
+        "openindu": "Each repository LICENSE and dependency obligation is authoritative"
+      },
+      {
+        "aspect": "Soft PLC",
+        "traditional": "An experiment can replace a hardware PLC",
+        "openindu": "Experiment / E0 and the next evidence gates are explicit"
+      }
     ]
   },
   "cta": {

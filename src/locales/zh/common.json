@@ -22,6 +22,21 @@
     "forum": "论坛",
     "aiAssistant": "智能咨询"
   },
+  "cookieConsent": {
+    "title": "openIndu 社区尊重您的隐私",
+    "description": "本网站使用必要的浏览器存储以保障正常运行，并使用可选的第一方访问统计来改善您的浏览体验。选择“全部接受”即表示您同意启用访问统计；选择“全部拒绝”将保持访问统计关闭；选择“管理 Cookie”可自行设置偏好。我们不使用第三方广告追踪器。",
+    "cookiesLink": "更多信息请参阅《关于 Cookies》。",
+    "accept": "全部接受",
+    "reject": "全部拒绝",
+    "manage": "管理 Cookie",
+    "manageTitle": "Cookie 偏好设置",
+    "manageDescription": "必要存储用于核心功能与安全；访问统计帮助我们了解匿名页面访问情况。",
+    "necessary": "必要存储（始终启用）",
+    "analytics": "访问统计",
+    "cancel": "取消",
+    "save": "保存偏好",
+    "settings": "Cookie 设置"
+  },
   "auth": {
     "signIn": "登录 / 注册",
     "signOut": "退出",
@@ -53,7 +68,6 @@
     "aiAssistantBot": "智能咨询机器人",
     "relatedPlatforms": "相关平台",
     "serviceStatus": "社区服务状态",
-    "communityAdmin": "社区管理平台",
     "legalAndPrivacy": "法律与隐私",
     "privacyStatement": "隐私声明",
     "legalNotice": "法律声明",
