@@ -72,7 +72,7 @@ export function ProductShowcaseCarousel() {
   }, [paused, total]);
 
   return (
-    <section className="pt-6 pb-16 sm:pt-8 sm:pb-20 bg-gradient-to-b from-white via-sky-50/40 to-white overflow-hidden">
+    <section className="pt-6 pb-16 sm:pt-8 sm:pb-20 bg-white overflow-hidden">
       <div className="text-center mb-10 sm:mb-12 px-4 sm:px-6 lg:px-8">
         <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-3">
           {t("home:showcase.heading")}
@@ -92,7 +92,7 @@ export function ProductShowcaseCarousel() {
         onFocus={() => setPaused(true)}
         onBlur={() => setPaused(false)}
       >
-        <div className="overflow-hidden bg-gradient-to-br from-sky-50 via-white to-sky-50 border-y border-sky-100">
+        <div className="overflow-hidden bg-white">
           <div
             className="flex transition-transform duration-700 ease-out"
             style={{ transform: `translateX(-${index * 100}%)` }}
@@ -105,11 +105,11 @@ export function ProductShowcaseCarousel() {
                 aria-hidden={i !== index}
                 tabIndex={i === index ? 0 : -1}
               >
-                <div className="max-w-6xl mx-auto aspect-video p-3 sm:p-6 lg:p-8">
+                <div className="max-w-6xl mx-auto aspect-video p-3 sm:p-6 lg:p-8 flex items-center justify-center">
                   <img
                     src={slide.src}
                     alt={t(`${slide.ns}:${slide.altKey}`)}
-                    className="w-full h-full object-contain rounded-xl shadow-2xl ring-1 ring-black/5 transition-transform duration-500 group-hover:scale-[1.02]"
+                    className="block w-auto h-auto max-w-full max-h-full rounded-xl transition-transform duration-500 group-hover:scale-[1.02] motion-reduce:transform-none motion-reduce:transition-none"
                     loading="lazy"
                     decoding="async"
                   />
