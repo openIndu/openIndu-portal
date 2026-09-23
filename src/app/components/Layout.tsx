@@ -495,11 +495,6 @@ export function Layout() {
                     {t("footer.serviceStatus")}
                   </a>
                 </li>
-                <li>
-                  <a href="https://admin.openindu.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white py-1.5 pr-3 min-w-[60px] min-h-[44px] inline-flex items-center">
-                    {t("footer.communityAdmin")}
-                  </a>
-                </li>
                 {/* Rehomed from the removed "Community & Developers" column so
                     the code-hosting links stay reachable from the footer. */}
                 <li>
