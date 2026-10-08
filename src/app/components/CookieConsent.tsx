@@ -53,7 +53,7 @@ export function CookieConsent({ preference, onChange }: Props) {
         <section
           aria-label={t("cookieConsent.title")}
           aria-live="polite"
-          className="fixed inset-x-0 bottom-0 z-[60] border-t border-sky-200 bg-white shadow-[0_-12px_40px_rgba(15,23,42,0.16)]"
+          className="border-t border-sky-200 bg-white shadow-[0_-12px_40px_rgba(15,23,42,0.16)] sm:fixed sm:inset-x-0 sm:bottom-0 sm:z-[60]"
           data-testid="cookie-consent-banner"
         >
           <div className="mx-auto grid max-w-7xl gap-6 px-5 py-6 sm:px-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:gap-10 lg:py-7">

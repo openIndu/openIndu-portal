@@ -419,9 +419,9 @@ export function Resources() {
 
         <div className="mt-6 flex flex-col items-center justify-between gap-3 sm:flex-row">
           <p className="text-sm text-gray-500">{t("pagination.pageOf", { page, total: totalPages })}</p>
-          <div className="flex items-center gap-3">
-            <span className="text-sm text-gray-500">{t("pagination.totalItems", { count: data.total })}</span>
-            <Select className="h-9 w-24" value={String(pageSize)} onChange={(event) => { setPageSize(Number(event.target.value)); setPage(1); }} aria-label={t("pagination.perPageAriaLabel")}>
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:justify-end">
+            <span className="whitespace-nowrap text-sm text-gray-500">{t("pagination.totalItems", { count: data.total })}</span>
+            <Select className="h-9 w-24 shrink-0" value={String(pageSize)} onChange={(event) => { setPageSize(Number(event.target.value)); setPage(1); }} aria-label={t("pagination.perPageAriaLabel")}>
               {PAGE_SIZE_OPTIONS.map((n) => <option key={n} value={n}>{t("pagination.perPage", { n })}</option>)}
             </Select>
             <div className="flex gap-2">

@@ -76,3 +76,31 @@ test("English route renders English privacy controls", async ({ page }) => {
     "Manage Cookies",
   ]);
 });
+
+for (const { width, path, label } of [
+  { width: 320, path: "/resources", label: "每页数量" },
+  { width: 390, path: "/resources", label: "每页数量" },
+  { width: 390, path: "/en/resources", label: "Items per page" },
+]) {
+  test(`mobile consent notice does not cover resource pagination at ${width}px on ${path}`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 844 });
+    await page.goto(path);
+
+    const banner = page.getByTestId("cookie-consent-banner");
+    const perPage = page.getByRole("combobox", { name: label });
+    await expect(banner).toHaveCSS("position", "static");
+    await perPage.scrollIntoViewIfNeeded();
+
+    const bannerBox = await banner.boundingBox();
+    const perPageBox = await perPage.boundingBox();
+    expect(bannerBox).not.toBeNull();
+    expect(perPageBox).not.toBeNull();
+    expect(bannerBox!.y + bannerBox!.height).toBeLessThanOrEqual(perPageBox!.y);
+    await expect(perPage).toBeInViewport();
+  });
+}
+
+test("desktop consent notice remains fixed at the bottom", async ({ page }) => {
+  await page.goto("/resources");
+  await expect(page.getByTestId("cookie-consent-banner")).toHaveCSS("position", "fixed");
+});
