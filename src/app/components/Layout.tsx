@@ -23,7 +23,7 @@ export function Layout() {
   const { t, i18n } = useTranslation("common");
   const locale = i18n.language; // "zh" | "en"
   const [cookieConsent, setCookieConsent] = useState(readCookieConsent);
-  const lastTrackedPath = useRef<string | null>(null);
+  const lastTrackedLocationKey = useRef<string | null>(null);
 
   // Scroll to top and close any open dropdown on every page navigation
   useEffect(() => {
@@ -67,10 +67,10 @@ export function Layout() {
   }, [mobileMenuOpen]);
 
   useEffect(() => {
-    if (!analyticsAllowed(cookieConsent) || lastTrackedPath.current === location.pathname) return;
-    lastTrackedPath.current = location.pathname;
+    if (!analyticsAllowed(cookieConsent) || lastTrackedLocationKey.current === location.key) return;
+    lastTrackedLocationKey.current = location.key;
     void visitsApi.track(location.pathname).catch(() => {});
-  }, [cookieConsent, location.pathname]);
+  }, [cookieConsent, location.key, location.pathname]);
   const { isAuthenticated, user, logout } = useAuth();
   const displayName = getDisplayName(user);
 
