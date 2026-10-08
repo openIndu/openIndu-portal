@@ -406,6 +406,9 @@ export function Layout() {
         </div>
       )}
 
+      {/* Keep the consent notice in the mobile document flow so it cannot cover page controls. */}
+      <CookieConsent preference={cookieConsent} onChange={setCookieConsent} />
+
       {/* Main Content */}
       <main id="main-content" role="main">
         <Outlet />
@@ -576,8 +579,6 @@ export function Layout() {
           </div>
         </div>
       </footer>
-
-      <CookieConsent preference={cookieConsent} onChange={setCookieConsent} />
     </div>
   );
 }
