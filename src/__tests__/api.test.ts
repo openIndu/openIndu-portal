@@ -67,6 +67,7 @@ const {
   documentsApi,
   softwareApi,
   portalApi,
+  visitsApi,
   apiClient,
   unwrap,
   normalizeAuthResponse,
@@ -81,6 +82,7 @@ const {
   documentsApi: typeof apiModule.documentsApi;
   softwareApi: typeof apiModule.softwareApi;
   portalApi: typeof apiModule.portalApi;
+  visitsApi: typeof apiModule.visitsApi;
   apiClient: typeof apiModule.apiClient;
   unwrap: <T>(response: AxiosResponse<apiModule.ApiEnvelope<T> | T>) => T;
   normalizeAuthResponse: (payload: apiModule.AuthResponse | apiModule.NestedAuthResponse) => apiModule.AuthResponse;
@@ -289,6 +291,21 @@ describe("isTooManyRequests", () => {
 });
 
 // --- API tests ---
+
+describe("visitsApi", () => {
+  it("sends both visits when the same page is visited again immediately", async () => {
+    const mockPost = vi.spyOn(apiClient, "post").mockResolvedValue({
+      data: { code: 200, data: { tracked: true } },
+    });
+
+    await visitsApi.track("/");
+    await visitsApi.track("/");
+
+    expect(mockPost).toHaveBeenCalledTimes(2);
+    expect(mockPost).toHaveBeenNthCalledWith(1, "/visits/track", expect.objectContaining({ path: "/" }));
+    expect(mockPost).toHaveBeenNthCalledWith(2, "/visits/track", expect.objectContaining({ path: "/" }));
+  });
+});
 
 describe("authApi", () => {
   it("should have all expected methods", () => {

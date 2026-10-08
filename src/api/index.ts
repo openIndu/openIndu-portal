@@ -440,17 +440,8 @@ export const softwareApi = {
   },
 };
 
-let lastTrackKey = "";
-
 export const visitsApi = {
   async track(path = window.location.pathname) {
-    // React StrictMode/dev and rapid route effects can double-fire. Bucket by
-    // second so normal refreshes are still counted while duplicate same-path
-    // effects do not inflate PV.
-    const bucket = Math.floor(Date.now() / 1000);
-    const key = `${path}:${bucket}`;
-    if (lastTrackKey === key) return { tracked: false, deduped: true };
-    lastTrackKey = key;
     return unwrap(await apiClient.post<ApiEnvelope<{ tracked: boolean }>>("/visits/track", {
       path,
       client_id: getClientId(),
