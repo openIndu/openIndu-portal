@@ -25,31 +25,30 @@ function upsertMeta(selector: string, attributes: Record<string, string>) {
     element = document.createElement("meta");
     document.head.appendChild(element);
   }
-  Object.entries(attributes).forEach(([key, value]) =>
-    element?.setAttribute(key, value),
-  );
+  Object.entries(attributes).forEach(([key, value]) => element?.setAttribute(key, value));
 }
 
-function upsertLink(
-  selector: string,
-  attributes: Record<string, string>,
-) {
+function upsertLink(selector: string, attributes: Record<string, string>) {
   let element = document.head.querySelector<HTMLLinkElement>(selector);
   if (!element) {
     element = document.createElement("link");
     document.head.appendChild(element);
   }
-  Object.entries(attributes).forEach(([key, value]) =>
-    element?.setAttribute(key, value),
-  );
+  Object.entries(attributes).forEach(([key, value]) => element?.setAttribute(key, value));
+}
+
+/**
+ * Nginx serves prerendered route directories as their trailing-slash URLs.
+ * Keep every search-engine-facing URL on that canonical representation.
+ */
+function canonicalRoutePath(path: string) {
+  return path === "/" ? "/" : `${path.replace(/\/+$/, "")}/`;
 }
 
 /** Replace all hreflang alternates with the given list. */
 function setHreflangs(alternates: Array<{ hreflang: string; href: string }>) {
   // Remove existing alternates
-  document.head
-    .querySelectorAll('link[rel="alternate"][hreflang]')
-    .forEach((el) => el.remove());
+  document.head.querySelectorAll('link[rel="alternate"][hreflang]').forEach((el) => el.remove());
   // Add new ones
   for (const { hreflang, href } of alternates) {
     const link = document.createElement("link");
@@ -77,10 +76,11 @@ export function SEO({
     // og:locale / <html lang> regardless of what the URL prefix says.
     const pageLocale = localized ? pathLocale : "zh";
     const prefix = pageLocale === "en" ? "/en" : "";
+    const routePath = canonicalPath ? canonicalRoutePath(canonicalPath) : undefined;
 
     // Canonical URL: locale-neutral path + locale prefix
-    const fullCanonical = canonicalPath
-      ? `${origin}${localized ? prefix : ""}${canonicalPath}`
+    const fullCanonical = routePath
+      ? `${origin}${localized ? prefix : ""}${routePath}`
       : window.location.href;
 
     const imageUrl = image
@@ -98,8 +98,7 @@ export function SEO({
       name: "description",
       content: description,
     });
-    if (keywords)
-      upsertMeta('meta[name="keywords"]', { name: "keywords", content: keywords });
+    if (keywords) upsertMeta('meta[name="keywords"]', { name: "keywords", content: keywords });
 
     // Open Graph
     upsertMeta('meta[property="og:title"]', {
@@ -156,19 +155,19 @@ export function SEO({
     });
 
     // hreflang alternates
-    if (localized && canonicalPath) {
+    if (localized && routePath) {
       setHreflangs([
         {
           hreflang: "zh-Hans",
-          href: `${origin}${canonicalPath}`,
+          href: `${origin}${routePath}`,
         },
         {
           hreflang: "en",
-          href: `${origin}/en${canonicalPath}`,
+          href: `${origin}/en${routePath}`,
         },
         {
           hreflang: "x-default",
-          href: `${origin}${canonicalPath}`,
+          href: `${origin}${routePath}`,
         },
       ]);
     } else {

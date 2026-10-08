@@ -10,14 +10,8 @@ import { test, expect } from "@playwright/test";
  * Two harness gaps this file works around, both confirmed by hand against
  * this project's actual `vite preview` behavior (not assumed):
  *
- * 1. `vite preview`'s static resolution does not replicate nginx's
- *    `try_files $uri $uri/ /index.html` for extensionless directory
- *    paths. A bare `/en` (no trailing slash) silently falls back to the
- *    root dist/index.html (ZH) instead of dist/en/index.html -- nginx's
- *    `$uri/` step + `index index.html;` directive resolves this
- *    correctly in production (verified: `curl /en` -> zh-CN,
- *    `curl /en/` -> en, `curl /en/index.html` -> en). All navigation
- *    below uses a trailing slash to get the same file nginx would serve.
+ * 1. Prerendered routes are directories, so their canonical form has a
+ *    trailing slash. All navigation below uses that representation.
  *
  * 2. SEO.tsx recomputes canonical/hreflang from `window.location.origin`
  *    on mount (client-side), so a live post-hydration DOM check reflects
@@ -135,12 +129,7 @@ test.describe("Prerendered HTML", () => {
     const html = await response!.text();
 
     expect(html).toContain('lang="en"');
-    // Trailing slash here is real, consistent React Router behavior for the
-    // index route under a non-root basename (`/en`'s location.pathname is
-    // "/en/", not "/en") -- not a bug, just inconsistent with the no-slash
-    // "/en" used elsewhere (sitemap.xml, robots.txt, nginx). Flagged as a
-    // minor known nit, not fixed here (would mean touching routes.tsx/
-    // SEO.tsx, out of scope for this batch).
+    // The sitemap, canonical and server's directory URL are all slash-normalized.
     expect(html).toContain('<link rel="canonical" href="https://www.openindu.com/en/"');
     // Hero tagline is ZH-only; its presence would mean the EN build got
     // ZH content baked in (ADR C1 -- locale must resolve from the URL at
@@ -159,14 +148,14 @@ test.describe("Prerendered HTML", () => {
     const response = await page.goto(servePath("/en/motion-control"));
     const html = await response!.text();
     expect(html).toContain(
-      '<link rel="canonical" href="https://www.openindu.com/en/motion-control"',
+      '<link rel="canonical" href="https://www.openindu.com/en/motion-control/"',
     );
   });
 
   test("ZH subpage raw response canonical self-references correctly", async ({ page }) => {
     const response = await page.goto(servePath("/motion-control"));
     const html = await response!.text();
-    expect(html).toContain('<link rel="canonical" href="https://www.openindu.com/motion-control"');
+    expect(html).toContain('<link rel="canonical" href="https://www.openindu.com/motion-control/"');
   });
 
   test("EN structured data matches the visible page metadata and canonical URL", async ({
@@ -176,7 +165,7 @@ test.describe("Prerendered HTML", () => {
     const html = await response!.text();
     const schema = webPageJsonLd(html);
     expect(schema.name).toBe(TITLES["/en/architecture"]);
-    expect(schema.url).toBe("https://www.openindu.com/en/architecture");
+    expect(schema.url).toBe("https://www.openindu.com/en/architecture/");
     expect(schema.description).toContain("openIndu community roadmap");
     expect((schema.about as Record<string, unknown>).name).toBe(
       "Smart Manufacturing and Industrial Automation",
@@ -188,8 +177,8 @@ test.describe("Prerendered HTML", () => {
     expect(response.status()).toBe(200);
     const xml = await response.text();
     for (const path of SHARED) {
-      expect(xml).toContain(`https://www.openindu.com${path}`);
-      expect(xml).toContain(`https://www.openindu.com/en${path}`);
+      expect(xml).toContain(`https://www.openindu.com${path}/`);
+      expect(xml).toContain(`https://www.openindu.com/en${path}/`);
     }
   });
 
@@ -198,13 +187,13 @@ test.describe("Prerendered HTML", () => {
   }) => {
     const enResponse = await page.goto(servePath("/en/vision"));
     const enHtml = await enResponse!.text();
-    expect(enHtml).toContain('hreflang="zh-Hans" href="https://www.openindu.com/vision"');
-    expect(enHtml).toContain('hreflang="en" href="https://www.openindu.com/en/vision"');
+    expect(enHtml).toContain('hreflang="zh-Hans" href="https://www.openindu.com/vision/"');
+    expect(enHtml).toContain('hreflang="en" href="https://www.openindu.com/en/vision/"');
 
     const zhResponse = await page.goto(servePath("/vision"));
     const zhHtml = await zhResponse!.text();
-    expect(zhHtml).toContain('hreflang="zh-Hans" href="https://www.openindu.com/vision"');
-    expect(zhHtml).toContain('hreflang="en" href="https://www.openindu.com/en/vision"');
+    expect(zhHtml).toContain('hreflang="zh-Hans" href="https://www.openindu.com/vision/"');
+    expect(zhHtml).toContain('hreflang="en" href="https://www.openindu.com/en/vision/"');
   });
 
   test("ZH-only legal page raw response emits no hreflang alternates", async ({ page }) => {
