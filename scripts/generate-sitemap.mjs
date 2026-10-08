@@ -9,9 +9,12 @@ const LAST_MODIFIED = "2026-08-28";
 
 function localizedEntry(path, locale) {
   const localizedPath = locale === "en" ? `/en${path}` : path;
-  const location = path === "/" && locale === "en" ? `${ORIGIN}/en` : `${ORIGIN}${localizedPath}`;
-  const zh = `${ORIGIN}${path}`;
-  const en = path === "/" ? `${ORIGIN}/en` : `${ORIGIN}/en${path}`;
+  const canonicalPath = localizedPath === "/" ? "/" : `${localizedPath}/`;
+  const zhPath = path === "/" ? "/" : `${path}/`;
+  const enPath = path === "/" ? "/en/" : `/en${path}/`;
+  const location = `${ORIGIN}${canonicalPath}`;
+  const zh = `${ORIGIN}${zhPath}`;
+  const en = `${ORIGIN}${enPath}`;
   const priority = path === "/" ? "1.0" : path === "/resources" ? "0.9" : "0.8";
   const frequency = path === "/resources" ? "daily" : "weekly";
   return `  <url>
@@ -26,8 +29,9 @@ function localizedEntry(path, locale) {
 }
 
 function zhOnlyEntry(path) {
+  const canonicalPath = `${path}/`;
   return `  <url>
-    <loc>${ORIGIN}${path}</loc>
+    <loc>${ORIGIN}${canonicalPath}</loc>
     <lastmod>${LAST_MODIFIED}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
@@ -47,4 +51,3 @@ ${entries.join("\n")}
 
 writeFileSync(resolve(ROOT, "public", "sitemap.xml"), xml, "utf8");
 console.log(`Generated sitemap.xml with ${entries.length} URLs.`);
-

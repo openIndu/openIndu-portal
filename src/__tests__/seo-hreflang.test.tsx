@@ -17,9 +17,7 @@ function setPathname(pathname: string) {
 /** Reset head state between tests so meta/link don't leak. */
 function resetHead() {
   document.head
-    .querySelectorAll(
-      'meta, link[rel="canonical"], link[rel="alternate"][hreflang]',
-    )
+    .querySelectorAll('meta, link[rel="canonical"], link[rel="alternate"][hreflang]')
     .forEach((el) => el.remove());
   document.title = "";
   document.documentElement.lang = "";
@@ -52,9 +50,7 @@ describe("SEO — hreflang & locale", () => {
           localized
         />,
       );
-      const meta = document.head.querySelector<HTMLMetaElement>(
-        'meta[property="og:locale"]',
-      );
+      const meta = document.head.querySelector<HTMLMetaElement>('meta[property="og:locale"]');
       expect(meta?.content).toBe("en_US");
     });
 
@@ -69,10 +65,8 @@ describe("SEO — hreflang & locale", () => {
           localized
         />,
       );
-      const link = document.head.querySelector<HTMLLinkElement>(
-        'link[rel="canonical"]',
-      );
-      expect(link?.href).toBe("https://www.openindu.com/en/vision");
+      const link = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+      expect(link?.href).toBe("https://www.openindu.com/en/vision/");
     });
 
     it("emits hreflang alternates for zh-Hans, en, and x-default", () => {
@@ -96,15 +90,15 @@ describe("SEO — hreflang & locale", () => {
       }));
       expect(tags).toContainEqual({
         hreflang: "zh-Hans",
-        href: "https://www.openindu.com/vision",
+        href: "https://www.openindu.com/vision/",
       });
       expect(tags).toContainEqual({
         hreflang: "en",
-        href: "https://www.openindu.com/en/vision",
+        href: "https://www.openindu.com/en/vision/",
       });
       expect(tags).toContainEqual({
         hreflang: "x-default",
-        href: "https://www.openindu.com/vision",
+        href: "https://www.openindu.com/vision/",
       });
     });
   });
@@ -114,12 +108,7 @@ describe("SEO — hreflang & locale", () => {
       setPathname("/vision");
       resetHead();
       render(
-        <SEO
-          title="AI+视觉"
-          description="工业机器视觉平台。"
-          canonicalPath="/vision"
-          localized
-        />,
+        <SEO title="AI+视觉" description="工业机器视觉平台。" canonicalPath="/vision" localized />,
       );
       expect(document.documentElement.lang).toBe("zh-CN");
     });
@@ -128,16 +117,9 @@ describe("SEO — hreflang & locale", () => {
       setPathname("/vision");
       resetHead();
       render(
-        <SEO
-          title="AI+视觉"
-          description="工业机器视觉平台。"
-          canonicalPath="/vision"
-          localized
-        />,
+        <SEO title="AI+视觉" description="工业机器视觉平台。" canonicalPath="/vision" localized />,
       );
-      const meta = document.head.querySelector<HTMLMetaElement>(
-        'meta[property="og:locale"]',
-      );
+      const meta = document.head.querySelector<HTMLMetaElement>('meta[property="og:locale"]');
       expect(meta?.content).toBe("zh_CN");
     });
 
@@ -145,29 +127,17 @@ describe("SEO — hreflang & locale", () => {
       setPathname("/vision");
       resetHead();
       render(
-        <SEO
-          title="AI+视觉"
-          description="工业机器视觉平台。"
-          canonicalPath="/vision"
-          localized
-        />,
+        <SEO title="AI+视觉" description="工业机器视觉平台。" canonicalPath="/vision" localized />,
       );
-      const link = document.head.querySelector<HTMLLinkElement>(
-        'link[rel="canonical"]',
-      );
-      expect(link?.href).toBe("https://www.openindu.com/vision");
+      const link = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+      expect(link?.href).toBe("https://www.openindu.com/vision/");
     });
 
     it("emits hreflang alternates", () => {
       setPathname("/vision");
       resetHead();
       render(
-        <SEO
-          title="AI+视觉"
-          description="工业机器视觉平台。"
-          canonicalPath="/vision"
-          localized
-        />,
+        <SEO title="AI+视觉" description="工业机器视觉平台。" canonicalPath="/vision" localized />,
       );
       const alternates = document.head.querySelectorAll<HTMLLinkElement>(
         'link[rel="alternate"][hreflang]',
@@ -205,11 +175,9 @@ describe("SEO — hreflang & locale", () => {
           localized={false}
         />,
       );
-      const link = document.head.querySelector<HTMLLinkElement>(
-        'link[rel="canonical"]',
-      );
+      const link = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
       // localized=false → no /en prefix
-      expect(link?.href).toBe("https://www.openindu.com/privacy");
+      expect(link?.href).toBe("https://www.openindu.com/privacy/");
     });
 
     it("keeps og:locale as zh_CN regardless of path", () => {
@@ -223,9 +191,7 @@ describe("SEO — hreflang & locale", () => {
           localized={false}
         />,
       );
-      const meta = document.head.querySelector<HTMLMetaElement>(
-        'meta[property="og:locale"]',
-      );
+      const meta = document.head.querySelector<HTMLMetaElement>('meta[property="og:locale"]');
       expect(meta?.content).toBe("zh_CN");
     });
   });
