@@ -7,19 +7,9 @@ import { test, expect } from "@playwright/test";
  * playwright.prerender.config.ts's header comment for why the two are
  * kept separate).
  *
- * Two harness gaps this file works around, both confirmed by hand against
- * this project's actual `vite preview` behavior (not assumed):
- *
- * 1. Prerendered routes are directories, so their canonical form has a
- *    trailing slash. All navigation below uses that representation.
- *
- * 2. SEO.tsx recomputes canonical/hreflang from `window.location.origin`
- *    on mount (client-side), so a live post-hydration DOM check reflects
- *    *this test's* origin (http://localhost:4174), not the production
- *    domain prerender.mjs's saveHtml() bakes into the static files. The
- *    thing worth verifying -- what a non-JS crawler actually sees -- is
- *    the raw response body, so domain-sensitive assertions read
- *    `response.text()` before any hydration, not the live DOM.
+ * Prerendered routes are directories, so their canonical form has a
+ * trailing slash. All navigation below uses that representation. The
+ * production origin must survive hydration on the local preview origin.
  */
 
 const SHARED = [
@@ -142,6 +132,28 @@ test.describe("Prerendered HTML", () => {
     const html = await response!.text();
     expect(html).toContain('lang="zh-CN"');
     expect(html).toContain('<link rel="canonical" href="https://www.openindu.com/"');
+  });
+
+  test("hydration keeps canonical and structured URLs on the production HTTPS host", async ({ page }) => {
+    await page.goto(servePath("/resources"));
+    await page.waitForLoadState("networkidle");
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+      "href",
+      "https://www.openindu.com/resources/",
+    );
+    await expect(page.locator('meta[property="og:url"]')).toHaveAttribute(
+      "content",
+      "https://www.openindu.com/resources/",
+    );
+    await expect
+      .poll(async () => {
+        const payload = await page.locator("script[data-openindu-jsonld]").textContent();
+        return payload
+          ? JSON.parse(payload).find((entry: { "@type": string }) => entry["@type"] === "WebPage")
+              ?.url
+          : null;
+      })
+      .toBe("https://www.openindu.com/resources/");
   });
 
   test("EN subpage raw response canonical self-references correctly", async ({ page }) => {

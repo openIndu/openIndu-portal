@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { SITE_ORIGIN } from "@/lib/siteOrigin";
 
 /** Path segment → human-readable name for BreadcrumbList generation. */
 const BREADCRUMB_NAMES: Record<string, string> = {
@@ -75,9 +76,9 @@ export function StructuredData({
   useEffect(() => {
     let script: HTMLScriptElement | undefined;
     const timer = window.setTimeout(() => {
-    const origin = window.location.origin;
+    const origin = SITE_ORIGIN;
     const canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
-    const url = canonical?.href || window.location.href;
+    const url = canonical?.href || `${origin}${window.location.pathname}`;
     const pathname = new URL(url).pathname;
     const isEnglish = document.documentElement.lang.startsWith("en");
     const metaDescription = document.head.querySelector<HTMLMetaElement>('meta[name="description"]')?.content;
