@@ -5,7 +5,6 @@ import { SHARED_ROUTES, ZH_ONLY_ROUTES } from "./public-routes.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const ORIGIN = "https://www.openindu.com";
-const LAST_MODIFIED = "2026-08-28";
 
 function localizedEntry(path, locale) {
   const localizedPath = locale === "en" ? `/en${path}` : path;
@@ -15,13 +14,8 @@ function localizedEntry(path, locale) {
   const location = `${ORIGIN}${canonicalPath}`;
   const zh = `${ORIGIN}${zhPath}`;
   const en = `${ORIGIN}${enPath}`;
-  const priority = path === "/" ? "1.0" : path === "/resources" ? "0.9" : "0.8";
-  const frequency = path === "/resources" ? "daily" : "weekly";
   return `  <url>
     <loc>${location}</loc>
-    <lastmod>${LAST_MODIFIED}</lastmod>
-    <changefreq>${frequency}</changefreq>
-    <priority>${priority}</priority>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="${zh}"/>
     <xhtml:link rel="alternate" hreflang="en" href="${en}"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="${zh}"/>
@@ -32,9 +26,6 @@ function zhOnlyEntry(path) {
   const canonicalPath = `${path}/`;
   return `  <url>
     <loc>${ORIGIN}${canonicalPath}</loc>
-    <lastmod>${LAST_MODIFIED}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
   </url>`;
 }
 
