@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { detectLocale } from "@/i18n/locale";
+import { SITE_ORIGIN } from "@/lib/siteOrigin";
 
 interface SEOProps {
   title: string;
@@ -70,7 +71,7 @@ export function SEO({
   localized = true,
 }: SEOProps) {
   useEffect(() => {
-    const origin = window.location.origin;
+    const origin = SITE_ORIGIN;
     const pathLocale = detectLocale();
     // When localized=false the page only exists in ZH; force locale for
     // og:locale / <html lang> regardless of what the URL prefix says.
@@ -81,7 +82,7 @@ export function SEO({
     // Canonical URL: locale-neutral path + locale prefix
     const fullCanonical = routePath
       ? `${origin}${localized ? prefix : ""}${routePath}`
-      : window.location.href;
+      : `${origin}${canonicalRoutePath(window.location.pathname)}`;
 
     const imageUrl = image
       ? image.startsWith("http")

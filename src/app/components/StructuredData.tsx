@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { SITE_ORIGIN } from "@/lib/siteOrigin";
 
 /** Path segment → human-readable name for BreadcrumbList generation. */
 const BREADCRUMB_NAMES: Record<string, string> = {
@@ -17,23 +18,35 @@ const BREADCRUMB_NAMES: Record<string, string> = {
   "legal-center": "法律与隐私",
 };
 
-function buildBreadcrumbList(pathname: string, origin: string) {
-  // /motion-control/studio → ["motion-control", "studio"]
+const BREADCRUMB_NAMES_EN: Record<string, string> = {
+  "motion-control": "AI + Motion Control",
+  studio: "openIndu-studio",
+  vision: "AI + Vision",
+  station: "openIndu-station",
+  "iiot-platform": "Industrial IoT Platform",
+  infrastructure: "AI Infrastructure",
+  resources: "Downloads",
+  documents: "Documents",
+  software: "Software",
+};
+
+function buildBreadcrumbList(pathname: string, origin: string, isEnglish: boolean) {
   const segments = pathname.split("/").filter(Boolean);
+  if (isEnglish && segments[0] === "en") segments.shift();
   if (segments.length === 0) {
     // Home page — no breadcrumb needed, but return empty list
     return [];
   }
 
   const items: Array<{ name: string; item: string }> = [
-    { name: "首页", item: origin + "/" },
+    { name: isEnglish ? "Home" : "首页", item: origin + (isEnglish ? "/en/" : "/") },
   ];
 
-  let accumulated = "";
+  let accumulated = isEnglish ? "/en" : "";
   for (const seg of segments) {
     accumulated += "/" + seg;
-    const name = BREADCRUMB_NAMES[seg] || seg;
-    items.push({ name, item: origin + accumulated });
+    const name = (isEnglish ? BREADCRUMB_NAMES_EN : BREADCRUMB_NAMES)[seg] || seg;
+    items.push({ name, item: origin + accumulated + "/" });
   }
 
   return items;
@@ -63,9 +76,9 @@ export function StructuredData({
   useEffect(() => {
     let script: HTMLScriptElement | undefined;
     const timer = window.setTimeout(() => {
-    const origin = window.location.origin;
+    const origin = SITE_ORIGIN;
     const canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
-    const url = canonical?.href || window.location.href;
+    const url = canonical?.href || `${origin}${window.location.pathname}`;
     const pathname = new URL(url).pathname;
     const isEnglish = document.documentElement.lang.startsWith("en");
     const metaDescription = document.head.querySelector<HTMLMetaElement>('meta[name="description"]')?.content;
@@ -78,6 +91,7 @@ export function StructuredData({
         name: "openIndu Community",
         alternateName: "openIndu",
         url: origin,
+        sameAs: ["https://github.com/openIndu"],
         logo: `${origin}/assets/logo-512.png`,
         description: isEnglish
           ? "An open smart manufacturing ecosystem built through the forum, open engineering tools, and verifiable projects."
@@ -97,7 +111,7 @@ export function StructuredData({
     ];
 
     // --- Page-level schemas ---
-    const breadcrumb = buildBreadcrumbList(pathname, origin);
+    const breadcrumb = buildBreadcrumbList(pathname, origin, isEnglish);
 
     const pagePayload: Record<string, unknown>[] = [];
 
@@ -122,7 +136,6 @@ export function StructuredData({
         ? "openIndu Community — Open Smart Manufacturing Ecosystem"
         : "openIndu Community — 开源智能制造工业生态"),
       url,
-      dateModified: "2026-08-28",
       isPartOf: {
         "@type": "WebSite",
         name: "openIndu Community",
