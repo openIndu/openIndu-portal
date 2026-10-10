@@ -8,7 +8,7 @@ const ORIGIN = "https://www.openindu.com";
 
 function localizedEntry(path, locale) {
   const localizedPath = locale === "en" ? `/en${path}` : path;
-  const canonicalPath = localizedPath === "/" ? "/" : `${localizedPath}/`;
+  const canonicalPath = localizedPath.endsWith("/") ? localizedPath : `${localizedPath}/`;
   const zhPath = path === "/" ? "/" : `${path}/`;
   const enPath = path === "/" ? "/en/" : `/en${path}/`;
   const location = `${ORIGIN}${canonicalPath}`;

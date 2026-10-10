@@ -188,6 +188,8 @@ test.describe("Prerendered HTML", () => {
     const response = await request.get("/sitemap.xml");
     expect(response.status()).toBe(200);
     const xml = await response.text();
+    expect(xml).toContain("<loc>https://www.openindu.com/en/</loc>");
+    expect(xml).not.toContain("https://www.openindu.com/en//");
     for (const path of SHARED) {
       expect(xml).toContain(`https://www.openindu.com${path}/`);
       expect(xml).toContain(`https://www.openindu.com/en${path}/`);
