@@ -406,7 +406,7 @@ export function Layout() {
         </div>
       )}
 
-      {/* Keep the consent notice in the mobile document flow so it cannot cover page controls. */}
+      {/* Keep the consent notice in document flow so it cannot cover page controls. */}
       <CookieConsent preference={cookieConsent} onChange={setCookieConsent} />
 
       {/* Main Content */}
