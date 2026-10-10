@@ -80,27 +80,36 @@ test("English route renders English privacy controls", async ({ page }) => {
 for (const { width, path, label } of [
   { width: 320, path: "/resources", label: "每页数量" },
   { width: 390, path: "/resources", label: "每页数量" },
+  { width: 600, path: "/resources", label: "每页数量" },
+  { width: 640, path: "/resources", label: "每页数量" },
+  { width: 768, path: "/resources", label: "每页数量" },
+  { width: 1024, path: "/resources", label: "每页数量" },
+  { width: 1366, path: "/resources", label: "每页数量" },
+  { width: 320, path: "/en/resources", label: "Items per page" },
   { width: 390, path: "/en/resources", label: "Items per page" },
 ]) {
-  test(`mobile consent notice does not cover resource pagination at ${width}px on ${path}`, async ({ page }) => {
+  test(`consent notice does not cover resource pagination at ${width}px on ${path}`, async ({ page }) => {
     await page.setViewportSize({ width, height: 844 });
     await page.goto(path);
 
     const banner = page.getByTestId("cookie-consent-banner");
     const perPage = page.getByRole("combobox", { name: label });
-    await expect(banner).toHaveCSS("position", "static");
+    await expect(banner).toHaveCSS("position", "fixed");
     await perPage.scrollIntoViewIfNeeded();
 
     const bannerBox = await banner.boundingBox();
     const perPageBox = await perPage.boundingBox();
     expect(bannerBox).not.toBeNull();
     expect(perPageBox).not.toBeNull();
-    expect(bannerBox!.y + bannerBox!.height).toBeLessThanOrEqual(perPageBox!.y);
+    expect(Math.abs(bannerBox!.y + bannerBox!.height - (page.viewportSize()!.height - 16))).toBeLessThanOrEqual(1);
+    for (const button of await page.getByTestId("cookie-actions").getByRole("button").all()) {
+      await expect(button).toBeInViewport();
+    }
     await expect(perPage).toBeInViewport();
+    const selectIsTopmost = await perPage.evaluate((select) => {
+      const box = select.getBoundingClientRect();
+      return document.elementFromPoint(box.x + box.width / 2, box.y + box.height / 2) === select;
+    });
+    expect(selectIsTopmost).toBe(true);
   });
 }
-
-test("desktop consent notice remains fixed at the bottom", async ({ page }) => {
-  await page.goto("/resources");
-  await expect(page.getByTestId("cookie-consent-banner")).toHaveCSS("position", "fixed");
-});

@@ -53,15 +53,15 @@ export function CookieConsent({ preference, onChange }: Props) {
         <section
           aria-label={t("cookieConsent.title")}
           aria-live="polite"
-          className="border-t border-sky-200 bg-white shadow-[0_-12px_40px_rgba(15,23,42,0.16)] sm:fixed sm:inset-x-0 sm:bottom-0 sm:z-[60]"
+          className="fixed bottom-4 left-4 z-[60] max-h-[45vh] w-[calc(100%-2rem)] max-w-[380px] overflow-y-auto rounded-2xl border border-sky-200 bg-white shadow-[0_12px_40px_rgba(15,23,42,0.16)]"
           data-testid="cookie-consent-banner"
         >
-          <div className="mx-auto grid max-w-7xl gap-6 px-5 py-6 sm:px-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:gap-10 lg:py-7">
+          <div className="grid gap-2 p-3">
             <div>
-              <h2 className="text-xl font-semibold tracking-tight text-gray-950 sm:text-2xl">
+              <h2 className="text-lg font-semibold leading-6 tracking-tight text-gray-950">
                 {t("cookieConsent.title")}
               </h2>
-              <p className="mt-2 max-w-4xl text-sm leading-6 text-gray-700 sm:text-base sm:leading-7">
+              <p className="mt-1 text-sm leading-5 text-gray-700">
                 {t("cookieConsent.description")}{" "}
                 <Link
                   className="font-medium text-sky-700 underline underline-offset-4"
@@ -72,25 +72,25 @@ export function CookieConsent({ preference, onChange }: Props) {
               </p>
             </div>
             <div
-              className="flex flex-col gap-3 sm:flex-row lg:justify-end"
+              className="flex flex-row flex-wrap gap-1.5"
               data-testid="cookie-actions"
             >
               <button
-                className="min-h-11 rounded-full bg-sky-700 px-6 py-2.5 font-medium text-white transition-colors hover:bg-sky-800"
+                className="min-h-11 rounded-full bg-sky-700 px-2.5 py-1.5 text-sm font-medium text-white transition-colors hover:bg-sky-800"
                 data-testid="cookie-accept"
                 onClick={() => choose(true)}
               >
                 {t("cookieConsent.accept")}
               </button>
               <button
-                className="min-h-11 rounded-full border border-sky-700 px-6 py-2.5 font-medium text-sky-800 transition-colors hover:bg-sky-50"
+                className="min-h-11 rounded-full border border-sky-700 px-2.5 py-1.5 text-sm font-medium text-sky-800 transition-colors hover:bg-sky-50"
                 data-testid="cookie-reject"
                 onClick={() => choose(false)}
               >
                 {t("cookieConsent.reject")}
               </button>
               <button
-                className="min-h-11 rounded-full border border-sky-700 px-6 py-2.5 font-medium text-sky-800 transition-colors hover:bg-sky-50"
+                className="min-h-11 rounded-full border border-sky-700 px-2.5 py-1.5 text-sm font-medium text-sky-800 transition-colors hover:bg-sky-50"
                 data-testid="cookie-manage"
                 onClick={(event) => {
                   restoreFocusRef.current = event.currentTarget;
